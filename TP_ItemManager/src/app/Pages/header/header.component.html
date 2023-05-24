@@ -1,34 +1,20 @@
 <div class="container-fluid">
   <div class="row">
       <mat-toolbar >
-<div class="">
-  <button mat-fab color="warn" >
-    <mat-icon>home</mat-icon>
-  </button>
-</div>
-<div class="title" >
-  <h1 class="title">Item Manager</h1>
-</div>
-<div class="title">
-  <h1 class="title">Categoria</h1>
-</div>
-<div class="title">
-  <h1 class="title">Item</h1>
-</div>
-<div class="title">
-  <h1 class="title">Option</h1>
-</div>
+
+    <img src=".\assets\mylogo.png" class="logo" alt="">
+
+  <div >
+    <h1 class="title app">Item Manager</h1>
+    </div>
+    <mat-button-toggle-group >
+      <mat-button-toggle value="Category" (click)="SetLabel('Category')" >Category</mat-button-toggle>
+      <mat-button-toggle value="Item" (click)="SetLabel('Item') ">Item</mat-button-toggle>
+      <mat-button-toggle value="Option" (click)="SetLabel('Option')">Option</mat-button-toggle>
+    </mat-button-toggle-group>
 
 
-
-
-
-
-    </mat-toolbar>
-
-
-
-
+</mat-toolbar>
 
 </div>
 </div>

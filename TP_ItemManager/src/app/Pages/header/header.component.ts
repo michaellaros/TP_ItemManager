@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { StatusService } from 'src/app/Services/status.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+constructor(public status:StatusService){}
+SetLabel(value:string){
+this.status.buttonValue = value;
+console.log(this.status.buttonValue);
+
+}
 }

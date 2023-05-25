@@ -6,7 +6,7 @@ import { environment } from './app/enviroments/environment';
 
 export const getBaseUrl = () => {
   if (isDevMode()) {
-    return 'http://localhost:5172/swagger';
+    return 'http://localhost:5172';
 
   } else {
 

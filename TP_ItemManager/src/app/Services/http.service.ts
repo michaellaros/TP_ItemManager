@@ -6,6 +6,10 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ItemFilterModel } from '../Models/ItemFilterModel';
+
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,5 +24,16 @@ export class HttpService {
   ) {
     this.urlAPI = baseUrl + '/';
     this.assetsUrl = assetsUrl;
+  }
+
+  GetItems(filter : ItemFilterModel) {
+    return this.http
+      .post<any>(this.urlAPI + 'Item', {
+
+      })
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+  ErrorHandler(error: HttpErrorResponse): any {
+    throw new Error('Method not implemented.');
   }
 }

@@ -5,5 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class StatusService {
   public buttonValue : string = '';
+  objectMap = new Map();
   constructor() { }
 }

@@ -9,19 +9,23 @@ import { MaterialModule } from './Modules/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditListComponent } from './Pages/edit-list/edit-list.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CategoryFilterComponent } from './category-filter/category-filter.component';
-import { ItemFilterComponent } from './item-filter/item-filter.component';
-import { OptionFilterComponent } from './option-filter/option-filter.component';
 
+import { HttpService } from './Services/http.service';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { ItemFilterComponent } from './Pages/item-filter/item-filter.component';
+import { CategoryFilterComponent } from './Pages/category-filter/category-filter.component';
+import { OptionFilterComponent } from './Pages/option-filter/option-filter.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HeaderComponent,
     EditListComponent,
-    CategoryFilterComponent,
     ItemFilterComponent,
-    OptionFilterComponent
+    CategoryFilterComponent,
+    OptionFilterComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,8 @@ import { OptionFilterComponent } from './option-filter/option-filter.component';
     MaterialModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: MAT_DATE_LOCALE, useValue: 'it-IT' },HttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

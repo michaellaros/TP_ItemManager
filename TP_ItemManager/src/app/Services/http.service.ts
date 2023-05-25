@@ -7,6 +7,9 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ItemFilterModel } from '../Models/ItemFilterModel';
+import { CategoryFilterModel } from '../Models/CategoryFilterModel';
+import { OptionFilterModel } from '../Models/OptionFilterModel';
+
 
 
 
@@ -16,6 +19,9 @@ import { ItemFilterModel } from '../Models/ItemFilterModel';
 export class HttpService {
   urlAPI: string;
   assetsUrl: string;
+  id!:string;
+  name!:string;
+
 
   constructor(
     private http: HttpClient,
@@ -26,14 +32,35 @@ export class HttpService {
     this.assetsUrl = assetsUrl;
   }
 
-  GetItems(filter : ItemFilterModel) {
+  FilterItems(filter : ItemFilterModel) {
     return this.http
-      .post<any>(this.urlAPI + 'Item', {
+      .post<any>(this.urlAPI + 'Items', filter,
+      {
+        params: new HttpParams()
+          .append('id',this.id )
+          .append('name', this.name),
+      }
 
-      })
+      )
       .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
-  ErrorHandler(error: HttpErrorResponse): any {
-    throw new Error('Method not implemented.');
+  FilterCategory(filter : CategoryFilterModel) {
+    return this.http
+      .post<any>(this.urlAPI + 'Categories', filter
+
+     )
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+  FilterOption(filter : OptionFilterModel) {
+    return this.http
+      .post<any>(this.urlAPI + 'Options', filter
+
+     )
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+  ErrorHandler(error: HttpErrorResponse) {
+
+
+    return throwError(() => new Error(error.message || 'Server error!'));
   }
 }

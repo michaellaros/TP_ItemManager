@@ -10,7 +10,6 @@ export class HeaderComponent {
 constructor(public status:StatusService){}
 SetLabel(value:string){
 this.status.buttonValue = value;
-console.log(this.status.buttonValue);
 
 }
 }

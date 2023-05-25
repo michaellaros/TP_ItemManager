@@ -2,7 +2,7 @@
 <button mat-raised-button color="primary" (click)="ButtonPressed()" class="create" *ngIf="status.buttonValue !== ''">
   Create {{status.buttonValue}}
 </button>
-<table mat-table  class="mat-elevation-z8">
+<table mat-table  class="mat-elevation-z8" *ngIf="status.buttonValue !== ''">
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->

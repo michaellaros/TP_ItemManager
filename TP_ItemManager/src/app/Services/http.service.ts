@@ -58,6 +58,18 @@ export class HttpService {
      )
       .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
+
+  GetItem(id:string) {
+    return this.http
+      .get<any>(this.urlAPI + 'Item',
+      {
+        params: new HttpParams()
+          .append('id',id)
+      }
+
+     )
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
   ErrorHandler(error: HttpErrorResponse) {
 
 

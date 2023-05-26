@@ -20,4 +20,10 @@ export class EditListComponent {
 
   ngOnInit() {
   }
+  ModifyItem(id:string)
+  {
+    this.http.GetItem(id).subscribe(data=>{
+      console.log(data)
+    })
+  }
 }

@@ -1,6 +1,7 @@
-<button mat-raised-button color="primary"  class="create" *ngIf="status.buttonValue !== ''">
-  Create {{status.buttonValue}}
-</button>
+<div class="container" >
+  <button mat-raised-button color="primary"  class="create" *ngIf="status.buttonValue !== ''">
+    Create {{status.buttonValue}}
+  </button>
 <form [formGroup]="filterForm" (change)="GetCategory()" class="formGroup">
     <mat-form-field >
       <mat-label>ID</mat-label>
@@ -10,11 +11,7 @@
       <mat-label>Name</mat-label>
       <input formControlName="name" matInput placeholder="Name">
     </mat-form-field>
-    <mat-form-field  >
-      <mat-label >Barcode</mat-label>
-      <input formControlName="barcode" matInput placeholder="Barcode" >
-    </mat-form-field>
-</form>
+</form></div>
 <app-edit-list
   *ngIf="this.list != null"
   [parentData]="this.list"

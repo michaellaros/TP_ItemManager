@@ -1,9 +1,10 @@
+<<<<<<< Updated upstream
 import { Component, Input, signal } from '@angular/core';
 import { StatusService } from 'src/app/Services/status.service';
+=======
+import { Component, Input, signal  } from '@angular/core';
+>>>>>>> Stashed changes
 import { HttpService } from 'src/app/Services/http.service';
-import { ItemFilterModel } from 'src/app/Models/ItemFilterModel';
-import { OptionFilterModel } from 'src/app/Models/OptionFilterModel';
-import { CategoryFilterModel } from 'src/app/Models/CategoryFilterModel';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
 
 @Component({
@@ -24,7 +25,27 @@ export class EditListComponent {
     this.dataSource = [new SearchedObject('1', 'name')];
   }
 
+<<<<<<< Updated upstream
   ngOnInit() {
     this.dataSource = this.parentData;
   }
+=======
+
+  dataSource:SearchedObject[]= []
+  constructor( public http:HttpService) {
+
+
+
+     }
+
+ngOnInit() {
+  this.dataSource2= ELEMENT_DATA
+  console.log(this.parentData)
+  this.dataSource=this.parentData
+  console.log(this.dataSource)
+
+}
+
+
+>>>>>>> Stashed changes
 }

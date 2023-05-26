@@ -6,10 +6,18 @@
       <th scope="col">Actions</th>
     </thead>
     <tbody>
-      <tr *ngFor="let item of dataSource">
+
+      <tr *ngFor="let item of this.parentData">
         <td>{{ item.id }}</td>
         <td>{{ item.name }}</td>
-        <td></td>
+        <td>
+          <button mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

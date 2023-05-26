@@ -14,13 +14,10 @@ export class EditListComponent {
   @Input() public columnName: string = 'NAme';
   public displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
 
-  dataSource = this.parentData;
 
   constructor(public http: HttpService) {
-    this.dataSource = [new SearchedObject('1', 'name')];
   }
 
   ngOnInit() {
-    this.dataSource = this.parentData;
   }
 }

@@ -1,16 +1,16 @@
-<button mat-raised-button color="primary" (click)="ButtonPressed()" class="create" *ngIf="status.buttonValue !== ''">
+<button mat-raised-button color="primary"  class="create" *ngIf="status.buttonValue !== ''">
   Create {{status.buttonValue}}
 </button>
-<form [formGroup]="filterForm">
-    <mat-form-field (submit)="OnSubmitID()">
+<form [formGroup]="filterForm" (change)="GetItems()" class="formGroup">
+    <mat-form-field >
       <mat-label>ID</mat-label>
       <input formControlName="id" matInput placeholder="ID">
     </mat-form-field>
-    <mat-form-field (submit)="OnSubmitName()">
+    <mat-form-field >
       <mat-label>Name</mat-label>
       <input formControlName="name" matInput placeholder="Name">
     </mat-form-field>
-    <mat-form-field  (submit)="OnSubmitBarcode()">
+    <mat-form-field  >
       <mat-label >Barcode</mat-label>
       <input formControlName="barcode" matInput placeholder="Barcode" >
     </mat-form-field>

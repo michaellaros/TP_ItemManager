@@ -20,71 +20,31 @@ export class ItemFilterComponent {
     'EN'
   );
   public list!: SearchedObject[];
-    filterForm= new FormGroup({
-      id:new FormControl(''),
-      name: new FormControl(''),
-      barcode:new FormControl('')
-    })
   constructor(private http: HttpService,public status:StatusService) {}
+  filterForm= new FormGroup({
+    id:new FormControl(''),
+    name: new FormControl(''),
+    barcode:new FormControl('')
+  })
   ngOnInit() {
-    this.GetItems();
+    this.GetItems()
   }
 
   GetItems() {
+    let id=this.filterForm.get('id')?.value!;
+    let name=this.filterForm.get('name')?.value!;
+    let barcode=this.filterForm.get('barcode')?.value!;
+
     let list: SearchedObject[] = [];
 
-    this.http.FilterItems(this.filterItem).subscribe((data) => {
+    this.http.FilterItems(new ItemFilterModel(id,name,barcode,0,50,'EN')).subscribe((data) => {
       Object.keys(data).forEach((key) => {
         list.push(new SearchedObject(key, data[key]));
       });
     });
     this.list = list;
-    console.log(this.list);
   }
-  ButtonPressed(){
-    switch(this.status.buttonValue) {
-      case 'option':
-        {
-          this.GetOptions()
-        }
-        break;
-      case 'category':
-        {
-          this.GetCategory()
-        }
-        break;
-        case 'item':
-          {
-
-          }
-        break;
-      default:
-        // code block
-    }
-   }
 
 
-   GetOptions(){
 
-      console.log('options')
-
-   }
-
-   GetCategory(){
-      console.log('category')
-   }
-
-
-  OnSubmitID() {
-
-
-  }
-  OnSubmitName() {
-
-
-  }
-  OnSubmitBarcode() {
-
-
-  }
 }

@@ -1,9 +1,9 @@
 
 export class ItemFilterModel {
   constructor(
-    public id? :string | null,
-    public name? : string | null,
-    public barcode? : string | null,
+    public id? :string,
+    public name? : string,
+    public barcode? : string,
     public pageIndex? : number ,
     public pageSize? : number,
     public language? : string,

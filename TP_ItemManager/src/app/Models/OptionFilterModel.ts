@@ -1,8 +1,8 @@
 
 export class OptionFilterModel {
   constructor(
-    public id? :string | null,
-    public name? : string | null,
+    public id? :string ,
+    public name? : string ,
     public pageIndex? : number,
     public pageSize? : number,
     public language? : string,

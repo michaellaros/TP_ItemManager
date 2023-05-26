@@ -11,7 +11,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatCardModule} from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
-import {MatFormFieldModule} from '@angular/material/form-field';
+
 const MaterialComponents = [
   MatButtonModule,
   MatSlideToggleModule,
@@ -21,8 +21,7 @@ const MaterialComponents = [
   MatCardModule,
   MatDividerModule,
   MatIconModule,
-  MatTableModule,
-  MatFormFieldModule,
+  MatTableModule
 ];
 
 @NgModule({

@@ -1,24 +1,5 @@
-<<<<<<< Updated upstream
 <app-edit-list
   *ngIf="this.list != null"
   [parentData]="this.list"
   [columnName]="'Item'"
 ></app-edit-list>
-=======
-<button mat-raised-button color="primary" (click)="ButtonPressed()" class="create" *ngIf="status.buttonValue !== ''">
-  Create {{status.buttonValue}}
-</button>
-<mat-form-field (submit)="OnSubmitID()">
-  <mat-label>Input</mat-label>
-  <input matInput placeholder="ID">
-</mat-form-field>
-<mat-form-field (submit)="OnSubmitName()">
-  <mat-label>Input</mat-label>
-  <input matInput placeholder="Name">
-</mat-form-field>
-<mat-form-field  (submit)="OnSubmitBarcode()">
-  <mat-label >Input</mat-label>
-  <input  matInput placeholder="Barcode" >
-</mat-form-field>
-<app-edit-list *ngIf="this.list != null" [parentData] ="this.list" [columnName]="columnName"></app-edit-list>
->>>>>>> Stashed changes

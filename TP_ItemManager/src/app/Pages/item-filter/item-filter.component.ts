@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ItemFilterModel } from 'src/app/Models/ItemFilterModel';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { HttpService } from 'src/app/Services/http.service';
+import { StatusService } from 'src/app/Services/status.service';
 
 @Component({
   selector: 'app-item-filter',
@@ -18,8 +20,12 @@ export class ItemFilterComponent {
     'EN'
   );
   public list!: SearchedObject[];
-
-  constructor(private http: HttpService) {}
+    filterForm= new FormGroup({
+      id:new FormControl(''),
+      name: new FormControl(''),
+      barcode:new FormControl('')
+    })
+  constructor(private http: HttpService,public status:StatusService) {}
   ngOnInit() {
     this.GetItems();
   }
@@ -34,5 +40,51 @@ export class ItemFilterComponent {
     });
     this.list = list;
     console.log(this.list);
+  }
+  ButtonPressed(){
+    switch(this.status.buttonValue) {
+      case 'option':
+        {
+          this.GetOptions()
+        }
+        break;
+      case 'category':
+        {
+          this.GetCategory()
+        }
+        break;
+        case 'item':
+          {
+
+          }
+        break;
+      default:
+        // code block
+    }
+   }
+
+
+   GetOptions(){
+
+      console.log('options')
+
+   }
+
+   GetCategory(){
+      console.log('category')
+   }
+
+
+  OnSubmitID() {
+
+
+  }
+  OnSubmitName() {
+
+
+  }
+  OnSubmitBarcode() {
+
+
   }
 }

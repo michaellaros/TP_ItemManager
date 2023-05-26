@@ -16,6 +16,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { ItemFilterComponent } from './Pages/item-filter/item-filter.component';
 import { CategoryFilterComponent } from './Pages/category-filter/category-filter.component';
 import { OptionFilterComponent } from './Pages/option-filter/option-filter.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import { OptionFilterComponent } from './Pages/option-filter/option-filter.compo
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [    { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: MAT_DATE_LOCALE, useValue: 'it-IT' },HttpService],

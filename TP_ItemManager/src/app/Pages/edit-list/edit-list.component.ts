@@ -1,9 +1,5 @@
 import { Component, Input, signal } from '@angular/core';
-import { StatusService } from 'src/app/Services/status.service';
 import { HttpService } from 'src/app/Services/http.service';
-import { ItemFilterModel } from 'src/app/Models/ItemFilterModel';
-import { OptionFilterModel } from 'src/app/Models/OptionFilterModel';
-import { CategoryFilterModel } from 'src/app/Models/CategoryFilterModel';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
 
 @Component({

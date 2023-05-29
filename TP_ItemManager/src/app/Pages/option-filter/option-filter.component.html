@@ -18,5 +18,17 @@
       <input formControlName="name" matInput placeholder="Name" />
     </mat-form-field>
   </form>
+  <button
+    mat-raised-button
+    color="primary"
+    class="search"
+    (click)="GetOption()"
+  >
+    Search
+  </button>
 </div>
-<app-edit-list [parentData]="list" [columnName]="'Option'"></app-edit-list>
+<app-edit-list
+  *ngIf="this.list != null"
+  [parentData]="this.list"
+  [columnName]="'Option'"
+></app-edit-list>

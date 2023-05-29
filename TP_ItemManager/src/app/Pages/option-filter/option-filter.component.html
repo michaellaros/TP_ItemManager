@@ -8,24 +8,26 @@
   >
     Create {{ status.buttonValue }}
   </button>
-  <form [formGroup]="filterForm" (change)="GetOption()" class="formGroup">
-    <mat-form-field>
-      <mat-label>ID</mat-label>
-      <input formControlName="id" matInput placeholder="ID" />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Name</mat-label>
-      <input formControlName="name" matInput placeholder="Name" />
-    </mat-form-field>
-  </form>
-  <button
-    mat-raised-button
-    color="primary"
-    class="search"
-    (click)="GetOption()"
-  >
-    Search
-  </button>
+  <div class="d-flex">
+    <form [formGroup]="filterForm" class="formGroup">
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input formControlName="id" matInput placeholder="ID" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input formControlName="name" matInput placeholder="Name" />
+      </mat-form-field>
+    </form>
+    <button
+      mat-raised-button
+      color="primary"
+      class="search"
+      (click)="GetOption()"
+    >
+      Search
+    </button>
+  </div>
 </div>
 <app-edit-list
   *ngIf="this.list != null"

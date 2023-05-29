@@ -5,6 +5,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class StatusService {
-  public buttonValue : string = 'item';
+  public buttonValue : string = 'category';
   constructor() { }
 }

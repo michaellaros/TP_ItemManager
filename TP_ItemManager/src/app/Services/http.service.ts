@@ -9,6 +9,9 @@ import { catchError } from 'rxjs/operators';
 import { ItemFilterModel } from '../Models/ItemFilterModel';
 import { CategoryFilterModel } from '../Models/CategoryFilterModel';
 import { OptionFilterModel } from '../Models/OptionFilterModel';
+import { Item } from '../Models/Item';
+import { Category } from '../Models/Category';
+import { Option } from '../Models/Option';
 
 
 
@@ -61,11 +64,39 @@ export class HttpService {
 
   GetItem(id:string) {
     return this.http
-      .get<any>(this.urlAPI + 'Item',
+      .get<Item>(this.urlAPI + 'Item',
       {
         params: new HttpParams()
           .append('id',id)
       }
+
+     )
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+  GetCategory(id:string) {
+    return this.http
+      .get<Category>(this.urlAPI + 'Category',
+      {
+        params: new HttpParams()
+          .append('id',id)
+
+      }
+
+
+     )
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+  GetOption(id:string) {
+    return this.http
+      .get<Option>(this.urlAPI + 'Option',
+      {
+        params: new HttpParams()
+          .append('id',id)
+
+      }
+
 
      )
       .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));

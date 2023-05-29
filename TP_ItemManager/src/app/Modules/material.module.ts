@@ -14,6 +14,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
 const MaterialComponents = [
   MatButtonModule,
   MatSlideToggleModule,
@@ -26,7 +27,8 @@ const MaterialComponents = [
   MatTableModule,
   MatFormFieldModule,
   MatInputModule,
-  MatDialogModule
+  MatDialogModule,
+  MatSelectModule
 
 ];
 

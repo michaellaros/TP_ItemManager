@@ -6,5 +6,6 @@ export class Category {
     public id? :number ,
     public imagePath? : string,
     public name? : string
+    //check selezione testo testo nome
   ) {}
 }

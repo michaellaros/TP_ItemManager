@@ -1,1 +1,33 @@
-<p>Category!</p>
+
+<div class="dialog">
+  <form [formGroup]="categoryForm"  class="formGroup">
+  <mat-form-field class="example-full-width">
+    <mat-label>ID</mat-label>
+    <input  formControlName="id" matInput value="" >
+  </mat-form-field>
+
+  <mat-checkbox formControlName="avaible" matInput value="" class="example-margin">Is avaible
+  </mat-checkbox>
+
+  <mat-checkbox formControlName="dineIn" matInput value="" class="example-margin">Dine in
+  </mat-checkbox>
+
+  <mat-checkbox formControlName="takeAway" matInput value="" class="example-margin">Take away
+  </mat-checkbox>
+
+
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Image Name</mat-label>
+    <input  formControlName="imagePath" matInput value="" >
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Item name</mat-label>
+    <input  formControlName="name" matInput value="" >
+  </mat-form-field>
+</form>
+<button mat-raised-button color="primary"  (click)="confirmObject()">
+  Create
+</button>
+</div>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Category } from 'src/app/Models/Category';
 import { Item } from 'src/app/Models/Item';
 import { ItemFilterModel } from 'src/app/Models/ItemFilterModel';
 import { SearchedObject } from 'src/app/Models/SearchedObject';

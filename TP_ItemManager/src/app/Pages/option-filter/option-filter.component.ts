@@ -4,7 +4,9 @@ import { OptionFilterModel } from 'src/app/Models/OptionFilterModel';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
-
+import { ModifyDialogueOptionComponent } from 'src/app/modify-dialogue-option/modify-dialogue-option.component';
+import { Option } from 'src/app/Models/Option';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-option-filter',
   templateUrl: './option-filter.component.html',
@@ -19,7 +21,7 @@ export class OptionFilterComponent {
     'EN'
   );
   public list!: SearchedObject[];
-  constructor(private http: HttpService,public status:StatusService) {}
+  constructor(private http: HttpService,public status:StatusService, public dialog:MatDialog) {}
   filterForm= new FormGroup({
     id:new FormControl(''),
     name: new FormControl('')
@@ -41,7 +43,15 @@ export class OptionFilterComponent {
     });
     this.list = list;
   }
+  ModifyObject()
+  {
+          this.OpenDialogModifyOption();
+  }
 
+
+  OpenDialogModifyOption() {
+    const dialogRef = this.dialog.open(ModifyDialogueOptionComponent);
+  }
 
 
 }

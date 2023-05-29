@@ -1,5 +1,5 @@
 <div class="container" >
-  <button mat-raised-button color="primary"  class="create" *ngIf="status.buttonValue !== ''">
+  <button mat-raised-button color="primary"  (click)="ModifyObject()" class="create" *ngIf="status.buttonValue !== ''">
     Create {{status.buttonValue}}
   </button>
 <form [formGroup]="filterForm" (change)="GetCategory()" class="formGroup">

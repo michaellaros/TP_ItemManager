@@ -4,7 +4,9 @@ import { CategoryFilterModel } from 'src/app/Models/CategoryFilterModel';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
-
+import { MatDialog } from '@angular/material/dialog';
+import { Category } from 'src/app/Models/Category';
+import { ModifyDialogueCategoryComponent } from 'src/app/modify-dialogue-category/modify-dialogue-category.component';
 @Component({
   selector: 'app-category-filter',
   templateUrl: './category-filter.component.html',
@@ -19,7 +21,7 @@ export class CategoryFilterComponent {
     'EN'
   );
   public list!: SearchedObject[];
-  constructor(private http: HttpService,public status:StatusService) {}
+  constructor(private http: HttpService,public status:StatusService, public dialog:MatDialog) {}
   filterForm= new FormGroup({
     id:new FormControl(''),
     name: new FormControl(''),
@@ -44,6 +46,19 @@ export class CategoryFilterComponent {
     this.list = list;
   }
 
+  ModifyObject()
+  {
+          this.OpenDialogModifyCategory();
+  }
+
+
+  OpenDialogModifyCategory() {
+    const dialogRef = this.dialog.open(ModifyDialogueCategoryComponent);
+  }
+
+
 
 
 }
+
+

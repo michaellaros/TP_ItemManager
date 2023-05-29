@@ -24,40 +24,42 @@ export class ItemFilterComponent {
     'EN'
   );
   public list!: SearchedObject[];
-  constructor(private http: HttpService,public status:StatusService, public dialog:MatDialog) {}
-  filterForm= new FormGroup({
-    id:new FormControl(''),
+  constructor(
+    private http: HttpService,
+    public status: StatusService,
+    public dialog: MatDialog
+  ) {}
+  filterForm = new FormGroup({
+    id: new FormControl(''),
     name: new FormControl(''),
-    barcode:new FormControl('')
-  })
+    barcode: new FormControl(''),
+  });
   ngOnInit() {
-    this.GetItems()
+    this.GetItems();
   }
 
   GetItems() {
-    let id=this.filterForm.get('id')?.value!;
-    let name=this.filterForm.get('name')?.value!;
-    let barcode=this.filterForm.get('barcode')?.value!;
+    let id = this.filterForm.get('id')?.value!;
+    let name = this.filterForm.get('name')?.value!;
+    let barcode = this.filterForm.get('barcode')?.value!;
 
     let list: SearchedObject[] = [];
 
-    this.http.FilterItems(new ItemFilterModel(id,name,barcode,0,50,'EN')).subscribe((data) => {
-      Object.keys(data).forEach((key) => {
-        list.push(new SearchedObject(key, data[key]));
+    this.http
+      .FilterItems(new ItemFilterModel(id, name, barcode, 0, 50, 'EN'))
+      .subscribe((data) => {
+        Object.keys(data).forEach((key) => {
+          list.push(new SearchedObject(key, data[key]));
+        });
+        this.list = list;
       });
-    });
-    this.list = list;
   }
 
-  ModifyObject()
-  {
-          this.OpenDialogModifyItem();
+  ModifyObject() {
+    this.OpenDialogModifyItem();
   }
-
 
   OpenDialogModifyItem() {
     const dialogRef = this.dialog.open(ModifyDialogueItemComponent);
   }
-
-
 }

@@ -20,45 +20,43 @@ export class CategoryFilterComponent {
     50,
     'EN'
   );
-  public list!: SearchedObject[];
-  constructor(private http: HttpService,public status:StatusService, public dialog:MatDialog) {}
-  filterForm= new FormGroup({
-    id:new FormControl(''),
+  public list: SearchedObject[] = [];
+  constructor(
+    private http: HttpService,
+    public status: StatusService,
+    public dialog: MatDialog
+  ) {}
+  filterForm = new FormGroup({
+    id: new FormControl(''),
     name: new FormControl(''),
-    barcode:new FormControl('')
-  })
+    barcode: new FormControl(''),
+  });
   ngOnInit() {
-    this.GetCategory()
+    this.GetCategory();
   }
 
   GetCategory() {
-    let id=this.filterForm.get('id')?.value!;
-    let name=this.filterForm.get('name')?.value!;
-    let barcode=this.filterForm.get('barcode')?.value!;
+    let id = this.filterForm.get('id')?.value!;
+    let name = this.filterForm.get('name')?.value!;
+    let barcode = this.filterForm.get('barcode')?.value!;
 
     let list: SearchedObject[] = [];
 
-    this.http.FilterCategory(new CategoryFilterModel(id,name,0,50,'')).subscribe((data) => {
-      Object.keys(data).forEach((key) => {
-        list.push(new SearchedObject(key, data[key]));
+    this.http
+      .FilterCategory(new CategoryFilterModel(id, name, 0, 50, ''))
+      .subscribe((data) => {
+        Object.keys(data).forEach((key) => {
+          list.push(new SearchedObject(key, data[key]));
+        });
+        this.list = list;
       });
-    });
-    this.list = list;
   }
 
-  ModifyObject()
-  {
-          this.OpenDialogModifyCategory();
+  ModifyObject() {
+    this.OpenDialogModifyCategory();
   }
-
 
   OpenDialogModifyCategory() {
     const dialogRef = this.dialog.open(ModifyDialogueCategoryComponent);
   }
-
-
-
-
 }
-
-

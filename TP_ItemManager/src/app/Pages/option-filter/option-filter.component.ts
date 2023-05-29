@@ -21,37 +21,39 @@ export class OptionFilterComponent {
     'EN'
   );
   public list!: SearchedObject[];
-  constructor(private http: HttpService,public status:StatusService, public dialog:MatDialog) {}
-  filterForm= new FormGroup({
-    id:new FormControl(''),
-    name: new FormControl('')
-  })
+  constructor(
+    private http: HttpService,
+    public status: StatusService,
+    public dialog: MatDialog
+  ) {}
+  filterForm = new FormGroup({
+    id: new FormControl(''),
+    name: new FormControl(''),
+  });
   ngOnInit() {
-    this.GetOption()
+    this.GetOption();
   }
 
   GetOption() {
-    let id=this.filterForm.get('id')?.value!;
-    let name=this.filterForm.get('name')?.value!;
+    let id = this.filterForm.get('id')?.value!;
+    let name = this.filterForm.get('name')?.value!;
 
     let list: SearchedObject[] = [];
 
-    this.http.FilterOption(new OptionFilterModel(id,name,0,50,'EN')).subscribe((data) => {
-      Object.keys(data).forEach((key) => {
-        list.push(new SearchedObject(key, data[key]));
+    this.http
+      .FilterOption(new OptionFilterModel(id, name, 0, 50, 'EN'))
+      .subscribe((data) => {
+        Object.keys(data).forEach((key) => {
+          list.push(new SearchedObject(key, data[key]));
+        });
+        this.list = list;
       });
-    });
-    this.list = list;
   }
-  ModifyObject()
-  {
-          this.OpenDialogModifyOption();
+  ModifyObject() {
+    this.OpenDialogModifyOption();
   }
-
 
   OpenDialogModifyOption() {
     const dialogRef = this.dialog.open(ModifyDialogueOptionComponent);
   }
-
-
 }

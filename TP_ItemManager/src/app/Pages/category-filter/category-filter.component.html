@@ -2,7 +2,22 @@
   <button mat-raised-button color="primary"  (click)="ModifyObject()" class="create" *ngIf="status.buttonValue !== ''">
     Create {{status.buttonValue}}
   </button>
-<form [formGroup]="filterForm" (change)="GetCategory()" class="formGroup">
+  <div style="display: flex;">
+  <form [formGroup]="filterForm" class="formGroup">
+      <mat-form-field >
+        <mat-label>ID</mat-label>
+        <input formControlName="id" matInput placeholder="ID">
+      </mat-form-field>
+      <mat-form-field >
+        <mat-label>Name</mat-label>
+        <input formControlName="name" matInput placeholder="Name">
+      </mat-form-field>
+  </form>
+  <button mat-raised-button color="primary"  class="search" (click)="GetCategory()">
+    Search
+  </button>
+  </div>
+<form [formGroup]="filterForm" class="formGroup">
     <mat-form-field >
       <mat-label>ID</mat-label>
       <input formControlName="id" matInput placeholder="ID">
@@ -11,7 +26,11 @@
       <mat-label>Name</mat-label>
       <input formControlName="name" matInput placeholder="Name">
     </mat-form-field>
-</form></div>
+</form>
+<button mat-raised-button color="primary"  class="search" (click)="GetCategory()">
+  Search
+</button>
+</div>
 <app-edit-list
   *ngIf="this.list != null"
   [parentData]="this.list"

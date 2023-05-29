@@ -3,8 +3,8 @@
   <button mat-raised-button color="primary" (click)="ModifyObject()" class="create" *ngIf="status.buttonValue !== ''">
     Create {{status.buttonValue}}
   </button>
-
-<form [formGroup]="filterForm" (change)="GetItems()" class="formGroup">
+<div style="display: flex;">
+  <form [formGroup]="filterForm"  class="formGroup">
     <mat-form-field >
       <mat-label>ID</mat-label>
       <input formControlName="id" matInput placeholder="ID">
@@ -18,6 +18,11 @@
       <input formControlName="barcode" matInput placeholder="Barcode" >
     </mat-form-field>
 </form>
+<button class="search"  mat-raised-button color="primary"  (click)="GetItems()">
+  Search
+</button>
+</div>
+
 </div>
 <app-edit-list
   *ngIf="this.list != null"

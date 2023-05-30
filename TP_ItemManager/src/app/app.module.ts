@@ -16,9 +16,9 @@ import { ItemFilterComponent } from './Pages/item-filter/item-filter.component';
 import { CategoryFilterComponent } from './Pages/category-filter/category-filter.component';
 import { OptionFilterComponent } from './Pages/option-filter/option-filter.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ModifyDialogueItemComponent } from './Pages/modify-dialogue-item/modify-dialogue-item.component';
-import { ModifyDialogueCategoryComponent } from './Pages/modify-dialogue-category/modify-dialogue-category.component';
-import { ModifyDialogueOptionComponent } from './Pages/modify-dialogue-option/modify-dialogue-option.component';
+import { ModalItemComponent } from './Pages/modal-item/modal-item.component';
+import { ModalCategoryComponent } from './Pages/modal-category/modal-category.component';
+import { ModalOptionComponent } from './Pages/modal-option/modal-option.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,9 +27,9 @@ import { ModifyDialogueOptionComponent } from './Pages/modify-dialogue-option/mo
     ItemFilterComponent,
     CategoryFilterComponent,
     OptionFilterComponent,
-    ModifyDialogueItemComponent,
-    ModifyDialogueCategoryComponent,
-    ModifyDialogueOptionComponent,
+    ModalItemComponent,
+    ModalCategoryComponent,
+    ModalOptionComponent,
   ],
   imports: [
     BrowserModule,

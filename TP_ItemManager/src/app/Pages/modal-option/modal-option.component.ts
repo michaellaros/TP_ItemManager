@@ -6,16 +6,16 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Option } from '../../Models/Option';
 
 @Component({
-  selector: 'app-modify-dialogue-option',
-  templateUrl: './modify-dialogue-option.component.html',
-  styleUrls: ['./modify-dialogue-option.component.scss'],
+  selector: 'app-modal-option',
+  templateUrl: './modal-option.component.html',
+  styleUrls: ['./modal-option.component.scss'],
 })
-export class ModifyDialogueOptionComponent {
+export class ModalOptionComponent {
   option!: Option;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: Option,
-    public dialogRef: MatDialogRef<ModifyDialogueOptionComponent>,
+    public dialogRef: MatDialogRef<ModalOptionComponent>,
     private http: HttpService,
     public status: StatusService
   ) {

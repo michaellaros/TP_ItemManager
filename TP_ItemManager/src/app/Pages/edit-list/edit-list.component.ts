@@ -7,9 +7,9 @@ import { Item } from 'src/app/Models/Item';
 import { Option } from 'src/app/Models/Option';
 import { Category } from 'src/app/Models/Category';
 import { MatDialog } from '@angular/material/dialog';
-import { ModifyDialogueItemComponent } from 'src/app/Pages/modify-dialogue-item/modify-dialogue-item.component';
-import { ModifyDialogueCategoryComponent } from 'src/app/Pages/modify-dialogue-category/modify-dialogue-category.component';
-import { ModifyDialogueOptionComponent } from 'src/app/Pages/modify-dialogue-option/modify-dialogue-option.component';
+import { ModalItemComponent } from 'src/app/Pages/modal-item/modal-item.component';
+import { ModalCategoryComponent } from 'src/app/Pages/modal-category/modal-category.component';
+import { ModalOptionComponent } from 'src/app/Pages/modal-option/modal-option.component';
 @Component({
   selector: 'app-edit-list',
   templateUrl: './edit-list.component.html',
@@ -47,17 +47,17 @@ export class EditListComponent {
   }
 
   OpenDialogModifyItem(item: Item) {
-    const dialogRef = this.dialog.open(ModifyDialogueItemComponent, {
+    const dialogRef = this.dialog.open(ModalItemComponent, {
       data: item,
     });
   }
   OpenDialogModifyCategory(category: Category) {
-    const dialogRef = this.dialog.open(ModifyDialogueCategoryComponent, {
+    const dialogRef = this.dialog.open(ModalCategoryComponent, {
       data: category,
     });
   }
   OpenDialogModifyOption(option: Option) {
-    const dialogRef = this.dialog.open(ModifyDialogueOptionComponent, {
+    const dialogRef = this.dialog.open(ModalOptionComponent, {
       data: option,
     });
   }

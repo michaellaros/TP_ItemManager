@@ -1,11 +1,10 @@
-
 export class Category {
   constructor(
-    public avaible?: boolean,
+    public id?: number,
+    public name?: string, //check selezione testo testo nome
+    public imagePath?: string,
+    public available?: boolean,
     public codConsumationAllowed?: string,
-    public id? :number ,
-    public imagePath? : string,
-    public name? : string
-    //check selezione testo testo nome
+    public categoryOrder?: number
   ) {}
 }

@@ -7,7 +7,7 @@ import { ItemFilterModel } from 'src/app/Models/ItemFilterModel';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
-import { ModifyDialogueItemComponent } from 'src/app/Pages/modify-dialogue-item/modify-dialogue-item.component';
+import { ModalItemComponent } from 'src/app/Pages/modal-item/modal-item.component';
 
 @Component({
   selector: 'app-item-filter',
@@ -56,6 +56,6 @@ export class ItemFilterComponent {
   }
 
   OpenDialogModifyItem() {
-    const dialogRef = this.dialog.open(ModifyDialogueItemComponent);
+    const dialogRef = this.dialog.open(ModalItemComponent);
   }
 }

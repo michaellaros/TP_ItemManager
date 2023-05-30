@@ -1,0 +1,47 @@
+<div class="dialog container-fluid">
+  <div class="w-100 d-flex position-relative">
+    <h1 mat-dialog-title class="px-0">Inserire i dati del nuovo cliente:</h1>
+
+    <button
+      mat-icon-button
+      class="m-2 position-absolute end-0"
+      [mat-dialog-close]="null"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <form [formGroup]="categoryForm" class="formGroup" (ngSubmit)="SubmitForm()">
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-10">
+        <mat-label>Name</mat-label>
+        <input formControlName="name" matInput />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Image</mat-label>
+        <input formControlName="imagePath" matInput />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-10">
+        <mat-label>Order</mat-label>
+        <input type="number" formControlName="order" matInput />
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-checkbox formControlName="available" matInput color="primary">
+        Available
+      </mat-checkbox>
+    </div>
+    <div class="row">
+      <h4 class="mb-0">Visible if:</h4>
+      <mat-checkbox formControlName="dineIn" matInput color="primary">
+        Dine in
+      </mat-checkbox>
+      <mat-checkbox formControlName="takeAway" matInput color="primary">
+        Take away
+      </mat-checkbox>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">
+      {{ flg_insert ? "Create" : "Modify" }}
+    </button>
+  </form>
+</div>

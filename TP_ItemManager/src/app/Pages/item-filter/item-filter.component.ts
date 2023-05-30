@@ -7,7 +7,7 @@ import { ItemFilterModel } from 'src/app/Models/ItemFilterModel';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
-import { ModifyDialogueItemComponent } from 'src/app/modify-dialogue-item/modify-dialogue-item.component';
+import { ModifyDialogueItemComponent } from 'src/app/Pages/modify-dialogue-item/modify-dialogue-item.component';
 
 @Component({
   selector: 'app-item-filter',

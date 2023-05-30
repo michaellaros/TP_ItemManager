@@ -6,7 +6,7 @@ import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Category } from 'src/app/Models/Category';
-import { ModifyDialogueCategoryComponent } from 'src/app/modify-dialogue-category/modify-dialogue-category.component';
+import { ModifyDialogueCategoryComponent } from 'src/app/Pages/modify-dialogue-category/modify-dialogue-category.component';
 @Component({
   selector: 'app-category-filter',
   templateUrl: './category-filter.component.html',

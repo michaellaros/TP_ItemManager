@@ -4,7 +4,7 @@ import { OptionFilterModel } from 'src/app/Models/OptionFilterModel';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
-import { ModifyDialogueOptionComponent } from 'src/app/modify-dialogue-option/modify-dialogue-option.component';
+import { ModifyDialogueOptionComponent } from 'src/app/Pages/modify-dialogue-option/modify-dialogue-option.component';
 import { Option } from 'src/app/Models/Option';
 import { MatDialog } from '@angular/material/dialog';
 @Component({

@@ -7,9 +7,9 @@ import { Item } from 'src/app/Models/Item';
 import { Option } from 'src/app/Models/Option';
 import { Category } from 'src/app/Models/Category';
 import { MatDialog } from '@angular/material/dialog';
-import { ModifyDialogueItemComponent } from 'src/app/modify-dialogue-item/modify-dialogue-item.component';
-import { ModifyDialogueCategoryComponent } from 'src/app/modify-dialogue-category/modify-dialogue-category.component';
-import { ModifyDialogueOptionComponent } from 'src/app/modify-dialogue-option/modify-dialogue-option.component';
+import { ModifyDialogueItemComponent } from 'src/app/Pages/modify-dialogue-item/modify-dialogue-item.component';
+import { ModifyDialogueCategoryComponent } from 'src/app/Pages/modify-dialogue-category/modify-dialogue-category.component';
+import { ModifyDialogueOptionComponent } from 'src/app/Pages/modify-dialogue-option/modify-dialogue-option.component';
 @Component({
   selector: 'app-edit-list',
   templateUrl: './edit-list.component.html',

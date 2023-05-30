@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { HttpService } from '../Services/http.service';
-import { StatusService } from '../Services/status.service';
-import { Category } from '../Models/Category';
+import { HttpService } from '../../Services/http.service';
+import { StatusService } from '../../Services/status.service';
+import { Category } from '../../Models/Category';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({

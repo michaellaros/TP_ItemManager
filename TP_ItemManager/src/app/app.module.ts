@@ -16,9 +16,9 @@ import { ItemFilterComponent } from './Pages/item-filter/item-filter.component';
 import { CategoryFilterComponent } from './Pages/category-filter/category-filter.component';
 import { OptionFilterComponent } from './Pages/option-filter/option-filter.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ModifyDialogueItemComponent } from './modify-dialogue-item/modify-dialogue-item.component';
-import { ModifyDialogueCategoryComponent } from './modify-dialogue-category/modify-dialogue-category.component';
-import { ModifyDialogueOptionComponent } from './modify-dialogue-option/modify-dialogue-option.component';
+import { ModifyDialogueItemComponent } from './Pages/modify-dialogue-item/modify-dialogue-item.component';
+import { ModifyDialogueCategoryComponent } from './Pages/modify-dialogue-category/modify-dialogue-category.component';
+import { ModifyDialogueOptionComponent } from './Pages/modify-dialogue-option/modify-dialogue-option.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +30,6 @@ import { ModifyDialogueOptionComponent } from './modify-dialogue-option/modify-d
     ModifyDialogueItemComponent,
     ModifyDialogueCategoryComponent,
     ModifyDialogueOptionComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -38,10 +37,13 @@ import { ModifyDialogueOptionComponent } from './modify-dialogue-option/modify-d
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [    { provide: LocationStrategy, useClass: HashLocationStrategy },
-    { provide: MAT_DATE_LOCALE, useValue: 'it-IT' },HttpService],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    { provide: MAT_DATE_LOCALE, useValue: 'it-IT' },
+    HttpService,
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

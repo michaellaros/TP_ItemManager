@@ -18,7 +18,7 @@ import { ModalOptionComponent } from 'src/app/Pages/modal-option/modal-option.co
 export class EditListComponent {
   @Input() public parentData!: SearchedObject[];
   @Input() public columnName: string = 'Name';
-  displayedColumns: string[] = ['id', 'name', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'edit', 'delete'];
 
   constructor(public http: HttpService, public dialog: MatDialog) {}
 

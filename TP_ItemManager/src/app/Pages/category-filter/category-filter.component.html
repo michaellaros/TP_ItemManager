@@ -1,25 +1,37 @@
-<div class="container" >
-  <button mat-raised-button color="primary"  (click)="ModifyObject()" class="create" *ngIf="status.buttonValue !== ''">
-    Create {{status.buttonValue}}
-  </button>
-  <div style="display: flex;">
+<div class="container mt-3">
+  <div class="row"><h1>Categories</h1></div>
   <form [formGroup]="filterForm" class="formGroup">
-      <mat-form-field >
+    <div class="row container-fluid">
+      <mat-form-field class="col-3 m-1">
         <mat-label>ID</mat-label>
-        <input formControlName="id" matInput placeholder="ID">
+        <input formControlName="id" matInput />
       </mat-form-field>
-      <mat-form-field >
+      <mat-form-field class="col-3 m-1">
         <mat-label>Name</mat-label>
-        <input formControlName="name" matInput placeholder="Name">
+        <input formControlName="name" matInput />
       </mat-form-field>
+    </div>
+    <div class="container-fluid d-flex justify-content-between">
+      <button
+        mat-raised-button
+        color="primary"
+        class="col-3 mx-1 mb-3"
+        (click)="GetCategory()"
+      >
+        Search
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="OpenDialogModifyCategory()"
+        class="col-3 mx-1"
+      >
+        Create {{ status.buttonValue }}
+      </button>
+    </div>
   </form>
-  <button mat-raised-button color="primary"  class="search" (click)="GetCategory()">
-    Search
-  </button>
-  </div>
-
-
 </div>
+
 <app-edit-list
   *ngIf="this.list != null"
   [parentData]="this.list"

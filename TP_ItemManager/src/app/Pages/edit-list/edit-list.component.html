@@ -5,35 +5,41 @@
 
     <!-- Position Column -->
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      <th mat-header-cell *matHeaderCellDef class="col-1">ID</th>
+      <td mat-cell *matCellDef="let element" class="col-1">{{ element.id }}</td>
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container matColumnDef="name">
+    <ng-container matColumnDef="name" class="col-9">
       <th mat-header-cell *matHeaderCellDef>NAME</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      <td mat-cell *matCellDef="let element">
+        {{ element.name }}
+      </td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>ACTIONS</th>
-      <td mat-cell *matCellDef="let element">
-        <button
-          (click)="ModifyItem(element.id!)"
-          mat-mini-fab
-          color="primary"
-          aria-label="Example icon button with a filter list icon"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button
-          mat-mini-fab
-          color="primary"
-          aria-label="Example icon button with a filter list icon"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
+      <th mat-header-cell *matHeaderCellDef class="col-2">
+        <div class="w-100 d-flex justify-content-center">ACTIONS</div>
+      </th>
+      <td mat-cell *matCellDef="let element" class="justify-content-end">
+        <div class="w-100 d-flex justify-content-center">
+          <button
+            (click)="ModifyItem(element.id!)"
+            mat-mini-fab
+            color="primary"
+            aria-label="Example icon button with a filter list icon"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-mini-fab
+            color="primary"
+            aria-label="Example icon button with a filter list icon"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </td>
     </ng-container>
 

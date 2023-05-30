@@ -55,10 +55,6 @@ export class ItemFilterComponent {
       });
   }
 
-  ModifyObject() {
-    this.OpenDialogModifyItem();
-  }
-
   OpenDialogModifyItem() {
     const dialogRef = this.dialog.open(ModifyDialogueItemComponent);
   }

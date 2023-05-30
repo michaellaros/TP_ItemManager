@@ -1,20 +1,31 @@
 <div class="container-fluid">
   <div class="row">
-      <mat-toolbar >
+    <mat-toolbar color="primary">
+      <img src=".\assets\mylogo.png" class="logo" alt="" />
 
-    <img src=".\assets\mylogo.png" class="logo" alt="">
-
-  <div >
-    <h1 class="title app">Item Manager</h1>
-    </div>
-    <mat-button-toggle-group class="buttonGroup">
-      <mat-button-toggle value="Category" routerLink="/CategoryFilter" (click)="SetLabel('category')" >Category</mat-button-toggle>
-      <mat-button-toggle value="Item" routerLink="/ItemFilter" (click)="SetLabel('item')">Item</mat-button-toggle>
-      <mat-button-toggle value="Option" routerLink="/OptionFilter" (click)="SetLabel('option')">Option</mat-button-toggle>
-    </mat-button-toggle-group>
-
-
-</mat-toolbar>
-
-</div>
+      <div>
+        <h1 class="title app">Item Manager</h1>
+      </div>
+      <mat-button-toggle-group class="buttonGroup">
+        <mat-button-toggle
+          value="Category"
+          routerLink="/Category"
+          (click)="SetLabel('category')"
+          >Category</mat-button-toggle
+        >
+        <mat-button-toggle
+          value="Item"
+          routerLink="/Item"
+          (click)="SetLabel('item')"
+          >Item</mat-button-toggle
+        >
+        <mat-button-toggle
+          value="Option"
+          routerLink="/Option"
+          (click)="SetLabel('option')"
+          >Option</mat-button-toggle
+        >
+      </mat-button-toggle-group>
+    </mat-toolbar>
+  </div>
 </div>

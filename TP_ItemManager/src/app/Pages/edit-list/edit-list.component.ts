@@ -22,9 +22,7 @@ export class EditListComponent {
 
   constructor(public http: HttpService, public dialog: MatDialog) {}
 
-  ngOnInit() {
-    console.log(this.parentData);
-  }
+  ngOnInit() {}
   ModifyItem(id: string) {
     switch (this.columnName) {
       case 'Item':

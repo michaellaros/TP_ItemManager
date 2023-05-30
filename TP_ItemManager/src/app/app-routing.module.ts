@@ -4,15 +4,15 @@ import { ItemFilterComponent } from './Pages/item-filter/item-filter.component';
 import { CategoryFilterComponent } from './Pages/category-filter/category-filter.component';
 import { OptionFilterComponent } from './Pages/option-filter/option-filter.component';
 
-
 const routes: Routes = [
-  { path: 'CategoryFilter', component: CategoryFilterComponent },
-  { path: 'ItemFilter', component: ItemFilterComponent },
-  { path: 'OptionFilter', component: OptionFilterComponent }
+  { path: 'Category', component: CategoryFilterComponent },
+  { path: 'Item', component: ItemFilterComponent },
+  { path: 'Option', component: OptionFilterComponent },
+  { path: '**', redirectTo: 'Category' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

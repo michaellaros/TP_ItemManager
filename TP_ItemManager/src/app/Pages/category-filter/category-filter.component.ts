@@ -38,7 +38,6 @@ export class CategoryFilterComponent {
   GetCategory() {
     let id = this.filterForm.get('id')?.value!;
     let name = this.filterForm.get('name')?.value!;
-    let barcode = this.filterForm.get('barcode')?.value!;
 
     let list: SearchedObject[] = [];
 
@@ -50,10 +49,6 @@ export class CategoryFilterComponent {
         });
         this.list = list;
       });
-  }
-
-  ModifyObject() {
-    this.OpenDialogModifyCategory();
   }
 
   OpenDialogModifyCategory() {

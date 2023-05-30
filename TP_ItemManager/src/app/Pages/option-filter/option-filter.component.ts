@@ -31,10 +31,10 @@ export class OptionFilterComponent {
     name: new FormControl(''),
   });
   ngOnInit() {
-    this.GetOption();
+    this.GetOptions();
   }
 
-  GetOption() {
+  GetOptions() {
     let id = this.filterForm.get('id')?.value!;
     let name = this.filterForm.get('name')?.value!;
 
@@ -49,10 +49,6 @@ export class OptionFilterComponent {
         this.list = list;
       });
   }
-  ModifyObject() {
-    this.OpenDialogModifyOption();
-  }
-
   OpenDialogModifyOption() {
     const dialogRef = this.dialog.open(ModifyDialogueOptionComponent);
   }

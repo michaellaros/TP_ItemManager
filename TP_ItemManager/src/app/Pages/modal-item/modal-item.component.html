@@ -1,6 +1,8 @@
-<div class="dialog container-fluid">
-  <div class="w-100 d-flex position-relative">
-    <h1 mat-dialog-title class="px-0">Inserire i dati del nuovo cliente:</h1>
+<div class="dialog">
+  <mat-toolbar class="w-100 position-relative mb-4" color="primary">
+    <div>
+      <h1 class="px-0 my-2 text-white">Inserire i dati del nuovo cliente:</h1>
+    </div>
 
     <button
       mat-icon-button
@@ -9,7 +11,8 @@
     >
       <mat-icon>close</mat-icon>
     </button>
-  </div>
+  </mat-toolbar>
+<div class="container-fluid">
   <form [formGroup]="itemForm" class="formGroup" (ngSubmit)="SubmitForm()">
     <div class="row">
       <mat-form-field appearance="outline" class="col-6">
@@ -56,6 +59,7 @@
       {{ flg_insert ? "Create" : "Modify" }}
     </button>
   </form>
+  </div>
   <app-translations-editor  [translations]="item?.translations!" [flg_isEditable]="!this.flg_insert" />
 
 </div>

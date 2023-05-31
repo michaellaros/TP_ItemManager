@@ -12,56 +12,62 @@
       <mat-icon>close</mat-icon>
     </button>
   </mat-toolbar>
-<div class="container-fluid">
-  <form [formGroup]="itemForm" class="formGroup" (ngSubmit)="SubmitForm()">
-    <div class="row">
-      <mat-form-field appearance="outline" class="col-6">
-        <mat-label>Name</mat-label>
-        <input formControlName="name" matInput />
-      </mat-form-field>
+  <div class="container-fluid">
+    <form [formGroup]="itemForm" class="formGroup" (ngSubmit)="SubmitForm()">
+      <div class="row">
+        <mat-form-field appearance="outline" class="col-6">
+          <mat-label>Name</mat-label>
+          <input formControlName="name" matInput />
+        </mat-form-field>
 
-      <mat-form-field appearance="outline" class="col-6">
-        <mat-label>Description</mat-label>
-        <input formControlName="description" matInput />
-      </mat-form-field>
+        <mat-form-field appearance="outline" class="col-6">
+          <mat-label>Description</mat-label>
+          <input formControlName="description" matInput />
+        </mat-form-field>
 
-      <mat-form-field appearance="outline" class="col-6">
-        <mat-label>Barcode</mat-label>
-        <input formControlName="barcode" matInput />
-      </mat-form-field>
+        <mat-form-field appearance="outline" class="col-6">
+          <mat-label>Barcode</mat-label>
+          <input formControlName="barcode" matInput />
+        </mat-form-field>
 
-      <mat-form-field appearance="outline" class="col-6">
-        <mat-label>Price</mat-label>
-        <input type="number" formControlName="price" matInput />
-      </mat-form-field>
+        <mat-form-field appearance="outline" class="col-6">
+          <mat-label>Price</mat-label>
+          <input type="number" formControlName="price" matInput />
+        </mat-form-field>
 
-      <mat-form-field appearance="outline" class="col-6">
-        <mat-label>Image</mat-label>
-        <input formControlName="imagePath" matInput />
-      </mat-form-field>
-    </div>
-    <div class="row">
-      <mat-checkbox formControlName="flg_addToCart" matInput color="primary">
-        Add item to transaction
-      </mat-checkbox>
-      <mat-checkbox formControlName="flg_verifyAdult" matInput color="primary">
-        Article 18+
-      </mat-checkbox>
-      <mat-checkbox formControlName="flg_isMenu" matInput color="primary">
-        Menu
-      </mat-checkbox>
-      <mat-checkbox formControlName="available" matInput color="primary">
-        Available
-      </mat-checkbox>
-    </div>
+        <mat-form-field appearance="outline" class="col-6">
+          <mat-label>Image</mat-label>
+          <input formControlName="imagePath" matInput />
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-checkbox formControlName="flg_addToCart" matInput color="primary">
+          Add item to transaction
+        </mat-checkbox>
+        <mat-checkbox
+          formControlName="flg_verifyAdult"
+          matInput
+          color="primary"
+        >
+          Article 18+
+        </mat-checkbox>
+        <mat-checkbox formControlName="flg_isMenu" matInput color="primary">
+          Menu
+        </mat-checkbox>
+        <mat-checkbox formControlName="available" matInput color="primary">
+          Available
+        </mat-checkbox>
+      </div>
 
-    <button mat-raised-button color="primary" type="submit">
-      {{ flg_insert ? "Create" : "Modify" }}
-    </button>
-  </form>
+      <button mat-raised-button color="primary" type="submit">
+        {{ flg_insert ? "Create" : "Modify" }}
+      </button>
+    </form>
   </div>
-  <app-translations-editor [id]="item?.id!" [translations]="item?.translations!" [flg_isEditable]="!this.flg_insert" />
-
+  <app-translations-editor
+    [id]="item?.id!"
+    [translations]="item?.translations!"
+    [flg_isEditable]="!this.flg_insert"
+    [type]="'Item'"
+  />
 </div>
-
-

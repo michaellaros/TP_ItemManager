@@ -18,48 +18,50 @@
   [@bodyExpansion]="this.state ? 'collapsed' : 'expanded'"
   class="expandable-content"
 >
-  <div class="row  mx-4" *ngFor="let translation of translations">
-    <form  class="formGroup" >
-    <mat-form-field  class="col-2">
+  <div class="row mx-4" *ngFor="let translation of translations">
+    <mat-form-field class="col-2">
       <mat-label>Language</mat-label>
-      <input disabled matInput type="text" [value]="translation.language" />
+      <input disabled matInput type="text" [(ngModel)]="translation.language" />
     </mat-form-field>
     <mat-form-field class="col-2">
       <mat-label>Field</mat-label>
-      <input disabled matInput type="text" [value]="translation.field" />
+      <input disabled matInput type="text" [(ngModel)]="translation.field" />
     </mat-form-field>
     <mat-form-field class="col-6">
       <mat-label>Value</mat-label>
-      <input matInput  type="text" [value]="translation.value" />
-
+      <input matInput type="text" [(ngModel)]="translation.value" />
     </mat-form-field>
-    <button  mat-mini-fab color="primary" class="p-1 col-1">
+    <button
+      mat-mini-fab
+      color="primary"
+      class="p-1 col-1"
+      (click)="UpdateTranslation(translation)"
+    >
       <mat-icon>edit</mat-icon>
     </button>
     <button mat-mini-fab color="primary" class="p-1 col-1">
       <mat-icon>delete</mat-icon>
     </button>
-  </form>
   </div>
 
   <div class="row mx-4">
-    <form  class="formGroup" >
-    <mat-form-field class="col-2">
-      <mat-label>Language</mat-label>
-      <input  matInput type="text" />
-    </mat-form-field>
-    <mat-form-field class="col-2">
-      <mat-label>Field</mat-label>
-      <input  matInput type="text" />
-    </mat-form-field>
-    <mat-form-field class="col-6">
-      <mat-label>Value</mat-label>
-      <input  matInput type="text" />
-    </mat-form-field>
+    <form class="formGroup">
+      <mat-form-field class="col-2">
+        <mat-label>Language</mat-label>
+        <input matInput type="text" />
+      </mat-form-field>
+      <mat-form-field class="col-2">
+        <mat-label>Field</mat-label>
+        <input matInput type="text" />
+      </mat-form-field>
+      <mat-form-field class="col-6">
+        <mat-label>Value</mat-label>
+        <input matInput type="text" />
+      </mat-form-field>
 
-    <button mat-mini-fab color="primary" class="m-1 col-2">
-      <mat-icon>add</mat-icon>
-    </button>
-  </form>
+      <button mat-mini-fab color="primary" class="m-1 col-2">
+        <mat-icon>add</mat-icon>
+      </button>
+    </form>
   </div>
 </div>

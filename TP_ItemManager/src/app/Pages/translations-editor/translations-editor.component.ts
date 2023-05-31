@@ -36,11 +36,10 @@ export class TranslationsEditorComponent {
   public translation?: Translation;
   @Input() flg_isEditable!: boolean;
   @Input() id!: string;
+  @Input() type!: string;
   public state: boolean = true;
 
-
-
-  constructor(private http:HttpService) {}
+  constructor(private http: HttpService) {}
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -53,6 +52,15 @@ export class TranslationsEditorComponent {
     }
   }
 
-
-
+  UpdateTranslation(translation: Translation) {
+    switch (this.type) {
+      case 'Item':
+        this.http
+          .UpdateItemTranslation(this.id, translation)
+          .subscribe((data) => {
+            this.translations = data;
+            console.log(data);
+          });
+    }
+  }
 }

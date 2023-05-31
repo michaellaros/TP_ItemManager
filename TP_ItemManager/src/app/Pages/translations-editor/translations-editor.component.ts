@@ -8,7 +8,6 @@ import {
   trigger,
 } from '@angular/animations';
 
-
 @Component({
   selector: 'app-translations-editor',
   templateUrl: './translations-editor.component.html',
@@ -32,23 +31,20 @@ import {
 })
 export class TranslationsEditorComponent {
   @Input() public translations?: Translation[];
-  public state : string = "collapsed";
-  @Input() flg_isEditable!: boolean;
 
-  constructor(){}
+  @Input() flg_isEditable!: boolean;
+  public state: boolean = true;
+
+  constructor() {}
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    console.log(    this.flg_isEditable
-      )
+    console.log(this.flg_isEditable);
   }
   toggle(): void {
-    if(this.flg_isEditable === true){
-      this.state =
-      this.state === 'collapsed' ? 'expanded' : 'collapsed';
-      console.log(this.state)
+    if (this.flg_isEditable) {
+      this.state = !this.state;
+      console.log(this.state);
     }
   }
-
-
 }

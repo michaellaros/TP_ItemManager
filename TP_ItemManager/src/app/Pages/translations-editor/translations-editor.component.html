@@ -3,18 +3,31 @@
     <h1 class="px-0 my-2 text-white">Translations</h1>
   </div>
 
-  <button mat-icon-button [disabled]="!this.flg_isEditable" (click)="toggle()" class="m-2 position-absolute end-0">
+  <button
+    mat-icon-button
+    [disabled]="!this.flg_isEditable"
+    (click)="toggle()"
+    class="m-2 position-absolute end-0"
+  >
     <mat-icon>expand_less</mat-icon>
   </button>
 </mat-toolbar>
 
-<div class="container-fluid row" [@bodyExpansion]="this.state" class="expandable-content">
-  <div class="col-6 row" *ngFor="let translation of translations">
-    <mat-form-field class="col-3">
+<div
+  class="container-fluid row"
+  [@bodyExpansion]="this.state ? 'collapsed' : 'expanded'"
+  class="expandable-content"
+>
+  <div class="row" *ngFor="let translation of translations">
+    <mat-form-field class="col-2">
       <mat-label>Language</mat-label>
       <input matInput type="text" [value]="translation.language" />
     </mat-form-field>
-    <mat-form-field class="col-7">
+    <mat-form-field class="col-2">
+      <mat-label>Field</mat-label>
+      <input matInput type="text" [value]="translation.field" />
+    </mat-form-field>
+    <mat-form-field class="col-6">
       <mat-label>Value</mat-label>
       <input matInput type="text" [value]="translation.value" />
     </mat-form-field>
@@ -26,13 +39,16 @@
     </button>
   </div>
 
-  <div class="row col-6">
-    <mat-form-field class="col-3">
-      <mat-label>Lang</mat-label>
+  <div class="row">
+    <mat-form-field class="col-2">
+      <mat-label>Language</mat-label>
       <input matInput type="text" />
     </mat-form-field>
-
-    <mat-form-field class="col-7">
+    <mat-form-field class="col-2">
+      <mat-label>Field</mat-label>
+      <input matInput type="text" />
+    </mat-form-field>
+    <mat-form-field class="col-6">
       <mat-label>Value</mat-label>
       <input matInput type="text" />
     </mat-form-field>

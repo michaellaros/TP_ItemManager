@@ -12,6 +12,7 @@ import { OptionFilterModel } from '../Models/OptionFilterModel';
 import { Item } from '../Models/Item';
 import { Category } from '../Models/Category';
 import { Option } from '../Models/Option';
+import {Translation} from '../Models/Translation'
 
 @Injectable({
   providedIn: 'root',
@@ -119,5 +120,14 @@ export class HttpService {
 
   ErrorHandler(error: HttpErrorResponse) {
     return throwError(() => new Error(error.message || 'Server error!'));
+  }
+
+  InsertItemTranslation(id:string,translation:Translation) {
+    console.log(id);
+    return this.http
+      .post<Translation>(this.urlAPI + 'InsertItemTranslation', translation,{
+        params: new HttpParams().append('id', id),
+      })
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
 }

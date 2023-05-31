@@ -2,7 +2,7 @@ import { Translation } from './Translation';
 
 export class Option {
   constructor(
-    public id?: number,
+    public id?: string,
     public name?: string,
     public Flg_addToCart?: boolean,
     public defaultQuantity?: number,

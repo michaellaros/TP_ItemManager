@@ -40,12 +40,13 @@ export class CategoryFilterComponent {
     let name = this.filterForm.get('name')?.value!;
 
     let list: SearchedObject[] = [];
-
+    console.log(new CategoryFilterModel(id, name, 0, 50, ''))
     this.http
       .FilterCategory(new CategoryFilterModel(id, name, 0, 50, ''))
       .subscribe((data) => {
         Object.keys(data).forEach((key) => {
           list.push(new SearchedObject(key, data[key]));
+
         });
         this.list = list;
       });

@@ -7,6 +7,8 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { HttpService } from 'src/app/Services/http.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-translations-editor',
@@ -31,11 +33,14 @@ import {
 })
 export class TranslationsEditorComponent {
   @Input() public translations?: Translation[];
-
+  public translation?: Translation;
   @Input() flg_isEditable!: boolean;
+  @Input() id!: string;
   public state: boolean = true;
 
-  constructor() {}
+
+
+  constructor(private http:HttpService) {}
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -47,4 +52,7 @@ export class TranslationsEditorComponent {
       console.log(this.state);
     }
   }
+
+
+
 }

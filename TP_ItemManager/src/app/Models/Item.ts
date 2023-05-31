@@ -2,7 +2,7 @@ import { Translation } from "./Translation";
 
 export class Item {
   constructor(
-    public id?: number,
+    public id?: string,
     public name?: string,
     public description?: string,
     public barcode?: string,

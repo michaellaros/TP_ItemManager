@@ -1,44 +1,47 @@
-<div class="dialog">
-  <form [formGroup]="optionForm" class="formGroup">
-    <mat-form-field class="example-full-width">
-      <mat-label>ID</mat-label>
-      <input type="number" formControlName="id" matInput value="" />
-    </mat-form-field>
+<div class="dialog container-fluid">
+  <div class="w-100 d-flex position-relative">
+    <h1 mat-dialog-title class="px-0">Inserire i dati del nuovo cliente:</h1>
 
-    <mat-form-field class="example-full-width">
-      <mat-label>Default quantity</mat-label>
-      <input
-        type="number"
-        formControlName="defaultQuantity"
+    <button
+      mat-icon-button
+      class="m-2 position-absolute end-0"
+      [mat-dialog-close]="null"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <form [formGroup]="optionForm" class="formGroup" (ngSubmit)="SubmitForm()">
+    <div class="row">
+      <mat-form-field class="col-12">
+        <mat-label>Option name</mat-label>
+        <input formControlName="name" matInput value="" />
+      </mat-form-field>
+      <mat-form-field class="col-4">
+        <mat-label>Default quantity</mat-label>
+        <input type="number" formControlName="default_quantity" matInput />
+      </mat-form-field>
+
+      <mat-form-field class="col-4">
+        <mat-label>Max quantity</mat-label>
+        <input type="number" formControlName="min_quantity" matInput />
+      </mat-form-field>
+
+      <mat-form-field class="col-4">
+        <mat-label>Min quantity</mat-label>
+        <input type="number" formControlName="max_quantity" matInput />
+      </mat-form-field>
+
+      <mat-checkbox
+        formControlName="flg_addToCart"
         matInput
-        value=""
-      />
-    </mat-form-field>
+        class="example-margin"
+        color="primary"
+        >Is available
+      </mat-checkbox>
+    </div>
 
-    <mat-form-field class="example-full-width">
-      <mat-label>Max quantity</mat-label>
-      <input type="number" formControlName="minQuantity" matInput value="" />
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-      <mat-label>Min quantity</mat-label>
-      <input type="number" formControlName="maxQuantity" matInput value="" />
-    </mat-form-field>
-
-    <mat-checkbox
-      formControlName="flg_addToCart"
-      matInput
-      value=""
-      class="example-margin"
-      >Is available
-    </mat-checkbox>
-
-    <mat-form-field class="example-full-width">
-      <mat-label>Option name</mat-label>
-      <input formControlName="name" matInput value="" />
-    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">
+      {{ flg_insert ? "Create" : "Modify" }}
+    </button>
   </form>
-  <button mat-raised-button color="primary" (click)="confirmObject()">
-    Create
-  </button>
 </div>

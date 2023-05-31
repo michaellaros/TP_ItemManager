@@ -1,3 +1,5 @@
+import { Translation } from './Translation';
+
 export class Category {
   constructor(
     public id?: number,
@@ -5,6 +7,7 @@ export class Category {
     public imagePath?: string,
     public available?: boolean,
     public codConsumationAllowed?: string,
-    public categoryOrder?: number
+    public categoryOrder?: number,
+    public translations?: Translation[]
   ) {}
 }

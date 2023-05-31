@@ -1,13 +1,14 @@
-import { Translations } from "./Translations";
+import { Translation } from './Translation';
 
 export class Option {
   constructor(
+    public id?: number,
+    public name?: string,
+    public Flg_addToCart?: boolean,
     public defaultQuantity?: number,
-    public flg_addToCart?:boolean,
-    public id? :number ,
-    public maxQuantity? :number ,
-    public minQuantity? :number ,
-    public name? : string,
-    public translations?: Translations[]
+    public maxQuantity?: number,
+    public minQuantity?: number,
+    public available?: boolean,
+    public translations?: Translation[]
   ) {}
 }

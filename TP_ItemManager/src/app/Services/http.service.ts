@@ -103,6 +103,20 @@ export class HttpService {
       .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
 
+  InsertOption(option: Option) {
+    console.log(option);
+    return this.http
+      .post<Category>(this.urlAPI + 'InsertOption', option)
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+  UpdateOption(option: Option) {
+    console.log(option);
+    return this.http
+      .post<Category>(this.urlAPI + 'UpdateOption', option)
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
   ErrorHandler(error: HttpErrorResponse) {
     return throwError(() => new Error(error.message || 'Server error!'));
   }

@@ -9,7 +9,7 @@
     (click)="toggle()"
     class="m-2 position-absolute end-0"
   >
-    <mat-icon>expand_less</mat-icon>
+    <mat-icon>{{ this.state ? "expand_less" : "expand_more" }}</mat-icon>
   </button>
 </mat-toolbar>
 

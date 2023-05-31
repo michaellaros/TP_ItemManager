@@ -20,6 +20,7 @@ import { ModalItemComponent } from './Pages/modal-item/modal-item.component';
 import { ModalCategoryComponent } from './Pages/modal-category/modal-category.component';
 import { ModalOptionComponent } from './Pages/modal-option/modal-option.component';
 import { FormsModule } from '@angular/forms';
+import { TranslationsEditorComponent } from './Pages/translations-editor/translations-editor.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { FormsModule } from '@angular/forms';
     ModalItemComponent,
     ModalCategoryComponent,
     ModalOptionComponent,
+    TranslationsEditorComponent,
   ],
   imports: [
     BrowserModule,

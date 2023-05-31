@@ -1,0 +1,48 @@
+<mat-toolbar class="w-100 position-relative my-4" color="primary">
+  <div>
+    <h1 class="px-0 my-2 text-white">Translations</h1>
+  </div>
+
+  <button
+    mat-icon-button
+    class="m-2 position-absolute end-0"
+    [mat-dialog-close]="null"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="container-fluid row">
+  <div class="col-6 row" *ngFor="let translation of translations">
+    <mat-form-field class="col-3">
+      <mat-label>Language</mat-label>
+      <input matInput type="text" [value]="translation.language" />
+    </mat-form-field>
+    <mat-form-field class="col-7">
+      <mat-label>Value</mat-label>
+      <input matInput type="text" [value]="translation.value" />
+    </mat-form-field>
+    <button mat-mini-fab color="primary" class="p-1 col-1">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-mini-fab color="primary" class="p-1 col-1">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+
+  <div class="row col-6">
+    <mat-form-field class="col-3">
+      <mat-label>Lang</mat-label>
+      <input matInput type="text" />
+    </mat-form-field>
+
+    <mat-form-field class="col-7">
+      <mat-label>Value</mat-label>
+      <input matInput type="text" />
+    </mat-form-field>
+
+    <button mat-mini-fab color="primary" class="m-1 col-2">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

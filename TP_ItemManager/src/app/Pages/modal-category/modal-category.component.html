@@ -1,8 +1,8 @@
-<div class="dialog container-fluid">
-  <div class="w-100 d-flex position-relative">
-    <h1 mat-dialog-title class="px-0">
-      {{ flg_insert ? "New category" : "Edit category" }}:
-    </h1>
+<div class="dialog">
+  <mat-toolbar class="w-100 position-relative mb-4" color="primary">
+    <div>
+      <h1 class="px-0 my-2 text-white">Category info</h1>
+    </div>
 
     <button
       mat-icon-button
@@ -11,81 +11,50 @@
     >
       <mat-icon>close</mat-icon>
     </button>
-  </div>
-  <form [formGroup]="categoryForm" class="formGroup" (ngSubmit)="SubmitForm()">
-    <div class="row">
-      <mat-form-field appearance="outline" class="col-4">
-        <mat-label>Name</mat-label>
-        <input formControlName="name" matInput />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="col-4">
-        <mat-label>Image</mat-label>
-        <input formControlName="imagePath" matInput />
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="col-4">
-        <mat-label>Order</mat-label>
-        <input type="number" formControlName="order" matInput />
-      </mat-form-field>
-    </div>
-    <div class="row">
-      <div class="col-6">
-        <mat-checkbox formControlName="available" matInput color="primary">
-          Available
-        </mat-checkbox>
-      </div>
-
-      <div class="col-6">
-        <h4 class="mb-0">Visible if:</h4>
-        <mat-checkbox formControlName="dineIn" matInput color="primary">
-          Dine in
-        </mat-checkbox>
-        <mat-checkbox formControlName="takeAway" matInput color="primary">
-          Take away
-        </mat-checkbox>
-      </div>
-    </div>
-
-    <button mat-raised-button color="primary" type="submit">
-      {{ flg_insert ? "Create" : "Modify" }}
-    </button>
-  </form>
-  <div>
-    <div class="row" *ngFor="let translation of this.category?.translations">
-      <mat-form-field class="col-2">
-        <mat-label>Language</mat-label>
-        <input matInput type="text" [(ngModel)]="translation!.language" />
-      </mat-form-field>
-      <mat-form-field class="col-8">
-        <mat-label>Value</mat-label>
-        <input matInput type="text" [(ngModel)]="translation!.value" />
-      </mat-form-field>
-      <button mat-mini-fab color="primary" class="m-1 col-1">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button mat-mini-fab color="primary" class="m-1 col-1">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
+  </mat-toolbar>
+  <div class="container-fluid">
     <form
       [formGroup]="categoryForm"
       class="formGroup"
       (ngSubmit)="SubmitForm()"
     >
       <div class="row">
-        <mat-form-field class="col-2">
-          <mat-label>Language</mat-label>
-          <input matInput type="text" />
+        <mat-form-field appearance="outline" class="col-4">
+          <mat-label>Name</mat-label>
+          <input formControlName="name" matInput />
         </mat-form-field>
-
-        <mat-form-field class="col-8">
-          <mat-label>Value</mat-label>
-          <input matInput type="text" />
+        <mat-form-field appearance="outline" class="col-4">
+          <mat-label>Image</mat-label>
+          <input formControlName="imagePath" matInput />
         </mat-form-field>
-
-        <button mat-mini-fab color="primary" class="m-1 col-2">
-          <mat-icon>add</mat-icon>
-        </button>
+        <mat-form-field appearance="outline" class="col-4">
+          <mat-label>Order</mat-label>
+          <input type="number" formControlName="order" matInput />
+        </mat-form-field>
       </div>
+      <div class="row">
+        <div class="col-6">
+          <mat-checkbox formControlName="available" matInput color="primary">
+            Available
+          </mat-checkbox>
+        </div>
+
+        <div class="col-6">
+          <h4 class="mb-0">Visible if:</h4>
+          <mat-checkbox formControlName="dineIn" matInput color="primary">
+            Dine in
+          </mat-checkbox>
+          <mat-checkbox formControlName="takeAway" matInput color="primary">
+            Take away
+          </mat-checkbox>
+        </div>
+      </div>
+
+      <button mat-raised-button color="primary" type="submit">
+        {{ flg_insert ? "Create" : "Modify" }}
+      </button>
     </form>
   </div>
+
+  <app-translations-editor [translations]="category?.translations!" />
 </div>

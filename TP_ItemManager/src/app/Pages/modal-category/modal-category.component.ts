@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./modal-category.component.scss'],
 })
 export class ModalCategoryComponent {
-  category!: Category;
+  category?: Category;
   public flg_insert: boolean;
 
   categoryForm = new FormGroup({

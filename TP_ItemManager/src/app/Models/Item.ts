@@ -1,3 +1,5 @@
+import { Translation } from "./Translation";
+
 export class Item {
   constructor(
     public id?: number,
@@ -9,6 +11,7 @@ export class Item {
     public flg_addToCart?: boolean,
     public flg_verifyAdult?: boolean,
     public flg_isMenu?: boolean,
-    public available?: boolean
+    public available?: boolean,
+    public translations?: Translation[]
   ) {}
 }

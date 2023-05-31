@@ -3,12 +3,12 @@
     <h1 class="px-0 my-2 text-white">Translations</h1>
   </div>
 
-  <button mat-icon-button class="m-2 position-absolute end-0">
+  <button mat-icon-button [disabled]="!this.flg_isEditable" (click)="toggle()" class="m-2 position-absolute end-0">
     <mat-icon>expand_less</mat-icon>
   </button>
 </mat-toolbar>
 
-<div class="container-fluid row">
+<div class="container-fluid row" [@bodyExpansion]="this.state" class="expandable-content">
   <div class="col-6 row" *ngFor="let translation of translations">
     <mat-form-field class="col-3">
       <mat-label>Language</mat-label>

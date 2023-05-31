@@ -13,7 +13,7 @@ import { StatusService } from 'src/app/Services/status.service';
   styleUrls: ['./modal-item.component.scss'],
 })
 export class ModalItemComponent {
-  item!: Item;
+  item?: Item;
   public flg_insert: boolean;
 
   itemForm = new FormGroup({

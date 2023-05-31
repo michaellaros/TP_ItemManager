@@ -44,4 +44,7 @@
       {{ flg_insert ? "Create" : "Modify" }}
     </button>
   </form>
+
+  <app-translations-editor [translations]="option?.translations!"  [flg_isEditable]="!this.flg_insert" />
+
 </div>

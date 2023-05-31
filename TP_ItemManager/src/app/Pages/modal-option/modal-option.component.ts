@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./modal-option.component.scss'],
 })
 export class ModalOptionComponent {
-  option!: Option;
+  option?: Option;
   public flg_insert: boolean;
 
   optionForm = new FormGroup({

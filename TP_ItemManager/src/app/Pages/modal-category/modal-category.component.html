@@ -56,6 +56,16 @@
     </form>
   </div>
 
-  <app-translations-editor [type]="'Category'" [id]="category?.id!"
-  [translations]="category?.translations!"  [flg_isEditable]="!this.flg_insert" />
+  <app-translations-editor
+    [type]="'Category'"
+    [id]="category?.id!"
+    [translations]="category?.translations!"
+    [flg_isEditable]="!this.flg_insert"
+  />
+  <app-assigned-editor
+    [type]="'Category'"
+    [id]="category?.id!"
+    [AssignedObjects]="category?.items"
+    [flg_insert]="this.flg_insert"
+  />
 </div>

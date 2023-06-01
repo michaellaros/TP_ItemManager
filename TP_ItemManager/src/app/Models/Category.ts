@@ -1,3 +1,4 @@
+import { AssignedObject } from './AssignedObject';
 import { Translation } from './Translation';
 
 export class Category {
@@ -8,6 +9,7 @@ export class Category {
     public available?: boolean,
     public codConsumationAllowed?: string,
     public categoryOrder?: number,
-    public translations?: Translation[]
+    public translations?: Translation[],
+    public items?: AssignedObject[]
   ) {}
 }

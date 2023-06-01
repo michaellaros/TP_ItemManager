@@ -21,6 +21,7 @@ import { ModalCategoryComponent } from './Pages/modal-category/modal-category.co
 import { ModalOptionComponent } from './Pages/modal-option/modal-option.component';
 import { FormsModule } from '@angular/forms';
 import { TranslationsEditorComponent } from './Pages/translations-editor/translations-editor.component';
+import { AssignedEditorComponent } from './Pages/assigned-editor/assigned-editor.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { TranslationsEditorComponent } from './Pages/translations-editor/transla
     ModalCategoryComponent,
     ModalOptionComponent,
     TranslationsEditorComponent,
+    AssignedEditorComponent,
   ],
   imports: [
     BrowserModule,

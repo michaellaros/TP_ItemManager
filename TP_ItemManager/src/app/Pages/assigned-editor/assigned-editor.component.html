@@ -1,0 +1,63 @@
+<mat-toolbar class="w-100 position-relative my-4" color="primary">
+  <div>
+    <h1 class="px-0 my-2 text-white">{{ type }}</h1>
+  </div>
+
+  <button
+    mat-icon-button
+    [disabled]="flg_insert"
+    (click)="toggle()"
+    class="m-2 position-absolute end-0"
+  >
+    <mat-icon>{{ this.state ? "expand_more" : "expand_less" }}</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div
+  class="container-fluid row"
+  [@bodyExpansion]="this.state ? 'collapsed' : 'expanded'"
+  class="expandable-content"
+>
+  <div class="row mx-4" *ngFor="let object of AssignedObjects">
+    <mat-form-field appearance="outline" class="col-6">
+      <mat-label>Name</mat-label>
+      <input disabled matInput type="text" [(ngModel)]="object.name" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-2">
+      <mat-label>Order</mat-label>
+      <input matInput type="number" [(ngModel)]="object.order" />
+    </mat-form-field>
+
+    <button
+      mat-mini-fab
+      color="primary"
+      class="p-1 col-1"
+      (click)="UpdateAssignedObject(object)"
+    >
+      <mat-icon>save</mat-icon>
+    </button>
+    <button mat-mini-fab color="primary" class="p-1 col-1">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+
+  <div class="row mx-4">
+    <mat-form-field appearance="outline" class="col-6">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" [(ngModel)]="newAssignedObject.name" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-2">
+      <mat-label>Order</mat-label>
+      <input matInput type="number" [(ngModel)]="newAssignedObject.order" />
+    </mat-form-field>
+
+    <button
+      (click)="InsertAssignedObject(newAssignedObject)"
+      mat-mini-fab
+      color="primary"
+      class="m-1 col-2"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

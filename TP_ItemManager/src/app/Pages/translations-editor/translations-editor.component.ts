@@ -46,12 +46,9 @@ export class TranslationsEditorComponent {
 
 
   translationForm = new FormGroup({
-    language: new FormControl('',[
-      Validators.required]),
-    field: new FormControl(this.valueTranslation[0],[
-      Validators.required]),
-    value: new FormControl('',[
-      Validators.required])
+    language: new FormControl(''),
+    field: new FormControl(this.valueTranslation[0]),
+    value: new FormControl('')
   })
 
   constructor(private http: HttpService) {
@@ -62,6 +59,10 @@ export class TranslationsEditorComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     console.log(this.flg_isEditable);
+    if(this.type!='item')
+    {
+      this.translationForm.get('language')!.disabled;
+    }
 
   }
   toggle(): void {
@@ -117,7 +118,7 @@ export class TranslationsEditorComponent {
     }
   }
     InsertTranslation() {
-      if (this.translationForm.valid)
+      if (this.translationForm.get('language')!.value! != null && this.translationForm.get('value')!.value! != null)
       {
         switch (this.type) {
           case 'Item':

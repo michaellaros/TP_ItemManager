@@ -38,8 +38,12 @@ export class TranslationsEditorComponent {
   @Input() id!: string;
   @Input() type!: string;
   public state: boolean = true;
+  public newTranslation: Translation = new Translation();
 
-  constructor(private http: HttpService) {}
+
+  constructor(private http: HttpService) {
+
+  }
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
@@ -61,6 +65,68 @@ export class TranslationsEditorComponent {
             this.translations = data;
             console.log(data);
           });
+          break
+
+          case 'Category':
+        this.http
+          .UpdateCategoryTranslation(this.id, translation)
+          .subscribe((data) => {
+            this.translations = data;
+            console.log(data);
+          });
+          break
+
+          case 'Option':
+        this.http
+          .UpdateOptionTranslation(this.id, translation)
+          .subscribe((data) => {
+            this.translations = data;
+            console.log(data);
+          });
+          break
+      }
     }
+
+    InsertTranslation(translation: Translation) {
+      switch (this.type) {
+        case 'Item':
+          this.http
+            .InsertItemTranslation(this.id, translation)
+            .subscribe((data) => {
+              this.translations = data;
+              this.newTranslation = new Translation();
+
+              console.log(data);
+              console.log(this.newTranslation);
+            });
+            break
+
+            case 'Category':
+          this.http
+            .InsertCategoryTranslation(this.id, translation)
+            .subscribe((data) => {
+              this.translations = data;
+              this.newTranslation = new Translation();
+
+              console.log(data);
+              console.log(this.newTranslation);
+
+            });
+            break
+
+            case 'Option':
+          this.http
+            .InsertOptionTranslation(this.id, translation)
+            .subscribe((data) => {
+              this.translations = data;
+              this.newTranslation = new Translation();
+              console.log(data);
+              console.log(this.newTranslation);
+
+            });
+            break
+        }
+      }
+
   }
-}
+

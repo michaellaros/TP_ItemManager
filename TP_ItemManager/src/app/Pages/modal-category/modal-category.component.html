@@ -56,5 +56,6 @@
     </form>
   </div>
 
-  <app-translations-editor [translations]="category?.translations!"  [flg_isEditable]="!this.flg_insert" />
+  <app-translations-editor [type]="'Category'" [id]="category?.id!"
+  [translations]="category?.translations!"  [flg_isEditable]="!this.flg_insert" />
 </div>

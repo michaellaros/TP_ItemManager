@@ -139,4 +139,40 @@ export class HttpService {
       })
       .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
+
+  InsertCategoryTranslation(id: string, translation: Translation) {
+    console.log(id);
+    return this.http
+      .post<Translation[]>(this.urlAPI + 'InsertCategoryTranslation', translation, {
+        params: new HttpParams().append('id', id),
+      })
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+  UpdateCategoryTranslation(id: string, translation: Translation) {
+    console.log(id);
+    return this.http
+      .post<Translation[]>(this.urlAPI + 'UpdateCategoryTranslation', translation, {
+        params: new HttpParams().append('id', id),
+      })
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+  InsertOptionTranslation(id: string, translation: Translation) {
+    console.log(translation);
+    return this.http
+      .post<Translation[]>(this.urlAPI + 'InsertOptionTranslation', translation, {
+        params: new HttpParams().append('id', id),
+      })
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+  UpdateOptionTranslation(id: string, translation: Translation) {
+    console.log(id);
+    return this.http
+      .post<Translation[]>(this.urlAPI + 'UpdateOptionTranslation', translation, {
+        params: new HttpParams().append('id', id),
+      })
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
 }

@@ -48,6 +48,8 @@
     </button>
   </form>
 </div>
-  <app-translations-editor [translations]="option?.translations!"  [flg_isEditable]="!this.flg_insert" />
+
+<app-translations-editor  [translations]="option?.translations!" [type]="'Option'"
+ [id]="option?.id!" [flg_isEditable]="!this.flg_insert" />
 
 </div>

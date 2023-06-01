@@ -21,21 +21,25 @@
   <div class="row mx-4" *ngFor="let translation of translations">
     <mat-form-field class="col-2">
       <mat-label>Language</mat-label>
-      <input disabled matInput type="text" [(ngModel)]="translation.language" />
+      <input matInput disabled type="text" [(ngModel)]="translation.language" />
     </mat-form-field>
-    <mat-form-field class="col-2">
-      <mat-label>Field</mat-label>
-      <input disabled matInput type="text" [(ngModel)]="translation.field" />
-    </mat-form-field>
+
+ <mat-form-field class="col-2">
+  <mat-label>Field</mat-label>
+  <input matInput disabled type="text" [(ngModel)]="translation.field" />
+</mat-form-field>
+
     <mat-form-field class="col-6">
       <mat-label>Value</mat-label>
-      <input matInput type="text" [(ngModel)]="translation.value" />
+      <input matInput  type="text" [(ngModel)]="translation.value" />
     </mat-form-field>
     <button
       mat-mini-fab
       color="primary"
       class="p-1 col-1"
       (click)="UpdateTranslation(translation)"
+
+      [disabled]="translation.value===''"
     >
       <mat-icon>edit</mat-icon>
     </button>
@@ -45,21 +49,29 @@
   </div>
 
   <div class="row mx-4">
-      <mat-form-field class="col-2">
-        <mat-label>Language</mat-label>
-        <input matInput type="text" [(ngModel)]="this.newTranslation.language" />
-      </mat-form-field>
-      <mat-form-field class="col-2">
+    <form [formGroup]="translationForm" class="formGroup" (ngSubmit)="InsertTranslation()" >
+    <mat-form-field  class="col-2">
+      <mat-label>Language</mat-label>
+      <mat-select formControlName="language">
+        <mat-option  *ngFor="let value of this.fieldTranslation" [value]="value" >{{value}}</mat-option>
+      </mat-select>
+ </mat-form-field>
+
+      <mat-form-field   class="col-2">
         <mat-label>Field</mat-label>
-        <input matInput type="text" [(ngModel)]="newTranslation.field"/>
+        <mat-select formControlName="field"  >
+          <mat-option  *ngFor="let value of valueTranslation" [value]="value" >{{value}}</mat-option>
+        </mat-select>
       </mat-form-field>
       <mat-form-field class="col-6">
         <mat-label>Value</mat-label>
-        <input matInput type="text" [(ngModel)]="newTranslation.value" />
+        <input matInput formControlName="value" type="text" />
       </mat-form-field>
 
-      <button (click)="InsertTranslation(newTranslation)" mat-mini-fab color="primary" class="m-1 col-2">
+      <button
+       type="submit" mat-mini-fab color="primary" class="m-1 col-2">
         <mat-icon>add</mat-icon>
       </button>
+    </form>
   </div>
 </div>

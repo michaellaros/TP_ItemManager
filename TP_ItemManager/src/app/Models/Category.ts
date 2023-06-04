@@ -11,5 +11,6 @@ export class Category {
     public categoryOrder?: number,
     public translations?: Translation[],
     public items?: AssignedObject[]
+
   ) {}
 }

@@ -1,3 +1,4 @@
+import { AssignedObject } from './AssignedObject';
 import { Translation } from './Translation';
 
 export class Option {
@@ -9,6 +10,8 @@ export class Option {
     public maxQuantity?: number,
     public minQuantity?: number,
     public available?: boolean,
+    public items?: AssignedObject[],
+    public itemsItsIn?: AssignedObject[],
     public translations?: Translation[]
   ) {}
 }

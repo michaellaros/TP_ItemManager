@@ -70,4 +70,25 @@
     [flg_isEditable]="!this.flg_insert"
     [type]="'Item'"
   />
+
+  <app-assigned-editor
+    [type]="'ItemOption-Item'"
+    [id]="item?.id!"
+    [AssignedObjects]="item?.options"
+    [flg_insert]="this.flg_insert"
+  />
+
+  <app-assigned-editor
+    [type]="'CategoryItem-Item'"
+    [id]="item?.id!"
+    [AssignedObjects]="item?.categoriesItsIn"
+    [flg_insert]="this.flg_insert"
+  />
+
+  <app-assigned-editor
+    [type]="'OptionItem-Item'"
+    [id]="item?.id!"
+    [AssignedObjects]="item?.optionsItsIn"
+    [flg_insert]="this.flg_insert"
+  />
 </div>

@@ -1,4 +1,5 @@
-import { Translation } from "./Translation";
+import { AssignedObject } from './AssignedObject';
+import { Translation } from './Translation';
 
 export class Item {
   constructor(
@@ -12,6 +13,9 @@ export class Item {
     public flg_verifyAdult?: boolean,
     public flg_isMenu?: boolean,
     public available?: boolean,
+    public options?: AssignedObject[],
+    public categoriesItsIn?: AssignedObject[],
+    public optionsItsIn?: AssignedObject[],
     public translations?: Translation[]
   ) {}
 }

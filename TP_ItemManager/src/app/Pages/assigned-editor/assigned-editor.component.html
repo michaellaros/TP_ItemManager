@@ -1,4 +1,4 @@
-<mat-toolbar class="w-100 position-relative my-4" color="primary">
+<mat-toolbar class="w-100 position-relative" color="primary">
   <div>
     <h1 class="px-0 my-2 text-white">{{ type }}</h1>
   </div>
@@ -18,7 +18,7 @@
   [@bodyExpansion]="this.state ? 'collapsed' : 'expanded'"
   class="expandable-content"
 >
-  <div class="row mx-4" *ngFor="let object of AssignedObjects">
+  <div class="row mx-4 pt-4" *ngFor="let object of AssignedObjects">
     <mat-form-field appearance="outline" class="col-6">
       <mat-label>Name</mat-label>
       <input disabled matInput type="text" [(ngModel)]="object.name" />
@@ -36,28 +36,46 @@
     >
       <mat-icon>save</mat-icon>
     </button>
-    <button mat-mini-fab color="primary" class="p-1 col-1">
+    <button
+      mat-mini-fab
+      color="primary"
+      class="p-1 col-1"
+      (click)="ResetForm()"
+    >
       <mat-icon>delete</mat-icon>
     </button>
   </div>
+  <form
+    [formGroup]="assignForm"
+    class="formGroup"
+    (ngSubmit)="InsertAssignedObject()"
+  >
+    <div class="row mx-4 pt-4">
+      <mat-form-field appearance="outline" class="col-6">
+        <mat-label>Name</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="name"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let option of filteredOptions | async"
+            [value]="option.name"
+          >
+            {{ option.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-2">
+        <mat-label>Order</mat-label>
+        <input matInput formControlName="order" type="number" />
+      </mat-form-field>
 
-  <div class="row mx-4">
-    <mat-form-field appearance="outline" class="col-6">
-      <mat-label>Name</mat-label>
-      <input matInput type="text" [(ngModel)]="newAssignedObject.name" />
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="col-2">
-      <mat-label>Order</mat-label>
-      <input matInput type="number" [(ngModel)]="newAssignedObject.order" />
-    </mat-form-field>
-
-    <button
-      (click)="InsertAssignedObject(newAssignedObject)"
-      mat-mini-fab
-      color="primary"
-      class="m-1 col-2"
-    >
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
+      <button type="submit" mat-mini-fab color="primary" class="m-1 col-2">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </form>
 </div>

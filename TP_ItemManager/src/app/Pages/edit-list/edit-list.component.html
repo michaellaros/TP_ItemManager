@@ -41,7 +41,12 @@
       </th>
       <td mat-cell *matCellDef="let element" class="justify-content-end">
         <div class="w-100 d-flex justify-content-center">
-          <button mat-mini-fab color="primary" class="m-1">
+          <button
+            mat-mini-fab
+            color="primary"
+            class="m-1"
+            (click)="DeleteObject(element.id)"
+          >
             <mat-icon>delete</mat-icon>
           </button>
         </div>

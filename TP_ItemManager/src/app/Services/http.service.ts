@@ -13,6 +13,7 @@ import { Item } from '../Models/Item';
 import { Category } from '../Models/Category';
 import { Option } from '../Models/Option';
 import { Translation } from '../Models/Translation';
+import { AssignedObject } from '../Models/AssignedObject';
 
 @Injectable({
   providedIn: 'root',
@@ -143,34 +144,71 @@ export class HttpService {
   InsertCategoryTranslation(id: string, translation: Translation) {
     console.log(id);
     return this.http
-      .post<Translation[]>(this.urlAPI + 'InsertCategoryTranslation', translation, {
-        params: new HttpParams().append('id', id),
-      })
+      .post<Translation[]>(
+        this.urlAPI + 'InsertCategoryTranslation',
+        translation,
+        {
+          params: new HttpParams().append('id', id),
+        }
+      )
       .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
 
   UpdateCategoryTranslation(id: string, translation: Translation) {
     console.log(id);
     return this.http
-      .post<Translation[]>(this.urlAPI + 'UpdateCategoryTranslation', translation, {
-        params: new HttpParams().append('id', id),
-      })
+      .post<Translation[]>(
+        this.urlAPI + 'UpdateCategoryTranslation',
+        translation,
+        {
+          params: new HttpParams().append('id', id),
+        }
+      )
       .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
 
   InsertOptionTranslation(id: string, translation: Translation) {
     console.log(translation);
     return this.http
-      .post<Translation[]>(this.urlAPI + 'InsertOptionTranslation', translation, {
-        params: new HttpParams().append('id', id),
-      })
+      .post<Translation[]>(
+        this.urlAPI + 'InsertOptionTranslation',
+        translation,
+        {
+          params: new HttpParams().append('id', id),
+        }
+      )
       .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
 
   UpdateOptionTranslation(id: string, translation: Translation) {
     console.log(id);
     return this.http
-      .post<Translation[]>(this.urlAPI + 'UpdateOptionTranslation', translation, {
+      .post<Translation[]>(
+        this.urlAPI + 'UpdateOptionTranslation',
+        translation,
+        {
+          params: new HttpParams().append('id', id),
+        }
+      )
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+  InsertAssignedObject(data: any, methodName: string) {
+    console.log(data);
+    return this.http
+      .post<AssignedObject[]>(this.urlAPI + methodName, data)
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+  UpdateAssignedObject(data: any, methodName: string) {
+    console.log(data);
+    return this.http
+      .post<AssignedObject[]>(this.urlAPI + methodName, data)
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+  DeleteObject(type: string, id: string) {
+    return this.http
+      .post<AssignedObject[]>(this.urlAPI + 'Delete' + type, null, {
         params: new HttpParams().append('id', id),
       })
       .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));

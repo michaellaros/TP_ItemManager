@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -33,6 +34,7 @@ const MaterialComponents = [
   MatSelectModule,
   MatSnackBarModule,
   MatExpansionModule,
+  MatAutocompleteModule,
 ];
 
 @NgModule({

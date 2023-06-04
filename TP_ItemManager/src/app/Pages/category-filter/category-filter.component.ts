@@ -13,24 +13,19 @@ import { ModalCategoryComponent } from 'src/app/Pages/modal-category/modal-categ
   styleUrls: ['./category-filter.component.scss'],
 })
 export class CategoryFilterComponent {
-  private filterItem: CategoryFilterModel = new CategoryFilterModel(
-    '',
-    '',
-    0,
-    50,
-    'EN'
-  );
   public list: SearchedObject[] = [];
-  constructor(
-    private http: HttpService,
-    public status: StatusService,
-    public dialog: MatDialog
-  ) {}
   filterForm = new FormGroup({
     id: new FormControl(''),
     name: new FormControl(''),
     barcode: new FormControl(''),
   });
+
+  constructor(
+    private http: HttpService,
+    public status: StatusService,
+    public dialog: MatDialog
+  ) {}
+
   ngOnInit() {
     this.GetCategory();
   }
@@ -40,19 +35,22 @@ export class CategoryFilterComponent {
     let name = this.filterForm.get('name')?.value!;
 
     let list: SearchedObject[] = [];
-    console.log(new CategoryFilterModel(id, name, 0, 50, ''))
     this.http
-      .FilterCategory(new CategoryFilterModel(id, name, 0, 50, ''))
+      .FilterCategory(new CategoryFilterModel(id, name, 0, 50))
       .subscribe((data) => {
-        Object.keys(data).forEach((key) => {
-          list.push(new SearchedObject(key, data[key]));
-
-        });
-        this.list = list;
+        if (data == null) {
+          this.list = [];
+        } else {
+          Object.keys(data).forEach((key) => {
+            list.push(new SearchedObject(key, data[key]));
+          });
+          this.list = list;
+        }
       });
   }
 
   OpenDialogModifyCategory() {
     const dialogRef = this.dialog.open(ModalCategoryComponent);
+    dialogRef.afterClosed().subscribe(() => this.GetCategory());
   }
 }

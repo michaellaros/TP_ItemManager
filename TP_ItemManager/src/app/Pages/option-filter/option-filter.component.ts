@@ -13,23 +13,18 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./option-filter.component.scss'],
 })
 export class OptionFilterComponent {
-  private filterItem: OptionFilterModel = new OptionFilterModel(
-    '',
-    '',
-    0,
-    50,
-    'EN'
-  );
   public list!: SearchedObject[];
+  filterForm = new FormGroup({
+    id: new FormControl(''),
+    name: new FormControl(''),
+  });
+
   constructor(
     private http: HttpService,
     public status: StatusService,
     public dialog: MatDialog
   ) {}
-  filterForm = new FormGroup({
-    id: new FormControl(''),
-    name: new FormControl(''),
-  });
+
   ngOnInit() {
     this.GetOptions();
   }
@@ -41,15 +36,20 @@ export class OptionFilterComponent {
     let list: SearchedObject[] = [];
 
     this.http
-      .FilterOption(new OptionFilterModel(id, name, 0, 50, 'EN'))
+      .FilterOption(new OptionFilterModel(id, name, 0, 50))
       .subscribe((data) => {
-        Object.keys(data).forEach((key) => {
-          list.push(new SearchedObject(key, data[key]));
-        });
-        this.list = list;
+        if (data == null) {
+          this.list = [];
+        } else {
+          Object.keys(data).forEach((key) => {
+            list.push(new SearchedObject(key, data[key]));
+          });
+          this.list = list;
+        }
       });
   }
   OpenDialogModifyOption() {
     const dialogRef = this.dialog.open(ModalOptionComponent);
+    dialogRef.afterClosed().subscribe(() => this.GetOptions());
   }
 }

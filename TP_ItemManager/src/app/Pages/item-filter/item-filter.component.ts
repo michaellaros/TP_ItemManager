@@ -15,14 +15,6 @@ import { ModalItemComponent } from 'src/app/Pages/modal-item/modal-item.componen
   styleUrls: ['./item-filter.component.scss'],
 })
 export class ItemFilterComponent {
-  private filterItem: ItemFilterModel = new ItemFilterModel(
-    '',
-    '',
-    '',
-    0,
-    50,
-    'EN'
-  );
   public list!: SearchedObject[];
   constructor(
     private http: HttpService,
@@ -46,16 +38,21 @@ export class ItemFilterComponent {
     let list: SearchedObject[] = [];
 
     this.http
-      .FilterItems(new ItemFilterModel(id, name, barcode, 0, 50, 'EN'))
+      .FilterItems(new ItemFilterModel(id, name, barcode, 0, 50))
       .subscribe((data) => {
-        Object.keys(data).forEach((key) => {
-          list.push(new SearchedObject(key, data[key]));
-        });
-        this.list = list;
+        if (data == null) {
+          this.list = [];
+        } else {
+          Object.keys(data).forEach((key) => {
+            list.push(new SearchedObject(key, data[key]));
+          });
+          this.list = list;
+        }
       });
   }
 
   OpenDialogModifyItem() {
     const dialogRef = this.dialog.open(ModalItemComponent);
+    dialogRef.afterClosed().subscribe(() => this.GetItems());
   }
 }

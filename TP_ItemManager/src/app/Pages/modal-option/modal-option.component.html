@@ -13,43 +13,58 @@
     </button>
   </mat-toolbar>
   <div class="container-fluid">
-  <form [formGroup]="optionForm" class="formGroup" (ngSubmit)="SubmitForm()">
-    <div class="row">
-      <mat-form-field class="col-12">
-        <mat-label>Option name</mat-label>
-        <input formControlName="name" matInput value="" />
-      </mat-form-field>
-      <mat-form-field class="col-4">
-        <mat-label>Default quantity</mat-label>
-        <input type="number" formControlName="default_quantity" matInput />
-      </mat-form-field>
+    <form [formGroup]="optionForm" class="formGroup" (ngSubmit)="SubmitForm()">
+      <div class="row">
+        <mat-form-field class="col-12">
+          <mat-label>Option name</mat-label>
+          <input formControlName="name" matInput value="" />
+        </mat-form-field>
+        <mat-form-field class="col-4">
+          <mat-label>Default quantity</mat-label>
+          <input type="number" formControlName="default_quantity" matInput />
+        </mat-form-field>
 
-      <mat-form-field class="col-4">
-        <mat-label>Max quantity</mat-label>
-        <input type="number" formControlName="min_quantity" matInput />
-      </mat-form-field>
+        <mat-form-field class="col-4">
+          <mat-label>Max quantity</mat-label>
+          <input type="number" formControlName="min_quantity" matInput />
+        </mat-form-field>
 
-      <mat-form-field class="col-4">
-        <mat-label>Min quantity</mat-label>
-        <input type="number" formControlName="max_quantity" matInput />
-      </mat-form-field>
+        <mat-form-field class="col-4">
+          <mat-label>Min quantity</mat-label>
+          <input type="number" formControlName="max_quantity" matInput />
+        </mat-form-field>
 
-      <mat-checkbox
-        formControlName="flg_addToCart"
-        matInput
-        class="example-margin"
-        color="primary"
-        >Is available
-      </mat-checkbox>
-    </div>
+        <mat-checkbox
+          formControlName="flg_addToCart"
+          matInput
+          class="example-margin"
+          color="primary"
+          >Is available
+        </mat-checkbox>
+      </div>
 
-    <button mat-raised-button color="primary" type="submit">
-      {{ flg_insert ? "Create" : "Modify" }}
-    </button>
-  </form>
-</div>
+      <button mat-raised-button color="primary" type="submit">
+        {{ flg_insert ? "Create" : "Modify" }}
+      </button>
+    </form>
+  </div>
 
-<app-translations-editor  [translations]="option?.translations!" [type]="'Option'"
- [id]="option?.id!" [flg_isEditable]="!this.flg_insert" />
-
+  <app-translations-editor
+    [translations]="option?.translations!"
+    [type]="'Option'"
+    [id]="option?.id!"
+    [flg_isEditable]="!this.flg_insert"
+  />
+  <app-assigned-editor
+    [type]="'OptionItem-Option'"
+    [id]="option?.id!"
+    [AssignedObjects]="option?.items"
+    [flg_insert]="this.flg_insert"
+  />
+  <app-assigned-editor
+    [type]="'ItemOption-Item'"
+    [id]="option?.id!"
+    [AssignedObjects]="option?.itemsItsIn"
+    [flg_insert]="this.flg_insert"
+  />
 </div>

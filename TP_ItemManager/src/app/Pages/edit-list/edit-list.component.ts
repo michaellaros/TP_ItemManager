@@ -1,4 +1,4 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { HttpService } from 'src/app/Services/http.service';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { MaterialModule } from 'src/app/Modules/material.module';
@@ -18,6 +18,7 @@ import { ModalOptionComponent } from 'src/app/Pages/modal-option/modal-option.co
 export class EditListComponent {
   @Input() public parentData!: SearchedObject[];
   @Input() public columnName: string = 'Name';
+  @Output() public refresh = new EventEmitter();
   displayedColumns: string[] = ['id', 'name', 'edit', 'delete'];
 
   constructor(public http: HttpService, public dialog: MatDialog) {}
@@ -50,15 +51,33 @@ export class EditListComponent {
     const dialogRef = this.dialog.open(ModalItemComponent, {
       data: item,
     });
+    dialogRef.afterClosed().subscribe(() => {
+      this.refresh.emit(null);
+    });
   }
   OpenDialogModifyCategory(category: Category) {
     const dialogRef = this.dialog.open(ModalCategoryComponent, {
       data: category,
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.refresh.emit(null);
     });
   }
   OpenDialogModifyOption(option: Option) {
     const dialogRef = this.dialog.open(ModalOptionComponent, {
       data: option,
     });
+    dialogRef.afterClosed().subscribe(() => {
+      this.refresh.emit(null);
+    });
+  }
+
+  DeleteObject(id: string) {
+    if (confirm('The element will be deleted permanently!')) {
+      //todo cambiare pop up
+      this.http
+        .DeleteObject(this.columnName, id)
+        .subscribe(() => this.refresh.emit(null));
+    }
   }
 }

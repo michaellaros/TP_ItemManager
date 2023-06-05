@@ -1,81 +1,72 @@
 <div class="container pb-4">
-  <table mat-table [dataSource]="parentData" class="mat-elevation-z8">
-    <!--- Note that these columns can be defined in any order.
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+      <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef class="col-2">ID</th>
-      <td mat-cell *matCellDef="let element" class="col-2">{{ element.id }}</td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef class="col-8">NAME</th>
-      <td mat-cell *matCellDef="let element" class="col-8">
-        {{ element.name }}
-      </td>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="edit">
-      <th mat-header-cell *matHeaderCellDef class="col-1">
-        <div class="w-100 d-flex justify-content-center">Edit</div>
-      </th>
-      <td mat-cell *matCellDef="let element" class="justify-content-end">
-        <div class="w-100 d-flex justify-content-center">
-          <button
-            (click)="ModifyItem(element.id!)"
-            mat-mini-fab
-            color="primary"
-            class="m-1"
-          >
-            <mat-icon>edit</mat-icon>
-          </button>
-        </div>
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef class="col-1">
-        <div class="w-100 d-flex justify-content-center">Delete</div>
-      </th>
-      <td mat-cell *matCellDef="let element" class="justify-content-end">
-        <div class="w-100 d-flex justify-content-center">
-          <button
-            mat-mini-fab
-            color="primary"
-            class="m-1"
-            (click)="DeleteObject(element.id)"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-  <!-- <table class="table">
-    <thead>
-      <th scope="col">ID</th>
-      <th scope="col">{{ this.columnName }}</th>
-      <th scope="col">Actions</th>
-    </thead>
-    <tbody>
-
-      <tr *ngFor="let item of this.parentData">
-        <td>{{ item.id }}</td>
-        <td>{{ item.name }}</td>
-        <td>
-          <button (click)="ModifyItem(item.id!)" mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon">
-            <mat-icon>delete</mat-icon>
-          </button>
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef class="col-2" mat-sort-header>
+          ID
+        </th>
+        <td mat-cell *matCellDef="let element" class="col-2">
+          {{ element.id }}
         </td>
-      </tr>
-    </tbody>
-  </table> -->
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef class="col-8" mat-sort-header>
+          NAME
+        </th>
+        <td mat-cell *matCellDef="let element" class="col-8">
+          {{ element.name }}
+        </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell *matHeaderCellDef class="col-1">
+          <div class="w-100 d-flex justify-content-center">Edit</div>
+        </th>
+        <td mat-cell *matCellDef="let element" class="justify-content-end">
+          <div class="w-100 d-flex justify-content-center">
+            <button
+              (click)="ModifyItem(element.id!)"
+              mat-mini-fab
+              color="primary"
+              class="m-1"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef class="col-1">
+          <div class="w-100 d-flex justify-content-center">Delete</div>
+        </th>
+        <td mat-cell *matCellDef="let element" class="justify-content-end">
+          <div class="w-100 d-flex justify-content-center">
+            <button
+              mat-mini-fab
+              color="primary"
+              class="m-1"
+              (click)="DeleteObject(element.id)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page of users"
+    ></mat-paginator>
+  </div>
 </div>

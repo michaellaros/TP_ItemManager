@@ -6,27 +6,30 @@
       <div>
         <h1 class="text-white m-2">Item Manager</h1>
       </div>
-      <mat-button-toggle-group value="Category" class="buttonGroup">
-        <mat-button-toggle
-          value="Category"
-          routerLink="/Category"
-          (click)="SetLabel('category')"
-          >Category</mat-button-toggle
-        >
-        <mat-button-toggle
-          value="Item"
-          routerLink="/Item"
-          (click)="SetLabel('item')"
-        >
-          Item
-        </mat-button-toggle>
-        <mat-button-toggle
-          value="Option"
-          routerLink="/Option"
-          (click)="SetLabel('option')"
-          >Option</mat-button-toggle
-        >
-      </mat-button-toggle-group>
+      <button
+        mat-raised-button
+        [color]="currentRoute == '/Category' ? '' : 'primary'"
+        class="m-2"
+        routerLink="/Category"
+      >
+        Category {{ currentRoute }}
+      </button>
+      <button
+        mat-raised-button
+        [color]="currentRoute == '/Item' ? '' : 'primary'"
+        class="m-2"
+        routerLink="/Item"
+      >
+        Item
+      </button>
+      <button
+        mat-raised-button
+        [color]="currentRoute == '/Option' ? '' : 'primary'"
+        class="m-2"
+        routerLink="/Option"
+      >
+        Option
+      </button>
     </mat-toolbar>
   </div>
 </div>

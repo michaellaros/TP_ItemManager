@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+  ViewChild,
+  signal,
+} from '@angular/core';
 import { HttpService } from 'src/app/Services/http.service';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { MaterialModule } from 'src/app/Modules/material.module';
@@ -10,20 +19,37 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalItemComponent } from 'src/app/Pages/modal-item/modal-item.component';
 import { ModalCategoryComponent } from 'src/app/Pages/modal-category/modal-category.component';
 import { ModalOptionComponent } from 'src/app/Pages/modal-option/modal-option.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'app-edit-list',
   templateUrl: './edit-list.component.html',
   styleUrls: ['./edit-list.component.scss'],
 })
-export class EditListComponent {
-  @Input() public parentData!: SearchedObject[];
+export class EditListComponent implements OnChanges {
+  @Input() public parentData?: SearchedObject[];
   @Input() public columnName: string = 'Name';
   @Output() public refresh = new EventEmitter();
   displayedColumns: string[] = ['id', 'name', 'edit', 'delete'];
 
-  constructor(public http: HttpService, public dialog: MatDialog) {}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  dataSource: MatTableDataSource<SearchedObject>;
+  constructor(public http: HttpService, public dialog: MatDialog) {
+    this.dataSource = new MatTableDataSource<SearchedObject>(this.parentData);
+  }
 
   ngOnInit() {}
+  ngOnChanges(changes: SimpleChanges) {
+    this.dataSource.data = changes['parentData'].currentValue;
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
   ModifyItem(id: string) {
     switch (this.columnName) {
       case 'Item':

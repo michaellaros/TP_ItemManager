@@ -62,6 +62,11 @@
     [translations]="category?.translations!"
     [flg_isEditable]="!this.flg_insert"
   />
+  <app-timespan-editor
+    [id]="category?.id!"
+    [timespans]="category?.timespans!"
+    [flg_isEditable]="!this.flg_insert"
+  />
   <app-assigned-editor
     [type]="'CategoryItems-Category'"
     [id]="category?.id!"

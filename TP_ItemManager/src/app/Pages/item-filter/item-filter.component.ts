@@ -31,9 +31,18 @@ export class ItemFilterComponent {
   }
 
   GetItems() {
-    let id = this.filterForm.get('id')?.value!;
-    let name = this.filterForm.get('name')?.value!;
-    let barcode = this.filterForm.get('barcode')?.value!;
+    let id =
+      this.filterForm.get('id')?.value != undefined
+        ? this.filterForm.get('id')?.value!
+        : '';
+    let name =
+      this.filterForm.get('name')?.value != undefined
+        ? this.filterForm.get('name')?.value!
+        : '';
+    let barcode =
+      this.filterForm.get('barcode')?.value != undefined
+        ? this.filterForm.get('barcode')?.value!
+        : '';
 
     let list: SearchedObject[] = [];
 

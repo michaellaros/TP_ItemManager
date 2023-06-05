@@ -17,6 +17,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -35,6 +37,8 @@ const MaterialComponents = [
   MatSnackBarModule,
   MatExpansionModule,
   MatAutocompleteModule,
+  MatSortModule,
+  MatPaginatorModule,
 ];
 
 @NgModule({

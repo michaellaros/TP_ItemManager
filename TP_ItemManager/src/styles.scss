@@ -9,7 +9,8 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 .dialog {
-  height: 80vh;
+  max-height: 80vh;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar-thumb {

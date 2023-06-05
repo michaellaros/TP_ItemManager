@@ -1,4 +1,5 @@
 import { AssignedObject } from './AssignedObject';
+import { Timespan } from './Timespan';
 import { Translation } from './Translation';
 
 export class Category {
@@ -10,7 +11,7 @@ export class Category {
     public codConsumationAllowed?: string,
     public categoryOrder?: number,
     public translations?: Translation[],
-    public items?: AssignedObject[]
-
+    public items?: AssignedObject[],
+    public timespans?: Timespan[]
   ) {}
 }

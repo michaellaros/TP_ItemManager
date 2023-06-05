@@ -1,8 +1,7 @@
-
-
 export class Timespan {
   constructor(
-    public startHour : number,
-    public endHour: number
+    public id?: string,
+    public availableFrom?: number,
+    public availableTo?: number
   ) {}
 }

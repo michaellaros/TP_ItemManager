@@ -42,7 +42,12 @@
     >
       <mat-icon>edit</mat-icon>
     </button>
-    <button mat-mini-fab color="primary" class="p-1 col-1">
+    <button
+      mat-mini-fab
+      color="primary"
+      class="p-1 col-1"
+      (click)="DeleteTranslation(translation)"
+    >
       <mat-icon>delete</mat-icon>
     </button>
   </div>

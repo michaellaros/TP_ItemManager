@@ -30,8 +30,14 @@ export class OptionFilterComponent {
   }
 
   GetOptions() {
-    let id = this.filterForm.get('id')?.value!;
-    let name = this.filterForm.get('name')?.value!;
+    let id =
+      this.filterForm.get('id')?.value != undefined
+        ? this.filterForm.get('id')?.value!
+        : '';
+    let name =
+      this.filterForm.get('name')?.value != undefined
+        ? this.filterForm.get('name')?.value!
+        : '';
 
     let list: SearchedObject[] = [];
 

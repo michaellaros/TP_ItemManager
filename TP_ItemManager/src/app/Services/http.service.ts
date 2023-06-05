@@ -14,6 +14,7 @@ import { Category } from '../Models/Category';
 import { Option } from '../Models/Option';
 import { Translation } from '../Models/Translation';
 import { AssignedObject } from '../Models/AssignedObject';
+import { Timespan } from '../Models/Timespan';
 
 @Injectable({
   providedIn: 'root',
@@ -218,6 +219,65 @@ export class HttpService {
       .post<AssignedObject[]>(this.urlAPI + 'Delete' + type, null, {
         params: new HttpParams().append('id', id),
       })
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+  UpdateTimespan(
+    timespan_id: string,
+    AvailableFrom: number,
+    AvailableTo: number,
+    idCategory: string
+  ) {
+    return this.http
+      .post<Timespan[]>(
+        this.urlAPI + 'UpdateCategoryTimespan',
+        {
+          id: timespan_id,
+          AvailableFrom: AvailableFrom,
+          AvailableTo: AvailableTo,
+        },
+        {
+          params: new HttpParams().append('id', idCategory),
+        }
+      )
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+  InsertTimespan(
+    AvailableFrom: number,
+    AvailableTo: number,
+    idCategory: string
+  ) {
+    return this.http
+      .post<Timespan[]>(
+        this.urlAPI + 'InsertCategoryTimespan',
+        { AvailableFrom: AvailableFrom, AvailableTo: AvailableTo },
+        {
+          params: new HttpParams().append('id', idCategory),
+        }
+      )
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+  DeleteTimespan(timespan_id: string, category_id: string) {
+    return this.http
+      .post<Timespan[]>(this.urlAPI + 'DeleteCategoryTimespan', null, {
+        params: new HttpParams()
+          .append('timespan_id', timespan_id)
+          .append('category_id', category_id),
+      })
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+  DeleteTranslation(translation: Translation, id: string, type: string) {
+    return this.http
+      .post<Translation[]>(
+        this.urlAPI + 'Delete' + type + 'Translation',
+        translation,
+        {
+          params: new HttpParams().append('id', id),
+        }
+      )
       .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
 }

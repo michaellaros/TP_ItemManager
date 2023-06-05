@@ -220,6 +220,9 @@ export class AssignedEditorComponent {
   }
 
   DeleteAssignedObject(object: AssignedObject) {
+    if (!confirm('The element will be deleted permanently!')) {
+      return;
+    }
     switch (this.type) {
       case 'CategoryItems-Category':
         this.http

@@ -22,6 +22,7 @@ import { ModalOptionComponent } from './Pages/modal-option/modal-option.componen
 import { FormsModule } from '@angular/forms';
 import { TranslationsEditorComponent } from './Pages/translations-editor/translations-editor.component';
 import { AssignedEditorComponent } from './Pages/assigned-editor/assigned-editor.component';
+import { TimespanEditorComponent } from './Pages/timespan-editor/timespan-editor.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AssignedEditorComponent } from './Pages/assigned-editor/assigned-editor
     ModalOptionComponent,
     TranslationsEditorComponent,
     AssignedEditorComponent,
+    TimespanEditorComponent,
   ],
   imports: [
     BrowserModule,

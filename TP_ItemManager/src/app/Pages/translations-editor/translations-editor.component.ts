@@ -147,4 +147,12 @@ export class TranslationsEditorComponent {
       }
     }
   }
+  DeleteTranslation(translation: Translation) {
+    if (confirm('The element will be deleted permanently!')) {
+      //todo cambiare pop up
+      this.http
+        .DeleteTranslation(translation, this.id, this.type)
+        .subscribe((data) => (this.translations = data));
+    }
+  }
 }

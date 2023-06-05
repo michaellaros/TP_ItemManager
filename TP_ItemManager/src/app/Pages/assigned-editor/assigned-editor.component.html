@@ -35,7 +35,7 @@
   class="expandable-content"
 >
   <div class="row px-4 pt-4" *ngFor="let object of AssignedObjects">
-    <mat-form-field appearance="outline" class="col-6">
+    <mat-form-field appearance="outline" class="col-8">
       <mat-label>Name</mat-label>
       <input disabled matInput type="text" [(ngModel)]="object.name" />
     </mat-form-field>
@@ -67,7 +67,7 @@
     (ngSubmit)="InsertAssignedObject()"
   >
     <div class="row px-4 pt-4">
-      <mat-form-field appearance="outline" class="col-6">
+      <mat-form-field appearance="outline" class="col-8">
         <mat-label>Name</mat-label>
         <input
           matInput

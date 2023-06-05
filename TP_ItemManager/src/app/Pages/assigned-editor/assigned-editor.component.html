@@ -1,6 +1,22 @@
 <mat-toolbar class="w-100 position-relative" color="primary">
   <div>
-    <h1 class="px-0 my-2 text-white">{{ type }}</h1>
+    <h1 class="px-0 my-2 text-white">
+      {{
+        type == "CategoryItems-Category"
+          ? "Items in this category"
+          : type == "CategoryItems-Item"
+          ? "Category this item is in"
+          : type == "OptionItems-Item"
+          ? "Option this item is in"
+          : type == "OptionItems-Option"
+          ? "Item choises"
+          : type == "ItemOptions-Item"
+          ? "Options"
+          : type == "ItemOptions-Options"
+          ? "Items this options is used in"
+          : ""
+      }}
+    </h1>
   </div>
 
   <button
@@ -40,7 +56,7 @@
       mat-mini-fab
       color="primary"
       class="p-1 col-1"
-      (click)="ResetForm()"
+      (click)="DeleteAssignedObject(object)"
     >
       <mat-icon>delete</mat-icon>
     </button>

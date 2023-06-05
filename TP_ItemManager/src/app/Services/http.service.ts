@@ -206,6 +206,13 @@ export class HttpService {
       .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
 
+  DeleteAssignedObject(data: any, methodName: string) {
+    console.log(data);
+    return this.http
+      .post<AssignedObject[]>(this.urlAPI + methodName, data)
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
   DeleteObject(type: string, id: string) {
     return this.http
       .post<AssignedObject[]>(this.urlAPI + 'Delete' + type, null, {

@@ -61,9 +61,39 @@ export class AssignedEditorComponent {
     this.newAssignedObject = new AssignedObject();
   }
   ngOnInit() {
-    this.http.FilterItems({}).subscribe((data) => {
-      this.options = this.MapToArray(data);
-    });
+    switch (this.type) {
+      case 'CategoryItems-Category':
+        this.http.FilterItems({}).subscribe((data) => {
+          this.options = this.MapToArray(data);
+        });
+        break;
+      case 'CategoryItems-Item':
+        this.http.FilterCategory({}).subscribe((data) => {
+          this.options = this.MapToArray(data);
+        });
+        break;
+      case 'OptionItems-Item':
+        this.http.FilterOption({}).subscribe((data) => {
+          this.options = this.MapToArray(data);
+        });
+        break;
+      case 'OptionItems-Option':
+        this.http.FilterItems({}).subscribe((data) => {
+          this.options = this.MapToArray(data);
+        });
+        break;
+      case 'ItemOption-Item':
+        this.http.FilterOption({}).subscribe((data) => {
+          this.options = this.MapToArray(data);
+        });
+        break;
+      case 'ItemOption-Option':
+        this.http.FilterItems({}).subscribe((data) => {
+          this.options = this.MapToArray(data);
+        });
+        break;
+    }
+
     this.filteredOptions = this.assignForm.get('name')!.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value || ''))
@@ -189,6 +219,101 @@ export class AssignedEditorComponent {
     }
   }
 
+  DeleteAssignedObject(object: AssignedObject) {
+    switch (this.type) {
+      case 'CategoryItems-Category':
+        this.http
+          .DeleteAssignedObject(
+            {
+              idItem: object.id,
+              idCategory: this.id,
+            },
+            'DeleteCategoryItemFromCategory'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+      case 'CategoryItems-Item':
+        this.http
+          .DeleteAssignedObject(
+            {
+              idItem: this.id,
+              idCategory: object.id,
+            },
+            'DeleteCategoryItemFromItem'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+      case 'OptionItems-Item':
+        this.http
+          .DeleteAssignedObject(
+            {
+              idItem: this.id,
+              idOption: object.id,
+            },
+            'DeleteOptionItemFromItem'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+      case 'OptionItems-Option':
+        this.http
+          .DeleteAssignedObject(
+            {
+              idItem: object.id,
+              idOption: this.id,
+            },
+            'DeleteOptionItemFromOption'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+      case 'ItemOption-Item':
+        this.http
+          .DeleteAssignedObject(
+            {
+              idItem: this.id,
+              idOption: object.id,
+            },
+            'DeleteItemOptionFromItem'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+      case 'ItemOption-Option':
+        this.http
+          .DeleteAssignedObject(
+            {
+              idItem: object.id,
+              idOption: this.id,
+            },
+            'DeleteItemOptionFromOption'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+    }
+  }
+
   InsertAssignedObject() {
     if (!this.assignForm.valid) return;
 
@@ -229,7 +354,7 @@ export class AssignedEditorComponent {
             'InsertCategoryItemFromItem'
           )
           .subscribe((data) => {
-            this.AssignedObjects = this.MapToArray(data);
+            this.AssignedObjects = data;
             console.log(this.AssignedObjects);
             this.ResetForm();
           });
@@ -245,23 +370,24 @@ export class AssignedEditorComponent {
             'InsertOptionItemFromItem'
           )
           .subscribe((data) => {
-            this.AssignedObjects = this.MapToArray(data);
+            this.AssignedObjects = data;
             console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
       case 'OptionItems-Option':
+        console.log('pogo');
         this.http
           .InsertAssignedObject(
             {
               idItem: id,
               idOption: this.id,
-              order: this.assignForm.get('order')!.value!,
+              order: this.assignForm.get('order')!.value!.toString(),
             },
             'InsertOptionItemFromOption'
           )
           .subscribe((data) => {
-            this.AssignedObjects = this.MapToArray(data);
+            this.AssignedObjects = data;
             console.log(this.AssignedObjects);
             this.ResetForm();
           });
@@ -277,7 +403,7 @@ export class AssignedEditorComponent {
             'InsertItemOptionFromItem'
           )
           .subscribe((data) => {
-            this.AssignedObjects = this.MapToArray(data);
+            this.AssignedObjects = data;
             console.log(this.AssignedObjects);
             this.ResetForm();
           });
@@ -293,7 +419,7 @@ export class AssignedEditorComponent {
             'InsertItemOptionFromOption'
           )
           .subscribe((data) => {
-            this.AssignedObjects = this.MapToArray(data);
+            this.AssignedObjects = data;
             console.log(this.AssignedObjects);
             this.ResetForm();
           });
@@ -319,6 +445,6 @@ export class AssignedEditorComponent {
   }
 
   ResetForm() {
-    this.assignForm.reset({});
+    this.assignForm.reset({ name: '', order: 999 });
   }
 }

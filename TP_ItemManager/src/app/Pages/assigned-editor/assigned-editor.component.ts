@@ -78,12 +78,12 @@ export class AssignedEditorComponent {
           this.options = this.MapToArray(data);
         });
         break;
-      case 'ItemOption-Item':
+      case 'ItemOptions-Item':
         this.http.FilterOption({}).subscribe((data) => {
           this.options = this.MapToArray(data);
         });
         break;
-      case 'ItemOption-Option':
+      case 'ItemOptions-Option':
         this.http.FilterItems({}).subscribe((data) => {
           this.options = this.MapToArray(data);
         });
@@ -143,7 +143,7 @@ export class AssignedEditorComponent {
             'UpdateCategoryItemFromItem'
           )
           .subscribe((data) => {
-            this.AssignedObjects = this.MapToArray(data);
+            this.AssignedObjects = data;
             console.log(this.AssignedObjects);
             this.ResetForm();
           });
@@ -159,7 +159,7 @@ export class AssignedEditorComponent {
             'UpdateOptionItemFromItem'
           )
           .subscribe((data) => {
-            this.AssignedObjects = this.MapToArray(data);
+            this.AssignedObjects = data;
             console.log(this.AssignedObjects);
             this.ResetForm();
           });
@@ -175,7 +175,7 @@ export class AssignedEditorComponent {
             'UpdateOptionItemFromOption'
           )
           .subscribe((data) => {
-            this.AssignedObjects = this.MapToArray(data);
+            this.AssignedObjects = data;
             console.log(this.AssignedObjects);
             this.ResetForm();
           });
@@ -191,7 +191,7 @@ export class AssignedEditorComponent {
             'UpdateItemOptionFromItem'
           )
           .subscribe((data) => {
-            this.AssignedObjects = this.MapToArray(data);
+            this.AssignedObjects = data;
             console.log(this.AssignedObjects);
             this.ResetForm();
           });
@@ -207,7 +207,7 @@ export class AssignedEditorComponent {
             'UpdateItemOptionFromOption'
           )
           .subscribe((data) => {
-            this.AssignedObjects = this.MapToArray(data);
+            this.AssignedObjects = data;
             console.log(this.AssignedObjects);
             this.ResetForm();
           });
@@ -440,7 +440,7 @@ export class AssignedEditorComponent {
       list.push(new SearchedObject(key, map[key]));
     });
     this.options = list;
-    return list;
+    return list.sort((a, b) => (a.name! < b.name! ? -1 : 1));
   }
 
   ResetForm() {

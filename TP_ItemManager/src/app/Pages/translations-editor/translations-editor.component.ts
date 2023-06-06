@@ -34,7 +34,7 @@ export class TranslationsEditorComponent {
   public translation?: Translation;
   @Input() flg_isEditable!: boolean;
   @Input() id!: string;
-  @Input() type!: string;
+  @Input() public type!: string;
   public state: boolean = true;
   public newTranslation: Translation = new Translation();
 
@@ -50,8 +50,8 @@ export class TranslationsEditorComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     console.log(this.flg_isEditable);
-    if (this.type != 'item') {
-      this.translationForm.get('language')!.disabled;
+    if (this.type != 'Item') {
+      this.translationForm.get('language')!.disable();
     }
   }
   toggle(): void {

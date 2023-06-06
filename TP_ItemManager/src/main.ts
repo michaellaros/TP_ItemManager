@@ -3,16 +3,13 @@ import { enableProdMode, isDevMode } from '@angular/core';
 import { AppModule } from './app/app.module';
 import { environment } from './app/enviroments/environment';
 
-
 export const getBaseUrl = () => {
   if (isDevMode()) {
     return 'http://localhost:5172';
-
   } else {
-
     const url = document.getElementsByTagName('base')[0].href;
     const arr = url.split('/');
-    return arr[0] + '//' + arr[2] + '/TP_ItemManager';
+    return arr[0] + '//' + arr[2] + '/TPItemManagerAPI';
   }
 };
 
@@ -33,6 +30,3 @@ if (environment.production) {
 platformBrowserDynamic(providers)
   .bootstrapModule(AppModule)
   .catch((err) => console.error(err));
-
-
-

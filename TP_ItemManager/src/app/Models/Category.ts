@@ -7,8 +7,8 @@ export class Category {
     public id?: string,
     public name?: string, //check selezione testo testo nome
     public imagePath?: string,
-    public available?: boolean,
-    public codConsumationAllowed?: string,
+    public available: boolean = true,
+    public codConsumationAllowed: string = 'DI-TA',
     public categoryOrder?: number,
     public translations?: Translation[],
     public items?: AssignedObject[],

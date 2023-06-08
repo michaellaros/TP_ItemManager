@@ -3,8 +3,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpService } from '../../Services/http.service';
 import { StatusService } from '../../Services/status.service';
 import { Category } from '../../Models/Category';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ImagePickerComponent } from '../image-picker/image-picker.component';
 
 @Component({
   selector: 'app-modal-category',
@@ -12,12 +17,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./modal-category.component.scss'],
 })
 export class ModalCategoryComponent {
-  category?: Category;
+  category: Category;
   public flg_insert: boolean;
 
   categoryForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    imagePath: new FormControl('', [Validators.required]),
     available: new FormControl(true),
     dineIn: new FormControl(true),
     takeAway: new FormControl(true),
@@ -33,10 +37,11 @@ export class ModalCategoryComponent {
     public dialogRef: MatDialogRef<ModalCategoryComponent>,
     private http: HttpService,
     public status: StatusService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {
     {
-      this.category = this.data;
+      this.category = this.data || new Category();
       this.flg_insert = this.data == null;
     }
   }
@@ -53,6 +58,7 @@ export class ModalCategoryComponent {
           .subscribe((data) => {
             this.category = data;
             this.UpdateForm();
+            this.flg_insert = false;
             this._snackBar.open('Category successfully created!', 'Ok');
           });
       } else {
@@ -69,9 +75,9 @@ export class ModalCategoryComponent {
 
   GetCategoryFromForm(): Category {
     return new Category(
-      this.category?.id != undefined ? this.category.id : undefined,
+      this.category.id != undefined ? this.category.id : undefined,
       this.categoryForm.get('name')!.value!,
-      this.categoryForm.get('imagePath')!.value!,
+      this.category.imagePath,
       this.categoryForm.get('available')!.value!,
       this.categoryForm.get('dineIn')!.value! &&
       this.categoryForm.get('takeAway')!.value!
@@ -90,11 +96,19 @@ export class ModalCategoryComponent {
       this.categoryForm.patchValue({
         available: this.category.available,
 
-        imagePath: this.category.imagePath,
         name: this.category.name,
         dineIn: this.category.codConsumationAllowed?.includes('DI'),
         takeAway: this.category.codConsumationAllowed?.includes('TA'),
       });
     }
+  }
+
+  ChangeImage() {
+    const dialogRef = this.dialog.open(ImagePickerComponent, {
+      data: this.category.imagePath,
+    });
+    dialogRef.afterClosed().subscribe((data) => {
+      this.category.imagePath = data;
+    });
   }
 }

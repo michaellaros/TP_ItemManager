@@ -23,6 +23,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslationsEditorComponent } from './Pages/translations-editor/translations-editor.component';
 import { AssignedEditorComponent } from './Pages/assigned-editor/assigned-editor.component';
 import { TimespanEditorComponent } from './Pages/timespan-editor/timespan-editor.component';
+import { ImagePickerComponent } from './Pages/image-picker/image-picker.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { TimespanEditorComponent } from './Pages/timespan-editor/timespan-editor
     TranslationsEditorComponent,
     AssignedEditorComponent,
     TimespanEditorComponent,
+    ImagePickerComponent,
   ],
   imports: [
     BrowserModule,

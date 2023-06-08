@@ -76,6 +76,7 @@ export class EditListComponent implements OnChanges {
   OpenDialogModifyItem(item: Item) {
     const dialogRef = this.dialog.open(ModalItemComponent, {
       data: item,
+      width: '60vw',
     });
     dialogRef.afterClosed().subscribe(() => {
       this.refresh.emit(null);
@@ -84,6 +85,7 @@ export class EditListComponent implements OnChanges {
   OpenDialogModifyCategory(category: Category) {
     const dialogRef = this.dialog.open(ModalCategoryComponent, {
       data: category,
+      width: '60vw',
     });
     dialogRef.afterClosed().subscribe(() => {
       this.refresh.emit(null);
@@ -92,6 +94,7 @@ export class EditListComponent implements OnChanges {
   OpenDialogModifyOption(option: Option) {
     const dialogRef = this.dialog.open(ModalOptionComponent, {
       data: option,
+      width: '60vw',
     });
     dialogRef.afterClosed().subscribe(() => {
       this.refresh.emit(null);

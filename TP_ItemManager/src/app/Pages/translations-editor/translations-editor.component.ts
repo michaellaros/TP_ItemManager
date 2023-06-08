@@ -51,7 +51,7 @@ export class TranslationsEditorComponent {
     //Add 'implements OnInit' to the class.
     console.log(this.flg_isEditable);
     if (this.type != 'Item') {
-      this.translationForm.get('language')!.disable();
+      this.translationForm.get('field')!.disable();
     }
   }
   toggle(): void {

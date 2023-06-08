@@ -1,11 +1,16 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Category } from 'src/app/Models/Category';
 import { Item } from 'src/app/Models/Item';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
+import { ImagePickerComponent } from '../image-picker/image-picker.component';
 
 @Component({
   selector: 'app-modal-item',
@@ -13,7 +18,7 @@ import { StatusService } from 'src/app/Services/status.service';
   styleUrls: ['./modal-item.component.scss'],
 })
 export class ModalItemComponent {
-  item?: Item;
+  item: Item;
   public flg_insert: boolean;
 
   itemForm = new FormGroup({
@@ -33,10 +38,11 @@ export class ModalItemComponent {
     public dialogRef: MatDialogRef<ModalItemComponent>,
     private http: HttpService,
     public status: StatusService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {
     {
-      this.item = this.data;
+      this.item = this.data || new Item();
       this.flg_insert = this.data == null;
     }
   }
@@ -92,5 +98,13 @@ export class ModalItemComponent {
         available: this.item.available,
       });
     }
+  }
+  ChangeImage() {
+    const dialogRef = this.dialog.open(ImagePickerComponent, {
+      data: this.item!.imagePath,
+    });
+    dialogRef.afterClosed().subscribe((data) => {
+      this.item!.imagePath = data;
+    });
   }
 }

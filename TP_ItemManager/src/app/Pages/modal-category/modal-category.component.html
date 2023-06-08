@@ -12,41 +12,57 @@
       <mat-icon>close</mat-icon>
     </button>
   </mat-toolbar>
-  <div class="container-fluid">
+  <div class="container-fluid row">
     <form
       [formGroup]="categoryForm"
       class="formGroup"
       (ngSubmit)="SubmitForm()"
     >
       <div class="row">
-        <mat-form-field appearance="outline" class="col-4">
-          <mat-label>Name</mat-label>
-          <input formControlName="name" matInput />
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="col-4">
-          <mat-label>Image</mat-label>
-          <input formControlName="imagePath" matInput />
-        </mat-form-field>
-        <mat-form-field appearance="outline" class="col-4">
-          <mat-label>Order</mat-label>
-          <input type="number" formControlName="order" matInput />
-        </mat-form-field>
-      </div>
-      <div class="row">
-        <div class="col-6">
-          <mat-checkbox formControlName="available" matInput color="primary">
-            Available
-          </mat-checkbox>
+        <div class="d-flex justify-content-between flex-column col-3 h-100">
+          <img
+            src="http://localhost/KioskImages/{{ category.imagePath }}"
+            alt="Image"
+            style="aspect-ratio: 16/9"
+            class="object-fit-contain w-100"
+            *ngIf="category.imagePath != null"
+          />
+          <button
+            mat-raised-button
+            color="primary"
+            class="my-4"
+            type="button"
+            (click)="ChangeImage()"
+            [class.t-50]="category.imagePath == null"
+          >
+            {{ category.imagePath != null ? "Change image" : "Choose image" }}
+          </button>
         </div>
+        <div class="row col-9">
+          <div class="col-6 d-flex flex-column">
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input formControlName="name" matInput />
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Order</mat-label>
+              <input type="number" formControlName="order" matInput />
+            </mat-form-field>
+          </div>
+          <div class="col-6 d-flex flex-column">
+            <h4 class="mb-0">Available:</h4>
+            <mat-checkbox formControlName="available" matInput color="primary">
+              Available
+            </mat-checkbox>
 
-        <div class="col-6">
-          <h4 class="mb-0">Visible if:</h4>
-          <mat-checkbox formControlName="dineIn" matInput color="primary">
-            Dine in
-          </mat-checkbox>
-          <mat-checkbox formControlName="takeAway" matInput color="primary">
-            Take away
-          </mat-checkbox>
+            <h4 class="mb-0">Visible if:</h4>
+            <mat-checkbox formControlName="dineIn" matInput color="primary">
+              Dine in
+            </mat-checkbox>
+            <mat-checkbox formControlName="takeAway" matInput color="primary">
+              Take away
+            </mat-checkbox>
+          </div>
         </div>
       </div>
 
@@ -58,19 +74,19 @@
 
   <app-translations-editor
     [type]="'Category'"
-    [id]="category?.id!"
-    [translations]="category?.translations!"
+    [id]="category.id!"
+    [translations]="category.translations!"
     [flg_isEditable]="!this.flg_insert"
   />
   <app-timespan-editor
-    [id]="category?.id!"
-    [timespans]="category?.timespans!"
+    [id]="category.id!"
+    [timespans]="category.timespans!"
     [flg_isEditable]="!this.flg_insert"
   />
   <app-assigned-editor
     [type]="'CategoryItems-Category'"
-    [id]="category?.id!"
-    [AssignedObjects]="category?.items"
+    [id]="category.id!"
+    [AssignedObjects]="category.items"
     [flg_insert]="this.flg_insert"
   />
 </mat-dialog-content>

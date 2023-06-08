@@ -1,0 +1,116 @@
+<mat-dialog-content class="p-0 overflow-x-hidden" style="max-height: 80vh">
+  <mat-toolbar class="w-100 position-relative mb-4" color="primary">
+    <div>
+      <h1 class="px-0 my-2 text-white">Category info</h1>
+    </div>
+
+    <button
+      mat-icon-button
+      class="m-2 position-absolute end-0"
+      [mat-dialog-close]="null"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div class="row container-fluid">
+    <mat-form-field class="col-4">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="filter" (change)="ChangeFilter($event)" />
+    </mat-form-field>
+    <div class="col-2">
+      <button mat-raised-button color="primary" class="px-1 mb-3">
+        Search
+      </button>
+    </div>
+    <div class="col-6 d-flex justify-content-end">
+      <input
+        type="file"
+        (change)="UploadFile($event)"
+        style="display: none"
+        #fileUpload
+      />
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="mx-2 mb-3"
+        (click)="fileUpload.click()"
+      >
+        Upload new image
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        class="mx-2 mb-3"
+        (click)="RemoveFile()"
+      >
+        Remove image
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="mx-2 mb-3"
+        (click)="Stampa(selectedImage)"
+        [mat-dialog-close]="selectedImage"
+      >
+        Confirm
+      </button>
+    </div>
+  </div>
+  <div class="row overflow-y-auto overflow-x-hidden">
+    <div class="p-4 col-2" *ngFor="let imgPreview of imgPreviewList">
+      <mat-card
+        class="d-flex flex-column justify-content-between h-100 image-hover"
+        (click)="
+          deleteMode
+            ? imgPreview == selectedImage
+              ? SnackbarCurrentlySelected()
+              : DeleteImage(imgPreview)
+            : (selectedImage = imgPreview)
+        "
+      >
+        <mat-chip class="position-absolute m-1 start-0" color="primary">
+          New
+        </mat-chip>
+        <mat-icon
+          class="position-absolute m-1 end-0 text-success"
+          *ngIf="imgPreview == selectedImage"
+        >
+          check
+        </mat-icon>
+        <img
+          style="aspect-ratio: 3/2"
+          class="object-fit-contain w-100"
+          [src]="imgPath + imgPreview"
+        />
+        <p class="text-center px-2 text-break">{{ imgPreview }}</p>
+      </mat-card>
+    </div>
+    <div class="p-4 col-2" *ngFor="let image of filteredImages">
+      <mat-card
+        class="d-flex flex-column justify-content-between h-100 image-hover"
+        (click)="
+          deleteMode
+            ? image == selectedImage
+              ? SnackbarCurrentlySelected()
+              : DeleteImage(image)
+            : (selectedImage = image)
+        "
+      >
+        <mat-icon
+          class="position-absolute m-1 end-0 text-success"
+          *ngIf="image == selectedImage"
+        >
+          check
+        </mat-icon>
+
+        <img
+          style="aspect-ratio: 16/9"
+          class="object-fit-contain w-100"
+          [src]="imgPath + image"
+        />
+        <p class="text-center px-2 text-break">{{ image }}</p>
+      </mat-card>
+    </div>
+  </div>
+</mat-dialog-content>

@@ -19,6 +19,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatChipsModule } from '@angular/material/chips';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -39,6 +40,7 @@ const MaterialComponents = [
   MatAutocompleteModule,
   MatSortModule,
   MatPaginatorModule,
+  MatChipsModule,
 ];
 
 @NgModule({

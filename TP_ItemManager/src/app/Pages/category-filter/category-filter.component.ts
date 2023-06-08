@@ -55,7 +55,9 @@ export class CategoryFilterComponent {
   }
 
   OpenDialogModifyCategory() {
-    const dialogRef = this.dialog.open(ModalCategoryComponent);
+    const dialogRef = this.dialog.open(ModalCategoryComponent, {
+      width: '60vw',
+    });
     dialogRef.afterClosed().subscribe(() => this.GetCategory());
   }
 }

@@ -280,4 +280,25 @@ export class HttpService {
       )
       .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
+
+  GetImages() {
+    return this.http
+      .get<string[]>(this.urlAPI + 'Images')
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+  UploadImage(image: File) {
+    let formData = new FormData();
+    formData.append('image', image);
+    return this.http
+      .post<string[]>(this.urlAPI + 'Image', formData)
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+  DeleteImage(imageName: string) {
+    return this.http
+      .post<string[]>(this.urlAPI + 'DeleteImage', null, {
+        params: new HttpParams().append('imageName', imageName),
+      })
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
 }

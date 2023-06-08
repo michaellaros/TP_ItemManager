@@ -61,7 +61,9 @@ export class ItemFilterComponent {
   }
 
   OpenDialogModifyItem() {
-    const dialogRef = this.dialog.open(ModalItemComponent);
+    const dialogRef = this.dialog.open(ModalItemComponent, {
+      width: '60vw',
+    });
     dialogRef.afterClosed().subscribe(() => this.GetItems());
   }
 }

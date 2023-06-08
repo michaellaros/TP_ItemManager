@@ -15,48 +15,66 @@
   <div class="container-fluid">
     <form [formGroup]="itemForm" class="formGroup" (ngSubmit)="SubmitForm()">
       <div class="row">
-        <mat-form-field appearance="outline" class="col-6">
-          <mat-label>Name</mat-label>
-          <input formControlName="name" matInput />
-        </mat-form-field>
+        <div class="d-flex justify-content-between flex-column col-3">
+          <img
+            src="http://localhost/KioskImages/{{ item!.imagePath }}"
+            alt="Image"
+            style="aspect-ratio: 3/2"
+            class="object-fit-contain w-100"
+          />
+          <button
+            mat-raised-button
+            color="primary"
+            class="my-4"
+            type="button"
+            (click)="ChangeImage()"
+          >
+            Change image
+          </button>
+        </div>
+        <div class="row col-6 d-flex flex-column">
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input formControlName="name" matInput />
+          </mat-form-field>
 
-        <mat-form-field appearance="outline" class="col-6">
-          <mat-label>Description</mat-label>
-          <input formControlName="description" matInput />
-        </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <input formControlName="description" matInput />
+          </mat-form-field>
 
-        <mat-form-field appearance="outline" class="col-6">
-          <mat-label>Barcode</mat-label>
-          <input formControlName="barcode" matInput />
-        </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Barcode</mat-label>
+            <input formControlName="barcode" matInput />
+          </mat-form-field>
 
-        <mat-form-field appearance="outline" class="col-6">
-          <mat-label>Price</mat-label>
-          <input type="number" formControlName="price" matInput />
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="col-6">
-          <mat-label>Image</mat-label>
-          <input formControlName="imagePath" matInput />
-        </mat-form-field>
-      </div>
-      <div class="row">
-        <mat-checkbox formControlName="flg_addToCart" matInput color="primary">
-          Add item to transaction
-        </mat-checkbox>
-        <mat-checkbox
-          formControlName="flg_verifyAdult"
-          matInput
-          color="primary"
-        >
-          Article 18+
-        </mat-checkbox>
-        <mat-checkbox formControlName="flg_isMenu" matInput color="primary">
-          Menu
-        </mat-checkbox>
-        <mat-checkbox formControlName="available" matInput color="primary">
-          Available
-        </mat-checkbox>
+          <mat-form-field appearance="outline">
+            <mat-label>Price</mat-label>
+            <input type="number" formControlName="price" matInput />
+          </mat-form-field>
+        </div>
+        <div class="row col-3 d-flex flex-column">
+          <mat-checkbox
+            formControlName="flg_addToCart"
+            matInput
+            color="primary"
+          >
+            Add item to transaction
+          </mat-checkbox>
+          <mat-checkbox
+            formControlName="flg_verifyAdult"
+            matInput
+            color="primary"
+          >
+            Article 18+
+          </mat-checkbox>
+          <mat-checkbox formControlName="flg_isMenu" matInput color="primary">
+            Menu
+          </mat-checkbox>
+          <mat-checkbox formControlName="available" matInput color="primary">
+            Available
+          </mat-checkbox>
+        </div>
       </div>
 
       <button mat-raised-button color="primary" type="submit">
@@ -65,30 +83,30 @@
     </form>
   </div>
   <app-translations-editor
-    [id]="item?.id!"
-    [translations]="item?.translations!"
+    [id]="item.id!"
+    [translations]="item.translations!"
     [flg_isEditable]="!this.flg_insert"
     [type]="'Item'"
   />
 
   <app-assigned-editor
     [type]="'ItemOptions-Item'"
-    [id]="item?.id!"
-    [AssignedObjects]="item?.options"
+    [id]="item.id!"
+    [AssignedObjects]="item.options"
     [flg_insert]="this.flg_insert"
   />
 
   <app-assigned-editor
     [type]="'CategoryItems-Item'"
-    [id]="item?.id!"
-    [AssignedObjects]="item?.categoriesItsIn"
+    [id]="item.id!"
+    [AssignedObjects]="item.categoriesItsIn"
     [flg_insert]="this.flg_insert"
   />
 
   <app-assigned-editor
     [type]="'OptionItems-Item'"
-    [id]="item?.id!"
-    [AssignedObjects]="item?.optionsItsIn"
+    [id]="item.id!"
+    [AssignedObjects]="item.optionsItsIn"
     [flg_insert]="this.flg_insert"
   />
 </mat-dialog-content>

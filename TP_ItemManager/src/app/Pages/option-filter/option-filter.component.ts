@@ -55,7 +55,9 @@ export class OptionFilterComponent {
       });
   }
   OpenDialogModifyOption() {
-    const dialogRef = this.dialog.open(ModalOptionComponent);
+    const dialogRef = this.dialog.open(ModalOptionComponent, {
+      width: '60vw',
+    });
     dialogRef.afterClosed().subscribe(() => this.GetOptions());
   }
 }

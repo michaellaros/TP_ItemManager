@@ -3,6 +3,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpService } from 'src/app/Services/http.service';
 import { FormsModule } from '@angular/forms';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-image-picker',
@@ -17,19 +19,23 @@ export class ImagePickerComponent {
   public imgPreviewList: File[] = [];
   public deleteMode: boolean = false;
   public filter: string = '';
+  public folderName: string;
 
   constructor(
     @Inject('IMAGES_URL') imageUrl: string,
     public dialogRef: MatDialogRef<ImagePickerComponent>,
-    @Inject(MAT_DIALOG_DATA) image: string,
+    @Inject(MAT_DIALOG_DATA) data: any,
     private http: HttpService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    router: Router
   ) {
-    this.selectedImage = image;
+    this.folderName = data.folderName;
+    this.selectedImage = data.image;
     this.imgPath = imageUrl;
+    console.log(this.folderName);
   }
   ngOnInit() {
-    this.http.GetImages().subscribe((data) => {
+    this.http.GetImages(this.folderName).subscribe((data) => {
       this.images = data;
       this.filteredImages = data;
     });
@@ -64,7 +70,7 @@ export class ImagePickerComponent {
     let image = files.target.files[0];
     this.imgPreviewList.push(image.name);
     if (image)
-      this.http.UploadImage(image).subscribe((data) => {
+      this.http.UploadImage(this.folderName, image).subscribe((data) => {
         this.images = data.filter(
           (image) =>
             this.imgPreviewList.findIndex(

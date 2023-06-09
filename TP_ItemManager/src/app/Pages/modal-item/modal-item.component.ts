@@ -103,7 +103,7 @@ export class ModalItemComponent {
   }
   ChangeImage() {
     const dialogRef = this.dialog.open(ImagePickerComponent, {
-      data: this.item!.imagePath,
+      data: { image: this.item.imagePath, folderName: 'Items' },
     });
     dialogRef.afterClosed().subscribe((data) => {
       if (data != null) this.item!.imagePath = data;

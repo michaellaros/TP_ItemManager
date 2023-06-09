@@ -83,7 +83,9 @@
           class="object-fit-contain w-100"
           [src]="GetUrlFromFile(imgPreview)"
         />
-        <p class="text-center px-2 text-break">{{ imgPreview }}</p>
+        <p class="text-center px-2 text-break">
+          {{ imgPreview.name.replace(folderName + "\\", "") }}
+        </p>
       </mat-card>
     </div>
     <div class="p-4 col-2" *ngFor="let image of filteredImages">
@@ -109,7 +111,9 @@
           class="object-fit-contain w-100"
           [src]="imgPath + image"
         />
-        <p class="text-center px-2 text-break">{{ image }}</p>
+        <p class="text-center px-2 text-break">
+          {{ image.replace(folderName + "\\", "") }}
+        </p>
       </mat-card>
     </div>
   </div>

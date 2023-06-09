@@ -106,7 +106,7 @@ export class ModalCategoryComponent {
 
   ChangeImage() {
     const dialogRef = this.dialog.open(ImagePickerComponent, {
-      data: this.category.imagePath,
+      data: { image: this.category.imagePath, folderName: 'Categories' },
     });
     dialogRef.afterClosed().subscribe((data) => {
       if (data != null) this.category.imagePath = data;

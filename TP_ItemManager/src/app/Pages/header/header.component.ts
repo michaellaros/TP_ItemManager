@@ -8,7 +8,7 @@ import { StatusService } from 'src/app/Services/status.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  currentRoute: any;
+  currentRoute!: string;
 
   constructor(public status: StatusService, router: Router) {
     router.events

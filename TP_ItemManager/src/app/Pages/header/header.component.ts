@@ -15,6 +15,7 @@ export class HeaderComponent {
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event) => {
         this.currentRoute = (event as NavigationEnd).url;
+        console.log(this.currentRoute);
       });
   }
 }

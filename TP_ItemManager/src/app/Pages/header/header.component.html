@@ -8,7 +8,9 @@
       </div>
       <button
         mat-raised-button
-        [color]="currentRoute == '/Category' ? '' : 'primary'"
+        [color]="
+          currentRoute == '/Category' || currentRoute == '/' ? '' : 'primary'
+        "
         class="m-2"
         routerLink="/Category"
       >

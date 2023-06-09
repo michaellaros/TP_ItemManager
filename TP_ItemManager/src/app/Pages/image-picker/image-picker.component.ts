@@ -14,17 +14,19 @@ export class ImagePickerComponent {
   public images?: string[];
   public filteredImages?: string[];
   public imgPath = 'http:\\\\localhost\\KioskImages\\';
-  public imgPreviewList: string[] = [];
+  public imgPreviewList: File[] = [];
   public deleteMode: boolean = false;
   public filter: string = '';
 
   constructor(
+    @Inject('IMAGES_URL') imageUrl: string,
     public dialogRef: MatDialogRef<ImagePickerComponent>,
     @Inject(MAT_DIALOG_DATA) image: string,
     private http: HttpService,
     private _snackBar: MatSnackBar
   ) {
     this.selectedImage = image;
+    this.imgPath = imageUrl;
   }
   ngOnInit() {
     this.http.GetImages().subscribe((data) => {
@@ -64,7 +66,10 @@ export class ImagePickerComponent {
     if (image)
       this.http.UploadImage(image).subscribe((data) => {
         this.images = data.filter(
-          (image) => !this.imgPreviewList.includes(image)
+          (image) =>
+            this.imgPreviewList.findIndex(
+              (imgPreview) => image == imgPreview.name
+            ) == -1
         );
         this.FilterImages();
         this._snackBar.open('Image successfully uploaded!', 'Confirm');
@@ -88,11 +93,14 @@ export class ImagePickerComponent {
     if (confirm('The image will be permanently deleted!')) {
       this.http.DeleteImage(imageName).subscribe((data) => {
         this.images = data.filter(
-          (image) => !this.imgPreviewList.includes(image)
+          (image) =>
+            this.imgPreviewList.findIndex(
+              (imgPreview) => image == imgPreview.name
+            ) == -1
         );
 
         this.imgPreviewList = this.imgPreviewList.filter(
-          (img) => img != imageName
+          (img) => img.name != imageName
         );
         this.FilterImages();
         this._snackBar.open('Image successfully deleted!', 'Confirm');

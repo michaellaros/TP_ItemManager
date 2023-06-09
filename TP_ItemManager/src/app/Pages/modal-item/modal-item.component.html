@@ -17,8 +17,7 @@
       <div class="row">
         <div class="d-flex justify-content-between flex-column col-3">
           <img
-            src="http://localhost/KioskImages/{{ item!.imagePath }}"
-            alt="Image"
+            [src]="imageUrl + item.imagePath"
             style="aspect-ratio: 3/2"
             class="object-fit-contain w-100"
           />

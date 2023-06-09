@@ -26,7 +26,7 @@ export class ModalItemComponent {
     description: new FormControl('', [Validators.required]),
     barcode: new FormControl('', [Validators.required]),
     price: new FormControl(0.0, [Validators.required]),
-    imagePath: new FormControl('', [Validators.required]),
+
     flg_addToCart: new FormControl(true),
     flg_verifyAdult: new FormControl(false),
     flg_isMenu: new FormControl(false),
@@ -34,6 +34,7 @@ export class ModalItemComponent {
   });
 
   constructor(
+    @Inject('IMAGES_URL') public imageUrl: string,
     @Inject(MAT_DIALOG_DATA) private data: Item,
     public dialogRef: MatDialogRef<ModalItemComponent>,
     private http: HttpService,
@@ -52,6 +53,7 @@ export class ModalItemComponent {
   }
 
   public SubmitForm() {
+    console.log('submit');
     if (this.itemForm.valid) {
       if (this.flg_insert) {
         this.http.InsertItem(this.GetItemFromForm()).subscribe((data) => {
@@ -60,6 +62,7 @@ export class ModalItemComponent {
           this._snackBar.open('Item successfully created!', 'Ok');
         });
       } else {
+        console.log(this.GetItemFromForm());
         this.http.UpdateItem(this.GetItemFromForm()).subscribe((data) => {
           this.item = data;
           this.UpdateForm();
@@ -76,7 +79,7 @@ export class ModalItemComponent {
       this.itemForm.get('description')!.value!,
       this.itemForm.get('barcode')!.value!,
       this.itemForm.get('price')!.value!,
-      this.itemForm.get('imagePath')!.value!,
+      this.item.imagePath,
       this.itemForm.get('flg_addToCart')!.value!,
       this.itemForm.get('flg_verifyAdult')!.value!,
       this.itemForm.get('flg_isMenu')!.value!,
@@ -91,7 +94,6 @@ export class ModalItemComponent {
         description: this.item.description,
         barcode: this.item.barcode,
         price: this.item.price,
-        imagePath: this.item.imagePath,
         flg_addToCart: this.item.flg_addToCart,
         flg_verifyAdult: this.item.flg_verifyAdult,
         flg_isMenu: this.item.flg_isMenu,
@@ -104,7 +106,7 @@ export class ModalItemComponent {
       data: this.item!.imagePath,
     });
     dialogRef.afterClosed().subscribe((data) => {
-      this.item!.imagePath = data;
+      if (data != null) this.item!.imagePath = data;
     });
   }
 }

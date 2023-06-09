@@ -13,6 +13,16 @@ export const getBaseUrl = () => {
   }
 };
 
+export const getImagesUrl = () => {
+  if (isDevMode()) {
+    return 'http://localhost/KioskImages/';
+  } else {
+    const url = document.getElementsByTagName('base')[0].href;
+    const arr = url.split('/');
+    return arr[0] + '//' + arr[2] + '/KioskImages/';
+  }
+};
+
 export const getAssetsUrl = () => {
   if (isDevMode()) {
     return '/assets/';
@@ -23,6 +33,7 @@ export const getAssetsUrl = () => {
 const providers = [
   { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },
   { provide: 'ASSETS_URL', useFactory: getAssetsUrl, deps: [] },
+  { provide: 'IMAGES_URL', useFactory: getImagesUrl, deps: [] },
 ];
 if (environment.production) {
   enableProdMode();

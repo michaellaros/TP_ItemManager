@@ -63,10 +63,10 @@
         class="d-flex flex-column justify-content-between h-100 image-hover"
         (click)="
           deleteMode
-            ? imgPreview == selectedImage
+            ? imgPreview.name == selectedImage
               ? SnackbarCurrentlySelected()
-              : DeleteImage(imgPreview)
-            : (selectedImage = imgPreview)
+              : DeleteImage(imgPreview.name)
+            : (selectedImage = imgPreview.name)
         "
       >
         <mat-chip class="position-absolute m-1 start-0" color="primary">
@@ -74,14 +74,14 @@
         </mat-chip>
         <mat-icon
           class="position-absolute m-1 end-0 text-success"
-          *ngIf="imgPreview == selectedImage"
+          *ngIf="imgPreview.name == selectedImage"
         >
           check
         </mat-icon>
         <img
           style="aspect-ratio: 3/2"
           class="object-fit-contain w-100"
-          [src]="imgPath + imgPreview"
+          [src]="GetUrlFromFile(imgPreview)"
         />
         <p class="text-center px-2 text-break">{{ imgPreview }}</p>
       </mat-card>

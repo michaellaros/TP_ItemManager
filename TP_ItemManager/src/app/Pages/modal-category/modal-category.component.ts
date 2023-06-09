@@ -33,6 +33,7 @@ export class ModalCategoryComponent {
   });
 
   constructor(
+    @Inject('IMAGES_URL') public imageUrl: string,
     @Inject(MAT_DIALOG_DATA) private data: Category,
     public dialogRef: MatDialogRef<ModalCategoryComponent>,
     private http: HttpService,
@@ -108,7 +109,7 @@ export class ModalCategoryComponent {
       data: this.category.imagePath,
     });
     dialogRef.afterClosed().subscribe((data) => {
-      this.category.imagePath = data;
+      if (data != null) this.category.imagePath = data;
     });
   }
 }

@@ -1,7 +1,7 @@
 <mat-dialog-content class="p-0 overflow-x-hidden" style="max-height: 80vh">
   <mat-toolbar class="w-100 position-relative mb-4" color="primary">
     <div>
-      <h1 class="px-0 my-2 text-white">Item info</h1>
+      <h1 class="px-0 my-2 text-white">{{"Item info" | translate}}</h1>
     </div>
 
     <button
@@ -28,27 +28,27 @@
             type="button"
             (click)="ChangeImage()"
           >
-            Change image
+          {{"Change image" | translate}}
           </button>
         </div>
         <div class="row col-6 d-flex flex-column">
           <mat-form-field appearance="outline">
-            <mat-label>Name</mat-label>
+            <mat-label>{{"Name" | translate}}</mat-label>
             <input formControlName="name" matInput />
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Description</mat-label>
+            <mat-label>{{"Description" | translate}}</mat-label>
             <input formControlName="description" matInput />
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Barcode</mat-label>
+            <mat-label>{{"Barcode" | translate}}</mat-label>
             <input formControlName="barcode" matInput />
           </mat-form-field>
 
           <mat-form-field appearance="outline">
-            <mat-label>Price</mat-label>
+            <mat-label>{{"Price" | translate}}</mat-label>
             <input type="number" formControlName="price" matInput />
           </mat-form-field>
         </div>
@@ -58,26 +58,26 @@
             matInput
             color="primary"
           >
-            Add item to transaction
+          {{"Add item to transaction" | translate}}
           </mat-checkbox>
           <mat-checkbox
             formControlName="flg_verifyAdult"
             matInput
             color="primary"
           >
-            Article 18+
+          {{"Article 18+" | translate}}
           </mat-checkbox>
           <mat-checkbox formControlName="flg_isMenu" matInput color="primary">
-            Menu
+            {{"Menu" | translate}}
           </mat-checkbox>
           <mat-checkbox formControlName="available" matInput color="primary">
-            Available
+            {{"Available" | translate}}
           </mat-checkbox>
         </div>
       </div>
 
       <button mat-raised-button color="primary" type="submit">
-        {{ flg_insert ? "Create" : "Modify" }}
+        {{ flg_insert ? "Create" : "Modify" | translate}}
       </button>
     </form>
   </div>

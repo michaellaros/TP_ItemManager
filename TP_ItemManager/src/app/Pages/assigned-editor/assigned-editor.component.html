@@ -15,7 +15,7 @@
           : type == "ItemOptions-Options"
           ? "Items this options is used in"
           : ""
-      }}
+      | translate}}
     </h1>
   </div>
 
@@ -36,11 +36,11 @@
 >
   <div class="row px-4 pt-4" *ngFor="let object of AssignedObjects">
     <mat-form-field appearance="outline" class="col-8">
-      <mat-label>Name</mat-label>
+      <mat-label>{{"Name" | translate}}</mat-label>
       <input disabled matInput type="text" [(ngModel)]="object.name" />
     </mat-form-field>
     <mat-form-field appearance="outline" class="col-2">
-      <mat-label>Order</mat-label>
+      <mat-label>{{"Order"| translate}}</mat-label>
       <input matInput type="number" [(ngModel)]="object.order" />
     </mat-form-field>
 
@@ -68,7 +68,7 @@
   >
     <div class="row px-4 pt-4">
       <mat-form-field appearance="outline" class="col-8">
-        <mat-label>Name</mat-label>
+        <mat-label>{{"Name" | translate}}</mat-label>
         <input
           matInput
           type="text"
@@ -85,7 +85,7 @@
         </mat-autocomplete>
       </mat-form-field>
       <mat-form-field appearance="outline" class="col-2">
-        <mat-label>Order</mat-label>
+        <mat-label>{{"Order" | translate}}</mat-label>
         <input matInput formControlName="order" type="number" />
       </mat-form-field>
 

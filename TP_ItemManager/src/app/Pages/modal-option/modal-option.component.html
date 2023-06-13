@@ -1,7 +1,7 @@
 <mat-dialog-content class="p-0 overflow-x-hidden" style="max-height: 80vh">
   <mat-toolbar class="w-100 position-relative mb-4" color="primary">
     <div>
-      <h1 class="px-0 my-2 text-white">Option info</h1>
+      <h1 class="px-0 my-2 text-white">{{"Option info" | translate}}</h1>
     </div>
 
     <button
@@ -16,21 +16,21 @@
     <form [formGroup]="optionForm" class="formGroup" (ngSubmit)="SubmitForm()">
       <div class="row">
         <mat-form-field class="col-12">
-          <mat-label>Option name</mat-label>
+          <mat-label>{{"Option name" | translate}}</mat-label>
           <input formControlName="name" matInput value="" />
         </mat-form-field>
         <mat-form-field class="col-4">
-          <mat-label>Default quantity</mat-label>
+          <mat-label>{{"Default quantity" | translate}}</mat-label>
           <input type="number" formControlName="default_quantity" matInput />
         </mat-form-field>
 
         <mat-form-field class="col-4">
-          <mat-label>Max quantity</mat-label>
+          <mat-label>{{"Max quantity" | translate}}</mat-label>
           <input type="number" formControlName="min_quantity" matInput />
         </mat-form-field>
 
         <mat-form-field class="col-4">
-          <mat-label>Min quantity</mat-label>
+          <mat-label>{{"Min quantity" | translate}}</mat-label>
           <input type="number" formControlName="max_quantity" matInput />
         </mat-form-field>
 
@@ -39,12 +39,12 @@
           matInput
           class="example-margin"
           color="primary"
-          >Is available
+          >{{"Is available" | translate}}
         </mat-checkbox>
       </div>
 
       <button mat-raised-button color="primary" type="submit">
-        {{ flg_insert ? "Create" : "Modify" }}
+        {{ flg_insert ? "Create" : "Modify" | translate}}
       </button>
     </form>
   </div>

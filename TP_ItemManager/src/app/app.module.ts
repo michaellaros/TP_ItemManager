@@ -7,7 +7,7 @@ import { HeaderComponent } from './Pages/header/header.component';
 import { MaterialModule } from './Modules/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditListComponent } from './Pages/edit-list/edit-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { HttpService } from './Services/http.service';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
@@ -24,6 +24,12 @@ import { TranslationsEditorComponent } from './Pages/translations-editor/transla
 import { AssignedEditorComponent } from './Pages/assigned-editor/assigned-editor.component';
 import { TimespanEditorComponent } from './Pages/timespan-editor/timespan-editor.component';
 import { ImagePickerComponent } from './Pages/image-picker/image-picker.component';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -39,7 +45,7 @@ import { ImagePickerComponent } from './Pages/image-picker/image-picker.componen
     TranslationsEditorComponent,
     AssignedEditorComponent,
     TimespanEditorComponent,
-    ImagePickerComponent,
+    ImagePickerComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +55,13 @@ import { ImagePickerComponent } from './Pages/image-picker/image-picker.componen
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'EL',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]}
+    })
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

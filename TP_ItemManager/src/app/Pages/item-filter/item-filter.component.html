@@ -1,18 +1,18 @@
 <div class="container mt-3">
-  <div class="row"><h1>Items</h1></div>
+  <div class="row"><h1>{{"Items" | translate}}</h1></div>
   <form [formGroup]="filterForm" class="formGroup">
     <div class="row container-fluid">
       <mat-form-field class="col-3 m-1">
-        <mat-label>Name</mat-label>
+        <mat-label>{{"Name" | translate}}</mat-label>
         <input formControlName="name" matInput />
       </mat-form-field>
       <mat-form-field class="col-3 m-1">
-        <mat-label>ID</mat-label>
+        <mat-label>{{"ID" | translate}}</mat-label>
         <input formControlName="id" matInput />
       </mat-form-field>
 
       <mat-form-field class="col-3 m-1">
-        <mat-label>Barcode</mat-label>
+        <mat-label>{{"Barcode" | translate}}</mat-label>
         <input formControlName="barcode" matInput />
       </mat-form-field>
     </div>
@@ -24,7 +24,7 @@
           class="mx-1 mb-3"
           (click)="GetItems()"
         >
-          Search
+        {{"Search" | translate}}
         </button>
         <button
           mat-raised-button
@@ -32,7 +32,7 @@
           class="mx-1 mb-3"
           type="reset"
         >
-          Clear
+        {{"Clear" | translate}}
         </button>
       </div>
       <button
@@ -41,7 +41,7 @@
         (click)="OpenDialogModifyItem()"
         class="mx-1"
       >
-        Create item
+      {{"Create item" | translate}}
       </button>
     </div>
   </form>

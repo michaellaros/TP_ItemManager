@@ -20,12 +20,12 @@
 >
   <div class="row px-4 pt-4" *ngFor="let timespan of timespans">
     <mat-form-field class="col-5">
-      <mat-label>available from:</mat-label>
+      <mat-label>{{"Available from" | translate}}:</mat-label>
       <input matInput type="number" [(ngModel)]="timespan.availableFrom" />
     </mat-form-field>
 
     <mat-form-field class="col-5">
-      <mat-label>available to:</mat-label>
+      <mat-label>{{"Available to" | translate}}:</mat-label>
       <input matInput type="number" [(ngModel)]="timespan.availableTo" />
     </mat-form-field>
 
@@ -54,12 +54,12 @@
   >
     <div class="row px-4 pt-4">
       <mat-form-field class="col-5">
-        <mat-label>available from:</mat-label>
+        <mat-label>{{"Available from" | translate}}:</mat-label>
         <input matInput formControlName="availableFrom" type="number" />
       </mat-form-field>
 
       <mat-form-field class="col-5">
-        <mat-label>available to:</mat-label>
+        <mat-label>{{"Available to" | translate}}:</mat-label>
         <input matInput formControlName="availableTo" type="number" />
       </mat-form-field>
 

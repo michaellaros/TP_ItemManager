@@ -3,11 +3,11 @@
   <form [formGroup]="filterForm" class="formGroup">
     <div class="row container-fluid">
       <mat-form-field class="col-3 m-1">
-        <mat-label>Name</mat-label>
+        <mat-label>{{"Name" | translate}}</mat-label>
         <input formControlName="name" matInput />
       </mat-form-field>
       <mat-form-field class="col-3 m-1">
-        <mat-label>ID</mat-label>
+        <mat-label>{{"ID" | translate}}</mat-label>
         <input formControlName="id" matInput />
       </mat-form-field>
     </div>
@@ -19,7 +19,7 @@
           class="mx-1 mb-3"
           (click)="GetOptions()"
         >
-          Search
+        {{"Search" | translate}}
         </button>
         <button
           mat-raised-button
@@ -27,7 +27,7 @@
           class="mx-1 mb-3"
           type="reset"
         >
-          Clear
+        {{"Clear" | translate}}
         </button>
       </div>
 
@@ -37,7 +37,7 @@
         (click)="OpenDialogModifyOption()"
         class="mx-1"
       >
-        Create option
+      {{"Create option" | translate}}
       </button>
     </div>
   </form>

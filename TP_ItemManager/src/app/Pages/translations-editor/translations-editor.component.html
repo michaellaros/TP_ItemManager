@@ -1,6 +1,6 @@
 <mat-toolbar class="w-100 position-relative mt-4" color="primary">
   <div>
-    <h1 class="px-0 my-2 text-white">Translations</h1>
+    <h1 class="px-0 my-2 text-white">{{"Translations" | translate}}</h1>
   </div>
 
   <button
@@ -20,17 +20,17 @@
 >
   <div class="row px-4 pt-4" *ngFor="let translation of translations">
     <mat-form-field class="col-2">
-      <mat-label>Language</mat-label>
+      <mat-label>{{"Language" | translate}}</mat-label>
       <input matInput disabled type="text" [(ngModel)]="translation.language" />
     </mat-form-field>
 
     <mat-form-field class="col-2">
-      <mat-label>Field</mat-label>
+      <mat-label>{{"Field" | translate}}</mat-label>
       <input matInput disabled type="text" [(ngModel)]="translation.field" />
     </mat-form-field>
 
     <mat-form-field class="col-6">
-      <mat-label>Value</mat-label>
+      <mat-label>{{"Value" | translate}}</mat-label>
       <input matInput type="text" [(ngModel)]="translation.value" />
     </mat-form-field>
     <button
@@ -58,7 +58,7 @@
   >
     <div class="row px-4 pt-4">
       <mat-form-field class="col-2">
-        <mat-label>Language</mat-label>
+        <mat-label>{{"Language" | translate}}</mat-label>
         <mat-select formControlName="language">
           <mat-option
             *ngFor="let value of this.fieldTranslation"
@@ -69,7 +69,7 @@
       </mat-form-field>
 
       <mat-form-field class="col-2">
-        <mat-label>Field</mat-label>
+        <mat-label>{{"Field" | translate}}</mat-label>
         <mat-select formControlName="field">
           <mat-option *ngFor="let value of valueTranslation" [value]="value">{{
             value
@@ -77,7 +77,7 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field class="col-6">
-        <mat-label>Value</mat-label>
+        <mat-label>{{"Value" | translate}}</mat-label>
         <input matInput formControlName="value" type="text" />
       </mat-form-field>
 

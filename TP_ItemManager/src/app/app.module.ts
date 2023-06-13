@@ -24,11 +24,11 @@ import { TranslationsEditorComponent } from './Pages/translations-editor/transla
 import { AssignedEditorComponent } from './Pages/assigned-editor/assigned-editor.component';
 import { TimespanEditorComponent } from './Pages/timespan-editor/timespan-editor.component';
 import { ImagePickerComponent } from './Pages/image-picker/image-picker.component';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
@@ -45,7 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslationsEditorComponent,
     AssignedEditorComponent,
     TimespanEditorComponent,
-    ImagePickerComponent
+    ImagePickerComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,8 +60,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]}
-    })
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

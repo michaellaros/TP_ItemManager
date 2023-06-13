@@ -31,7 +31,7 @@ export class EditListComponent implements OnChanges {
   @Input() public parentData?: SearchedObject[];
   @Input() public columnName: string = 'Name';
   @Output() public refresh = new EventEmitter();
-  displayedColumns: string[] = ['id', 'name', 'edit', 'delete'];
+  displayedColumns: string[] = ['id', 'name', 'delete'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

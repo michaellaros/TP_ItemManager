@@ -9,17 +9,17 @@
         <th mat-header-cell *matHeaderCellDef class="col-2" mat-sort-header>
           {{"ID" | translate}}
         </th>
-        <td mat-cell matRipple *matCellDef="let element" class="col-2" (click)="ModifyItem(element.id!)">
+        <td mat-cell matRipple  *matCellDef="let element" class="col-2 ripple" (click)="ModifyItem(element.id!)">
           {{ element.id }}
         </td>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef class="col-8" mat-sort-header>
+        <th mat-header-cell  *matHeaderCellDef class="col-8 " mat-sort-header>
           {{"Name" | translate}}
         </th>
-        <td matRipple mat-cell *matCellDef="let element" class="col-8" (click)="ModifyItem(element.id!)">
+        <td mat-cell  matRipple *matCellDef="let element" class="col-8 ripple" (click)="ModifyItem(element.id!)">
           {{ element.name }}
         </td>
       </ng-container>

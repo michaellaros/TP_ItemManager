@@ -1,17 +1,18 @@
-<mat-dialog-content class="p-0 overflow-x-hidden" style="max-height: 80vh">
-  <mat-toolbar class="w-100 position-relative mb-4" color="primary">
-    <div>
-      <h1 class="px-0 my-2 text-white">{{"Category info" | translate}}</h1>
-    </div>
+<mat-toolbar class="w-100 position-relative mb-4 header" color="primary">
+  <div>
+    <h1 class="px-0 my-2 text-white">{{"Category info" | translate}}</h1>
+  </div>
 
-    <button
-      mat-icon-button
-      class="m-2 position-absolute end-0"
-      [mat-dialog-close]="null"
-    >
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-toolbar>
+  <button
+    mat-icon-button
+    class="m-2 position-absolute end-0"
+    [mat-dialog-close]="null"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-dialog-content class="p-0 overflow-x-hidden" style="max-height: 80vh">
+
   <div class="container-fluid row">
     <form
       [formGroup]="categoryForm"

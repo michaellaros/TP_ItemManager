@@ -1,4 +1,8 @@
-<mat-toolbar class="w-100 position-relative" color="primary">
+<mat-toolbar
+  class="w-100 position-relative"
+  [class.mt-4]="type == 'KioskCategory'"
+  color="primary"
+>
   <div>
     <h1 class="px-0 my-2 text-white">
       {{
@@ -12,10 +16,12 @@
           ? "Item choises"
           : type == "ItemOptions-Item"
           ? "Options"
-          : type == "ItemOptions-Options"
-          ? "Items this options is used in"
-          : ""
-      | translate}}
+          : type == "ItemOptions-Option"
+          ? "Items this option is used in"
+          : type == "KioskCategory"
+          ? "Categories enabled"
+          : ("" | translate)
+      }}
     </h1>
   </div>
 
@@ -36,11 +42,11 @@
 >
   <div class="row px-4 pt-4" *ngFor="let object of AssignedObjects">
     <mat-form-field appearance="outline" class="col-8">
-      <mat-label>{{"Name" | translate}}</mat-label>
+      <mat-label>{{ "Name" | translate }}</mat-label>
       <input disabled matInput type="text" [(ngModel)]="object.name" />
     </mat-form-field>
     <mat-form-field appearance="outline" class="col-2">
-      <mat-label>{{"Order"| translate}}</mat-label>
+      <mat-label>{{ "Order" | translate }}</mat-label>
       <input matInput type="number" [(ngModel)]="object.order" />
     </mat-form-field>
 
@@ -68,7 +74,7 @@
   >
     <div class="row px-4 pt-4">
       <mat-form-field appearance="outline" class="col-8">
-        <mat-label>{{"Name" | translate}}</mat-label>
+        <mat-label>{{ "Name" | translate }}</mat-label>
         <input
           matInput
           type="text"
@@ -85,7 +91,7 @@
         </mat-autocomplete>
       </mat-form-field>
       <mat-form-field appearance="outline" class="col-2">
-        <mat-label>{{"Order" | translate}}</mat-label>
+        <mat-label>{{ "Order" | translate }}</mat-label>
         <input matInput formControlName="order" type="number" />
       </mat-form-field>
 

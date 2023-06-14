@@ -1,6 +1,6 @@
 <mat-toolbar class="w-100 position-relative mb-4 header" color="primary">
   <div>
-    <h1 class="px-0 my-2 text-white">{{"Category info" | translate}}</h1>
+    <h1 class="px-0 my-2 text-white">{{ "Category info" | translate }}</h1>
   </div>
 
   <button
@@ -12,7 +12,6 @@
   </button>
 </mat-toolbar>
 <mat-dialog-content class="p-0 overflow-x-hidden" style="max-height: 80vh">
-
   <div class="container-fluid row">
     <form
       [formGroup]="categoryForm"
@@ -39,33 +38,33 @@
         <div class="row col-9">
           <div class="col-6 d-flex flex-column">
             <mat-form-field appearance="outline">
-              <mat-label>{{"Name" | translate}}</mat-label>
+              <mat-label>{{ "Name" | translate }}</mat-label>
               <input formControlName="name" matInput />
             </mat-form-field>
             <mat-form-field appearance="outline">
-              <mat-label>{{"Order" | translate}}</mat-label>
+              <mat-label>{{ "Order" | translate }}</mat-label>
               <input type="number" formControlName="order" matInput />
             </mat-form-field>
           </div>
           <div class="col-6 d-flex flex-column">
-            <h4 class="mb-0">{{"Available" | translate}}:</h4>
+            <h4 class="mb-0">{{ "Available" | translate }}:</h4>
             <mat-checkbox formControlName="available" matInput color="primary">
-              {{"Available" | translate}}
+              {{ "Available" | translate }}
             </mat-checkbox>
 
-            <h4 class="mb-0">{{"Visible if" | translate}}:</h4>
+            <h4 class="mb-0">{{ "Visible if" | translate }}:</h4>
             <mat-checkbox formControlName="dineIn" matInput color="primary">
-              {{"Dine in" | translate}}
+              {{ "Dine in" | translate }}
             </mat-checkbox>
             <mat-checkbox formControlName="takeAway" matInput color="primary">
-              {{"Take Away" | translate}}
+              {{ "Take Away" | translate }}
             </mat-checkbox>
           </div>
         </div>
       </div>
 
       <button mat-raised-button color="primary" type="submit">
-        {{ flg_insert ? "Create" : "Save" | translate}}
+        {{ flg_insert ? "Create" : ("Save" | translate) }}
       </button>
     </form>
   </div>

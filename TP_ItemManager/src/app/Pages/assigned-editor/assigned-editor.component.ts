@@ -88,12 +88,16 @@ export class AssignedEditorComponent {
           this.options = this.MapToArray(data);
         });
         break;
+      case 'KioskCategory':
+        this.http.FilterCategory({}).subscribe((data) => {
+          this.options = this.MapToArray(data);
+        });
+        break;
     }
 
-    this.filteredOptions = this.assignForm.get('name')!.valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filter(value || ''))
-    );
+    this.filteredOptions = this.assignForm
+      .get('name')!
+      .valueChanges.pipe(map((value) => this._filter(value || '')));
   }
 
   toggle(): void {
@@ -154,7 +158,7 @@ export class AssignedEditorComponent {
             {
               idItem: this.id,
               idOption: object.id,
-              order: object.order,
+              order: object.order?.toString(),
             },
             'UpdateOptionItemFromItem'
           )
@@ -170,7 +174,7 @@ export class AssignedEditorComponent {
             {
               idItem: object.id,
               idOption: this.id,
-              order: object.order,
+              order: object.order?.toString(),
             },
             'UpdateOptionItemFromOption'
           )
@@ -180,13 +184,13 @@ export class AssignedEditorComponent {
             this.ResetForm();
           });
         break;
-      case 'ItemOption-Item':
+      case 'ItemOptions-Item':
         this.http
           .UpdateAssignedObject(
             {
               idItem: this.id,
               idOption: object.id,
-              order: object.order,
+              order: object.order?.toString(),
             },
             'UpdateItemOptionFromItem'
           )
@@ -196,15 +200,31 @@ export class AssignedEditorComponent {
             this.ResetForm();
           });
         break;
-      case 'ItemOption-Option':
+      case 'ItemOptions-Option':
         this.http
           .UpdateAssignedObject(
             {
               idItem: object.id,
               idOption: this.id,
-              order: object.order,
+              order: object.order?.toString(),
             },
             'UpdateItemOptionFromOption'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+      case 'KioskCategory':
+        this.http
+          .UpdateAssignedObject(
+            {
+              Kiosk_id: this.id,
+              Category_id: object.id,
+              CategoryOrder: object.order,
+            },
+            'UpdateKioskCategory'
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
@@ -280,7 +300,7 @@ export class AssignedEditorComponent {
             this.ResetForm();
           });
         break;
-      case 'ItemOption-Item':
+      case 'ItemOptions-Item':
         this.http
           .DeleteAssignedObject(
             {
@@ -290,12 +310,13 @@ export class AssignedEditorComponent {
             'DeleteItemOptionFromItem'
           )
           .subscribe((data) => {
+            console.log(data);
             this.AssignedObjects = data;
             console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
-      case 'ItemOption-Option':
+      case 'ItemOptions-Option':
         this.http
           .DeleteAssignedObject(
             {
@@ -310,10 +331,26 @@ export class AssignedEditorComponent {
             this.ResetForm();
           });
         break;
+      case 'KioskCategory':
+        this.http
+          .DeleteAssignedObject(
+            {
+              Kiosk_id: this.id,
+              Category_id: object.id,
+            },
+            'DeleteKioskCategory'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
     }
   }
 
   InsertAssignedObject() {
+    console.log(this.type);
     if (!this.assignForm.valid) return;
 
     const id = this.options.find(
@@ -364,7 +401,7 @@ export class AssignedEditorComponent {
             {
               idOption: id,
               idItem: this.id,
-              order: this.assignForm.get('order')!.value!,
+              order: this.assignForm.get('order')!.value!.toString(),
             },
             'InsertOptionItemFromItem'
           )
@@ -391,13 +428,13 @@ export class AssignedEditorComponent {
             this.ResetForm();
           });
         break;
-      case 'ItemOption-Item':
+      case 'ItemOptions-Item':
         this.http
           .InsertAssignedObject(
             {
               idOption: id,
               idItem: this.id,
-              order: this.assignForm.get('order')!.value!,
+              order: this.assignForm.get('order')!.value!.toString(),
             },
             'InsertItemOptionFromItem'
           )
@@ -407,15 +444,36 @@ export class AssignedEditorComponent {
             this.ResetForm();
           });
         break;
-      case 'ItemOption-Option':
+      case 'ItemOptions-Option':
         this.http
           .InsertAssignedObject(
             {
               idOption: this.id,
               idItem: id,
-              order: this.assignForm.get('order')!.value!,
+              order: this.assignForm.get('order')!.value!.toString(),
             },
             'InsertItemOptionFromOption'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+      case 'KioskCategory':
+        console.log({
+          Kiosk_id: this.id,
+          Category_id: id,
+          CategoryOrder: this.assignForm.get('order')!.value!,
+        });
+        this.http
+          .InsertAssignedObject(
+            {
+              Kiosk_id: this.id,
+              Category_id: id,
+              CategoryOrder: this.assignForm.get('order')!.value!,
+            },
+            'InsertKioskCategory'
           )
           .subscribe((data) => {
             this.AssignedObjects = data;

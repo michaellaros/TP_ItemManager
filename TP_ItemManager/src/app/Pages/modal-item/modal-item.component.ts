@@ -56,9 +56,11 @@ export class ModalItemComponent {
     console.log('submit');
     if (this.itemForm.valid) {
       if (this.flg_insert) {
+        console.log(this.GetItemFromForm());
         this.http.InsertItem(this.GetItemFromForm()).subscribe((data) => {
           this.item = data;
           this.UpdateForm();
+          this.flg_insert = false;
           this._snackBar.open('Item successfully created!', 'Ok');
         });
       } else {

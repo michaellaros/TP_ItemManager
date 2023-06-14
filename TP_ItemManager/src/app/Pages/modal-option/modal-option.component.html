@@ -1,7 +1,6 @@
-
-<mat-toolbar class="w-100 position-relative mb-4 header " color="primary">
+<mat-toolbar class="w-100 position-relative mb-4 header" color="primary">
   <div>
-    <h1 class="px-0 my-2 text-white">{{"Option info" | translate}}</h1>
+    <h1 class="px-0 my-2 text-white">{{ "Option info" | translate }}</h1>
   </div>
 
   <button
@@ -13,40 +12,38 @@
   </button>
 </mat-toolbar>
 <mat-dialog-content class="p-0 overflow-x-hidden" style="max-height: 80vh">
-
   <div class="container-fluid">
     <form [formGroup]="optionForm" class="formGroup" (ngSubmit)="SubmitForm()">
       <div class="row">
         <mat-form-field class="col-12">
-          <mat-label>{{"Option name" | translate}}</mat-label>
+          <mat-label>{{ "Option name" | translate }}</mat-label>
           <input formControlName="name" matInput value="" />
         </mat-form-field>
         <mat-form-field class="col-4">
-          <mat-label>{{"Default quantity" | translate}}</mat-label>
+          <mat-label>{{ "Default quantity" | translate }}</mat-label>
           <input type="number" formControlName="default_quantity" matInput />
         </mat-form-field>
 
         <mat-form-field class="col-4">
-          <mat-label>{{"Max quantity" | translate}}</mat-label>
+          <mat-label>{{ "Max quantity" | translate }}</mat-label>
           <input type="number" formControlName="min_quantity" matInput />
         </mat-form-field>
 
         <mat-form-field class="col-4">
-          <mat-label>{{"Min quantity" | translate}}</mat-label>
+          <mat-label>{{ "Min quantity" | translate }}</mat-label>
           <input type="number" formControlName="max_quantity" matInput />
         </mat-form-field>
 
-        <mat-checkbox
-          formControlName="flg_addToCart"
-          matInput
-          class="example-margin"
-          color="primary"
-          >{{"Is available" | translate}}
+        <mat-checkbox formControlName="available" matInput color="primary"
+          >{{ "Is available" | translate }}
+        </mat-checkbox>
+        <mat-checkbox formControlName="flg_addToCart" matInput color="primary"
+          >{{ "add to transaction" | translate }}
         </mat-checkbox>
       </div>
 
       <button mat-raised-button color="primary" type="submit">
-        {{ flg_insert ? "Create" : "Save" | translate}}
+        {{ flg_insert ? "Create" : ("Save" | translate) }}
       </button>
     </form>
   </div>
@@ -64,7 +61,7 @@
     [flg_insert]="this.flg_insert"
   />
   <app-assigned-editor
-    [type]="'ItemOptions-Item'"
+    [type]="'ItemOptions-Option'"
     [id]="option?.id!"
     [AssignedObjects]="option?.itemsItsIn"
     [flg_insert]="this.flg_insert"

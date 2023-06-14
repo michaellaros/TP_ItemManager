@@ -26,6 +26,8 @@ import { TimespanEditorComponent } from './Pages/timespan-editor/timespan-editor
 import { ImagePickerComponent } from './Pages/image-picker/image-picker.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { KioskFilterComponent } from './Pages/kiosk-filter/kiosk-filter.component';
+import { ModalKioskComponent } from './Pages/modal-kiosk/modal-kiosk.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -46,6 +48,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AssignedEditorComponent,
     TimespanEditorComponent,
     ImagePickerComponent,
+    KioskFilterComponent,
+    ModalKioskComponent,
   ],
   imports: [
     BrowserModule,

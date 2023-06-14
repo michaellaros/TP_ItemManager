@@ -4,8 +4,18 @@
       <img src=".\assets\mylogo.png" class="logo" alt="" />
 
       <div>
-        <h1 class="text-white m-2">{{"Item Manager" | translate}}</h1>
+        <h1 class="text-white m-2">{{ "Item Manager" | translate }}</h1>
       </div>
+      <button
+        mat-raised-button
+        [color]="
+          currentRoute == '/Kiosk' || currentRoute == '/' ? '' : 'primary'
+        "
+        class="m-2"
+        routerLink="/Kiosk"
+      >
+        {{ "Kiosk" | translate }}
+      </button>
       <button
         mat-raised-button
         [color]="
@@ -14,7 +24,7 @@
         class="m-2"
         routerLink="/Category"
       >
-      {{"Category" | translate}}
+        {{ "Category" | translate }}
       </button>
       <button
         mat-raised-button
@@ -22,7 +32,7 @@
         class="m-2"
         routerLink="/Item"
       >
-      {{"Item" | translate}}
+        {{ "Item" | translate }}
       </button>
       <button
         mat-raised-button
@@ -30,7 +40,7 @@
         class="m-2"
         routerLink="/Option"
       >
-      {{"Option" | translate}}
+        {{ "Option" | translate }}
       </button>
     </mat-toolbar>
   </div>

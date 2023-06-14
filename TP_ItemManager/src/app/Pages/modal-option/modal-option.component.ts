@@ -60,6 +60,7 @@ export class ModalOptionComponent {
         this.http.InsertOption(this.GetOptionFromForm()).subscribe((data) => {
           this.option = data;
           this.UpdateForm();
+          this.flg_insert = false;
           this._snackBar.open('Option successfully created!', 'Ok');
         });
       } else {
@@ -88,7 +89,15 @@ export class ModalOptionComponent {
     if (this.option != null) {
       this.optionForm.patchValue({
         name: this.option.name,
-        flg_addToCart: this.option.Flg_addToCart,
+        flg_addToCart: this.option.flg_addToCart,
+        default_quantity: this.option.defaultQuantity,
+        min_quantity: this.option.minQuantity,
+        max_quantity: this.option.maxQuantity,
+        available: this.option.available,
+      });
+      console.log({
+        name: this.option.name,
+        flg_addToCart: this.option.flg_addToCart,
         default_quantity: this.option.defaultQuantity,
         min_quantity: this.option.minQuantity,
         max_quantity: this.option.maxQuantity,

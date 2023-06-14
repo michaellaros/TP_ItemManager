@@ -5,7 +5,7 @@ export class Option {
   constructor(
     public id?: string,
     public name?: string,
-    public Flg_addToCart?: boolean,
+    public flg_addToCart?: boolean,
     public defaultQuantity?: number,
     public maxQuantity?: number,
     public minQuantity?: number,

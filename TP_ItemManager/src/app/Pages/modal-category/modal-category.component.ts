@@ -60,6 +60,7 @@ export class ModalCategoryComponent {
             this.category = data;
             this.UpdateForm();
             this.flg_insert = false;
+            console.log(this.flg_insert);
             this._snackBar.open('Category successfully created!', 'Ok');
           });
       } else {
@@ -96,10 +97,10 @@ export class ModalCategoryComponent {
     if (this.category != null) {
       this.categoryForm.patchValue({
         available: this.category.available,
-
         name: this.category.name,
         dineIn: this.category.codConsumationAllowed?.includes('DI'),
         takeAway: this.category.codConsumationAllowed?.includes('TA'),
+        order: this.category.categoryOrder,
       });
     }
   }

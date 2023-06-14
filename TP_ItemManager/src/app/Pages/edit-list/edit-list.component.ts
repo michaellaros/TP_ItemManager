@@ -22,6 +22,8 @@ import { ModalOptionComponent } from 'src/app/Pages/modal-option/modal-option.co
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Kiosk } from 'src/app/Models/Kiosk';
+import { ModalKioskComponent } from '../modal-kiosk/modal-kiosk.component';
 @Component({
   selector: 'app-edit-list',
   templateUrl: './edit-list.component.html',
@@ -70,6 +72,12 @@ export class EditListComponent implements OnChanges {
           this.OpenDialogModifyOption(data);
         });
         break;
+      case 'Kiosk':
+        this.http.GetKiosk(id).subscribe((data) => {
+          console.log(data);
+          this.OpenDialogModifyKiosk(data);
+        });
+        break;
     }
   }
 
@@ -94,6 +102,15 @@ export class EditListComponent implements OnChanges {
   OpenDialogModifyOption(option: Option) {
     const dialogRef = this.dialog.open(ModalOptionComponent, {
       data: option,
+      width: '60vw',
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.refresh.emit(null);
+    });
+  }
+  OpenDialogModifyKiosk(kiosk: Kiosk) {
+    const dialogRef = this.dialog.open(ModalKioskComponent, {
+      data: kiosk,
       width: '60vw',
     });
     dialogRef.afterClosed().subscribe(() => {

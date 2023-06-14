@@ -15,6 +15,7 @@ import { Option } from '../Models/Option';
 import { Translation } from '../Models/Translation';
 import { AssignedObject } from '../Models/AssignedObject';
 import { Timespan } from '../Models/Timespan';
+import { Kiosk } from '../Models/Kiosk';
 
 @Injectable({
   providedIn: 'root',
@@ -53,6 +54,11 @@ export class HttpService {
       .post<any>(this.urlAPI + 'Options', filter)
       .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
+  FilterKiosk(filter: any) {
+    return this.http
+      .post<any>(this.urlAPI + 'Kiosks', filter)
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
 
   GetItem(id: string) {
     return this.http
@@ -73,6 +79,14 @@ export class HttpService {
   GetOption(id: string) {
     return this.http
       .get<Option>(this.urlAPI + 'Option', {
+        params: new HttpParams().append('id', id),
+      })
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+  GetKiosk(id: string) {
+    return this.http
+      .get<Kiosk>(this.urlAPI + 'Kiosk', {
         params: new HttpParams().append('id', id),
       })
       .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
@@ -303,6 +317,20 @@ export class HttpService {
       .post<string[]>(this.urlAPI + 'DeleteImage', null, {
         params: new HttpParams().append('imageName', imageName),
       })
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+  InsertKiosk(kiosk: Kiosk) {
+    console.log(kiosk);
+    return this.http
+      .post<Kiosk>(this.urlAPI + 'InsertKiosk', kiosk)
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+  UpdateKiosk(kiosk: Kiosk) {
+    console.log(kiosk);
+    return this.http
+      .post<Kiosk>(this.urlAPI + 'UpdateKiosk', kiosk)
       .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
 }

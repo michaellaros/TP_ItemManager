@@ -48,7 +48,7 @@ export class AssignedEditorComponent {
       Validators.required,
     ]),
   });
-  public filteredOptions!: Observable<SearchedObject[]>;
+  public filteredOptions?: SearchedObject[];
 
   public constructor(
     private http: HttpService,
@@ -61,43 +61,51 @@ export class AssignedEditorComponent {
       case 'CategoryItems-Category':
         this.http.FilterItems({}).subscribe((data) => {
           this.options = this.MapToArray(data);
+          this.filteredOptions = this.options;
         });
         break;
       case 'CategoryItems-Item':
         this.http.FilterCategory({}).subscribe((data) => {
           this.options = this.MapToArray(data);
+          this.filteredOptions = this.options;
         });
         break;
       case 'OptionItems-Item':
         this.http.FilterOption({}).subscribe((data) => {
           this.options = this.MapToArray(data);
+          this.filteredOptions = this.options;
         });
         break;
       case 'OptionItems-Option':
         this.http.FilterItems({}).subscribe((data) => {
           this.options = this.MapToArray(data);
+          this.filteredOptions = this.options;
         });
         break;
       case 'ItemOptions-Item':
         this.http.FilterOption({}).subscribe((data) => {
           this.options = this.MapToArray(data);
+          this.filteredOptions = this.options;
         });
         break;
       case 'ItemOptions-Option':
         this.http.FilterItems({}).subscribe((data) => {
           this.options = this.MapToArray(data);
+          this.filteredOptions = this.options;
         });
         break;
       case 'KioskCategory':
         this.http.FilterCategory({}).subscribe((data) => {
           this.options = this.MapToArray(data);
+          this.filteredOptions = this.options;
         });
         break;
     }
 
-    this.filteredOptions = this.assignForm
+    this.assignForm
       .get('name')!
-      .valueChanges.pipe(map((value) => this._filter(value || '')));
+      .valueChanges.pipe(map((value) => this._filter(value || '')))
+      .subscribe((data) => (this.filteredOptions = data));
   }
 
   toggle(): void {

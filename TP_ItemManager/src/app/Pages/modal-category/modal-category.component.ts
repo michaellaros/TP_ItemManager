@@ -25,11 +25,7 @@ export class ModalCategoryComponent {
     available: new FormControl(true),
     dineIn: new FormControl(true),
     takeAway: new FormControl(true),
-    order: new FormControl(999, [
-      Validators.max(999),
-      Validators.min(1),
-      Validators.required,
-    ]),
+    order: new FormControl(999, [Validators.max(999), Validators.min(1)]),
   });
 
   constructor(
@@ -57,6 +53,7 @@ export class ModalCategoryComponent {
         this.http
           .InsertCategory(this.GetCategoryFromForm())
           .subscribe((data) => {
+            console.log(data);
             this.category = data;
             this.UpdateForm();
             this.flg_insert = false;
@@ -89,7 +86,7 @@ export class ModalCategoryComponent {
         : this.categoryForm.get('takeAway')!.value!
         ? 'TA'
         : '',
-      this.categoryForm.get('order')!.value!
+      999 // this.categoryForm.get('order')!.value!
     );
   }
 
@@ -100,7 +97,7 @@ export class ModalCategoryComponent {
         name: this.category.name,
         dineIn: this.category.codConsumationAllowed?.includes('DI'),
         takeAway: this.category.codConsumationAllowed?.includes('TA'),
-        order: this.category.categoryOrder,
+        order: 999, //  this.category.categoryOrder,
       });
     }
   }

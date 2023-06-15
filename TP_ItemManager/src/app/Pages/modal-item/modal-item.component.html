@@ -32,25 +32,25 @@
           </button>
         </div>
         <div class="row col-6 d-flex flex-column">
-          <mat-form-field appearance="outline">
+          <mat-form-field>
             <mat-label>{{ "Name" | translate }}</mat-label>
             <input formControlName="name" matInput />
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <mat-form-field>
             <mat-label>{{ "Description" | translate }}</mat-label>
-            <input formControlName="description" matInput />
+            <textarea formControlName="description" matInput></textarea>
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <mat-form-field>
             <mat-label>{{ "Barcode" | translate }}</mat-label>
             <input formControlName="barcode" matInput />
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <!-- <mat-form-field>
             <mat-label>{{ "Price" | translate }}</mat-label>
             <input type="number" formControlName="price" matInput />
-          </mat-form-field>
+          </mat-form-field> -->
         </div>
         <div class="row col-3 d-flex flex-column">
           <mat-checkbox

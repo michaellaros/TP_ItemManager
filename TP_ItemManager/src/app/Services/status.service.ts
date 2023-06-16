@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Language } from '../Models/language';
 
 
 @Injectable({
@@ -6,5 +7,6 @@ import { Injectable } from '@angular/core';
 })
 export class StatusService {
   public buttonValue : string = 'category';
+  public languages: Language[] = [];
   constructor() { }
 }

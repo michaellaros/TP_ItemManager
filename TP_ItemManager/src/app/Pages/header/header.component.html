@@ -42,6 +42,15 @@
       >
         {{ "Option" | translate }}
       </button>
+      <div class="language">
+      <mat-form-field >
+        <mat-select [(value)]="status.languages[1].value">
+          <mat-option *ngFor="let language of this.status.languages" [value]="language.value">
+            {{ language.label | titlecase }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     </mat-toolbar>
   </div>
 </div>

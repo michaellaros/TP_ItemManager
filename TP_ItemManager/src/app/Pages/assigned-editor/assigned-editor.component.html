@@ -5,7 +5,7 @@
 >
   <div>
     <h1 class="px-0 my-2 text-white">
-      {{
+      {{(
         type == "CategoryItems-Category"
           ? "Items in this category"
           : type == "CategoryItems-Item"
@@ -20,7 +20,7 @@
           ? "Items this option is used in"
           : type == "KioskCategory"
           ? "Categories enabled"
-          : ("" | translate)
+          : "") | translate
       }}
     </h1>
   </div>

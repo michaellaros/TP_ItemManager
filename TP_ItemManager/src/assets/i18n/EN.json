@@ -50,5 +50,13 @@
 "Translations": "Translations",
 "Upload new image": "Upload new image",
 "Value": "Value",
-"Visible if": "Visible if"
+"Visible if": "Visible if",
+"Kiosk":"Kiosk",
+"Hostname":"Hostname",
+"IP":"IP",
+"Kiosk name":"Kiosk name",
+"Enable Dine In / Take Away":"Enable Dine In / Take Away",
+"Last update date":"Last update date",
+"Categories enabled":"Categories Enabled",
+"Kiosk info":"Kiosk info"
 }

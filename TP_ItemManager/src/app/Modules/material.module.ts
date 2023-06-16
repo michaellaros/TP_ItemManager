@@ -21,7 +21,6 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatChipsModule } from '@angular/material/chips';
 import {MatRippleModule} from '@angular/material/core';
-
 const MaterialComponents = [
   MatButtonModule,
   MatSlideToggleModule,

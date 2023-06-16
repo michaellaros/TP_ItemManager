@@ -16,6 +16,7 @@ import { Translation } from '../Models/Translation';
 import { AssignedObject } from '../Models/AssignedObject';
 import { Timespan } from '../Models/Timespan';
 import { Kiosk } from '../Models/Kiosk';
+import { Language } from '../Models/language';
 
 @Injectable({
   providedIn: 'root',
@@ -331,6 +332,11 @@ export class HttpService {
     console.log(kiosk);
     return this.http
       .post<Kiosk>(this.urlAPI + 'UpdateKiosk', kiosk)
+      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+  GetLanguages() {
+    return this.http
+      .get<Language[]>(this.assetsUrl + 'i18n/languages.json')
       .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
 }

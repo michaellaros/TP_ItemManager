@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'Item', component: ItemFilterComponent },
   { path: 'Option', component: OptionFilterComponent },
   { path: 'Kiosk', component: KioskFilterComponent },
-  { path: '**', redirectTo: 'Category' },
+  { path: '**', redirectTo: 'Kiosk' },
 ];
 
 @NgModule({

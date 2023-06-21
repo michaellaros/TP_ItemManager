@@ -16,6 +16,7 @@ export class LoginPageComponent {
     Password: new FormControl('',[Validators.required])
 
   });
+  error: Boolean = false
   constructor(private http:HttpService,private status:StatusService,private router: Router){
 
    }
@@ -33,10 +34,16 @@ export class LoginPageComponent {
       if(this.status.isLogged){
         this.router.navigate(['/Kiosk']);
     console.log(this.user);
+    this.error=false
 
+
+    }
+      else
+      {
+        this.error=true
       }
-      else "error"
-    })
-  }
+
+
+    })}
 
 }

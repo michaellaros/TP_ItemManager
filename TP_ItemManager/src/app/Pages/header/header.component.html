@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="this.status.isLogged">
   <div class="row">
     <mat-toolbar color="primary">
       <img src=".\assets\mylogo.png" class="logo" alt="" />
@@ -9,7 +9,7 @@
       <button
         mat-raised-button
         [color]="
-          currentRoute == '/Kiosk' || currentRoute == '/' ? '' : 'primary'
+          currentRoute == '/Kiosk'  ? '' : 'primary'
         "
         class="m-2"
         routerLink="/Kiosk"

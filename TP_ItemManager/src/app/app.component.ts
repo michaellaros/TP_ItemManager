@@ -11,7 +11,7 @@ import { StatusService } from './Services/status.service';
 export class AppComponent {
   title = 'TP_ItemManager';
   constructor(private http: HttpService,
-    translate: TranslateService,private status:StatusService) {
+    translate: TranslateService,public status:StatusService) {
     this.http.GetLanguages().subscribe((data) => {
       //default language is the first language in language.json
       // this language will be used as a fallback when a translation isn't found in the current language

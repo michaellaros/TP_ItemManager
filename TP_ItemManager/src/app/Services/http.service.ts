@@ -18,6 +18,7 @@ import { Timespan } from '../Models/Timespan';
 import { Kiosk } from '../Models/Kiosk';
 import { Language } from '../Models/language';
 import { UserModel } from '../Models/UserModel';
+import { SearchedObject } from '../Models/SearchedObject';
 
 @Injectable({
   providedIn: 'root',
@@ -340,8 +341,15 @@ export class HttpService {
       .get<Language[]>(this.assetsUrl + 'i18n/languages.json')
       .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
-  Login(usermodel:UserModel){
-    return this.http.post<Boolean>(this.urlAPI + 'Login', usermodel)
+  Login(name:string, password:string){
+
+    return this.http.post<Boolean>(this.urlAPI + 'DoLogin', {name,password})
     .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
+  GetUsers(filter: any){
+    return this.http.post<any>(this.urlAPI + 'GetUsers', filter)
+    .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+
 }

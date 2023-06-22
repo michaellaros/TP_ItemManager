@@ -10,9 +10,9 @@ import { StatusService } from 'src/app/Services/status.service';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent {
-  public user:UserModel = new UserModel('user','pass')
+  public user:UserModel = new UserModel('','pass','pass')
   loginForm = new FormGroup({
-    Username: new FormControl('',[Validators.required]),
+    Name: new FormControl('',[Validators.required]),
     Password: new FormControl('',[Validators.required])
 
   });
@@ -21,7 +21,7 @@ export class LoginPageComponent {
 
    }
    public Submit() {
-    this.user.username = this.loginForm.get('Username')!.value!
+    this.user.name = this.loginForm.get('Name')!.value!
     this.user.password = this.loginForm.get('Password')!.value!
     this.DoLogin();
 
@@ -29,7 +29,8 @@ export class LoginPageComponent {
   }
   DoLogin()
   {
-    this.http.Login(this.user).subscribe((data)=>{
+
+    this.http.Login(this.user.name!,this.user.password!).subscribe((data)=>{
       this.status.isLogged = data
       if(this.status.isLogged){
         this.router.navigate(['/Kiosk']);

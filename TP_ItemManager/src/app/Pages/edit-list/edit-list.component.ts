@@ -78,6 +78,12 @@ export class EditListComponent implements OnChanges {
           this.OpenDialogModifyKiosk(data);
         });
         break;
+        case 'Users':
+        this.http.GetUsers(id).subscribe((data) => {
+          console.log(data);
+          // this.OpenDialogModifyUsers(data);
+        });
+        break;
     }
   }
 

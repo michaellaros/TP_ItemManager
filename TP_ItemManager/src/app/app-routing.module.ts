@@ -5,12 +5,15 @@ import { CategoryFilterComponent } from './Pages/category-filter/category-filter
 import { OptionFilterComponent } from './Pages/option-filter/option-filter.component';
 import { KioskFilterComponent } from './Pages/kiosk-filter/kiosk-filter.component';
 import { LoginPageComponent } from './Pages/login-page/login-page.component';
+import { UserFilterComponent } from './Pages/user-filter/user-filter.component';
 const routes: Routes = [
   { path: 'Category', component: CategoryFilterComponent },
   { path: 'Item', component: ItemFilterComponent },
   { path: 'Option', component: OptionFilterComponent },
   { path: 'Kiosk', component: KioskFilterComponent },
   { path:'login-page', component: LoginPageComponent},
+  { path:'User', component: UserFilterComponent},
+
   { path: '**', redirectTo: 'login-page' },
 ];
 

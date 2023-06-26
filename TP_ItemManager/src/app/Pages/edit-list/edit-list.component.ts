@@ -24,6 +24,8 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Kiosk } from 'src/app/Models/Kiosk';
 import { ModalKioskComponent } from '../modal-kiosk/modal-kiosk.component';
+import { UserModelRequest } from 'src/app/Models/UserModelRequest';
+import { ModalUserComponent } from '../modal-user/modal-user.component';
 @Component({
   selector: 'app-edit-list',
   templateUrl: './edit-list.component.html',
@@ -78,10 +80,11 @@ export class EditListComponent implements OnChanges {
           this.OpenDialogModifyKiosk(data);
         });
         break;
-        case 'Users':
-        this.http.GetUsers(id).subscribe((data) => {
+        case 'User':
+          console.log(id)
+        this.http.GetUser(id).subscribe((data) => {
           console.log(data);
-          // this.OpenDialogModifyUsers(data);
+          this.OpenDialogModifyUser(data);
         });
         break;
     }
@@ -117,6 +120,16 @@ export class EditListComponent implements OnChanges {
   OpenDialogModifyKiosk(kiosk: Kiosk) {
     const dialogRef = this.dialog.open(ModalKioskComponent, {
       data: kiosk,
+      width: '60vw',
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.refresh.emit(null);
+    });
+  }
+
+  OpenDialogModifyUser(user: UserModelRequest) {
+    const dialogRef = this.dialog.open(ModalUserComponent, {
+      data: user,
       width: '60vw',
     });
     dialogRef.afterClosed().subscribe(() => {

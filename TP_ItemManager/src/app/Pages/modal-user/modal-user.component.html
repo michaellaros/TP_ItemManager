@@ -11,30 +11,29 @@
     <mat-icon>close</mat-icon>
   </button>
 </mat-toolbar>
+
 <mat-dialog-content class="p-0 overflow-x-hidden" style="max-height: 80vh">
   <div class="container-fluid">
-    <form [formGroup]="userForm" class="formGroup" (ngSubmit)="SubmitForm()">
+
       <div class="row">
+        <form [formGroup]="userForm" class="formGroup" >
         <mat-form-field class="col-12">
           <mat-label>{{ "Username" | translate }}</mat-label>
           <input formControlName="name" matInput />
         </mat-form-field>
+      </form>
 
-        <mat-form-field class="col-8">
-          <mat-label>{{ "Password" | translate }}</mat-label>
-          <input formControlName="ip" matInput />
-        </mat-form-field>
+      <mat-form-field class="col-12" *ngIf="this.userU==null">
+        <mat-label>{{ "Password" | translate }}</mat-label>
+        <input  matInput />
+      </mat-form-field>
 
-
-
-        <mat-form-field class="col-12">
-          <mat-label>{{ "Last update date" | translate }}</mat-label>
-          <input formControlName="last_request_date" matInput />
-        </mat-form-field>
       </div>
 
-      <button mat-raised-button color="primary" type="submit">
-        {{ this.userU==null ? "Create" : ("Save" | translate) }}
-      </button>
-    </form>
+      <!-- <button mat-raised-button color="primary" type="button" *ngIf="this.userU!=null" (click)="SubmitForm()">
+        {{ ("Modify password" | translate) }}
+      </button> -->
+    <button mat-raised-button color="primary" type="button" (click)="SubmitForm()">
+      {{ this.userU==null ? "Create" : ("Save" | translate) }}
+    </button>
   </div>

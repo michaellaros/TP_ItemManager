@@ -42,9 +42,7 @@ export class UserFilterComponent {
       if (data == null) {
         this.list = [];
       } else {
-        console.log(data)
-        this.list = data
-        console.log(this.list)
+        this.list = data;
       }
     });
   }

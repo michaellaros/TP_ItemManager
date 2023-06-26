@@ -18,7 +18,6 @@ import { Timespan } from '../Models/Timespan';
 import { Kiosk } from '../Models/Kiosk';
 import { Language } from '../Models/language';
 import { SearchedObject } from '../Models/SearchedObject';
-import { UserModelCreate } from '../Models/UserModelCreate';
 import { UserModelRequest } from '../Models/UserModelRequest';
 
 @Injectable({
@@ -351,9 +350,9 @@ export class HttpService {
     return this.http.post<any>(this.urlAPI + 'GetUsers', filter)
     .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
-  CreateUser(user:UserModelCreate)
+  CreateUser(name:string,password:string)
   {
-    return this.http.post<any>(this.urlAPI + 'CreateUsers', user)
+    return this.http.post<any>(this.urlAPI + 'CreateUser', {name,password})
     .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
   UpdateUser(user:UserModelRequest){
@@ -361,6 +360,10 @@ export class HttpService {
     .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
 
+  GetUser(id:string){
+    return this.http.post<UserModelRequest>(this.urlAPI + 'GetUser',{id:id,name:''} )
+    .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
 
 
 }

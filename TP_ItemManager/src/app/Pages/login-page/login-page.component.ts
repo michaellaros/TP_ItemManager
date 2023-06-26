@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserModel } from 'src/app/Models/UserModel';
+import { UserModelCreate } from 'src/app/Models/UserModelCreate';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 @Component({
@@ -10,7 +10,7 @@ import { StatusService } from 'src/app/Services/status.service';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent {
-  public user:UserModel = new UserModel('','pass','pass')
+  public user:UserModelCreate = new UserModelCreate('pass','pass')
   loginForm = new FormGroup({
     Name: new FormControl('',[Validators.required]),
     Password: new FormControl('',[Validators.required])

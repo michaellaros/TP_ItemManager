@@ -1,6 +1,5 @@
-export class UserModel {
+export class UserModelCreate {
   constructor(
-    public id?:string,
     public name?: string,
     public password?: string
   ) {}

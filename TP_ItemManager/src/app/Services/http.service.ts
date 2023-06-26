@@ -17,8 +17,9 @@ import { AssignedObject } from '../Models/AssignedObject';
 import { Timespan } from '../Models/Timespan';
 import { Kiosk } from '../Models/Kiosk';
 import { Language } from '../Models/language';
-import { UserModel } from '../Models/UserModel';
 import { SearchedObject } from '../Models/SearchedObject';
+import { UserModelCreate } from '../Models/UserModelCreate';
+import { UserModelRequest } from '../Models/UserModelRequest';
 
 @Injectable({
   providedIn: 'root',
@@ -350,6 +351,16 @@ export class HttpService {
     return this.http.post<any>(this.urlAPI + 'GetUsers', filter)
     .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
+  CreateUser(user:UserModelCreate)
+  {
+    return this.http.post<any>(this.urlAPI + 'CreateUsers', user)
+    .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+  UpdateUser(user:UserModelRequest){
+    return this.http.post<any>(this.urlAPI + 'UpdateUser',user )
+    .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
 
 
 }

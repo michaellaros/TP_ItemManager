@@ -32,14 +32,14 @@
         </button>
       </div>
 
-      <!-- <button
+      <button
         mat-raised-button
         color="primary"
-        (click)="OpenDialogAddKiosk()"
+        (click)="OpenDialogAddUser()"
         class="mx-1"
       >
-        {{ "Add kiosk" | translate }}
-      </button> -->
+        {{ "Add User" | translate }}
+      </button>
     </div>
   </form>
 </div>
@@ -47,6 +47,6 @@
 <app-edit-list
   *ngIf="this.list != null"
   [parentData]="this.list"
-  [columnName]="'Users'"
+  [columnName]="'User'"
   (refresh)="this.GetUsers()"
 ></app-edit-list>

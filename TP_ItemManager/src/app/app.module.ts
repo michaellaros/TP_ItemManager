@@ -30,6 +30,7 @@ import { KioskFilterComponent } from './Pages/kiosk-filter/kiosk-filter.componen
 import { ModalKioskComponent } from './Pages/modal-kiosk/modal-kiosk.component';
 import { LoginPageComponent } from './Pages/login-page/login-page.component';
 import { UserFilterComponent } from './Pages/user-filter/user-filter.component';
+import { ModalUserComponent } from './Pages/modal-user/modal-user.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -53,6 +54,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalKioskComponent,
     LoginPageComponent,
     UserFilterComponent,
+    ModalUserComponent,
   ],
   imports: [
     BrowserModule,

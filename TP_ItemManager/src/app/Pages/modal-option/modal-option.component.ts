@@ -52,6 +52,8 @@ export class ModalOptionComponent {
 
   ngOnInit() {
     this.UpdateForm();
+    this.status.isLogged=true;
+
   }
 
   public SubmitForm() {

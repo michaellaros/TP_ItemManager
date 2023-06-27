@@ -6,12 +6,14 @@ import { OptionFilterComponent } from './Pages/option-filter/option-filter.compo
 import { KioskFilterComponent } from './Pages/kiosk-filter/kiosk-filter.component';
 import { LoginPageComponent } from './Pages/login-page/login-page.component';
 import { UserFilterComponent } from './Pages/user-filter/user-filter.component';
+import { ModifypasswordComponent } from './Pages/modifypassword/modifypassword.component';
 const routes: Routes = [
   { path: 'Category', component: CategoryFilterComponent },
   { path: 'Item', component: ItemFilterComponent },
   { path: 'Option', component: OptionFilterComponent },
   { path: 'Kiosk', component: KioskFilterComponent },
   { path:'login-page', component: LoginPageComponent},
+  { path:'modify-password', component: ModifypasswordComponent},
   { path:'User', component: UserFilterComponent},
 
   { path: '**', redirectTo: 'login-page' },

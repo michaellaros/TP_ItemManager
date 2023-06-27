@@ -28,6 +28,8 @@ export class KioskFilterComponent {
 
   ngOnInit() {
     this.GetKiosks();
+    this.status.isLogged=true;
+
   }
 
   GetKiosks() {

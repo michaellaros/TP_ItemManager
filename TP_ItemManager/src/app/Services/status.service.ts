@@ -9,5 +9,6 @@ export class StatusService {
   public buttonValue : string = 'category';
   public languages: Language[] = [];
   public isLogged: Boolean = false;
+  public user:string = '';
   constructor() { }
 }

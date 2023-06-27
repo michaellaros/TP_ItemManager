@@ -48,6 +48,7 @@ export class UserFilterComponent {
   }
 
   OpenDialogAddUser() {
+
     const dialogRef = this.dialog.open(ModalUserComponent, {
       width: '60vw',
     });

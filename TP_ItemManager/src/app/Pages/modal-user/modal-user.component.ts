@@ -1,12 +1,13 @@
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserModelRequest } from 'src/app/Models/UserModelRequest';
 import { UserModelCreate } from 'src/app/Models/UserModelCreate';
 
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal-user',
@@ -18,12 +19,13 @@ export class ModalUserComponent {
   userU?: UserModelRequest;
 
   userForm = new FormGroup({
+    id: new FormControl(),
     name: new FormControl('', [Validators.required]),
 
   });
   password=new FormControl('', [Validators.required])
 
-  constructor(
+  constructor(private router:Router,
     @Inject(MAT_DIALOG_DATA) private data: UserModelRequest,
     private http: HttpService,
     public status: StatusService,
@@ -31,46 +33,37 @@ export class ModalUserComponent {
   ) {
     {
       this.userU = data;
-
     }
   }
   ngOnInit() {
     this.UpdateForm();
+    this.status.isLogged=true;
 
   }
-
-
-
-
     UpdateForm() {
       if (this.userU != null) {
         this.userForm.patchValue({
+          id:this.userU?.id,
           name: this.userU?.name
-
         });
         return new UserModelRequest(this.userU!.id!,this.userU!.name!)
-
       }else
       return new UserModelRequest('','')
-
+    }
+    public ModifyPassword(){
+      this.status.user = this.userU?.id!
+      this.router.navigate(['/modify-password']);
 
     }
-
     public SubmitForm() {
-
-
-      if (this.userU ==null) {
-        if(this.password.valid) {
-
+      if (this.userU==null ) {
+        if(this.password.value!= null) {
             this.http.CreateUser(this.userForm.get('name')!.value!,
-            this.password.value!).subscribe((data) => {
+            this.password.value).subscribe((data) => {
               this._snackBar.open('User successfully created!', 'Ok');
             });
-        }
-
-        } else {
+        }} else {
         this.http.UpdateUser(new UserModelRequest(this.userU?.id,this.userForm.get('name')!.value!)).subscribe((data) => {
-
             this._snackBar.open('User successfully updated!', 'Ok');
           });
         }

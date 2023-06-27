@@ -1,6 +1,6 @@
 <mat-toolbar class="w-100 position-relative mb-4 header" color="primary">
   <div>
-    <h1 class="px-0 my-2 text-white">{{ "Kiosk info" | translate }}</h1>
+    <h1 class="px-0 my-2 text-white">{{ "User info" | translate }}</h1>
   </div>
 
   <button
@@ -25,14 +25,14 @@
 
       <mat-form-field class="col-12" *ngIf="this.userU==null">
         <mat-label>{{ "Password" | translate }}</mat-label>
-        <input  matInput />
+        <input [formControl]=password matInput />
       </mat-form-field>
 
       </div>
 
-      <!-- <button mat-raised-button color="primary" type="button" *ngIf="this.userU!=null" (click)="SubmitForm()">
+      <button mat-raised-button color="primary" type="button" *ngIf="this.userU!=null" routerLink='/modify-password' [mat-dialog-close]="null">
         {{ ("Modify password" | translate) }}
-      </button> -->
+      </button>
     <button mat-raised-button color="primary" type="button" (click)="SubmitForm()">
       {{ this.userU==null ? "Create" : ("Save" | translate) }}
     </button>

@@ -364,6 +364,10 @@ export class HttpService {
     return this.http.post<UserModelRequest>(this.urlAPI + 'GetUser',{id:id,name:''} )
     .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
+  UpdatePassword(id:string, password:string,oldPassword:string){
+    return this.http.post<any>(this.urlAPI + 'UpdatePassword',{id:id,password:password,oldPassword:oldPassword})
+    .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
 
 
 }

@@ -26,12 +26,14 @@ import { Kiosk } from 'src/app/Models/Kiosk';
 import { ModalKioskComponent } from '../modal-kiosk/modal-kiosk.component';
 import { UserModelRequest } from 'src/app/Models/UserModelRequest';
 import { ModalUserComponent } from '../modal-user/modal-user.component';
+import { StatusService } from 'src/app/Services/status.service';
 @Component({
   selector: 'app-edit-list',
   templateUrl: './edit-list.component.html',
   styleUrls: ['./edit-list.component.scss'],
 })
 export class EditListComponent implements OnChanges {
+
   @Input() public parentData?: SearchedObject[];
   @Input() public columnName: string = 'Name';
   @Output() public refresh = new EventEmitter();
@@ -41,7 +43,7 @@ export class EditListComponent implements OnChanges {
   @ViewChild(MatSort) sort!: MatSort;
 
   dataSource: MatTableDataSource<SearchedObject>;
-  constructor(public http: HttpService, public dialog: MatDialog) {
+  constructor(private status:StatusService,public http: HttpService, public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource<SearchedObject>(this.parentData);
   }
 
@@ -81,9 +83,8 @@ export class EditListComponent implements OnChanges {
         });
         break;
         case 'User':
-          console.log(id)
         this.http.GetUser(id).subscribe((data) => {
-          console.log(data);
+          this.status.user = id;
           this.OpenDialogModifyUser(data);
         });
         break;

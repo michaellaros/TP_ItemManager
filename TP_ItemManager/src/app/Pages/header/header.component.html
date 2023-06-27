@@ -62,7 +62,8 @@
           <mat-select [(value)]="status.languages[1].value">
             <mat-option
               *ngFor="let language of this.status.languages"
-              [value]="language.value">
+              [value]="language.value"
+              (onchange)="setLanguage(language.value)">
               {{ language.label | titlecase }}
             </mat-option>
           </mat-select>

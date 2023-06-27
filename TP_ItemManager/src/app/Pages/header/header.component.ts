@@ -28,7 +28,8 @@ export class HeaderComponent {
     });
   }
   setLanguage(language: any) {
-    this.translate.use(language.target.value);
+    this.translate.use(language);
+    console.log(language)
   }
   Logout()
   {

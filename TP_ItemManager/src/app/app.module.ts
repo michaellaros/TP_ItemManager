@@ -67,7 +67,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReactiveFormsModule,
     FormsModule,
     TranslateModule.forRoot({
-      defaultLanguage: 'EL',
+      defaultLanguage: 'EN',
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,

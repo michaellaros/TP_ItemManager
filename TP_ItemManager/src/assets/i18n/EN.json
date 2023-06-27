@@ -58,5 +58,15 @@
 "Enable Dine In / Take Away":"Enable Dine In / Take Away",
 "Last update date":"Last update date",
 "Categories enabled":"Categories Enabled",
-"Kiosk info":"Kiosk info"
+"Kiosk info":"Kiosk info",
+"User":"User",
+"Add user":"Add user",
+"modify password":"Modify password",
+"Old password":"Old password",
+"New password":"New password",
+"Confirm new password":"Confirm new password",
+"Edit password":"Edit password",
+"Login":"Login",
+"Username":"Username",
+"Password":"Password"
 }

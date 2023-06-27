@@ -8,5 +8,6 @@ import { Language } from '../Models/language';
 export class StatusService {
   public buttonValue : string = 'category';
   public languages: Language[] = [];
+  public isLogged: Boolean = false;
   constructor() { }
 }

@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-4 center d-flex justify-content-center">
+      <form [formGroup]="loginForm" (ngSubmit)="Submit()">
+        <div class="row">
+          <div class="logo-container d-flex justify-content-center logo">
+            <img src=".\assets\mylogo.png" class="logo" alt="" />
+          </div>
+        </div>
+        <div class="row field">
+          <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Username" formControlName="Name">
+          </mat-form-field>
+        </div>
+        <div class="row field">
+          <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" formControlName="Password">
+          </mat-form-field>
+        </div>
+        <div class="row field">
+          <button mat-raised-button color="primary" type="submit">
+            login
+          </button>
+          <p *ngIf="this.error"class="error d-flex justify-content-center" >Wrong Username/password</p>
+        </div>
+      </form>
+    </div>
+    <div class="col-4"></div>
+  </div>
+</div>

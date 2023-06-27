@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="this.status.isLogged">
   <div class="row">
     <mat-toolbar color="primary">
       <img src=".\assets\mylogo.png" class="logo" alt="" />
@@ -9,7 +9,7 @@
       <button
         mat-raised-button
         [color]="
-          currentRoute == '/Kiosk' || currentRoute == '/' ? '' : 'primary'
+          currentRoute == '/Kiosk'  ? '' : 'primary'
         "
         class="m-2"
         routerLink="/Kiosk"
@@ -40,7 +40,16 @@
       >
         {{ "Option" | translate }}
       </button>
-      <div class="language">
+      <button
+        mat-raised-button
+        [color]="currentRoute == '/User' ? '' : 'primary'"
+        class="m-2"
+        routerLink="/User"
+      >
+        {{ "User" | translate }}
+      </button>
+
+      <div class="language position-absolute end-0">
         <mat-form-field>
           <mat-select [(value)]="status.languages[1].value">
             <mat-option

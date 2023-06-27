@@ -28,7 +28,9 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { KioskFilterComponent } from './Pages/kiosk-filter/kiosk-filter.component';
 import { ModalKioskComponent } from './Pages/modal-kiosk/modal-kiosk.component';
-
+import { LoginPageComponent } from './Pages/login-page/login-page.component';
+import { UserFilterComponent } from './Pages/user-filter/user-filter.component';
+import { ModalUserComponent } from './Pages/modal-user/modal-user.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -50,6 +52,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ImagePickerComponent,
     KioskFilterComponent,
     ModalKioskComponent,
+    LoginPageComponent,
+    UserFilterComponent,
+    ModalUserComponent,
   ],
   imports: [
     BrowserModule,

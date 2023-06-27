@@ -17,6 +17,8 @@ import { AssignedObject } from '../Models/AssignedObject';
 import { Timespan } from '../Models/Timespan';
 import { Kiosk } from '../Models/Kiosk';
 import { Language } from '../Models/language';
+import { SearchedObject } from '../Models/SearchedObject';
+import { UserModelRequest } from '../Models/UserModelRequest';
 
 @Injectable({
   providedIn: 'root',
@@ -339,4 +341,29 @@ export class HttpService {
       .get<Language[]>(this.assetsUrl + 'i18n/languages.json')
       .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
+  Login(name:string, password:string){
+
+    return this.http.post<Boolean>(this.urlAPI + 'DoLogin', {name,password})
+    .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+  GetUsers(filter: any){
+    return this.http.post<any>(this.urlAPI + 'GetUsers', filter)
+    .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+  CreateUser(name:string,password:string)
+  {
+    return this.http.post<any>(this.urlAPI + 'CreateUser', {name,password})
+    .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+  UpdateUser(user:UserModelRequest){
+    return this.http.post<any>(this.urlAPI + 'UpdateUser',user )
+    .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+  GetUser(id:string){
+    return this.http.post<UserModelRequest>(this.urlAPI + 'GetUser',{id:id,name:''} )
+    .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
+
+
 }

@@ -24,6 +24,7 @@ export class ModalUserComponent {
 
   });
   password=new FormControl('', [Validators.required])
+  confirmPassword=new FormControl('', [Validators.required])
 
   constructor(private router:Router,
     @Inject(MAT_DIALOG_DATA) private data: UserModelRequest,
@@ -53,13 +54,17 @@ export class ModalUserComponent {
     }
     public SubmitForm() {
       if (this.userU==null) {
-        if(this.password.value!= null) {
+        if(this.password.value!= null && this.password.value === this.confirmPassword.value )
+        {
             this.http.CreateUser(this.userForm.get('name')!.value!,
             this.password.value).subscribe((data) => {
               this._snackBar.open('User successfully created!', 'Ok');
               this.userU=new UserModelRequest(data,this.userForm.get('name')!.value!)
             });
-        }} else {
+        } else{
+          this._snackBar.open('Passwords need to match', 'Ok');
+        }
+      } else {
         this.http.UpdateUser(new UserModelRequest(this.userU?.id,this.userForm.get('name')!.value!)).subscribe((data) => {
             this._snackBar.open('User successfully updated!', 'Ok');
           });

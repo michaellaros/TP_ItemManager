@@ -19,13 +19,18 @@
         <form [formGroup]="userForm" class="formGroup" >
         <mat-form-field class="col-12">
           <mat-label>{{ "Username" | translate }}</mat-label>
-          <input formControlName="name" matInput />
+          <input  formControlName="name" matInput />
         </mat-form-field>
       </form>
 
       <mat-form-field class="col-12" *ngIf="this.userU==null">
         <mat-label>{{ "Password" | translate }}</mat-label>
-        <input [formControl]=password matInput />
+        <input type="password" [formControl]=password matInput />
+      </mat-form-field>
+
+      <mat-form-field class="col-12" *ngIf="this.userU==null">
+        <mat-label>{{ "Confirm Password" | translate }}</mat-label>
+        <input type="password" [formControl]=confirmPassword matInput />
       </mat-form-field>
 
       </div>

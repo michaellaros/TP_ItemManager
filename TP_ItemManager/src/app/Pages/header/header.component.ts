@@ -12,7 +12,7 @@ import { StatusService } from 'src/app/Services/status.service';
 export class HeaderComponent {
   currentRoute!: string;
   public language!: string;
-  constructor(public status: StatusService, router: Router,public translate: TranslateService) {
+  constructor(public status: StatusService, public router: Router,public translate: TranslateService) {
 
     router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
@@ -29,5 +29,9 @@ export class HeaderComponent {
   }
   setLanguage(language: any) {
     this.translate.use(language.target.value);
+  }
+  Logout()
+  {
+    this.router.navigate(['/login-page'])
   }
 }

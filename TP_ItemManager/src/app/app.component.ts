@@ -15,7 +15,7 @@ export class AppComponent {
     this.http.GetLanguages().subscribe((data) => {
       //default language is the first language in language.json
       // this language will be used as a fallback when a translation isn't found in the current language
-      // translate.setDefaultLang(data[0].value!);
+      translate.setDefaultLang(data[1].value!);
       // the lang to use, if the lang isn't available, it will use the current loader to get them
       translate.use(data[1].value!);
       status.languages = data;

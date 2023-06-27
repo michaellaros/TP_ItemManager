@@ -10,19 +10,19 @@
         </div>
         <div class="row field">
           <mat-form-field>
-            <mat-label>Username</mat-label>
+            <mat-label>{{"Username"|translate}}</mat-label>
             <input matInput placeholder="Username" formControlName="Name">
           </mat-form-field>
         </div>
         <div class="row field">
           <mat-form-field>
-            <mat-label>Password</mat-label>
-            <input matInput placeholder="Password" formControlName="Password">
+            <mat-label>{{"Password"|translate}}</mat-label>
+            <input  type="password" matInput placeholder="Password" formControlName="Password">
           </mat-form-field>
         </div>
         <div class="row field">
           <button mat-raised-button color="primary" type="submit">
-            login
+            {{"Login"|translate}}
           </button>
           <p *ngIf="this.error"class="error d-flex justify-content-center" >Wrong Username/password</p>
         </div>

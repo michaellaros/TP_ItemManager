@@ -81,8 +81,8 @@ export class ModalOptionComponent {
       this.optionForm.get('name')!.value!,
       this.optionForm.get('flg_addToCart')!.value!,
       this.optionForm.get('default_quantity')!.value!,
-      this.optionForm.get('min_quantity')!.value!,
       this.optionForm.get('max_quantity')!.value!,
+      this.optionForm.get('min_quantity')!.value!,
       this.optionForm.get('available')!.value!
     );
   }
@@ -90,14 +90,6 @@ export class ModalOptionComponent {
   UpdateForm() {
     if (this.option != null) {
       this.optionForm.patchValue({
-        name: this.option.name,
-        flg_addToCart: this.option.flg_addToCart,
-        default_quantity: this.option.defaultQuantity,
-        min_quantity: this.option.minQuantity,
-        max_quantity: this.option.maxQuantity,
-        available: this.option.available,
-      });
-      console.log({
         name: this.option.name,
         flg_addToCart: this.option.flg_addToCart,
         default_quantity: this.option.defaultQuantity,

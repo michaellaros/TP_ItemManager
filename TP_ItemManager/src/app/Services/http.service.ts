@@ -5,7 +5,7 @@ import {
   HttpParams,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { ItemFilterModel } from '../Models/ItemFilterModel';
 import { CategoryFilterModel } from '../Models/CategoryFilterModel';
 import { OptionFilterModel } from '../Models/OptionFilterModel';
@@ -352,11 +352,11 @@ export class HttpService {
   }
   CreateUser(name:string,password:string)
   {
-    return this.http.post<any>(this.urlAPI + 'CreateUser', {name,password})
+    return this.http.post<string>(this.urlAPI + 'CreateUser', {name,password})
     .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
   UpdateUser(user:UserModelRequest){
-    return this.http.post<any>(this.urlAPI + 'UpdateUser',user )
+    return this.http.post<UserModelRequest>(this.urlAPI + 'UpdateUser',{id:user.id?.toString(),name:user.name} )
     .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
 

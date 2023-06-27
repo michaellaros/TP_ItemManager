@@ -37,8 +37,6 @@ export class ModalUserComponent {
   }
   ngOnInit() {
     this.UpdateForm();
-    this.status.isLogged=true;
-
   }
     UpdateForm() {
       if (this.userU != null) {
@@ -46,9 +44,7 @@ export class ModalUserComponent {
           id:this.userU?.id,
           name: this.userU?.name
         });
-        return new UserModelRequest(this.userU!.id!,this.userU!.name!)
-      }else
-      return new UserModelRequest('','')
+      }else{}
     }
     public ModifyPassword(){
       this.status.user = this.userU?.id!
@@ -56,11 +52,12 @@ export class ModalUserComponent {
 
     }
     public SubmitForm() {
-      if (this.userU==null ) {
+      if (this.userU==null) {
         if(this.password.value!= null) {
             this.http.CreateUser(this.userForm.get('name')!.value!,
             this.password.value).subscribe((data) => {
               this._snackBar.open('User successfully created!', 'Ok');
+              this.userU=new UserModelRequest(data,this.userForm.get('name')!.value!)
             });
         }} else {
         this.http.UpdateUser(new UserModelRequest(this.userU?.id,this.userForm.get('name')!.value!)).subscribe((data) => {

@@ -28,7 +28,6 @@ export class ItemFilterComponent {
   });
   ngOnInit() {
     this.GetItems();
-    this.status.isLogged=true;
 
   }
 

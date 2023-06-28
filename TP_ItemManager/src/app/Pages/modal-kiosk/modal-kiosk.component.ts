@@ -38,7 +38,6 @@ export class ModalKioskComponent {
 
   ngOnInit() {
     this.UpdateForm();
-    this.status.isLogged=true;
 
   }
 

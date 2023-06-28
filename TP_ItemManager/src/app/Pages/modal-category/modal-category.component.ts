@@ -45,7 +45,6 @@ export class ModalCategoryComponent {
 
   ngOnInit() {
     this.UpdateForm();
-    this.status.isLogged=true;
 
   }
 

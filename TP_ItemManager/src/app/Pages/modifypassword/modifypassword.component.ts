@@ -50,7 +50,7 @@ export class ModifypasswordComponent {
 
     }
     else{
-      this._snackBar.open('error Check passwords field!', 'Ok');
+      this._snackBar.open('Passwords need to match!', 'Ok');
 
     }
   }

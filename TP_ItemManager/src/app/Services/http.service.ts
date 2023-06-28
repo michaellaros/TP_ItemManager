@@ -343,7 +343,7 @@ export class HttpService {
   }
   Login(name:string, password:string){
 
-    return this.http.post<Boolean>(this.urlAPI + 'DoLogin', {name,password})
+    return this.http.post<string>(this.urlAPI + 'DoLogin', {name,password})
     .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
   GetUsers(filter: any){

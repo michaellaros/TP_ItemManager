@@ -17,7 +17,9 @@ export class LoginPageComponent {
 
   });
   error: Boolean = false
-  constructor(private http:HttpService,private status:StatusService,private router: Router){
+  constructor(private http:HttpService,
+    private status:StatusService,
+    private router: Router){
 
    }
    public Submit() {
@@ -31,25 +33,26 @@ export class LoginPageComponent {
   {
 
     this.http.Login(this.user.name!,this.user.password!).subscribe((data)=>{
-      this.status.isLogged = data
-      if(this.status.isLogged){
+      // this.status.isLogged = 'true'
+      // if(this.status.isLogged == 'true'){
+        console.log(data);
         this.router.navigate(['/Kiosk']);
     console.log(this.user);
     this.error=false
 
 
-    }
-      else
-      {
-        this.error=true
-      }
+    // }
+    //   else
+    //   {
+    //     this.error=true
+    //   }
 
 
     })}
     ngOnInit(): void {
       //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
       //Add 'implements OnInit' to the class.
-      this.status.isLogged=false;
+      this.status.isLogged='false';
 
     }
 }

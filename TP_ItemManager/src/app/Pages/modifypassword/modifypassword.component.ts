@@ -29,7 +29,7 @@ export class ModifypasswordComponent {
   ngOnInit():void{
     this.user = this.status.user;
     console.log(this.user);
-    this.status.isLogged=false;
+    this.status.isLogged='false';
   }
   ErrorSnack(){
     this._snackBar.open('Old password is not correct', 'Ok');
@@ -43,7 +43,7 @@ export class ModifypasswordComponent {
       this.http.UpdatePassword(this.user,newpassword,oldPass).subscribe((data)=>{
 
         this.router.navigate(['/User']);
-        this.status.isLogged=true;
+        this.status.isLogged='true';
       this._snackBar.open('Password successfully Update!', 'Ok');
       })
 
@@ -55,7 +55,7 @@ export class ModifypasswordComponent {
     }
   }
   home(){
-    this.status.isLogged=true;
+    this.status.isLogged='true';
     this.router.navigate(['/Kiosk']);
   }
 }

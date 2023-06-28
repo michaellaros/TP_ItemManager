@@ -3,6 +3,7 @@ import { MaterialModule } from './Modules/material.module';
 import {TranslateService} from '@ngx-translate/core';
 import { HttpService } from './Services/http.service';
 import { StatusService } from './Services/status.service';
+import { AuthGuard } from './Services/auth-services/auth.guard';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,7 +11,7 @@ import { StatusService } from './Services/status.service';
 })
 export class AppComponent {
   title = 'TP_ItemManager';
-  constructor(private http: HttpService,
+  constructor(private http: HttpService,public guard:AuthGuard,
     translate: TranslateService,public status:StatusService) {
     this.http.GetLanguages().subscribe((data) => {
       //default language is the first language in language.json

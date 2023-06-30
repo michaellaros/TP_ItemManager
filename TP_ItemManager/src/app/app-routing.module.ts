@@ -7,14 +7,15 @@ import { KioskFilterComponent } from './Pages/kiosk-filter/kiosk-filter.componen
 import { LoginPageComponent } from './Pages/login-page/login-page.component';
 import { UserFilterComponent } from './Pages/user-filter/user-filter.component';
 import { ModifypasswordComponent } from './Pages/modifypassword/modifypassword.component';
+import { AuthGuard } from './Services/auth-services/auth.guard';
 const routes: Routes = [
-  { path: 'Category', component: CategoryFilterComponent },
-  { path: 'Item', component: ItemFilterComponent },
-  { path: 'Option', component: OptionFilterComponent },
-  { path: 'Kiosk', component: KioskFilterComponent },
+  { path: 'Category', component: CategoryFilterComponent, canLoad: [AuthGuard] , canActivate:[AuthGuard] },
+  { path: 'Item', component: ItemFilterComponent, canLoad: [AuthGuard] , canActivate:[AuthGuard]  },
+  { path: 'Option', component: OptionFilterComponent, canLoad: [AuthGuard] , canActivate:[AuthGuard]  },
+  { path: 'Kiosk', component: KioskFilterComponent , canLoad: [AuthGuard] , canActivate:[AuthGuard] },
   { path:'login-page', component: LoginPageComponent},
-  { path:'modify-password', component: ModifypasswordComponent},
-  { path:'User', component: UserFilterComponent},
+  { path:'modify-password', component: ModifypasswordComponent, canLoad: [AuthGuard] , canActivate:[AuthGuard] },
+  { path:'User', component: UserFilterComponent, canLoad: [AuthGuard] , canActivate:[AuthGuard] },
 
   { path: '**', redirectTo: 'login-page' },
 ];

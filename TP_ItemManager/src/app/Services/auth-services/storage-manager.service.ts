@@ -9,68 +9,68 @@ export class StorageManagerService {
 
   // ---- token
   public getToken(){
-    return localStorage.getItem('TPItemManagerAccessToken')!;
+    return localStorage.getItem('TP_ItemManager_AccessToken')!;
   }
 
   public saveToken(token: string){
-    localStorage.setItem('TPItemManagerAccessToken', token);
+    localStorage.setItem('TP_ItemManager_AccessToken', token);
   }
 
   public removeToken(token: string){
     localStorage.removeItem(token);
   }
 
-  // ---- username
-  public getUsername(){
-    return localStorage.getItem('TPItemManagerUsername')!;
-  }
+  // // ---- username
+  // public getUsername(){
+  //   return localStorage.getItem('ICashWebApplicationUsername')!;
+  // }
 
-  public saveUsername(username: string){
-    localStorage.setItem('TPItemManagerUsername', username);
-  }
+  // public saveUsername(username: string){
+  //   localStorage.setItem('ICashWebApplicationUsername', username);
+  // }
 
-  public removeUsername(username: string){
-    localStorage.removeItem(username);
-  }
+  // public removeUsername(username: string){
+  //   localStorage.removeItem(username);
+  // }
 
-  // ---- role
-  public getRole(){
-    return localStorage.getItem('TPItemManagerRole')!;
-  }
+  // // ---- role
+  // public getRole(){
+  //   return localStorage.getItem('ICashWebApplicationRole')!;
+  // }
 
-  public saveRole(role: string){
-    localStorage.setItem('TPItemManagerRole', role);
-  }
+  // public saveRole(role: string){
+  //   localStorage.setItem('ICashWebApplicationRole', role);
+  // }
 
-  public removeRole(role: string){
-    localStorage.removeItem(role);
-  }
+  // public removeRole(role: string){
+  //   localStorage.removeItem(role);
+  // }
 
-  // ---- store
-  public getStore(){
-    return localStorage.getItem('TPItemManagerStore')!;
-  }
+  // // ---- store
+  // public getStore(){
+  //   return localStorage.getItem('ICashWebApplicationStore')!;
+  // }
 
-  public saveStore(store: string){
-    localStorage.setItem('TPItemManagerStore', store);
-  }
+  // public saveStore(store: string){
+  //   localStorage.setItem('ICashWebApplicationStore', store);
+  // }
 
-  public removeStore(store: string){
-    localStorage.removeItem(store);
-  }
+  // public removeStore(store: string){
+  //   localStorage.removeItem(store);
+  // }
 
-  // ---- loadSetting
-  public getLoadSetting(){
-    return localStorage.getItem('TPItemManagerLoadSetting')!;
-  }
+  // // ---- loadSetting
+  // public getLoadSetting(){
+  //   return localStorage.getItem('ICashWebApplicationLoadSetting')!;
+  // }
 
-  public saveLoadSetting(loadSetting: string){
-    localStorage.setItem('TPItemManagerLoadSetting', loadSetting);
-  }
+  // public saveLoadSetting(loadSetting: string){
+  //   localStorage.setItem('ICashWebApplicationLoadSetting', loadSetting);
+  // }
 
-  public removeLoadSetting(loadSetting: string){
-    localStorage.removeItem(loadSetting);
-  }
+  // public removeLoadSetting(loadSetting: string){
+  //   localStorage.removeItem(loadSetting);
+  // }
 
   public isLogged(){
     if(this.getToken()){

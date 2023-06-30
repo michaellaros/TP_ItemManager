@@ -4,12 +4,15 @@ import { Router } from '@angular/router';
 import { UserModelCreate } from 'src/app/Models/UserModelCreate';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
+import { Token } from 'src/app/Models/Token';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent {
+  public token!:Token;
   public user:UserModelCreate = new UserModelCreate('pass','pass')
   loginForm = new FormGroup({
     Name: new FormControl('',[Validators.required]),
@@ -19,7 +22,8 @@ export class LoginPageComponent {
   error: Boolean = false
   constructor(private http:HttpService,
     private status:StatusService,
-    private router: Router){
+    private router: Router,
+    private storage:StorageManagerService){
 
    }
    public Submit() {
@@ -35,7 +39,11 @@ export class LoginPageComponent {
     this.http.Login(this.user.name!,this.user.password!).subscribe((data)=>{
       // this.status.isLogged = 'true'
       // if(this.status.isLogged == 'true'){
-        console.log(data);
+        this.token=data;
+        console.log(this.token);
+
+        this.storage.saveToken(this.token.token!);
+        console.log(this.storage.getToken())
         this.router.navigate(['/Kiosk']);
     console.log(this.user);
     this.error=false

@@ -4,6 +4,7 @@ import {TranslateService} from '@ngx-translate/core';
 import { HttpService } from './Services/http.service';
 import { StatusService } from './Services/status.service';
 import { AuthGuard } from './Services/auth-services/auth.guard';
+import { StorageManagerService } from './Services/auth-services/storage-manager.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +12,7 @@ import { AuthGuard } from './Services/auth-services/auth.guard';
 })
 export class AppComponent {
   title = 'TP_ItemManager';
-  constructor(private http: HttpService,public guard:AuthGuard,
+  constructor(private http: HttpService,public guard:AuthGuard,public storageManagementService:StorageManagerService,
     translate: TranslateService,public status:StatusService) {
     this.http.GetLanguages().subscribe((data) => {
       //default language is the first language in language.json
@@ -21,5 +22,10 @@ export class AppComponent {
       translate.use(data[1].value!);
       status.languages = data;
     });
+
+}
+get isLogged() {
+  return this.storageManagementService.isLogged();
+
 }
 }

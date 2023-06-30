@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -7,7 +7,7 @@ import { HeaderComponent } from './Pages/header/header.component';
 import { MaterialModule } from './Modules/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditListComponent } from './Pages/edit-list/edit-list.component';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { HttpService } from './Services/http.service';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
@@ -32,6 +32,10 @@ import { LoginPageComponent } from './Pages/login-page/login-page.component';
 import { UserFilterComponent } from './Pages/user-filter/user-filter.component';
 import { ModalUserComponent } from './Pages/modal-user/modal-user.component';
 import { ModifypasswordComponent } from './Pages/modifypassword/modifypassword.component';
+import { AuthGuard } from './Services/auth-services/auth.guard';
+import { AuthService } from './Services/auth-services/auth.service';
+import { AuthInterceptor, authInterceptorProviders } from './Services/auth-services/auth.interceptor';
+import { errorInterceptorProviders } from './Services/auth-services/error.interceptor';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -78,7 +82,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: MAT_DATE_LOCALE, useValue: 'it-IT' },
-    HttpService,
+    HttpService,authInterceptorProviders,errorInterceptorProviders
   ],
   bootstrap: [AppComponent],
 })

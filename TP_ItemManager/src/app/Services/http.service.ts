@@ -19,6 +19,7 @@ import { Kiosk } from '../Models/Kiosk';
 import { Language } from '../Models/language';
 import { SearchedObject } from '../Models/SearchedObject';
 import { UserModelRequest } from '../Models/UserModelRequest';
+import { Token } from '../Models/Token';
 
 @Injectable({
   providedIn: 'root',
@@ -92,7 +93,7 @@ export class HttpService {
       .get<Kiosk>(this.urlAPI + 'Kiosk', {
         params: new HttpParams().append('id', id),
       })
-      .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+      // .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
 
   InsertCategory(category: Category) {
@@ -343,17 +344,17 @@ export class HttpService {
   }
   Login(name:string, password:string){
 
-    return this.http.post<string>(this.urlAPI + 'DoLogin', {name,password})
+    return this.http.post<Token>(this.urlAPI + 'DoLogin', {name,password})
     .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
   GetUsers(filter: any){
-    return this.http.post<any>(this.urlAPI + 'GetUsers', filter)
-    .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+    return this.http.post<any>(this.urlAPI + 'GetUsers', filter);
+    // .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
   CreateUser(name:string,password:string)
   {
     return this.http.post<string>(this.urlAPI + 'CreateUser', {name,password})
-    .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+    // .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
   UpdateUser(user:UserModelRequest){
     return this.http.post<UserModelRequest>(this.urlAPI + 'UpdateUser',{id:user.id?.toString(),name:user.name} )

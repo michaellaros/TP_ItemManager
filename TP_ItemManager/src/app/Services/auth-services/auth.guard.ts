@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate, CanLoad {
 
   public canActivate(): boolean {
     if (!this.storageManager.isLogged()) {
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/login-page');
       return false;
     }
     return true;
@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate, CanLoad {
 
   public canLoad(): boolean {
     if (!this.storageManager.isLogged()) {
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/login-page');
       return false;
     }
     return true;

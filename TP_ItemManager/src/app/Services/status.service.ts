@@ -6,6 +6,7 @@ import { Language } from '../Models/language';
   providedIn: 'root'
 })
 export class StatusService {
+  public token!:string;
   public buttonValue : string = 'category';
   public languages: Language[] = [];
   public isLogged: string = 'false';

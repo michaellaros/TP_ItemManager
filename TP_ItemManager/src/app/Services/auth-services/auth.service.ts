@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { StorageManagerService } from './storage-manager.service';
 import { Router } from '@angular/router';
-import { UserModelCreate } from 'src/app/Models/UserModelCreate';
+import { StatusService } from '../status.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +14,14 @@ export class AuthService {
   constructor(
     private http: HttpClient, @Inject('BASE_URL') baseUrl: string,
     private storageManager: StorageManagerService,
-    private router: Router
+    private router: Router,
+    private status: StatusService
   ) {
     this.baseUrl = baseUrl;
   }
 
-  // public login(user: UserModelCreate): Observable<any> {
-  //   return this.http.post<UserModelCreate>(
+  // public login(user: User): Observable<any> {
+  //   return this.http.post<User>(
   //     this.baseUrl +
   //     `/ICashDataAccessAPI/User/login`,
   //     user
@@ -28,7 +29,7 @@ export class AuthService {
   // }
 
   // public GenerateNewTokenOnStoreChanged(store: number): Observable<any> {
-  //   return this.http.post<UserModelCreate>(
+  //   return this.http.post<User>(
   //     this.baseUrl +
   //     `/ICashDataAccessAPI/User/GenerateNewTokenOnStoreChanged`,
   //     store
@@ -36,14 +37,13 @@ export class AuthService {
   // }
 
   public logout() {
-    // localStorage.removeItem('TPItemManagerLanguage');
+    // localStorage.removeItem('ICashWebApplicationLanguage');
 
-    this.storageManager.removeToken('TPItemManagerAccessToken');
-    this.storageManager.removeUsername('TPItemManagerUsername');
-    // this.storageManager.removeRole('TPItemManagerRole');
-    // this.storageManager.removeStore('TPItemManagerStore');
-    this.storageManager.removeLoadSetting('TPItemManagerLoadSetting');
-
-    this.router.navigateByUrl('/login-user');
+    this.storageManager.removeToken('TP_ItemManager_AccessToken');
+    // this.storageManager.removeUsername('ICashWebApplicationUsername');
+    // this.storageManager.removeRole('ICashWebApplicationRole');
+    // this.storageManager.removeStore('ICashWebApplicationStore');
+    // this.storageManager.removeLoadSetting('ICashWebApplicationLoadSetting');
+    this.router.navigateByUrl('/login-page');
   }
 }

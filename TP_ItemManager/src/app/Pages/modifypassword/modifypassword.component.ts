@@ -44,13 +44,17 @@ export class ModifypasswordComponent {
 
         this.router.navigate(['/User']);
         this.status.isLogged='true';
-      this._snackBar.open('Password successfully Update!', 'Ok');
+      this._snackBar.open('Password successfully Update!', 'Ok',{
+        duration:this.status.snackbarDuration
+      });
       })
 
 
     }
     else{
-      this._snackBar.open('Passwords need to match!', 'Ok');
+      this._snackBar.open('Passwords need to match!', 'Ok',{
+        duration:this.status.snackbarDuration
+      });
 
     }
   }

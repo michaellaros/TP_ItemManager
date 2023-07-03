@@ -62,11 +62,15 @@ export class ModalUserComponent {
               this.userU=new UserModelRequest(data,this.userForm.get('name')!.value!)
             });
         } else{
-          this._snackBar.open('Passwords need to match', 'Ok');
+          this._snackBar.open('Passwords need to match', 'Ok',{
+            duration:this.status.snackbarDuration
+          });
         }
       } else {
         this.http.UpdateUser(new UserModelRequest(this.userU?.id,this.userForm.get('name')!.value!)).subscribe((data) => {
-            this._snackBar.open('User successfully updated!', 'Ok');
+            this._snackBar.open('User successfully updated!', 'Ok',{
+              duration:this.status.snackbarDuration
+            });
           });
         }
 

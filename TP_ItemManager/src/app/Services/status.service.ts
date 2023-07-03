@@ -11,5 +11,6 @@ export class StatusService {
   public languages: Language[] = [];
   public isLogged: string = 'false';
   public user:string = '';
+  public snackbarDuration:number= 3000;
   constructor() { }
 }

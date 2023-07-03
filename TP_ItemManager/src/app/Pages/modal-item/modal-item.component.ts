@@ -62,14 +62,18 @@ export class ModalItemComponent {
           this.item = data;
           this.UpdateForm();
           this.flg_insert = false;
-          this._snackBar.open('Item successfully created!', 'Ok');
+          this._snackBar.open('Item successfully created!', 'Ok',{
+            duration:this.status.snackbarDuration
+          });
         });
       } else {
         console.log(this.GetItemFromForm());
         this.http.UpdateItem(this.GetItemFromForm()).subscribe((data) => {
           this.item = data;
           this.UpdateForm();
-          this._snackBar.open('Item successfully updated!', 'Ok');
+          this._snackBar.open('Item successfully updated!', 'Ok',{
+            duration:this.status.snackbarDuration
+          });
         });
       }
     }

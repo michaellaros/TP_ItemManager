@@ -62,13 +62,17 @@ export class ModalOptionComponent {
           this.option = data;
           this.UpdateForm();
           this.flg_insert = false;
-          this._snackBar.open('Option successfully created!', 'Ok');
+          this._snackBar.open('Option successfully created!', 'Ok',{
+            duration:this.status.snackbarDuration
+          });
         });
       } else {
         this.http.UpdateOption(this.GetOptionFromForm()).subscribe((data) => {
           this.option = data;
           this.UpdateForm();
-          this._snackBar.open('Option successfully updated!', 'Ok');
+          this._snackBar.open('Option successfully updated!', 'Ok',{
+            duration:this.status.snackbarDuration
+          });
         });
       }
     }

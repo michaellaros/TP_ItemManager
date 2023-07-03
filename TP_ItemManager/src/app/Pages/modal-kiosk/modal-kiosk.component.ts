@@ -48,13 +48,17 @@ export class ModalKioskComponent {
           this.kiosk = data;
           this.UpdateForm();
           this.flg_insert = false;
-          this._snackBar.open('Kiosk successfully created!', 'Ok');
+          this._snackBar.open('Kiosk successfully created!', 'Ok',{
+            duration:this.status.snackbarDuration
+          });
         });
       } else {
         this.http.UpdateKiosk(this.GetKioskFromForm()).subscribe((data) => {
           this.kiosk = data;
           this.UpdateForm();
-          this._snackBar.open('Kiosk successfully updated!', 'Ok');
+          this._snackBar.open('Kiosk successfully updated!', 'Ok',{
+            duration:this.status.snackbarDuration
+          });
         });
       }
     }

@@ -32,7 +32,9 @@ export class ModifypasswordComponent {
     this.status.isLogged='false';
   }
   ErrorSnack(){
-    this._snackBar.open('Old password is not correct', 'Ok');
+    this._snackBar.open('Old password is not correct', 'Ok',{
+      duration:this.status.snackbarDuration
+    });
 
   }
   SubmitForm()

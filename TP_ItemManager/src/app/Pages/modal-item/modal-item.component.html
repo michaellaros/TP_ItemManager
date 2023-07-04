@@ -13,7 +13,7 @@
 </mat-toolbar>
 <mat-dialog-content class="p-0 overflow-x-hidden" style="max-height: 80vh">
   <div class="container-fluid">
-    <form [formGroup]="itemForm" class="formGroup" (ngSubmit)="SubmitForm()">
+    <form [formGroup]="itemForm" class="formGroup">
       <div class="row">
         <div class="d-flex justify-content-between flex-column col-3">
           <img
@@ -76,10 +76,25 @@
         </div>
       </div>
 
-      <button mat-raised-button color="primary" type="submit">
-        {{ flg_insert ? "Create" : ("Save" | translate) }}
-      </button>
+
     </form>
+
+    <form [formGroup]="itemvatform" class="formGroup2" >
+
+    <div class="col-4 ">
+      <mat-form-field>
+      <mat-label>{{ "Price" | translate }}</mat-label>
+      <input  formControlName="price" matInput />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>{{ "Vat" | translate }}</mat-label>
+      <input  formControlName="vat" matInput  />
+    </mat-form-field>
+  </div>
+  </form>
+  <button mat-raised-button color="primary" [disabled]="itemForm.invalid" (click)="SubmitForm()">
+    {{ flg_insert ? "Create" : ("Save" | translate) }}
+  </button>
   </div>
   <app-translations-editor
     [id]="item.id!"

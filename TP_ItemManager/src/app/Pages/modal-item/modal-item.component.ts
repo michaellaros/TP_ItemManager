@@ -11,6 +11,7 @@ import { Item } from 'src/app/Models/Item';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 import { ImagePickerComponent } from '../image-picker/image-picker.component';
+import { ItemVat } from 'src/app/Models/ItemVat';
 
 @Component({
   selector: 'app-modal-item',
@@ -19,19 +20,24 @@ import { ImagePickerComponent } from '../image-picker/image-picker.component';
 })
 export class ModalItemComponent {
   item: Item;
+  itemVat!: ItemVat;
   public flg_insert: boolean;
 
   itemForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
     barcode: new FormControl('', [Validators.required]),
-    price: new FormControl(0.0),
-
     flg_addToCart: new FormControl(true),
     flg_verifyAdult: new FormControl(false),
     flg_isMenu: new FormControl(false),
     available: new FormControl(true),
   });
+
+  itemvatform= new FormGroup({
+    price: new FormControl({value:'0',disabled:true}),
+    vat: new FormControl({value:'0',disabled:true})
+  })
+
 
   constructor(
     @Inject('IMAGES_URL') public imageUrl: string,
@@ -53,30 +59,44 @@ export class ModalItemComponent {
 
   }
 
+
   public SubmitForm() {
     console.log('submit');
     if (this.itemForm.valid) {
-      if (this.flg_insert) {
-        console.log(this.GetItemFromForm());
-        this.http.InsertItem(this.GetItemFromForm()).subscribe((data) => {
-          this.item = data;
-          this.UpdateForm();
-          this.flg_insert = false;
-          this._snackBar.open('Item successfully created!', 'Ok',{
-            duration:this.status.snackbarDuration
+    if(this.item.imagePath == null){
+      this._snackBar.open('Select item image!', 'Ok',{
+        duration:this.status.snackbarDuration
+      });
+      return;
+    }
+    else{
+
+        if (this.flg_insert) {
+          console.log(this.GetItemFromForm());
+          this.http.InsertItem(this.GetItemFromForm()).subscribe((data) => {
+            this.item = data;
+
+            this.UpdateForm();
+            this.flg_insert = false;
+            this._snackBar.open('Item successfully created!', 'Ok',{
+              duration:this.status.snackbarDuration
+            });
           });
-        });
-      } else {
-        console.log(this.GetItemFromForm());
-        this.http.UpdateItem(this.GetItemFromForm()).subscribe((data) => {
-          this.item = data;
-          this.UpdateForm();
-          this._snackBar.open('Item successfully updated!', 'Ok',{
-            duration:this.status.snackbarDuration
+        } else {
+          console.log(this.GetItemFromForm());
+          this.http.UpdateItem(this.GetItemFromForm()).subscribe((data) => {
+            this.item = data;
+
+            this.GetItemVat();
+            this.UpdateForm();
+            this._snackBar.open('Item successfully updated!', 'Ok',{
+              duration:this.status.snackbarDuration
+            });
           });
-        });
+        }
       }
     }
+
   }
 
   GetItemFromForm(): Item {
@@ -94,18 +114,35 @@ export class ModalItemComponent {
     );
   }
 
+  GetItemVat(){
+    this.http.GetItemVat(this.item.barcode!).subscribe((data)=>{
+      console.log(data);
+      this.itemvatform.patchValue({
+        price:data.price + '€',
+        vat:data.vat + '%'
+      });
+      console.log(this.itemvatform.get('price')!.value!,this.itemvatform.get('vat')!.value!)
+
+    })
+  }
   UpdateForm() {
+    console.log(this.item);
     if (this.item != null) {
+
       this.itemForm.patchValue({
         name: this.item.name,
         description: this.item.description,
         barcode: this.item.barcode,
-        price: 0,
         flg_addToCart: this.item.flg_addToCart,
         flg_verifyAdult: this.item.flg_verifyAdult,
         flg_isMenu: this.item.flg_isMenu,
         available: this.item.available,
       });
+      if(this.itemForm.get('barcode')!.value! !=''){
+        console.log(this.item);
+      this.GetItemVat();
+
+      }
     }
   }
   ChangeImage() {

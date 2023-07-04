@@ -20,6 +20,8 @@ import { Language } from '../Models/language';
 import { SearchedObject } from '../Models/SearchedObject';
 import { UserModelRequest } from '../Models/UserModelRequest';
 import { Token } from '../Models/Token';
+import { ItemVat } from '../Models/ItemVat';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +35,8 @@ export class HttpService {
   constructor(
     private http: HttpClient,
     @Inject('BASE_URL') baseUrl: string,
-    @Inject('ASSETS_URL') assetsUrl: string
+    @Inject('ASSETS_URL') assetsUrl: string,
+    private snack:MatSnackBar
   ) {
     this.urlAPI = baseUrl + '/';
     this.assetsUrl = assetsUrl;
@@ -139,6 +142,9 @@ export class HttpService {
   }
 
   ErrorHandler(error: HttpErrorResponse) {
+    this.snack.open('error check your fields!', 'Ok',{
+      duration:3000
+    });
     return throwError(() => new Error(error.message || 'Server error!'));
   }
 
@@ -370,5 +376,12 @@ export class HttpService {
     .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
   }
 
+  GetItemVat(id:string)
+  {
+    return this.http.post<ItemVat>(this.urlAPI + 'GetItemVat', null,{
+      params: new HttpParams().append('id', id)
+    })
+    .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+  }
 
 }

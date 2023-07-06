@@ -19,9 +19,8 @@ export class LoginPageComponent {
     Password: new FormControl('',[Validators.required])
 
   });
-  error: Boolean = false
   constructor(private http:HttpService,
-    private status:StatusService,
+    public status:StatusService,
     private router: Router,
     private storage:StorageManagerService){
 
@@ -46,21 +45,14 @@ export class LoginPageComponent {
         console.log(this.storage.getToken())
         this.router.navigate(['/Kiosk']);
     console.log(this.user);
-    this.error=false
 
 
-    // }
-    //   else
-    //   {
-    //     this.error=true
-    //   }
+
 
 
     })}
     ngOnInit(): void {
-      //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-      //Add 'implements OnInit' to the class.
-      this.status.isLogged='false';
+      this.status.error= false
 
     }
 }

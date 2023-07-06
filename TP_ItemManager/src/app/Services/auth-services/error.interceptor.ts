@@ -11,11 +11,13 @@ import { environment } from 'src/app/enviroments/environment';
 import { StorageManagerService } from './storage-manager.service';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
+import { StatusService } from '../status.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private status:StatusService
   ) {}
 
   intercept(
@@ -27,6 +29,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         console.log(err)
         if (err.status === 401) {
           this.authService.logout();
+          this.status.error=true
         }
 
         const error = err.error.message || err.statusText;

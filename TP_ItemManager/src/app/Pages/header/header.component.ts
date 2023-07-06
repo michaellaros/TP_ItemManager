@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { filter } from 'rxjs';
 import { Language } from 'src/app/Models/language';
@@ -21,8 +21,11 @@ export class HeaderComponent {
         this.currentRoute = (event as NavigationEnd).url;
         console.log(this.currentRoute);
       });
+
+
   }
   ngOnInit() {
+    console.log(this.currentRoute)
     this.language = this.translate.currentLang;
     this.translate.onLangChange.subscribe((lang) => {
       this.language = lang.lang;

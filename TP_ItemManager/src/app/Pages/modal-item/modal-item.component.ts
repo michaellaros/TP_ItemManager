@@ -56,7 +56,14 @@ export class ModalItemComponent {
 
   ngOnInit() {
     this.UpdateForm();
-
+    this.itemForm.get("barcode")?.valueChanges.subscribe((data)=>{
+      if(this.itemForm.get("barcode")?.value == undefined || this.itemForm.get("barcode")?.value == null || this.itemForm.get("barcode")?.value == '')
+      {this.itemvatform.patchValue({
+        price:0 + '€',
+        vat:0 + '%'
+      });}
+       else this.GetItemVat();
+    })
   }
 
 
@@ -115,14 +122,17 @@ export class ModalItemComponent {
   }
 
   GetItemVat(){
-    this.http.GetItemVat(this.item.barcode!).subscribe((data)=>{
-      console.log(data);
-      this.itemvatform.patchValue({
+    this.http.GetItemVat(this.itemForm.get("barcode")?.value!).subscribe((data)=>{
+      if(data != null){this.itemvatform.patchValue({
         price:data.price + '€',
         vat:data.vat + '%'
       });
-      console.log(this.itemvatform.get('price')!.value!,this.itemvatform.get('vat')!.value!)
-
+    }
+      else {this.itemvatform.patchValue({
+        price:0 + '€',
+        vat:0 + '%'
+      });
+    }
     })
   }
   UpdateForm() {

@@ -22,11 +22,12 @@ import { UserModelRequest } from '../Models/UserModelRequest';
 import { Token } from '../Models/Token';
 import { ItemVat } from '../Models/ItemVat';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { LoginPageComponent } from '../Pages/login-page/login-page.component';
 @Injectable({
   providedIn: 'root',
 })
 export class HttpService {
+
   urlAPI: string;
   assetsUrl: string;
   id!: string;
@@ -142,11 +143,9 @@ export class HttpService {
   }
 
   ErrorHandler(error: HttpErrorResponse) {
-    this.snack.open('error check your fields!', 'Ok',{
-      duration:3000
-    });
     return throwError(() => new Error(error.message || 'Server error!'));
   }
+
 
   InsertItemTranslation(id: string, translation: Translation) {
     console.log(id);
@@ -351,7 +350,10 @@ export class HttpService {
   Login(name:string, password:string){
 
     return this.http.post<Token>(this.urlAPI + 'DoLogin', {name,password})
-    .pipe(catchError((error: HttpErrorResponse) => this.ErrorHandler(error)));
+    .pipe(catchError((error: HttpErrorResponse) => {
+      return this.ErrorHandler(error)}
+
+    ));
   }
   GetUsers(filter: any){
     return this.http.post<any>(this.urlAPI + 'GetUsers', filter);

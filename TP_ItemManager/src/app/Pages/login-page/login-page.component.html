@@ -24,7 +24,7 @@
           <button mat-raised-button color="primary" type="submit">
             {{"Login"|translate}}
           </button>
-          <p *ngIf="this.error"class="error d-flex justify-content-center" >Wrong Username/password</p>
+          <p *ngIf="this.status.error"class="error d-flex justify-content-center" >Wrong Username/password</p>
         </div>
       </form>
     </div>

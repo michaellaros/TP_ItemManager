@@ -32,7 +32,7 @@
             type="button"
             (click)="ChangeImage()"
           >
-            {{ category.imagePath != null ? "Change image" : "Choose image" }}
+            {{ category.imagePath != null ? ( "Change image" | translate ) :  ("Choose image" | translate ) }}
           </button>
         </div>
         <div class="row col-9">
@@ -57,14 +57,14 @@
               {{ "Dine in" | translate }}
             </mat-checkbox>
             <mat-checkbox formControlName="takeAway" matInput color="primary">
-              {{ "Take Away" | translate }}
+              {{ "Take away" | translate }}
             </mat-checkbox>
           </div>
         </div>
       </div>
 
       <button mat-raised-button color="primary" type="submit">
-        {{ flg_insert ? "Create" : ("Save" | translate) }}
+        {{ flg_insert ? ("Create" | translate) : ("Save" | translate) }}
       </button>
     </form>
   </div>

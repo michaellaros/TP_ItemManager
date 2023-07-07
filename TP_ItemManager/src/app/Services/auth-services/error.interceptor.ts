@@ -32,6 +32,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.status.error=true
         }
 
+
         const error = err.error.message || err.statusText;
         return throwError(() => new Error(error.message || 'Server error!'))
       })

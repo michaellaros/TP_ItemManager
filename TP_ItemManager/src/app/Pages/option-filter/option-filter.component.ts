@@ -28,7 +28,10 @@ export class OptionFilterComponent {
   ngOnInit() {
     this.GetOptions();
   }
-
+  ResetForm(){
+    this.filterForm.reset();
+    this.GetOptions();
+  }
   GetOptions() {
     let id =
       this.filterForm.get('id')?.value != undefined

@@ -31,11 +31,19 @@ export class UserFilterComponent {
     this.GetUsers();
   }
 
+  ResetForm(){
+    this.filterForm.reset();
+    this.GetUsers();
+  }
   GetUsers() {
     let name =
-      this.filterForm.get('name')?.value!;
+    this.filterForm.get('name')?.value != undefined
+    ? this.filterForm.get('name')?.value!
+    : '';
     let id=
-    this.filterForm.get('id')?.value!;
+    this.filterForm.get('id')?.value != undefined
+        ? this.filterForm.get('id')?.value!
+        : '';
 
 
     this.http.GetUsers({Name:name,Id:id}).subscribe((data) => {

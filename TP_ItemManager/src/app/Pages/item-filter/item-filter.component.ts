@@ -30,7 +30,10 @@ export class ItemFilterComponent {
     this.GetItems();
 
   }
-
+  ResetForm(){
+    this.filterForm.reset();
+    this.GetItems();
+  }
   GetItems() {
     let id =
       this.filterForm.get('id')?.value != undefined

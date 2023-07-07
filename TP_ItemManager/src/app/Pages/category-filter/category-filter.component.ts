@@ -29,7 +29,10 @@ export class CategoryFilterComponent {
   ngOnInit() {
     this.GetCategory();
   }
-
+  ResetForm(){
+    this.filterForm.reset();
+    this.GetCategory();
+  }
   GetCategory() {
     let id =
       this.filterForm.get('id')?.value != undefined

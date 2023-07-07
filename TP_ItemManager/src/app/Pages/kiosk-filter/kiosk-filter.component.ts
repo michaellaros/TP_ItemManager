@@ -30,6 +30,10 @@ export class KioskFilterComponent {
     this.GetKiosks();
 
   }
+  ResetForm(){
+    this.filterForm.reset();
+    this.GetKiosks();
+  }
 
   GetKiosks() {
     let hostname =

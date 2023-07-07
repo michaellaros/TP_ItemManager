@@ -36,6 +36,7 @@ import { AuthGuard } from './Services/auth-services/auth.guard';
 import { AuthService } from './Services/auth-services/auth.service';
 import { AuthInterceptor, authInterceptorProviders } from './Services/auth-services/auth.interceptor';
 import { errorInterceptorProviders } from './Services/auth-services/error.interceptor';
+import { MenuFilterComponent } from './menu-filter/menu-filter.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -61,6 +62,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserFilterComponent,
     ModalUserComponent,
     ModifypasswordComponent,
+    MenuFilterComponent,
   ],
   imports: [
     BrowserModule,

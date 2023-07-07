@@ -59,8 +59,8 @@ export class ModalItemComponent {
     this.itemForm.get("barcode")?.valueChanges.subscribe((data)=>{
       if(this.itemForm.get("barcode")?.value == undefined || this.itemForm.get("barcode")?.value == null || this.itemForm.get("barcode")?.value == '')
       {this.itemvatform.patchValue({
-        price:0 + '€',
-        vat:0 + '%'
+        price:'',
+        vat:''
       });}
        else this.GetItemVat();
     })
@@ -129,8 +129,8 @@ export class ModalItemComponent {
       });
     }
       else {this.itemvatform.patchValue({
-        price:0 + '€',
-        vat:0 + '%'
+        price:'',
+        vat:''
       });
     }
     })

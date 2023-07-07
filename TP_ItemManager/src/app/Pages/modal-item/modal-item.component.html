@@ -92,7 +92,8 @@
     </mat-form-field>
   </div>
   </form>
-  <button mat-raised-button color="primary" [disabled]="itemForm.invalid" (click)="SubmitForm()">
+  <button mat-raised-button color="primary"
+  [disabled]="itemForm.invalid || this.itemvatform.get('price')!.value! == ''" (click)="SubmitForm()">
     {{ flg_insert ? "Create" : ("Save" | translate) }}
   </button>
   </div>

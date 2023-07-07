@@ -1,5 +1,8 @@
 {
 	"Add item to transaction": "Add item to transaction",
+	"Add category": "Add category",
+	"Add item": "Add item",
+	"Add option": "Add option",
 	"Add kiosk": "Add kiosk",
 	"Add user": "Add user",
 	"Article 18+": "Article 18+",
@@ -17,9 +20,6 @@
 	"Clear": "Clear",
 	"Confirm new password": "Confirm new password",
 	"Confirm": "Confirm",
-	"Create category": "Create category",
-	"Create item": "Create item",
-	"Create option": "Create option",
 	"Create": "Create",
 	"Default quantity": "Default quantity",
 	"Delete": "Delete",

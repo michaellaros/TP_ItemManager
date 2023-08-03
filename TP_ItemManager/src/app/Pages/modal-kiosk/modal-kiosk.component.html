@@ -33,10 +33,20 @@
           >{{ "Enable Dine In / Take Away" | translate }}
         </mat-checkbox>
 
-        <mat-form-field class="col-12">
-          <mat-label>{{ "Last update date" | translate }}</mat-label>
-          <input formControlName="last_request_date" matInput />
-        </mat-form-field>
+          <mat-form-field class="col-8">
+            <mat-label>{{ "Last update date" | translate }}</mat-label>
+            <input formControlName="last_request_date" matInput />
+          </mat-form-field>
+
+          <div class="col-3 m-2">
+            <button mat-raised-button color="primary" type="button" (click)="ForceReplication(kiosk!.id!)">
+              Force Update
+            </button>
+
+          </div>
+
+
+
       </div>
 
       <button mat-raised-button color="primary" type="submit">

@@ -41,6 +41,13 @@ export class ModalKioskComponent {
 
   }
 
+
+  ForceReplication(id:string){
+    this.http.ForceReplication(id).subscribe();
+
+    this.SubmitForm();
+  }
+
   public SubmitForm() {
     if (this.kioskForm.valid) {
       if (this.flg_insert) {

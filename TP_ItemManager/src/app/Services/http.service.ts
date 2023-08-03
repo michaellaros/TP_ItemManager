@@ -380,5 +380,11 @@ export class HttpService {
     })
 
   }
+  ForceReplication(id:string)
+  {
+    return this.http.post<string>(this.urlAPI + 'KioskReplication', null,{
+      params: new HttpParams().append('id', id),
+    })
+  }
 
 }

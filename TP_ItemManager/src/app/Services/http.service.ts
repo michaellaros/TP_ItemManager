@@ -386,5 +386,11 @@ export class HttpService {
       params: new HttpParams().append('id', id),
     })
   }
+  UploadCSV( CSV: File) {
+    let formData = new FormData();
+    formData.append('CSV', CSV);
+    return this.http
+      .post<string[]>(this.urlAPI + 'UpdateCSV', formData)
 
+  }
 }

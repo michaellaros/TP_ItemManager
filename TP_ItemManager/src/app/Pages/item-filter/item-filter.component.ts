@@ -8,6 +8,7 @@ import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 import { ModalItemComponent } from 'src/app/Pages/modal-item/modal-item.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-item-filter',
@@ -16,10 +17,18 @@ import { ModalItemComponent } from 'src/app/Pages/modal-item/modal-item.componen
 })
 export class ItemFilterComponent {
   public list!: SearchedObject[];
+  public CSV?: string[];
+  public imgPreviewList: any;
+  public folderName!: string;
+
   constructor(
     private http: HttpService,
     public status: StatusService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private _snackBar: MatSnackBar,
+
+
+
   ) {}
   filterForm = new FormGroup({
     id: new FormControl(''),
@@ -70,4 +79,33 @@ export class ItemFilterComponent {
     });
     dialogRef.afterClosed().subscribe(() => this.GetItems());
   }
+
+
+  UploadFile(files: any) {
+    console.log(files.target.files);
+    console.log(URL.createObjectURL(files.target.files[0]));
+
+    if (
+      this.CSV?.includes(files.target.files[0].name!) ||
+      this.imgPreviewList?.includes(files.target.files[0].name!)
+    ) {
+      if (
+        !confirm(
+          'An image with that name already exists, do you want to replace it?'
+        )
+      ) {
+        return;
+      }
+    }
+    let CSV = files.target.files[0];
+    console.log(CSV.name)
+    if (CSV)
+      this.http.UploadCSV(CSV).subscribe((data) => {
+        this.CSV = data.filter(
+          (CSV)
+        );
+        this._snackBar.open('CSV successfully uploaded!', 'Confirm');
+      });
+  }
+
 }

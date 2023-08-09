@@ -36,6 +36,21 @@
         {{"Clear" | translate}}
         </button>
       </div>
+      <div class="col"></div>
+      <input
+      type="file"
+      (change)="UploadFile($event)"
+      style="display: none"
+      #fileUpload
+    />
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="fileUpload.click()"
+        class="mx-1"
+      >
+      {{"Upload prices" | translate}}
+      </button>
       <button
         mat-raised-button
         color="primary"

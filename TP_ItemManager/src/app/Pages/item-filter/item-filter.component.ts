@@ -101,9 +101,7 @@ export class ItemFilterComponent {
     console.log(CSV.name)
     if (CSV)
       this.http.UploadCSV(CSV).subscribe((data) => {
-        this.CSV = data.filter(
-          (CSV)
-        );
+        this.CSV = data;
         this._snackBar.open('CSV successfully uploaded!', 'Confirm');
       });
   }

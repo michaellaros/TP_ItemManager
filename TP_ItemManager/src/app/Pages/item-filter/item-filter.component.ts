@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Category } from 'src/app/Models/Category';
@@ -85,24 +85,26 @@ export class ItemFilterComponent {
     console.log(files.target.files);
     console.log(URL.createObjectURL(files.target.files[0]));
 
-    if (
-      this.CSV?.includes(files.target.files[0].name!) ||
-      this.imgPreviewList?.includes(files.target.files[0].name!)
-    ) {
-      if (
-        !confirm(
-          'An image with that name already exists, do you want to replace it?'
-        )
-      ) {
-        return;
-      }
-    }
+    // if (
+    //   this.CSV?.includes(files.target.files[0].name!) ||
+    //   this.imgPreviewList?.includes(files.target.files[0].name!)
+    // ) {
+    //   if (
+    //     !confirm(
+    //       'An image with that name already exists, do you want to replace it?'
+    //     )
+    //   ) {
+
+    //     return;
+    //   }
+    // }
     let CSV = files.target.files[0];
     console.log(CSV.name)
     if (CSV)
       this.http.UploadCSV(CSV).subscribe((data) => {
-        this.CSV = data;
+        CSV = data;
         this._snackBar.open('CSV successfully uploaded!', 'Confirm');
+
       });
   }
 

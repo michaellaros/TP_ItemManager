@@ -25,7 +25,10 @@ export class ModalItemComponent {
 
   itemForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
+    description: new FormControl(''),
+     //[Validators.required] rimosso perchè se nella creazione item non metti la descrizione
+     //una volta creato se vuoi cambiare il nome sei obbligato per forza a
+    // mettere una descrizione
     barcode: new FormControl('', [Validators.required]),
     flg_addToCart: new FormControl(true),
     flg_verifyAdult: new FormControl(false),

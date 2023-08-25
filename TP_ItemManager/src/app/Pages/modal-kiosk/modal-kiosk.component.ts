@@ -6,6 +6,7 @@ import { Kiosk } from 'src/app/Models/Kiosk';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 import { ModalOptionComponent } from '../modal-option/modal-option.component';
+import { ForceReplicationModel } from 'src/app/Models/ForceReplicationModel';
 
 @Component({
   selector: 'app-modal-kiosk',
@@ -42,8 +43,8 @@ export class ModalKioskComponent {
   }
 
 
-  ForceReplication(id:string){
-    this.http.ForceReplication(id).subscribe();
+  ForceReplication(id:string,ip:string){
+    this.http.ForceReplication(new ForceReplicationModel(id,ip)).subscribe();
 
     this.SubmitForm();
   }

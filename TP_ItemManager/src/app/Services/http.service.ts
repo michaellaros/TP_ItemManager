@@ -23,6 +23,7 @@ import { Token } from '../Models/Token';
 import { ItemVat } from '../Models/ItemVat';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginPageComponent } from '../Pages/login-page/login-page.component';
+import { ForceReplicationModel } from '../Models/ForceReplicationModel';
 @Injectable({
   providedIn: 'root',
 })
@@ -380,11 +381,10 @@ export class HttpService {
     })
 
   }
-  ForceReplication(id:string)
+  ForceReplication(kiosk:ForceReplicationModel)
   {
-    return this.http.post<string>(this.urlAPI + 'KioskReplication', null,{
-      params: new HttpParams().append('id', id),
-    })
+    return this.http.post<string>(this.urlAPI + 'KioskReplication', kiosk
+    )
   }
   UploadCSV( CSV: File) {
     let formData = new FormData();

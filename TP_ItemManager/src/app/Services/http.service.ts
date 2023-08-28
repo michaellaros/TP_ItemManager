@@ -381,9 +381,10 @@ export class HttpService {
     })
 
   }
-  ForceReplication(kiosk:ForceReplicationModel)
+  ForceReplication(ip:string)
   {
-    return this.http.post<string>(this.urlAPI + 'KioskReplication', kiosk
+    return this.http.post<string>(this.urlAPI + 'KioskReplication', null,{
+      params: new HttpParams().append('ip', ip)}
     )
   }
   UploadCSV( CSV: File) {

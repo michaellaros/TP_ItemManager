@@ -43,8 +43,8 @@ export class ModalKioskComponent {
   }
 
 
-  ForceReplication(id:string,ip:string){
-    this.http.ForceReplication(new ForceReplicationModel(id,ip)).subscribe();
+  ForceReplication(ip:string){
+    this.http.ForceReplication(ip).subscribe();
 
     this.SubmitForm();
   }

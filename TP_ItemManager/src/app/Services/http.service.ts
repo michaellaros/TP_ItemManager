@@ -383,7 +383,7 @@ export class HttpService {
   }
   ForceReplication(ip:string)
   {
-    return this.http.post<string>(this.urlAPI + 'KioskReplication', null,{
+    return this.http.post<string>(this.urlAPI + 'ForceKioskReplication', null,{
       params: new HttpParams().append('ip', ip)}
     )
   }

@@ -68,7 +68,7 @@ export class ImagePickerComponent {
       }
     }
     let image = files.target.files[0];
-    this.imgPreviewList.push(image.name);
+    this.imgPreviewList.push(image);
     if (image)
       this.http.UploadImage(this.folderName, image).subscribe((data) => {
         this.images = data.filter(
@@ -80,10 +80,12 @@ export class ImagePickerComponent {
         this.FilterImages();
         this._snackBar.open('Image successfully uploaded!', 'Confirm');
       });
+
   }
 
   GetUrlFromFile(file: File) {
     return URL.createObjectURL(file);
+
   }
 
   RemoveFile() {

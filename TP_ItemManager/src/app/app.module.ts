@@ -7,7 +7,11 @@ import { HeaderComponent } from './Pages/header/header.component';
 import { MaterialModule } from './Modules/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditListComponent } from './Pages/edit-list/edit-list.component';
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpClientModule,
+  HttpClient,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 
 import { HttpService } from './Services/http.service';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
@@ -34,9 +38,13 @@ import { ModalUserComponent } from './Pages/modal-user/modal-user.component';
 import { ModifypasswordComponent } from './Pages/modifypassword/modifypassword.component';
 import { AuthGuard } from './Services/auth-services/auth.guard';
 import { AuthService } from './Services/auth-services/auth.service';
-import { AuthInterceptor, authInterceptorProviders } from './Services/auth-services/auth.interceptor';
+import {
+  AuthInterceptor,
+  authInterceptorProviders,
+} from './Services/auth-services/auth.interceptor';
 import { errorInterceptorProviders } from './Services/auth-services/error.interceptor';
 import { MenuFilterComponent } from './menu-filter/menu-filter.component';
+import { ModalStoreComponent } from './Pages/modal-store/modal-store.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -63,6 +71,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalUserComponent,
     ModifypasswordComponent,
     MenuFilterComponent,
+    ModalStoreComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,7 +93,9 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: MAT_DATE_LOCALE, useValue: 'it-IT' },
-    HttpService,authInterceptorProviders,errorInterceptorProviders
+    HttpService,
+    authInterceptorProviders,
+    errorInterceptorProviders,
   ],
   bootstrap: [AppComponent],
 })

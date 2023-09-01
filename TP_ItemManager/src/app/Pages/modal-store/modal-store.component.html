@@ -1,6 +1,6 @@
 <mat-toolbar class="w-100 position-relative mb-4 header" color="primary">
   <div>
-    <h1 class="px-0 my-2 text-white">{{ "Kiosk info" | translate }}</h1>
+    <h1 class="px-0 my-2 text-white">{{ "Store info" | translate }}</h1>
   </div>
 
   <button
@@ -12,43 +12,35 @@
   </button>
 </mat-toolbar>
 <mat-dialog-content class="p-0 overflow-x-hidden" style="max-height: 80vh">
-  <div class="container-fluid">
-    <form [formGroup]="kioskForm" class="formGroup" (ngSubmit)="SubmitForm()">
+  <div class="container-fluid pb-2">
+    <form [formGroup]="storeForm" class="formGroup" (ngSubmit)="SubmitForm()">
       <div class="row">
         <mat-form-field class="col-6">
-          <mat-label>{{ "Kiosk name" | translate }}</mat-label>
+          <mat-label>{{ "Store name" | translate }}</mat-label>
           <input formControlName="name" matInput />
         </mat-form-field>
 
         <mat-form-field class="col-3">
-          <mat-label>{{ "IP" | translate }}</mat-label>
-          <input formControlName="ip" matInput />
+          <mat-label>{{ "Store number" | translate }}</mat-label>
+          <input formControlName="lRetailStoreID" matInput />
         </mat-form-field>
 
-        <mat-checkbox
-          formControlName="flg_consumations"
-          matInput
-          class="col-3"
-          color="primary"
-          >{{ "Enable Dine In / Take Away" | translate }}
-        </mat-checkbox>
-
-        <mat-form-field class="col-6">
-          <mat-label>{{ "Store" | translate }}</mat-label>
-          <input formControlName="store" matInput />
+        <mat-form-field class="col-3">
+          <mat-label>{{ "Store IP" | translate }}</mat-label>
+          <input formControlName="store_ip" matInput />
         </mat-form-field>
 
-        <mat-form-field class="col-3" *ngIf="!flg_insert">
+        <mat-form-field class="col-3">
           <mat-label>{{ "Last update date" | translate }}</mat-label>
           <input formControlName="last_request_date" matInput />
         </mat-form-field>
 
-        <div class="col-3" *ngIf="!flg_insert">
+        <div class="col-3">
           <button
             mat-raised-button
             color="primary"
             type="button"
-            (click)="ForceReplication(kiosk!.id!)"
+            (click)="ForceReplication(store!.id!)"
           >
             Force Update
           </button>
@@ -60,11 +52,4 @@
       </button>
     </form>
   </div>
-
-  <app-assigned-editor
-    [type]="'KioskCategory'"
-    [id]="kiosk?.id!"
-    [AssignedObjects]="kiosk?.categories"
-    [flg_insert]="this.flg_insert"
-  />
 </mat-dialog-content>

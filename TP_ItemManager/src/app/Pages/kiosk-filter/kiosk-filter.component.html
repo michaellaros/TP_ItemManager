@@ -1,5 +1,7 @@
 <div class="container mt-3">
-  <div class="row"><h1>{{"Kiosks" | translate}}</h1></div>
+  <div class="row">
+    <h1>{{ "Kiosks" | translate }}</h1>
+  </div>
   <form [formGroup]="filterForm" class="formGroup">
     <div class="row container-fluid">
       <mat-form-field class="col-3 m-1">
@@ -11,7 +13,7 @@
         <input formControlName="ip" matInput />
       </mat-form-field>
     </div>
-    <div class="container-fluid d-flex justify-content-between">
+    <div class="d-flex justify-content-between">
       <div>
         <button
           mat-raised-button
@@ -32,19 +34,51 @@
       </div>
 
       <button
+        (click)="OpenDialogAddStore()"
         mat-raised-button
         color="primary"
-        (click)="OpenDialogAddKiosk()"
+        class="mx-1"
+      >
+        {{ "Add store" | translate }}
+      </button>
+      <!--  (click)="OpenDialogAddKiosk(store.id!)" -->
+    </div>
+  </form>
+</div>
+<div *ngFor="let store of stores" class="my-2">
+  <div class="container d-flex justify-content-between">
+    <h1 class="col-3">{{ store.name }}</h1>
+    <div>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="DeleteObject(store.id!)"
+        class="mx-1"
+      >
+        {{ "Remove store" | translate }}</button
+      ><button
+        mat-raised-button
+        color="primary"
+        (click)="OpenDialogEditStore(store.id!)"
+        class="mx-1"
+      >
+        {{ "Edit store" | translate }}
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="OpenDialogAddKiosk(store)"
         class="mx-1"
       >
         {{ "Add kiosk" | translate }}
       </button>
     </div>
-  </form>
+  </div>
+
+  <app-edit-list
+    [parentData]="store.formattedKiosk"
+    [columnName]="'Kiosk'"
+    (refresh)="this.GetStores()"
+  >
+  </app-edit-list>
 </div>
-<app-edit-list
-  *ngIf="this.list != null"
-  [parentData]="this.list"
-  [columnName]="'Kiosk'"
-  (refresh)="this.GetKiosks()"
-></app-edit-list>

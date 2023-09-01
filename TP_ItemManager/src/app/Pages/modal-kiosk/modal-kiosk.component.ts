@@ -6,6 +6,7 @@ import { Kiosk } from 'src/app/Models/Kiosk';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 import { ModalOptionComponent } from '../modal-option/modal-option.component';
+import { Store } from 'src/app/Models/Store';
 import { ForceReplicationModel } from 'src/app/Models/ForceReplicationModel';
 
 @Component({
@@ -15,38 +16,43 @@ import { ForceReplicationModel } from 'src/app/Models/ForceReplicationModel';
 })
 export class ModalKioskComponent {
   kiosk?: Kiosk;
+
   public flg_insert: boolean;
 
   kioskForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     ip: new FormControl('', [Validators.required]),
+    store: new FormControl('', [Validators.required]),
+    // store_id: new FormControl('', [Validators.required]),
     flg_consumations: new FormControl(true),
     last_request_date: new FormControl(),
   });
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: Kiosk,
+    @Inject(MAT_DIALOG_DATA) private data: { kiosk: Kiosk; store: Store },
     private http: HttpService,
     public status: StatusService,
     private _snackBar: MatSnackBar
   ) {
     {
-      this.kiosk = this.data;
-      this.flg_insert = this.data == null;
+      this.kiosk = data.kiosk;
+      if (data.store != null)
+        this.kioskForm.patchValue({ store: data.store.name });
+      this.flg_insert = data.kiosk == null;
+
+      this.kioskForm.get('store')!.disable();
       this.kioskForm.get('last_request_date')!.disable();
     }
   }
 
   ngOnInit() {
     this.UpdateForm();
-
   }
 
-
-  ForceReplication(id:string,ip:string){
-    this.http.ForceReplication(new ForceReplicationModel(id,ip)).subscribe();
-
-    this.SubmitForm();
+  ForceReplication(id: string) {
+    this.http.ForceKioskReplication(id).subscribe(() => {
+      this.kioskForm.get('last_request_date')!.setValue(null);
+    });
   }
 
   public SubmitForm() {
@@ -56,16 +62,16 @@ export class ModalKioskComponent {
           this.kiosk = data;
           this.UpdateForm();
           this.flg_insert = false;
-          this._snackBar.open('Kiosk successfully created!', 'Ok',{
-            duration:this.status.snackbarDuration
+          this._snackBar.open('Kiosk successfully created!', 'Ok', {
+            duration: this.status.snackbarDuration,
           });
         });
       } else {
         this.http.UpdateKiosk(this.GetKioskFromForm()).subscribe((data) => {
           this.kiosk = data;
           this.UpdateForm();
-          this._snackBar.open('Kiosk successfully updated!', 'Ok',{
-            duration:this.status.snackbarDuration
+          this._snackBar.open('Kiosk successfully updated!', 'Ok', {
+            duration: this.status.snackbarDuration,
           });
         });
       }
@@ -77,8 +83,8 @@ export class ModalKioskComponent {
       this.kiosk?.id != undefined ? this.kiosk.id : undefined,
       this.kioskForm.get('name')!.value!,
       this.kioskForm.get('ip')!.value!,
-      this.kioskForm.get('flg_consumations')!.value!,
-      this.kioskForm.get('last_request_date')!.value!
+      this.data.store.id,
+      this.kioskForm.get('flg_consumations')!.value!
     );
   }
 
@@ -88,6 +94,7 @@ export class ModalKioskComponent {
       this.kioskForm.patchValue({
         name: this.kiosk.name,
         ip: this.kiosk.ip!,
+        store: this.data.store.name,
         flg_consumations: this.kiosk.flg_consumations!,
         last_request_date: this.kiosk.last_request_date!,
       });

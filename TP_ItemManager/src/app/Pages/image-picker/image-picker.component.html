@@ -1,6 +1,6 @@
 <mat-toolbar class="w-100 position-relative mb-4" color="primary">
   <div>
-    <h1 class="px-0 my-2 text-white">{{"Category info" | translate}}</h1>
+    <h1 class="px-0 my-2 text-white">{{ "Category info" | translate }}</h1>
   </div>
 
   <button
@@ -13,12 +13,12 @@
 </mat-toolbar>
 <div class="row container-fluid">
   <mat-form-field class="col-4">
-    <mat-label>{{"Name" | translate}}</mat-label>
+    <mat-label>{{ "Name" | translate }}</mat-label>
     <input matInput [(ngModel)]="filter" (change)="ChangeFilter($event)" />
   </mat-form-field>
   <div class="col-2">
     <button mat-raised-button color="primary" class="px-1 mb-3">
-      {{"Search" | translate}}
+      {{ "Search" | translate }}
     </button>
   </div>
   <div class="col-6 d-flex justify-content-end">
@@ -35,7 +35,7 @@
       class="mx-2 mb-3"
       (click)="fileUpload.click()"
     >
-    {{"Upload new image" | translate}}
+      {{ "Upload new image" | translate }}
     </button>
     <button
       mat-raised-button
@@ -52,12 +52,11 @@
       (click)="Stampa(selectedImage)"
       [mat-dialog-close]="selectedImage"
     >
-    {{"Confirm" | translate}}
+      {{ "Confirm" | translate }}
     </button>
   </div>
 </div>
 <mat-dialog-content class="p-0 overflow-x-hidden" style="max-height: 80vh">
-
   <div class="row overflow-y-auto overflow-x-hidden">
     <div class="p-4 col-2" *ngFor="let imgPreview of imgPreviewList">
       <mat-card
@@ -71,7 +70,7 @@
         "
       >
         <mat-chip class="position-absolute m-1 start-0" color="primary">
-          {{"New" | translate}}
+          {{ "New" | translate }}
         </mat-chip>
         <mat-icon
           class="position-absolute m-1 end-0 text-success"

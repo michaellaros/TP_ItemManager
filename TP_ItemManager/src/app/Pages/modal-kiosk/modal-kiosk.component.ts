@@ -22,8 +22,8 @@ export class ModalKioskComponent {
   kioskForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     ip: new FormControl('', [Validators.required]),
-    store: new FormControl('', [Validators.required]),
-    // store_id: new FormControl('', [Validators.required]),
+    store_name: new FormControl(''),
+    store_id: new FormControl(''),
     flg_consumations: new FormControl(true),
     last_request_date: new FormControl(),
   });
@@ -37,10 +37,10 @@ export class ModalKioskComponent {
     {
       this.kiosk = data.kiosk;
       if (data.store != null)
-        this.kioskForm.patchValue({ store: data.store.name });
+        this.kioskForm.patchValue({ store_name: data.store.name });
       this.flg_insert = data.kiosk == null;
 
-      this.kioskForm.get('store')!.disable();
+      this.kioskForm.get('store_name')!.disable();
       this.kioskForm.get('last_request_date')!.disable();
     }
   }
@@ -67,6 +67,7 @@ export class ModalKioskComponent {
           });
         });
       } else {
+        console.log(this.GetKioskFromForm());
         this.http.UpdateKiosk(this.GetKioskFromForm()).subscribe((data) => {
           this.kiosk = data;
           this.UpdateForm();
@@ -83,7 +84,10 @@ export class ModalKioskComponent {
       this.kiosk?.id != undefined ? this.kiosk.id : undefined,
       this.kioskForm.get('name')!.value!,
       this.kioskForm.get('ip')!.value!,
-      this.data.store.id,
+      undefined, //name
+      this.flg_insert
+        ? this.data.store.id
+        : this.kioskForm.get('store_id')!.value!,
       this.kioskForm.get('flg_consumations')!.value!
     );
   }
@@ -94,13 +98,16 @@ export class ModalKioskComponent {
       this.kioskForm.patchValue({
         name: this.kiosk.name,
         ip: this.kiosk.ip!,
-        store: this.data.store.name,
+        store_name: this.kiosk.store_name,
+        store_id: this.kiosk.store_id,
         flg_consumations: this.kiosk.flg_consumations!,
         last_request_date: this.kiosk.last_request_date!,
       });
       console.log({
-        name: this.kiosk.name!,
+        name: this.kiosk.name,
         ip: this.kiosk.ip!,
+        store_name: this.kiosk.store_name,
+        store_id: this.kiosk.store_id,
         flg_consumations: this.kiosk.flg_consumations!,
         last_request_date: this.kiosk.last_request_date!,
       });

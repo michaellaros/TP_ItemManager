@@ -30,12 +30,12 @@
           <input formControlName="store_ip" matInput />
         </mat-form-field>
 
-        <mat-form-field class="col-3">
+        <mat-form-field class="col-3" *ngIf="!flg_insert">
           <mat-label>{{ "Last update date" | translate }}</mat-label>
           <input formControlName="last_request_date" matInput />
         </mat-form-field>
 
-        <div class="col-3">
+        <div class="col-3" *ngIf="!flg_insert">
           <button
             mat-raised-button
             color="primary"

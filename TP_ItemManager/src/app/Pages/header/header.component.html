@@ -49,6 +49,16 @@
       >
         {{ "Users" | translate }}
       </button>
+      <button
+        mat-raised-button
+        [color]="
+          currentRoute == '/Discount'  ? '' : 'primary'
+        "
+        class="m-2"
+        routerLink="/Discount"
+      >
+        {{ "Discounts" | translate }}
+      </button>
 
 
       <div class=" d-flex language position-absolute   end-0" >

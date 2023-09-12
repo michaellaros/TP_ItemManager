@@ -25,6 +25,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginPageComponent } from '../Pages/login-page/login-page.component';
 import { Store } from '../Models/Store';
 import { StoreDetail } from '../Models/StoreDetail';
+import { DiscountFilterModel } from '../Models/DiscountFilterModel';
+import { Discount } from '../Models/Discount';
 @Injectable({
   providedIn: 'root',
 })
@@ -46,6 +48,11 @@ export class HttpService {
 
   FilterItems(filter: ItemFilterModel) {
     return this.http.post<any>(this.urlAPI + 'Items', filter, {
+      params: new HttpParams().append('id', this.id).append('name', this.name),
+    });
+  }
+  FilterDiscounts(filter: DiscountFilterModel) {
+    return this.http.post<any>(this.urlAPI + 'Discounts', filter, {
       params: new HttpParams().append('id', this.id).append('name', this.name),
     });
   }
@@ -101,10 +108,18 @@ export class HttpService {
     console.log(item);
     return this.http.post<Category>(this.urlAPI + 'InsertItem', item);
   }
+  InsertDiscount(discount: Discount) {
+    console.log(discount);
+    return this.http.post<Category>(this.urlAPI + 'InsertDiscount', discount);
+  }
 
   UpdateItem(item: Item) {
     console.log(item);
     return this.http.post<Category>(this.urlAPI + 'UpdateItem', item);
+  }
+  UpdateDiscount(discount: Discount) {
+    console.log(discount);
+    return this.http.post<Category>(this.urlAPI + 'UpdateDiscount', discount);
   }
 
   InsertOption(option: Option) {

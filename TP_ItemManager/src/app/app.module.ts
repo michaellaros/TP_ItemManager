@@ -43,8 +43,11 @@ import {
   authInterceptorProviders,
 } from './Services/auth-services/auth.interceptor';
 import { errorInterceptorProviders } from './Services/auth-services/error.interceptor';
-import { MenuFilterComponent } from './menu-filter/menu-filter.component';
+import { MenuFilterComponent } from './Pages/menu-filter/menu-filter.component';
 import { ModalStoreComponent } from './Pages/modal-store/modal-store.component';
+import { DiscountFilterComponent } from './Pages/discount-filter/discount-filter.component';
+import { ModalDiscountComponent } from './Pages/modal-discount/modal-discount.component';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -72,6 +75,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModifypasswordComponent,
     MenuFilterComponent,
     ModalStoreComponent,
+    DiscountFilterComponent,
+    ModalDiscountComponent,
   ],
   imports: [
     BrowserModule,

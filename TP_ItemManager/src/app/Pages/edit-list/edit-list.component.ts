@@ -27,6 +27,8 @@ import { ModalKioskComponent } from '../modal-kiosk/modal-kiosk.component';
 import { UserModelRequest } from 'src/app/Models/UserModelRequest';
 import { ModalUserComponent } from '../modal-user/modal-user.component';
 import { StatusService } from 'src/app/Services/status.service';
+import { Discount } from 'src/app/Models/Discount';
+import { ModalDiscountComponent } from '../modal-discount/modal-discount.component';
 @Component({
   selector: 'app-edit-list',
   templateUrl: './edit-list.component.html',
@@ -91,6 +93,13 @@ export class EditListComponent implements OnChanges {
           this.OpenDialogModifyUser(data);
         });
         break;
+
+        case 'Discount':
+          this.http.GetDiscount(id).subscribe((data) => {
+            console.log(data);
+            this.OpenDialogModifyDiscount(data);
+          });
+          break;
     }
   }
 
@@ -134,6 +143,16 @@ export class EditListComponent implements OnChanges {
   OpenDialogModifyUser(user: UserModelRequest) {
     const dialogRef = this.dialog.open(ModalUserComponent, {
       data: user,
+      width: '60vw',
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.refresh.emit(null);
+    });
+  }
+
+  OpenDialogModifyDiscount(discount: Discount) {
+    const dialogRef = this.dialog.open(ModalDiscountComponent, {
+      data: discount,
       width: '60vw',
     });
     dialogRef.afterClosed().subscribe(() => {

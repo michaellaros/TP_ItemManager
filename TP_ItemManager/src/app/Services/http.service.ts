@@ -352,6 +352,11 @@ export class HttpService {
       name: '',
     });
   }
+  GetDiscount(id: string) {
+    return this.http.get<Discount>(this.urlAPI + 'Discount', {
+      params: new HttpParams().append('id', id),
+    });
+  }
   UpdatePassword(id: string, password: string, oldPassword: string) {
     return this.http.post<any>(this.urlAPI + 'UpdatePassword', {
       id: id,

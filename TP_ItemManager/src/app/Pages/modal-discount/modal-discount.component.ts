@@ -45,11 +45,6 @@ export class ModalDiscountComponent {
 
   public SubmitForm() {
     console.log('submit');
-    if (this.discountForm.valid) {
-
-    }
-    else{
-
 
           console.log(this.GetDiscountFromForm());
           this.http.UpdateDiscount(this.GetDiscountFromForm()).subscribe((data) => {
@@ -61,7 +56,7 @@ export class ModalDiscountComponent {
             });
           });
 
-      }
+
     }
 
     GetDiscountFromForm(): Discount {

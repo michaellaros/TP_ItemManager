@@ -1,0 +1,48 @@
+<mat-toolbar class="w-100 position-relative mb-4 header" color="primary">
+  <div>
+    <h1 class="px-0 my-2 text-white">{{ "Item info" | translate }}</h1>
+  </div>
+
+  <button
+    mat-icon-button
+    class="m-2 position-absolute end-0"
+    [mat-dialog-close]="null"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-dialog-content class="p-0 overflow-x-hidden" style="max-height: 80vh">
+  <div class="container-fluid">
+    <form [formGroup]="itemGroupForm" class="formGroup">
+      <div class="row">
+        <div class="row col-6 d-flex flex-column">
+          <mat-form-field>
+            <mat-label>{{ "Name" | translate }}</mat-label>
+            <input formControlName="name" matInput />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>{{ "Description" | translate }}</mat-label>
+            <textarea formControlName="description" matInput></textarea>
+          </mat-form-field>
+
+
+        </div>
+      </div>
+
+
+    </form>
+
+  <button mat-raised-button color="primary"
+  (click)="SubmitForm()">
+    {{ flg_insert ? "Create" : ("Save" | translate) }}
+  </button>
+  </div>
+
+  <app-assigned-editor
+    [type]="'ItemGroup'"
+    [id]="itemGroup.id!"
+    [AssignedObjects]="itemGroup.itemList"
+    [flg_insert]="this.flg_insert"
+  />
+</mat-dialog-content>

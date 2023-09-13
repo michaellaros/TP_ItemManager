@@ -48,7 +48,7 @@ import { ModalStoreComponent } from './Pages/modal-store/modal-store.component';
 import { DiscountFilterComponent } from './Pages/discount-filter/discount-filter.component';
 import { ModalDiscountComponent } from './Pages/modal-discount/modal-discount.component';
 import { ItemgroupFilterComponent } from './Pages/itemgroup-filter/itemgroup-filter.component';
-import { ModalItemgroupComponent } from './modal-itemgroup/modal-itemgroup.component';
+import { ModalItemgroupComponent } from './Pages/modal-itemgroup/modal-itemgroup.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

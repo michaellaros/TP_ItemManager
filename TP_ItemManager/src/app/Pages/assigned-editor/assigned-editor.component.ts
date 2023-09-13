@@ -100,6 +100,12 @@ export class AssignedEditorComponent {
           this.filteredOptions = this.options;
         });
         break;
+        case 'ItemGroup':
+        this.http.FilterCategory({}).subscribe((data) => {
+          this.options = this.MapToArray(data);
+          this.filteredOptions = this.options;
+        });
+        break;
     }
 
     this.assignForm

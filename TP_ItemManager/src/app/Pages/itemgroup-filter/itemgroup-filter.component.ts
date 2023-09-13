@@ -6,7 +6,7 @@ import { ItemGroupFilterModel } from 'src/app/Models/ItemGroupFilterModel';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
-import { ModalItemgroupComponent } from 'src/app/modal-itemgroup/modal-itemgroup.component';
+import { ModalItemgroupComponent } from 'src/app/Pages/modal-itemgroup/modal-itemgroup.component';
 
 @Component({
   selector: 'app-itemgroup-filter',
@@ -29,7 +29,7 @@ export class ItemgroupFilterComponent {
 filterForm = new FormGroup({
   id: new FormControl(''),
   name: new FormControl(''),
-  barcode: new FormControl(''),
+  // barcode: new FormControl(''),
 });
 ngOnInit() {
   this.GetItemGroups();
@@ -48,15 +48,15 @@ GetItemGroups() {
     this.filterForm.get('name')?.value != undefined
       ? this.filterForm.get('name')?.value!
       : '';
-  let barcode =
-    this.filterForm.get('barcode')?.value != undefined
-      ? this.filterForm.get('barcode')?.value!
-      : '';
+  // let barcode =
+  //   this.filterForm.get('barcode')?.value != undefined
+  //     ? this.filterForm.get('barcode')?.value!
+  //     : '';
 
   let list: SearchedObject[] = [];
 
   this.http
-    .FilterItemGroups(new ItemGroupFilterModel(id, name, barcode, 0, 50))
+    .FilterItemGroups(new ItemGroupFilterModel(id, name, 0, 50))
     .subscribe((data) => {
       if (data == null) {
         this.list = [];

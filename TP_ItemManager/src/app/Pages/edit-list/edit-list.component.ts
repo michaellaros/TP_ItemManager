@@ -30,7 +30,7 @@ import { StatusService } from 'src/app/Services/status.service';
 import { Discount } from 'src/app/Models/Discount';
 import { ModalDiscountComponent } from '../modal-discount/modal-discount.component';
 import { ItemGroup } from 'src/app/Models/ItemGroup';
-import { ModalItemgroupComponent } from 'src/app/modal-itemgroup/modal-itemgroup.component';
+import { ModalItemgroupComponent } from 'src/app/Pages/modal-itemgroup/modal-itemgroup.component';
 @Component({
   selector: 'app-edit-list',
   templateUrl: './edit-list.component.html',

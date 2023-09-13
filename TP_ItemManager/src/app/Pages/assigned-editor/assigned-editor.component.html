@@ -1,6 +1,6 @@
 <mat-toolbar
   class="w-100 position-relative"
-  [class.mt-4]="type == 'KioskCategory'"
+  [class.mt-4]="type == 'KioskCategory' || type == 'ItemGroup' "
   color="primary"
 >
   <div>
@@ -20,6 +20,8 @@
           ? "Items this option is used in"
           : type == "KioskCategory"
           ? "Categories enabled"
+          : type == "ItemGroup"
+          ? "Items in this group"
           : "") | translate
       }}
     </h1>

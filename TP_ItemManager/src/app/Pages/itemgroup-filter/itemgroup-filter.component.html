@@ -1,0 +1,58 @@
+<div class="container mt-3">
+  <div class="row"><h1>{{"Items" | translate}}</h1></div>
+  <form [formGroup]="filterForm" class="formGroup">
+    <div class="row container-fluid">
+      <mat-form-field class="col-3 m-1">
+        <mat-label>{{"Name" | translate}}</mat-label>
+        <input formControlName="name" matInput />
+      </mat-form-field>
+      <mat-form-field class="col-3 m-1">
+        <mat-label>{{"ID" | translate}}</mat-label>
+        <input formControlName="id" matInput />
+      </mat-form-field>
+
+      <mat-form-field class="col-3 m-1">
+        <mat-label>{{"Barcode" | translate}}</mat-label>
+        <input formControlName="barcode" matInput />
+      </mat-form-field>
+    </div>
+    <div class="container-fluid d-flex justify-content-between">
+      <div>
+        <button
+          mat-raised-button
+          color="primary"
+          class="mx-1 mb-3"
+          (click)="GetItemGroups()"
+        >
+        {{"Search" | translate}}
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="ResetForm()"
+          class="mx-1 mb-3"
+          type=""
+        >
+        {{"Clear" | translate}}
+        </button>
+      </div>
+      <div class="col"></div>
+
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="OpenDialogModifyItemGroup()"
+        class="mx-1"
+      >
+      {{"Add item group" | translate}}
+      </button>
+    </div>
+  </form>
+</div>
+
+<app-edit-list
+  *ngIf="this.list != null"
+  [parentData]="this.list"
+  [columnName]="'ItemGroup'"
+  (refresh)="this.GetItemGroups()"
+></app-edit-list>

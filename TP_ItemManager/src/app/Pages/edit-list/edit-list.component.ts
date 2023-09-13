@@ -29,6 +29,8 @@ import { ModalUserComponent } from '../modal-user/modal-user.component';
 import { StatusService } from 'src/app/Services/status.service';
 import { Discount } from 'src/app/Models/Discount';
 import { ModalDiscountComponent } from '../modal-discount/modal-discount.component';
+import { ItemGroup } from 'src/app/Models/ItemGroup';
+import { ModalItemgroupComponent } from 'src/app/modal-itemgroup/modal-itemgroup.component';
 @Component({
   selector: 'app-edit-list',
   templateUrl: './edit-list.component.html',
@@ -100,6 +102,13 @@ export class EditListComponent implements OnChanges {
             this.OpenDialogModifyDiscount(data);
           });
           break;
+
+          case 'ItemGroup':
+          this.http.GetItemGroup(id).subscribe((data) => {
+            console.log(data);
+            this.OpenDialogModifyItemGroup(data);
+          });
+          break;
     }
   }
 
@@ -153,6 +162,16 @@ export class EditListComponent implements OnChanges {
   OpenDialogModifyDiscount(discount: Discount) {
     const dialogRef = this.dialog.open(ModalDiscountComponent, {
       data: discount,
+      width: '60vw',
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.refresh.emit(null);
+    });
+  }
+
+  OpenDialogModifyItemGroup(itemGroup: ItemGroup) {
+    const dialogRef = this.dialog.open(ModalItemgroupComponent, {
+      data: itemGroup,
       width: '60vw',
     });
     dialogRef.afterClosed().subscribe(() => {

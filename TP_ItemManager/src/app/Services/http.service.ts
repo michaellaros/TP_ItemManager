@@ -27,6 +27,8 @@ import { Store } from '../Models/Store';
 import { StoreDetail } from '../Models/StoreDetail';
 import { DiscountFilterModel } from '../Models/DiscountFilterModel';
 import { Discount } from '../Models/Discount';
+import { ItemGroup } from '../Models/ItemGroup';
+import { ItemGroupFilterModel } from '../Models/ItemGroupFilterModel';
 @Injectable({
   providedIn: 'root',
 })
@@ -53,6 +55,11 @@ export class HttpService {
   }
   FilterDiscounts(filter: DiscountFilterModel) {
     return this.http.post<any>(this.urlAPI + 'Discounts', filter, {
+      params: new HttpParams().append('id', this.id).append('name', this.name),
+    });
+  }
+  FilterItemGroups(filter: ItemGroupFilterModel) {
+    return this.http.post<any>(this.urlAPI + 'ItemGroups', filter, {
       params: new HttpParams().append('id', this.id).append('name', this.name),
     });
   }
@@ -354,6 +361,11 @@ export class HttpService {
   }
   GetDiscount(id: string) {
     return this.http.get<Discount>(this.urlAPI + 'Discount', {
+      params: new HttpParams().append('id', id),
+    });
+  }
+  GetItemGroup(id: string) {
+    return this.http.get<ItemGroup>(this.urlAPI + 'ItemGroup', {
       params: new HttpParams().append('id', id),
     });
   }

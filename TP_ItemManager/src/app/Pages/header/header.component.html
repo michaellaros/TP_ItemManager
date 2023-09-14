@@ -59,6 +59,16 @@
       >
         {{ "Discounts" | translate }}
       </button>
+      <button
+        mat-raised-button
+        [color]="
+          currentRoute == '/ItemGroup'  ? '' : 'primary'
+        "
+        class="m-2"
+        routerLink="/ItemGroup"
+      >
+        {{ "Discount item groups" | translate }}
+      </button>
 
 
       <div class=" d-flex language position-absolute   end-0" >

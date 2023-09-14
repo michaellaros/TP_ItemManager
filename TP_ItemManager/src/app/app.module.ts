@@ -47,6 +47,8 @@ import { MenuFilterComponent } from './Pages/menu-filter/menu-filter.component';
 import { ModalStoreComponent } from './Pages/modal-store/modal-store.component';
 import { DiscountFilterComponent } from './Pages/discount-filter/discount-filter.component';
 import { ModalDiscountComponent } from './Pages/modal-discount/modal-discount.component';
+import { ItemgroupFilterComponent } from './Pages/itemgroup-filter/itemgroup-filter.component';
+import { ModalItemgroupComponent } from './Pages/modal-itemgroup/modal-itemgroup.component';
 import { DiscountedItemEditorComponent } from './Pages/discounted-item-editor/discounted-item-editor.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -78,6 +80,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalStoreComponent,
     DiscountFilterComponent,
     ModalDiscountComponent,
+    ItemgroupFilterComponent,
+    ModalItemgroupComponent,
     DiscountedItemEditorComponent,
   ],
   imports: [

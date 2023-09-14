@@ -57,6 +57,7 @@ export class AssignedEditorComponent {
     this.newAssignedObject = new AssignedObject();
   }
   ngOnInit() {
+    console.log(this.AssignedObjects)
     switch (this.type) {
       case 'CategoryItems-Category':
         this.http.FilterItems({}).subscribe((data) => {
@@ -101,7 +102,13 @@ export class AssignedEditorComponent {
         });
         break;
         case 'ItemGroup':
-        this.http.FilterCategory({}).subscribe((data) => {
+        this.http.FilterItems({}).subscribe((data) => {
+          this.options = this.MapToArray(data);
+          this.filteredOptions = this.options;
+        });
+        break;
+        case 'ItemGroup-Item':
+        this.http.FilterItemGroups({}).subscribe((data) => {
           this.options = this.MapToArray(data);
           this.filteredOptions = this.options;
         });
@@ -128,7 +135,7 @@ export class AssignedEditorComponent {
         option.name?.toLowerCase().includes(filterValue) &&
         this.AssignedObjects?.findIndex(
           (assigned) => assigned.id == option.id
-        ) == -1
+        ) != -1
     );
   }
 

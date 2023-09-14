@@ -15,28 +15,29 @@
   <div class="container-fluid">
     <form [formGroup]="discountForm" class="formGroup">
       <div class="row">
-
         <div class="row col-6 d-flex flex-column">
           <mat-form-field>
             <mat-label>{{ "Name" | translate }}</mat-label>
             <input formControlName="name" matInput />
           </mat-form-field>
 
-          <mat-form-field>
+          <!-- <mat-form-field>
             <mat-label>{{ "Barcode" | translate }}</mat-label>
             <input formControlName="barcode" matInput  />
-          </mat-form-field>
-
+          </mat-form-field> -->
         </div>
-
       </div>
-
-
     </form>
-
-
-
-
   </div>
-
+  <app-assigned-editor
+    [type]="'DiscountStore'"
+    [id]="discount?.id!"
+    [AssignedObjects]="discount?.stores"
+    [flg_insert]="this.flg_insert"
+  />
+  <app-discounted-item-editor
+    [id]="discount?.id!"
+    [AssignedObjects]="discount?.stores"
+    [flg_insert]="this.flg_insert"
+  />
 </mat-dialog-content>

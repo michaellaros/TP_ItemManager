@@ -1,30 +1,8 @@
-<mat-toolbar
-  class="w-100 position-relative"
-  [class.mt-4]="type == 'KioskCategory'"
-  color="primary"
->
+<mat-toolbar class="w-100 position-relative" color="primary">
+  <!-- [class.mt-4]="type == 'KioskCategory'" -->
   <div>
     <h1 class="px-0 my-2 text-white">
-      {{
-        (type == "CategoryItems-Category"
-          ? "Items in this category"
-          : type == "CategoryItems-Item"
-          ? "Category this item is in"
-          : type == "OptionItems-Item"
-          ? "Option this item is in"
-          : type == "OptionItems-Option"
-          ? "Item choises"
-          : type == "ItemOptions-Item"
-          ? "Options"
-          : type == "ItemOptions-Option"
-          ? "Items this option is used in"
-          : type == "KioskCategory"
-          ? "Categories enabled"
-          : type == "DiscountStore"
-          ? "Stores this discount is enabled in"
-          : ""
-        ) | translate
-      }}
+      {{ "Items to discount" | translate }}
     </h1>
   </div>
 
@@ -48,10 +26,11 @@
       <mat-label>{{ "Name" | translate }}</mat-label>
       <input disabled matInput type="text" [(ngModel)]="object.name" />
     </mat-form-field>
-    <mat-form-field appearance="outline" class="col-2">
+
+    <!-- <mat-form-field appearance="outline" class="col-2">
       <mat-label>{{ "Order" | translate }}</mat-label>
       <input matInput type="number" [(ngModel)]="object.order" />
-    </mat-form-field>
+    </mat-form-field> -->
 
     <button
       mat-mini-fab
@@ -93,10 +72,33 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
+      <!-- Type -->
       <mat-form-field appearance="outline" class="col-2">
+        <mat-label>{{ "Type" | translate }}</mat-label>
+        <mat-select formControlName="type">
+          <mat-option *ngFor="let type of types" [value]="type">{{
+            type
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- <mat-form-field appearance="outline" class="col-2">
+        <mat-label>{{ "Type" | translate }}</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="type"
+          [matAutocomplete]="autoType"
+        />
+        <mat-autocomplete autoActiveFirstOption #autoType="matAutocomplete">
+          <mat-option *ngFor="let type of types" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field> -->
+      <!-- <mat-form-field appearance="outline" class="col-2">
         <mat-label>{{ "Order" | translate }}</mat-label>
         <input matInput formControlName="order" type="number" />
-      </mat-form-field>
+      </mat-form-field> -->
 
       <button type="submit" mat-mini-fab color="primary" class="m-1 col-2">
         <mat-icon>add</mat-icon>

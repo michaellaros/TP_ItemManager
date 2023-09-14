@@ -100,6 +100,16 @@ export class AssignedEditorComponent {
           this.filteredOptions = this.options;
         });
         break;
+      case 'DiscountStore':
+        this.http.FilterStore({}).subscribe((data) => {
+          let list: SearchedObject[] = [];
+          data.forEach((store) => {
+            list.push(new SearchedObject(store.id, store.name));
+          });
+          this.options = list;
+          this.filteredOptions = this.options;
+        });
+        break;
     }
 
     this.assignForm
@@ -240,6 +250,22 @@ export class AssignedEditorComponent {
             this.ResetForm();
           });
         break;
+      case 'DiscountStore':
+        this.http
+          .UpdateAssignedObject(
+            {
+              Discount_id: this.id,
+              store_id: object.id,
+              StoreOrder: object.order,
+            },
+            'UpdateDiscountStore'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
     }
   }
 
@@ -347,6 +373,21 @@ export class AssignedEditorComponent {
               Category_id: object.id,
             },
             'DeleteKioskCategory'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+      case 'DiscountStore':
+        this.http
+          .DeleteAssignedObject(
+            {
+              Discount_id: this.id,
+              Store_id: object.id,
+            },
+            'DeleteDiscountStore'
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
@@ -469,11 +510,6 @@ export class AssignedEditorComponent {
           });
         break;
       case 'KioskCategory':
-        console.log({
-          Kiosk_id: this.id,
-          Category_id: id,
-          CategoryOrder: this.assignForm.get('order')!.value!,
-        });
         this.http
           .InsertAssignedObject(
             {
@@ -482,6 +518,22 @@ export class AssignedEditorComponent {
               CategoryOrder: this.assignForm.get('order')!.value!,
             },
             'InsertKioskCategory'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+      case 'DiscountStore':
+        this.http
+          .InsertAssignedObject(
+            {
+              Discount_id: this.id,
+              Store_id: id,
+              StoreOrder: this.assignForm.get('order')!.value!,
+            },
+            'InsertDiscountStore'
           )
           .subscribe((data) => {
             this.AssignedObjects = data;

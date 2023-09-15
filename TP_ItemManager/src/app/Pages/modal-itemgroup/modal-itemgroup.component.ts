@@ -51,7 +51,7 @@ export class ModalItemgroupComponent {
 
         if (this.flg_insert) {
           console.log(this.GetItemGroupFromForm());
-          this.http.InsertItem(this.GetItemGroupFromForm()).subscribe((data) => {
+          this.http.InsertItemGroup(this.GetItemGroupFromForm()).subscribe((data) => {
             this.itemGroup = data;
 
             this.UpdateForm();

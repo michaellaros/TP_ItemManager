@@ -119,6 +119,10 @@ export class HttpService {
     console.log(discount);
     return this.http.post<Category>(this.urlAPI + 'InsertDiscount', discount);
   }
+  InsertItemGroup(itemGroup: ItemGroup) {
+    console.log(itemGroup);
+    return this.http.post<Category>(this.urlAPI + 'InsertItemGroup', itemGroup);
+  }
 
   UpdateItem(item: Item) {
     console.log(item);

@@ -22,17 +22,17 @@
             <input formControlName="name" matInput />
           </mat-form-field>
 
-          <mat-form-field>
-            <mat-label>{{ "Barcode" | translate }}</mat-label>
-            <input formControlName="barcode" matInput  />
-          </mat-form-field>
+
 
         </div>
 
       </div>
 
     </form>
-
+    <button mat-raised-button color="primary"
+    [disabled]="discountForm.invalid" (click)="SubmitForm()">
+      {{ flg_insert ? "Create" : ("Save" | translate) }}
+    </button>
   </div>
 
 </mat-dialog-content>

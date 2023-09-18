@@ -17,6 +17,7 @@ export class Item {
     public options?: AssignedObject[],
     public categoriesItsIn?: AssignedObject[],
     public optionsItsIn?: AssignedObject[],
+    public groupsItsIn?: AssignedObject[],
     public discountsItsIn?: DiscountedObject[],
     public translations?: Translation[]
   ) {}

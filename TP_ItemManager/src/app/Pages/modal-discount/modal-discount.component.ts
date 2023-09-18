@@ -43,15 +43,28 @@ export class ModalDiscountComponent {
   public SubmitForm() {
     console.log('submit');
 
-    console.log(this.GetDiscountFromForm());
-    this.http.UpdateDiscount(this.GetDiscountFromForm()).subscribe((data) => {
-      this.discount = data;
+    if (this.flg_insert) {
+      console.log(this.GetDiscountFromForm());
+      this.http.InsertDiscount(this.GetDiscountFromForm()).subscribe((data) => {
+        this.discount = data;
 
-      this.UpdateForm();
-      this._snackBar.open('Discount successfully updated!', 'Ok', {
-        duration: this.status.snackbarDuration,
+        this.UpdateForm();
+        this.flg_insert = false;
+        this._snackBar.open('Discount successfully created!', 'Ok', {
+          duration: this.status.snackbarDuration,
+        });
       });
-    });
+    } else {
+      console.log(this.GetDiscountFromForm());
+      this.http.UpdateItem(this.GetDiscountFromForm()).subscribe((data) => {
+        this.discount = data;
+
+        this.UpdateForm();
+        this._snackBar.open('Discount successfully updated!', 'Ok', {
+          duration: this.status.snackbarDuration,
+        });
+      });
+    }
   }
 
   GetDiscountFromForm(): Discount {

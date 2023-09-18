@@ -24,6 +24,8 @@
           ? "Stores this discount is enabled in"
           : type == "ItemGroup"
           ? "Items in this group"
+          : type == "ItemGroup-Item"
+          ? "Groups"
           : ""
         ) | translate
       }}

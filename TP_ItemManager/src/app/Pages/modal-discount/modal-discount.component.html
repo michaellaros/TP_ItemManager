@@ -31,6 +31,14 @@
         {{ flg_insert ? ("Create" | translate) : ("Save" | translate) }}
       </button>
     </form>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="discountForm.invalid"
+      (click)="SubmitForm()"
+    >
+      {{ (flg_insert ? "Create" : "Save") | translate }}
+    </button>
   </div>
   <app-discounted-item-editor
     [id]="discount?.id!"

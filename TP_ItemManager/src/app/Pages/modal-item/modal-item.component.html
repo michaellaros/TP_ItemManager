@@ -44,7 +44,7 @@
 
           <mat-form-field>
             <mat-label>{{ "Barcode" | translate }}</mat-label>
-            <input formControlName="barcode" matInput  />
+            <input formControlName="barcode" matInput />
           </mat-form-field>
 
           <!-- <mat-form-field>
@@ -75,27 +75,30 @@
           </mat-checkbox>
         </div>
       </div>
-
-
     </form>
 
-    <form [formGroup]="itemvatform" class="formGroup2" >
-
-    <div class="col-4 ">
-      <mat-form-field>
-      <mat-label>{{ "Price" | translate }}</mat-label>
-      <input  formControlName="price" matInput />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>{{ "Vat" | translate }}</mat-label>
-      <input  formControlName="vat" matInput  />
-    </mat-form-field>
-  </div>
-  </form>
-  <button mat-raised-button color="primary"
-  [disabled]="itemForm.invalid || this.itemvatform.get('price')!.value! == ''" (click)="SubmitForm()">
-    {{ flg_insert ? "Create" : ("Save" | translate) }}
-  </button>
+    <form [formGroup]="itemvatform" class="formGroup2">
+      <div class="col-4">
+        <mat-form-field>
+          <mat-label>{{ "Price" | translate }}</mat-label>
+          <input formControlName="price" matInput />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>{{ "Vat" | translate }}</mat-label>
+          <input formControlName="vat" matInput />
+        </mat-form-field>
+      </div>
+    </form>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="
+        itemForm.invalid || this.itemvatform.get('price')!.value! == ''
+      "
+      (click)="SubmitForm()"
+    >
+      {{ flg_insert ? "Create" : ("Save" | translate) }}
+    </button>
   </div>
   <app-translations-editor
     [id]="item.id!"
@@ -122,6 +125,12 @@
     [type]="'OptionItems-Item'"
     [id]="item.id!"
     [AssignedObjects]="item.optionsItsIn"
+    [flg_insert]="this.flg_insert"
+  />
+  <app-discounted-item-editor
+    [id]="item.id!"
+    [type]="'Item'"
+    [DiscountedObjects]="item.discountsItsIn"
     [flg_insert]="this.flg_insert"
   />
 </mat-dialog-content>

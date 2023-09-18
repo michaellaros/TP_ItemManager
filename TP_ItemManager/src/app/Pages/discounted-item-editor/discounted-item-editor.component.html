@@ -1,5 +1,8 @@
-<mat-toolbar class="w-100 position-relative" color="primary">
-  <!-- [class.mt-4]="type == 'KioskCategory'" -->
+<mat-toolbar
+  class="w-100 position-relative"
+  color="primary"
+  [class.mt-4]="type == 'Discount'"
+>
   <div>
     <h1 class="px-0 my-2 text-white">
       {{ "Items to discount" | translate }}
@@ -21,25 +24,20 @@
   [@bodyExpansion]="this.state ? 'collapsed' : 'expanded'"
   class="expandable-content"
 >
-  <div class="row px-4 pt-4" *ngFor="let object of AssignedObjects">
+  <div class="row px-4 pt-4" *ngFor="let object of DiscountedObjects">
     <mat-form-field appearance="outline" class="col-8">
       <mat-label>{{ "Name" | translate }}</mat-label>
       <input disabled matInput type="text" [(ngModel)]="object.name" />
     </mat-form-field>
 
-    <!-- <mat-form-field appearance="outline" class="col-2">
-      <mat-label>{{ "Order" | translate }}</mat-label>
-      <input matInput type="number" [(ngModel)]="object.order" />
-    </mat-form-field> -->
+    <mat-form-field appearance="outline" class="col-2">
+      <mat-label>{{ "Type" | translate }}</mat-label>
+      <input disabled matInput type="text" [(ngModel)]="object.type" />
+    </mat-form-field>
 
-    <button
-      mat-mini-fab
-      color="primary"
-      class="p-1 col-1"
-      (click)="UpdateAssignedObject(object)"
-    >
+    <!-- <button mat-mini-fab color="primary" class="p-1 col-1" disabled>
       <mat-icon>save</mat-icon>
-    </button>
+    </button> -->
     <button
       mat-mini-fab
       color="primary"
@@ -76,9 +74,11 @@
       <mat-form-field appearance="outline" class="col-2">
         <mat-label>{{ "Type" | translate }}</mat-label>
         <mat-select formControlName="type">
-          <mat-option *ngFor="let type of types" [value]="type">{{
-            type
-          }}</mat-option>
+          <mat-option
+            *ngFor="let discountType of types"
+            [value]="discountType"
+            >{{ discountType | translate }}</mat-option
+          >
         </mat-select>
       </mat-form-field>
       <!-- <mat-form-field appearance="outline" class="col-2">

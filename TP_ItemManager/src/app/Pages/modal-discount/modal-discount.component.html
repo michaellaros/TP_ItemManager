@@ -27,15 +27,19 @@
           </mat-form-field> -->
         </div>
       </div>
+      <button mat-raised-button color="primary" type="submit">
+        {{ flg_insert ? ("Create" | translate) : ("Save" | translate) }}
+      </button>
     </form>
   </div>
-  <app-assigned-editor
-    [type]="'DiscountStore'"
+  <app-discounted-item-editor
     [id]="discount?.id!"
-    [AssignedObjects]="discount?.stores"
+    [type]="'Discount'"
+    [DiscountedObjects]="discount?.items"
     [flg_insert]="this.flg_insert"
   />
-  <app-discounted-item-editor
+  <app-assigned-editor
+    [type]="'DiscountStore'"
     [id]="discount?.id!"
     [AssignedObjects]="discount?.stores"
     [flg_insert]="this.flg_insert"

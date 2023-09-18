@@ -9,9 +9,8 @@ import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { map } from 'rxjs';
-import { AssignedObject } from 'src/app/Models/AssignedObject';
+import { DiscountedObject } from 'src/app/Models/DiscountedObject';
 import { DiscountedItemType } from 'src/app/Models/Enums/DiscountedItemType';
-import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { HttpService } from 'src/app/Services/http.service';
 
 @Component({
@@ -32,48 +31,89 @@ import { HttpService } from 'src/app/Services/http.service';
   ],
 })
 export class DiscountedItemEditorComponent {
-  @Input() AssignedObjects?: AssignedObject[];
+  @Input() DiscountedObjects?: DiscountedObject[];
+  @Input() public type!: string;
   @Input() flg_insert!: boolean;
   @Input() id!: string;
 
-  public types = Object.values(DiscountedItemType);
+  public types?: DiscountedItemType[];
 
-  public newAssignedObject: AssignedObject;
+  public newAssignedObject: DiscountedObject;
   public state: boolean = true;
-  public options: SearchedObject[] = [];
 
   assignForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    type: new FormControl(this.types[0], [Validators.required]),
+    type: new FormControl(''),
     order: new FormControl(999, [
       Validators.max(999),
       Validators.min(1),
       Validators.required,
     ]),
   });
-  public filteredOptions?: SearchedObject[];
+
+  public items: DiscountedObject[] = [];
+  public itemGroups: DiscountedObject[] = [];
+  public discounts: DiscountedObject[] = [];
+  public filteredOptions?: DiscountedObject[];
 
   public constructor(
     private http: HttpService,
     private _snackBar: MatSnackBar
   ) {
-    this.newAssignedObject = new AssignedObject();
+    this.newAssignedObject = new DiscountedObject();
+    console.log(this.type);
   }
 
   ngOnInit() {
-    this.http.FilterStore({}).subscribe((data) => {
-      let list: SearchedObject[] = [];
-      data.forEach((store) => {
-        list.push(new SearchedObject(store.id, store.name));
-      });
-      this.options = list;
-      this.filteredOptions = this.options;
+    this.types =
+      this.type === 'Discount'
+        ? [DiscountedItemType.Item, DiscountedItemType.Group]
+        : [DiscountedItemType.Discount];
+    this.assignForm.patchValue({
+      name: '',
+      type:
+        this.type == 'Discount'
+          ? DiscountedItemType.Item
+          : DiscountedItemType.Discount,
     });
 
+    if (this.type !== 'Discount') this.assignForm.get('type')!.disable();
+
+    this.http.FilterItemGroups({}).subscribe((data) => {
+      this.itemGroups = this.MapToArray(data).map((itemGroup) => {
+        itemGroup.type = DiscountedItemType.Group;
+        return itemGroup;
+      });
+    });
+
+    this.http.FilterDiscounts({}).subscribe((data) => {
+      this.discounts = this.MapToArray(data).map((discount) => {
+        discount.type = DiscountedItemType.Discount;
+        return discount;
+      });
+      if (this.type != 'Discount') {
+        this.filteredOptions = this.discounts;
+        this._filter('');
+      }
+    });
+    this.http.FilterItems({}).subscribe((data) => {
+      this.items = this.MapToArray(data).map((itemGroup) => {
+        itemGroup.type = DiscountedItemType.Item;
+        return itemGroup;
+      });
+
+      if (this.type == 'Discount') {
+        this.filteredOptions = this.items;
+        this._filter('');
+      }
+    });
     this.assignForm
       .get('name')!
       .valueChanges.pipe(map((value) => this._filter(value || '')))
-      .subscribe((data) => (this.filteredOptions = data));
+      .subscribe();
+    this.assignForm
+      .get('type')!
+      .valueChanges.subscribe(() => this.assignForm.patchValue({ name: '' }));
   }
 
   toggle(): void {
@@ -82,101 +122,221 @@ export class DiscountedItemEditorComponent {
     }
   }
 
-  private _filter(value: string): SearchedObject[] {
+  private _filter(value: string) {
     const filterValue = value.toLowerCase();
-
-    return this.options.filter(
-      (option) =>
-        option.name?.toLowerCase().includes(filterValue) &&
-        this.AssignedObjects?.findIndex(
-          (assigned) => assigned.id == option.id
-        ) == -1
-    );
+    switch (this.assignForm.get('type')!.value!) {
+      case DiscountedItemType.Group:
+        this.filteredOptions = this.itemGroups.filter(
+          (itemGroup) =>
+            itemGroup.name?.toLowerCase().includes(filterValue) &&
+            this.DiscountedObjects?.findIndex(
+              (assigned) => assigned.id == itemGroup.id
+            ) == -1
+        );
+        break;
+      case DiscountedItemType.Discount:
+        this.filteredOptions = this.discounts.filter(
+          (discount) =>
+            discount.name?.toLowerCase().includes(filterValue) &&
+            this.DiscountedObjects?.findIndex(
+              (assigned) => assigned.id == discount.id
+            ) == -1
+        );
+        break;
+      case DiscountedItemType.Item:
+      default:
+        this.filteredOptions = this.items.filter(
+          (item) =>
+            item.name?.toLowerCase().includes(filterValue) &&
+            this.DiscountedObjects?.findIndex(
+              (assigned) => assigned.id == item.id
+            ) == -1
+        );
+    }
   }
 
-  UpdateAssignedObject(object: AssignedObject) {
-    this.http
-      .UpdateAssignedObject(
-        {
-          Discount_id: this.id,
-          store_id: object.id,
-          StoreOrder: object.order,
-        },
-        'UpdateDiscountStore'
-      )
-      .subscribe((data) => {
-        this.AssignedObjects = data;
-        console.log(this.AssignedObjects);
-        this.ResetForm();
-      });
-  }
-
-  DeleteAssignedObject(object: AssignedObject) {
+  DeleteAssignedObject(object: DiscountedObject) {
     if (!confirm('The element will be deleted permanently!')) {
       return;
     }
+    console.log(this.assignForm.get('type')!.value!);
 
-    this.http
-      .DeleteAssignedObject(
-        {
-          Discount_id: this.id,
-          Store_id: object.id,
-        },
-        'DeleteDiscountStore'
-      )
-      .subscribe((data) => {
-        this.AssignedObjects = data;
-        console.log(this.AssignedObjects);
-        this.ResetForm();
-      });
+    switch (object.type) {
+      case DiscountedItemType.Group:
+        this.http
+          .DeleteAssignedObject(
+            {
+              Discount_id: this.id,
+              Item_group_id: object.id,
+            },
+            'DeleteDiscountItemGroupFromDiscount'
+          )
+          .subscribe((data) => {
+            this.DiscountedObjects = data;
+            this.ResetForm();
+          });
+        break;
+      case DiscountedItemType.Discount:
+        if (this.type == 'Item') {
+          this.http
+            .DeleteAssignedObject(
+              {
+                Discount_id: object.id,
+                item_id: this.id,
+              },
+              'DeleteDiscountItemFromItem'
+            )
+            .subscribe((data) => {
+              this.DiscountedObjects = data;
+              this.ResetForm();
+            });
+        } else {
+          this.http
+            .DeleteAssignedObject(
+              {
+                Discount_id: object.id,
+                item_group_id: this.id,
+              },
+              'DeleteDiscountItemGroupFromItemGroup'
+            )
+            .subscribe((data) => {
+              this.DiscountedObjects = data;
+              this.ResetForm();
+            });
+        }
+
+        break;
+      case DiscountedItemType.Item:
+      default:
+        this.http
+          .DeleteAssignedObject(
+            {
+              Discount_id: this.id,
+              Item_id: object.id,
+            },
+            this.type === 'Discount'
+              ? 'DeleteDiscountItemFromDiscount'
+              : 'DeleteDiscountItemFromItem'
+          )
+          .subscribe((data) => {
+            this.DiscountedObjects = data;
+            console.log(this.DiscountedObjects);
+            this.ResetForm();
+          });
+    }
   }
 
   InsertAssignedObject() {
-    if (!this.assignForm.valid) return;
-
-    const id = this.options.find(
-      (option) => option.name == this.assignForm.get('name')!.value!
-    )?.id;
+    if (!this.assignForm.get('name')!.valid) return;
+    var id;
+    switch (this.assignForm.get('type')!.value!) {
+      case DiscountedItemType.Group:
+        id = this.itemGroups.find(
+          (itemGroup) => itemGroup.name == this.assignForm.get('name')!.value!
+        )?.id;
+        break;
+      case DiscountedItemType.Discount:
+        id = this.discounts.find(
+          (discount) => discount.name == this.assignForm.get('name')!.value!
+        )?.id;
+        break;
+      case DiscountedItemType.Item:
+      default:
+        id = this.items.find(
+          (item) => item.name == this.assignForm.get('name')!.value!
+        )?.id;
+        break;
+    }
 
     if (id == null) {
       this._snackBar.open('Select a valid item!', 'Ok');
       return;
     }
+    switch (this.assignForm.get('type')!.value!) {
+      case DiscountedItemType.Group:
+        this.http
+          .InsertAssignedObject(
+            {
+              Discount_id: this.id,
+              item_group_id: id,
+            },
+            'InsertDiscountItemGroupFromDiscount'
+          )
+          .subscribe((data) => {
+            this.DiscountedObjects = data;
+            this.ResetForm();
+          });
+        break;
+      case DiscountedItemType.Discount:
+        if (this.type == 'Item') {
+          this.http
+            .InsertAssignedObject(
+              {
+                Discount_id: id,
+                item_id: this.id,
+              },
+              'InsertDiscountItemFromItem'
+            )
+            .subscribe((data) => {
+              this.DiscountedObjects = data;
+              this.ResetForm();
+            });
+        } else {
+          this.http
+            .InsertAssignedObject(
+              {
+                Discount_id: id,
+                item_group_id: this.id,
+              },
+              'InsertDiscountItemGroupFromItemGroup'
+            )
+            .subscribe((data) => {
+              this.DiscountedObjects = data;
+              this.ResetForm();
+            });
+        }
 
-    this.http
-      .InsertAssignedObject(
-        {
-          Discount_id: this.id,
-          Store_id: id,
-          StoreOrder: this.assignForm.get('order')!.value!,
-        },
-        'InsertDiscountStore'
-      )
-      .subscribe((data) => {
-        this.AssignedObjects = data;
-        console.log(this.AssignedObjects);
-        this.ResetForm();
-      });
+        break;
+      case DiscountedItemType.Item:
+      default:
+        this.http
+          .InsertAssignedObject(
+            {
+              Discount_id: this.id,
+              Item_id: id,
+            },
+            'InsertDiscountItemFromDiscount'
+          )
+          .subscribe((data) => {
+            this.DiscountedObjects = data;
+            console.log(this.DiscountedObjects);
+            this.ResetForm();
+          });
+    }
   }
 
-  GetCategoryFromForm(): AssignedObject {
-    return new AssignedObject(
+  GetCategoryFromForm(): DiscountedObject {
+    return new DiscountedObject(
       this.assignForm.get('id')!.value!,
-      this.assignForm.get('name')!.value!,
-      this.assignForm.get('order')!.value!
+      this.assignForm.get('name')!.value!
     );
   }
 
-  MapToArray(map: any): SearchedObject[] {
-    let list: SearchedObject[] = [];
+  MapToArray(map: any): DiscountedObject[] {
+    let list: DiscountedObject[] = [];
     Object.keys(map).forEach((key) => {
-      list.push(new SearchedObject(key, map[key]));
+      list.push(new DiscountedObject(key, map[key]));
     });
-    this.options = list;
     return list.sort((a, b) => (a.name! < b.name! ? -1 : 1));
   }
 
   ResetForm() {
-    this.assignForm.reset({ name: '', order: 999 });
+    this.assignForm.reset({
+      name: '',
+      type:
+        this.type === 'Discount'
+          ? DiscountedItemType.Item
+          : DiscountedItemType.Discount,
+    });
   }
 }

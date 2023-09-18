@@ -138,7 +138,7 @@ export class AssignedEditorComponent {
         option.name?.toLowerCase().includes(filterValue) &&
         this.AssignedObjects?.findIndex(
           (assigned) => assigned.id == option.id
-        ) == -1
+        ) !== -1
     );
   }
 

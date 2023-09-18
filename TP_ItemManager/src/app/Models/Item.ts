@@ -1,4 +1,5 @@
 import { AssignedObject } from './AssignedObject';
+import { DiscountedObject } from './DiscountedObject';
 import { Translation } from './Translation';
 
 export class Item {
@@ -16,6 +17,7 @@ export class Item {
     public options?: AssignedObject[],
     public categoriesItsIn?: AssignedObject[],
     public optionsItsIn?: AssignedObject[],
+    public discountsItsIn?: DiscountedObject[],
     public translations?: Translation[]
   ) {}
 }

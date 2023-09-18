@@ -1,6 +1,6 @@
 <mat-toolbar
   class="w-100 position-relative"
-  [class.mt-4]="type == 'KioskCategory' || type == 'ItemGroup'"
+  [class.mt-4]="type == 'KioskCategory' || type == 'ItemGroup-ItemGroup'"
   color="primary"
 >
   <div>
@@ -22,7 +22,7 @@
           ? "Categories enabled"
           : type == "DiscountStore"
           ? "Stores this discount is enabled in"
-          : type == "ItemGroup"
+          : type == "ItemGroup-ItemGroup"
           ? "Items in this group"
           : type == "ItemGroup-Item"
           ? "Groups"

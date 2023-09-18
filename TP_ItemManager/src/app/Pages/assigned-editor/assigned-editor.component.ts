@@ -101,7 +101,7 @@ export class AssignedEditorComponent {
           this.filteredOptions = this.options;
         });
         break;
-      case 'ItemGroup':
+      case 'ItemGroup-ItemGroup':
         this.http.FilterItems({}).subscribe((data) => {
           this.options = this.MapToArray(data);
           this.filteredOptions = this.options;
@@ -256,6 +256,22 @@ export class AssignedEditorComponent {
               CategoryOrder: object.order,
             },
             'UpdateKioskCategory'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+      case 'ItemGroup-ItemGroup':
+        this.http
+          .UpdateAssignedObject(
+            {
+              Discount_id: this.id,
+              store_id: object.id,
+              StoreOrder: object.order,
+            },
+            'UpdateDiscountStore'
           )
           .subscribe((data) => {
             this.AssignedObjects = data;

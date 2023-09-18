@@ -25,22 +25,17 @@
             <mat-label>{{ "Description" | translate }}</mat-label>
             <textarea formControlName="description" matInput></textarea>
           </mat-form-field>
-
-
         </div>
       </div>
-
-
     </form>
 
-  <button mat-raised-button color="primary"
-  (click)="SubmitForm()">
-    {{ flg_insert ? "Create" : ("Save" | translate) }}
-  </button>
+    <button mat-raised-button color="primary" (click)="SubmitForm()">
+      {{ flg_insert ? "Create" : ("Save" | translate) }}
+    </button>
   </div>
 
   <app-assigned-editor
-    [type]="'ItemInItemGroup'"
+    [type]="'ItemGroup-ItemGroup'"
     [id]="itemGroup.id!"
     [AssignedObjects]="itemGroup.itemList"
     [flg_insert]="this.flg_insert"

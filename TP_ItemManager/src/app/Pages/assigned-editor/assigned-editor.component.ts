@@ -101,14 +101,14 @@ export class AssignedEditorComponent {
           this.filteredOptions = this.options;
         });
         break;
-      case 'ItemGroup-ItemGroup':
-        this.http.FilterItems({}).subscribe((data) => {
+      case 'Item-ItemGroup':
+        this.http.FilterItemGroups({}).subscribe((data) => {
           this.options = this.MapToArray(data);
           this.filteredOptions = this.options;
         });
         break;
-      case 'ItemGroup-Item':
-        this.http.FilterItemGroups({}).subscribe((data) => {
+        case 'ItemGroup-Item':
+        this.http.FilterItems({}).subscribe((data) => {
           this.options = this.MapToArray(data);
           this.filteredOptions = this.options;
         });
@@ -150,6 +150,7 @@ export class AssignedEditorComponent {
   }
 
   UpdateAssignedObject(object: AssignedObject) {
+    console.log(this.type)
     switch (this.type) {
       case 'CategoryItems-Category':
         this.http
@@ -263,7 +264,7 @@ export class AssignedEditorComponent {
             this.ResetForm();
           });
         break;
-      case 'ItemGroup-ItemGroup':
+      case 'ItemGroup-Item':
         this.http
           .UpdateAssignedObject(
             {
@@ -271,7 +272,7 @@ export class AssignedEditorComponent {
               store_id: object.id,
               StoreOrder: object.order,
             },
-            'UpdateDiscountStore'
+            'UpdateItemGroupItem'
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
@@ -295,6 +296,41 @@ export class AssignedEditorComponent {
             this.ResetForm();
           });
         break;
+
+        case 'Item-ItemGroup':
+        this.http
+          .UpdateAssignedObject(
+            {
+              idItem: this.id,
+              idItemGroup: object.id,
+              Order: object.order?.toString(),
+            },
+            'UpdateItemItemGroup'
+          ) //finire update
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+
+        case 'ItemGroup-Item':
+        this.http
+          .UpdateAssignedObject(
+            {
+              idItem: object.id,
+              idItemGroup: this.id,
+              Order: object.order?.toString(),
+            },
+            'UpdateItemGroupItem'
+          ) //finire update
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+
     }
   }
 
@@ -302,6 +338,7 @@ export class AssignedEditorComponent {
     if (!confirm('The element will be deleted permanently!')) {
       return;
     }
+    console.log(object)
     switch (this.type) {
       case 'CategoryItems-Category':
         this.http
@@ -417,6 +454,38 @@ export class AssignedEditorComponent {
               Store_id: object.id,
             },
             'DeleteDiscountStore'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+
+        case 'Item-ItemGroup':
+        this.http
+          .DeleteAssignedObject(
+            {
+              idItem: this.id,
+              idItemGroup: object.id
+            },
+            'DeleteItemItemGroup'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+
+        case 'ItemGroup-Item':
+        this.http
+          .DeleteAssignedObject(
+            {
+              idItem: object.id,
+              idItemGroup: this.id
+            },
+            'DeleteItemGroupItem'
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
@@ -563,6 +632,40 @@ export class AssignedEditorComponent {
               StoreOrder: this.assignForm.get('order')!.value!,
             },
             'InsertDiscountStore'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+
+        case 'Item-ItemGroup':
+        this.http
+          .InsertAssignedObject(
+            {
+              idItem: this.id,
+              idItemGroup: id,
+              Order: this.assignForm.get('order')!.value!,
+            },
+            'InsertItemGroupItem'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+
+        case 'ItemGroup-Item':
+        this.http
+          .InsertAssignedObject(
+            {
+              idItem: id,
+              idItemGroup: this.id,
+              Order: this.assignForm.get('order')!.value!,
+            },
+            'InsertItemItemGroups'
           )
           .subscribe((data) => {
             this.AssignedObjects = data;

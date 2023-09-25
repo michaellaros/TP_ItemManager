@@ -26,21 +26,20 @@ export class ModalItemComponent {
   itemForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     description: new FormControl(''),
-     //[Validators.required] rimosso perchè se nella creazione item non metti la descrizione
-     //una volta creato se vuoi cambiare il nome sei obbligato per forza a
+    //[Validators.required] rimosso perchè se nella creazione item non metti la descrizione
+    //una volta creato se vuoi cambiare il nome sei obbligato per forza a
     // mettere una descrizione
-    barcode: new FormControl('', [Validators.required]),
+    barcode: new FormControl(''),
     flg_addToCart: new FormControl(true),
     flg_verifyAdult: new FormControl(false),
     flg_isMenu: new FormControl(false),
     available: new FormControl(true),
   });
 
-  itemvatform= new FormGroup({
-    price: new FormControl({value:'0',disabled:true}),
-    vat: new FormControl({value:'0',disabled:true})
-  })
-
+  itemvatform = new FormGroup({
+    price: new FormControl({ value: '0', disabled: true }),
+    vat: new FormControl({ value: '0', disabled: true }),
+  });
 
   constructor(
     @Inject('IMAGES_URL') public imageUrl: string,
@@ -59,28 +58,22 @@ export class ModalItemComponent {
 
   ngOnInit() {
     this.UpdateForm();
-    this.itemForm.get("barcode")?.valueChanges.subscribe((data)=>{
-      if(this.itemForm.get("barcode")?.value == undefined || this.itemForm.get("barcode")?.value == null || this.itemForm.get("barcode")?.value == '')
-      {this.itemvatform.patchValue({
-        price:'',
-        vat:''
-      });}
-       else this.GetItemVat();
-    })
-  }
+    this.itemForm.get('barcode')?.valueChanges.subscribe((data) => {
+      console.log(data);
 
+      this.GetItemVat(data || '');
+    });
+  }
 
   public SubmitForm() {
     console.log('submit');
     if (this.itemForm.valid) {
-    if(this.item.imagePath == null){
-      this._snackBar.open('Select item image!', 'Ok',{
-        duration:this.status.snackbarDuration
-      });
-      return;
-    }
-    else{
-
+      if (this.item.imagePath == null) {
+        this._snackBar.open('Select item image!', 'Ok', {
+          duration: this.status.snackbarDuration,
+        });
+        return;
+      } else {
         if (this.flg_insert) {
           console.log(this.GetItemFromForm());
           this.http.InsertItem(this.GetItemFromForm()).subscribe((data) => {
@@ -88,8 +81,8 @@ export class ModalItemComponent {
 
             this.UpdateForm();
             this.flg_insert = false;
-            this._snackBar.open('Item successfully created!', 'Ok',{
-              duration:this.status.snackbarDuration
+            this._snackBar.open('Item successfully created!', 'Ok', {
+              duration: this.status.snackbarDuration,
             });
           });
         } else {
@@ -97,16 +90,15 @@ export class ModalItemComponent {
           this.http.UpdateItem(this.GetItemFromForm()).subscribe((data) => {
             this.item = data;
 
-            this.GetItemVat();
+            this.GetItemVat(this.item.barcode || '');
             this.UpdateForm();
-            this._snackBar.open('Item successfully updated!', 'Ok',{
-              duration:this.status.snackbarDuration
+            this._snackBar.open('Item successfully updated!', 'Ok', {
+              duration: this.status.snackbarDuration,
             });
           });
         }
       }
     }
-
   }
 
   GetItemFromForm(): Item {
@@ -124,24 +116,29 @@ export class ModalItemComponent {
     );
   }
 
-  GetItemVat(){
-    this.http.GetItemVat(this.itemForm.get("barcode")?.value!).subscribe((data)=>{
-      if(data != null){this.itemvatform.patchValue({
-        price:data.price + '€',
-        vat:data.vat + '%'
+  GetItemVat(barcode: string) {
+    console.log(barcode != null);
+    console.log(barcode != undefined);
+    console.log(barcode != '');
+    if (barcode == undefined || barcode == null || barcode == '') {
+      this.itemvatform.patchValue({
+        price: '',
+        vat: '',
       });
+      return;
     }
-      else {this.itemvatform.patchValue({
-        price:'',
-        vat:''
+
+    this.http.GetItemVat(barcode).subscribe((data) => {
+      this.itemvatform.patchValue({
+        price: data != null ? data.price + '€' : '',
+        vat: data != null ? data.vat + '%' : '',
       });
-    }
-    })
+    });
   }
+
   UpdateForm() {
     console.log(this.item);
     if (this.item != null) {
-
       this.itemForm.patchValue({
         name: this.item.name,
         description: this.item.description,
@@ -151,13 +148,11 @@ export class ModalItemComponent {
         flg_isMenu: this.item.flg_isMenu,
         available: this.item.available,
       });
-      if(this.itemForm.get('barcode')!.value! !=''){
-        console.log(this.item);
-      this.GetItemVat();
 
-      }
+      this.GetItemVat(this.item.barcode || '');
     }
   }
+
   ChangeImage() {
     const dialogRef = this.dialog.open(ImagePickerComponent, {
       data: { image: this.item.imagePath, folderName: 'Items' },

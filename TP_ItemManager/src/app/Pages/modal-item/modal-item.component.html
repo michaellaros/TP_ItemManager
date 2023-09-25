@@ -57,6 +57,7 @@
             formControlName="flg_addToCart"
             matInput
             color="primary"
+            #flg_addToCart
           >
             {{ "Add item to transaction" | translate }}
           </mat-checkbox>
@@ -93,7 +94,8 @@
       mat-raised-button
       color="primary"
       [disabled]="
-        itemForm.invalid || this.itemvatform.get('price')!.value! == ''
+        itemForm.invalid ||
+        (this.itemvatform.get('price')!.value! == '' && flg_addToCart.checked)
       "
       (click)="SubmitForm()"
     >

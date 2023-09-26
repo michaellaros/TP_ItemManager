@@ -401,4 +401,8 @@ export class HttpService {
     formData.append('CSV', CSV);
     return this.http.post<string[]>(this.urlAPI + 'UpdateCSV', formData);
   }
+
+  ReplicationDiscount(){
+    return this.http.post<string>(this.urlAPI + 'ReplicationDiscount', null);
+  }
 }

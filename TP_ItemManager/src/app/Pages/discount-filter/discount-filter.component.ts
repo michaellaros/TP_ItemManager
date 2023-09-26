@@ -75,6 +75,13 @@ export class DiscountFilterComponent {
   }
 
 
+  UpdateDiscount(){
+    this.http.ReplicationDiscount().subscribe((data) => {
+      this._snackBar.open(data,'OK')
+    });
+  }
+
+
 
 
 }

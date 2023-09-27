@@ -100,12 +100,22 @@ export class ModalItemComponent {
       }
     }
   }
+ GetBarcodeField(): string{
+  if(this.itemForm.get('description')!.value!== undefined || this.itemForm.get('description')!.value!== null){
+    console.log("son undefined")
+    return ' ';
 
+  }
+  else{
+    console.log("son value")
+    return this.itemForm.get('description')!.value!
+  }
+ }
   GetItemFromForm(): Item {
     return new Item(
       this.item?.id != undefined ? this.item.id : undefined,
       this.itemForm.get('name')!.value!,
-      this.itemForm.get('description')!.value!,
+      this.GetBarcodeField(),
       this.itemForm.get('barcode')!.value!,
       0,
       this.item.imagePath,

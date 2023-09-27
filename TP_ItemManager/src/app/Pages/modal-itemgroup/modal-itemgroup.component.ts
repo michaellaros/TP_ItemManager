@@ -80,7 +80,7 @@ export class ModalItemgroupComponent {
     return new ItemGroup(
       this.itemGroup?.id != undefined ? this.itemGroup.id : undefined,
       this.itemGroupForm.get('name')!.value!,
-      this.itemGroupForm.get('description')!.value!,
+      this.itemGroupForm.get('description')!.value !== undefined ? this.itemGroupForm.get('description')!.value! : '' ,
 
     )
   }

@@ -26,7 +26,7 @@ export class ModalDiscountComponent {
     name: new FormControl('', [Validators.required]),
     id: new FormControl(''),
     type:new FormControl(this.discountType[0]),
-    value:new FormControl('')
+    value:new FormControl<number>(0, [Validators.required])
   });
 
   constructor(
@@ -77,7 +77,7 @@ export class ModalDiscountComponent {
       this.discount?.id != undefined ? this.discount.id : undefined,
       this.discountForm.get('name')!.value!,
       this.discountForm.get('type')!.value!,
-      this.discountForm.get('value')!.value!.toString()
+      this.discountForm.get('value')!.value!
     );
   }
 

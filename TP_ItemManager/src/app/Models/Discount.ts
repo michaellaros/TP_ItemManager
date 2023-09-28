@@ -6,8 +6,9 @@ export class Discount {
     public id?: string,
     public name?: string,
     public discountType?:string,
-    public discountValue?:string,
+    public discountValue?:number,
     public items?: DiscountedObject[],
     public stores?: AssignedObject[]
+
   ) {}
 }

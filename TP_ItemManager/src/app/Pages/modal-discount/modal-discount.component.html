@@ -19,7 +19,27 @@
           <mat-form-field>
             <mat-label>{{ "Name" | translate }}</mat-label>
             <input formControlName="name" matInput />
+
           </mat-form-field>
+
+          <div class="row" >
+            <div class = "col-6">
+              <mat-form-field>
+                <mat-label>Discount type</mat-label>
+                <mat-select formControlName="type">
+                  <mat-option *ngFor="let type of discountType" [value]="type">
+                    {{type}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+
+            <mat-form-field appearance="outline" class="col-4">
+              <mat-label>{{ "Discount value" | translate }}</mat-label>
+              <input formControlName="value" matInput type="number"/>
+            </mat-form-field>
+
 
           <!-- <mat-form-field>
             <mat-label>{{ "Barcode" | translate }}</mat-label>
@@ -27,6 +47,8 @@
           </mat-form-field> -->
         </div>
       </div>
+       </div>
+
     </form>
     <button
       mat-raised-button

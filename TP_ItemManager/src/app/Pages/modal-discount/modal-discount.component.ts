@@ -10,6 +10,8 @@ import { Discount } from 'src/app/Models/Discount';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 
+
+
 @Component({
   selector: 'app-modal-discount',
   templateUrl: './modal-discount.component.html',
@@ -18,10 +20,13 @@ import { StatusService } from 'src/app/Services/status.service';
 export class ModalDiscountComponent {
   discount?: Discount;
   public flg_insert: boolean;
+  public discountType: string[] = ['Fix price', 'Percent', 'Amount off'];
 
   discountForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     id: new FormControl(''),
+    type:new FormControl(this.discountType[0]),
+    value:new FormControl('')
   });
 
   constructor(
@@ -56,7 +61,7 @@ export class ModalDiscountComponent {
       });
     } else {
       console.log(this.GetDiscountFromForm());
-      this.http.UpdateItem(this.GetDiscountFromForm()).subscribe((data) => {
+      this.http.UpdateDiscount(this.GetDiscountFromForm()).subscribe((data) => {
         this.discount = data;
 
         this.UpdateForm();
@@ -70,7 +75,9 @@ export class ModalDiscountComponent {
   GetDiscountFromForm(): Discount {
     return new Discount(
       this.discount?.id != undefined ? this.discount.id : undefined,
-      this.discountForm.get('name')!.value!
+      this.discountForm.get('name')!.value!,
+      this.discountForm.get('type')!.value!,
+      this.discountForm.get('value')!.value!.toString()
     );
   }
 
@@ -80,7 +87,8 @@ export class ModalDiscountComponent {
       this.discountForm.patchValue({
         name: this.discount.name,
         id: this.discount.id,
-      });
+        value:this.discount.discountValue,
+        type:this.discount.discountType});
     }
   }
 }

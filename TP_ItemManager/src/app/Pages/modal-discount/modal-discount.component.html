@@ -27,8 +27,8 @@
               <mat-form-field>
                 <mat-label>Discount type</mat-label>
                 <mat-select formControlName="type">
-                  <mat-option *ngFor="let type of discountType" [value]="type">
-                    {{type}}
+                  <mat-option *ngFor="let type of discountType" [value]="type.value">
+                    {{type.viewValue}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>

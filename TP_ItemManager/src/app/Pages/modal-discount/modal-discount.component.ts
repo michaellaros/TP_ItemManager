@@ -10,6 +10,10 @@ import { Discount } from 'src/app/Models/Discount';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 
+interface valueType {
+  value: string;
+  viewValue: string;
+}
 
 
 @Component({
@@ -20,12 +24,16 @@ import { StatusService } from 'src/app/Services/status.service';
 export class ModalDiscountComponent {
   discount?: Discount;
   public flg_insert: boolean;
-  public discountType: string[] = ['Fix price', 'Percent', 'Amount off'];
+  discountType: valueType[] = [
+    {value: 'Percent', viewValue: 'Percentage'},
+    {value: 'FixPrice', viewValue: 'Fix price'},
+    {value: 'AmountOff', viewValue: 'Amount off'},
+  ];
 
   discountForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     id: new FormControl(''),
-    type:new FormControl(this.discountType[0]),
+    type:new FormControl(this.discountType[0].viewValue),
     value:new FormControl<number>(0, [Validators.required])
   });
 

@@ -129,8 +129,7 @@ export class HttpService {
     return this.http.post<Category>(this.urlAPI + 'UpdateItem', item);
   }
   UpdateDiscount(discount: Discount) {
-    console.log(discount);
-    return this.http.post<Category>(this.urlAPI + 'UpdateDiscount', discount);
+    return this.http.post<Discount>(this.urlAPI + 'UpdateDiscount', discount);
   }
 
   InsertOption(option: Option) {

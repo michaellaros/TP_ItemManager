@@ -32,9 +32,14 @@ export class ModalDiscountComponent {
 
   discountForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
     id: new FormControl(''),
     type:new FormControl(this.discountType[0].viewValue),
-    value:new FormControl<number>(0, [Validators.required])
+    value:new FormControl<number>(0, [Validators.required,Validators.min(1)]),
+    quantity:new FormControl<number>(1, [Validators.required,Validators.min(1),Validators.max(99)]),
+    flg_discountedItems:new FormControl<boolean>(true),
+    flg_distribute:new FormControl<boolean>(true)
+
   });
 
   constructor(
@@ -51,6 +56,7 @@ export class ModalDiscountComponent {
 
   ngOnInit() {
     this.UpdateForm();
+
   }
 
   public SubmitForm() {
@@ -72,7 +78,7 @@ export class ModalDiscountComponent {
       this.http.UpdateDiscount(this.GetDiscountFromForm()).subscribe((data) => {
         this.discount = data;
 
-        this.UpdateForm();
+        //this.UpdateForm();
         this._snackBar.open('Discount successfully updated!', 'Ok', {
           duration: this.status.snackbarDuration,
         });
@@ -85,7 +91,11 @@ export class ModalDiscountComponent {
       this.discount?.id != undefined ? this.discount.id : undefined,
       this.discountForm.get('name')!.value!,
       this.discountForm.get('type')!.value!,
-      this.discountForm.get('value')!.value!
+      this.discountForm.get('value')!.value!,
+      this.discountForm.get('description')!.value!,
+      this.discountForm.get('quantity')!.value!,
+      this.discountForm.get('flg_discountedItems')!.value!,
+      this.discountForm.get('flg_distribute')!.value!
     );
   }
 
@@ -95,8 +105,12 @@ export class ModalDiscountComponent {
       this.discountForm.patchValue({
         name: this.discount.name,
         id: this.discount.id,
-        value:this.discount.discountValue,
-        type:this.discount.discountType});
+        description:this.discount.description,
+        value:this.discount.value,
+        type:this.discount.type,
+        quantity:this.discount.quantity,
+        flg_discountedItems:this.discount.flg_discountedItems,
+        flg_distribute:this.discount.flg_distribute});
     }
   }
 }

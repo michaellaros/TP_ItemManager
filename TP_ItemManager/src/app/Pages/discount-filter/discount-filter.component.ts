@@ -7,6 +7,8 @@ import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 import { ModalDiscountComponent } from 'src/app/Pages/modal-discount/modal-discount.component';
+import { ModalErrorComponent } from '../modal-error/modal-error.component';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-discount-filter',
@@ -17,8 +19,10 @@ export class DiscountFilterComponent {
   public list!: SearchedObject[];
   public imgPreviewList: any;
   public folderName!: string;
+  public errorList!: {id:string,ip:string}[]
 
   constructor(
+    private spinner: NgxSpinnerService,
     private http: HttpService,
     public status: StatusService,
     public dialog: MatDialog,
@@ -74,11 +78,33 @@ export class DiscountFilterComponent {
     dialogRef.afterClosed().subscribe(() => this.GetDiscounts());
   }
 
+  OpenDialogReturnError(errors:{id:string,ip:string}[]) {
+    const dialogRef = this.dialog.open(ModalErrorComponent, {
+      data:errors
+    });
+    dialogRef.afterClosed().subscribe(() => this.GetDiscounts());
+  }
+
 
   UpdateDiscount(){
-    this.http.ReplicationDiscount().subscribe((data) => {
-      this._snackBar.open(data,'OK')
-    });
+    this.spinner.show();
+    this.http.ReplicationDiscount().subscribe(
+      (data) => {
+        this.spinner.hide();
+        console.log("subscribe")
+        this.errorList = data;
+        if(this.errorList.length >0)
+        // alert('error for store {{}}');
+
+        this.OpenDialogReturnError(this.errorList);
+
+      },(err)=>{
+
+        this.spinner.hide();
+
+      })
+
+
   }
 
 

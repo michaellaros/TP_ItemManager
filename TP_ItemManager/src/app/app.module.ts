@@ -13,6 +13,7 @@ import {
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
 
+import { NgxSpinnerModule } from "ngx-spinner";
 import { HttpService } from './Services/http.service';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
@@ -50,6 +51,7 @@ import { ModalDiscountComponent } from './Pages/modal-discount/modal-discount.co
 import { ItemgroupFilterComponent } from './Pages/itemgroup-filter/itemgroup-filter.component';
 import { ModalItemgroupComponent } from './Pages/modal-itemgroup/modal-itemgroup.component';
 import { DiscountedItemEditorComponent } from './Pages/discounted-item-editor/discounted-item-editor.component';
+import { ModalErrorComponent } from './Pages/modal-error/modal-error.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -83,6 +85,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ItemgroupFilterComponent,
     ModalItemgroupComponent,
     DiscountedItemEditorComponent,
+    ModalErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,6 +94,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MaterialModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
     FormsModule,
     TranslateModule.forRoot({
       defaultLanguage: 'EN',

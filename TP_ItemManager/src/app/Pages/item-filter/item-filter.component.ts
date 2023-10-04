@@ -84,20 +84,6 @@ export class ItemFilterComponent {
   UploadFile(files: any) {
     console.log(files.target.files);
     console.log(URL.createObjectURL(files.target.files[0]));
-
-    // if (
-    //   this.CSV?.includes(files.target.files[0].name!) ||
-    //   this.imgPreviewList?.includes(files.target.files[0].name!)
-    // ) {
-    //   if (
-    //     !confirm(
-    //       'An image with that name already exists, do you want to replace it?'
-    //     )
-    //   ) {
-
-    //     return;
-    //   }
-    // }
     let CSV = files.target.files[0];
     console.log(CSV.name)
     if (CSV)

@@ -1,0 +1,17 @@
+<!-- <div class="row">
+  <div class="col">
+
+  </div>
+  </div>
+</div> -->
+<mat-toolbar class="w-100 position-relative mb-4 header" color="primary">
+  <div>
+    <h1 class="px-0 my-2 text-white">{{ "Update error" | translate }}</h1>
+  </div>
+</mat-toolbar>
+<mat-dialog-content class="p-0 overflow-x-hidden m-4" style="max-height: 80vh">
+  <h1>Update error for following stores</h1>
+  <div *ngFor="let error of errorList">
+  <p> store: {{error.id}} with ip:{{error.ip}}</p>
+  </div>
+</mat-dialog-content>

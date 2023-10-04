@@ -402,6 +402,6 @@ export class HttpService {
   }
 
   ReplicationDiscount(){
-    return this.http.post<string>(this.urlAPI + 'ReplicationDiscount', null);
+    return this.http.post<{id:string,ip:string}[]>(this.urlAPI + 'ReplicationDiscount', null);
   }
 }

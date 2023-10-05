@@ -8,6 +8,13 @@
   <div>
     <h1 class="px-0 my-2 text-white">{{ "Update error" | translate }}</h1>
   </div>
+  <button
+    mat-icon-button
+    class="m-2 position-absolute end-0"
+    [mat-dialog-close]="null"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
 </mat-toolbar>
 <mat-dialog-content class="p-0 overflow-x-hidden m-4" style="max-height: 80vh">
   <h1>Update error for following stores</h1>

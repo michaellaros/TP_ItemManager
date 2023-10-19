@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class StorageManagerService {
 
+  public var1!:number; //role
+  public userPermission:number = 101;
+
   constructor() { }
 
   // ---- token
@@ -20,6 +23,12 @@ export class StorageManagerService {
     localStorage.removeItem(token);
   }
 
+  public CheckPermission(value:number):boolean{
+   if(parseInt(this.getRole())>value){
+    return true
+   }
+   return false;
+  }
   // // ---- username
   // public getUsername(){
   //   return localStorage.getItem('ICashWebApplicationUsername')!;
@@ -33,18 +42,18 @@ export class StorageManagerService {
   //   localStorage.removeItem(username);
   // }
 
-  // // ---- role
-  // public getRole(){
-  //   return localStorage.getItem('ICashWebApplicationRole')!;
-  // }
+  // ---- role
+  public getRole(){
+    return localStorage.getItem('TP_ItemManager_role')!;
+  }
 
-  // public saveRole(role: string){
-  //   localStorage.setItem('ICashWebApplicationRole', role);
-  // }
+  public saveRole(role: string){
+    localStorage.setItem('TP_ItemManager_role', role);
+  }
 
-  // public removeRole(role: string){
-  //   localStorage.removeItem(role);
-  // }
+  public removeRole(role: string){
+    localStorage.removeItem(role);
+  }
 
   // // ---- store
   // public getStore(){

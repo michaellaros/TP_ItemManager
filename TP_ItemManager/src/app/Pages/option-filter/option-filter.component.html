@@ -36,6 +36,8 @@
         color="primary"
         (click)="OpenDialogModifyOption()"
         class="mx-1"
+        [disabled]="this.storage.CheckPermission(this.storage.userPermission)"
+
       >
         {{ "Add option" | translate }}
       </button>

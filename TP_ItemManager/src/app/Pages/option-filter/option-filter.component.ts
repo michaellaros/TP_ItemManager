@@ -7,6 +7,7 @@ import { StatusService } from 'src/app/Services/status.service';
 import { ModalOptionComponent } from 'src/app/Pages/modal-option/modal-option.component';
 import { Option } from 'src/app/Models/Option';
 import { MatDialog } from '@angular/material/dialog';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 @Component({
   selector: 'app-option-filter',
   templateUrl: './option-filter.component.html',
@@ -22,7 +23,8 @@ export class OptionFilterComponent {
   constructor(
     private http: HttpService,
     public status: StatusService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public storage:StorageManagerService
   ) {}
 
   ngOnInit() {

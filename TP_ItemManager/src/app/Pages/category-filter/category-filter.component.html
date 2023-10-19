@@ -33,6 +33,7 @@
         </button>
       </div>
       <button
+        [disabled]="this.storage.CheckPermission(this.storage.userPermission)"
         mat-raised-button
         color="primary"
         (click)="OpenDialogModifyCategory()"

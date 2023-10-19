@@ -8,6 +8,7 @@ import { StatusService } from 'src/app/Services/status.service';
 import { ModalOptionComponent } from '../modal-option/modal-option.component';
 import { Store } from 'src/app/Models/Store';
 import { ForceReplicationModel } from 'src/app/Models/ForceReplicationModel';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 
 @Component({
   selector: 'app-modal-kiosk',
@@ -32,7 +33,8 @@ export class ModalKioskComponent {
     @Inject(MAT_DIALOG_DATA) private data: { kiosk: Kiosk; store: Store },
     private http: HttpService,
     public status: StatusService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public storage:StorageManagerService
   ) {
     {
       this.kiosk = data.kiosk;
@@ -47,6 +49,16 @@ export class ModalKioskComponent {
 
   ngOnInit() {
     this.UpdateForm();
+    if (!this.storage.CheckPermission(this.storage.userPermission)) {
+      this.kioskForm.get('name')?.disable();
+      this.kioskForm.get('ip')?.disable();
+      this.kioskForm.get('store_name')?.disable();
+      this.kioskForm.get('flg_consumations')?.disable();
+
+
+
+    }
+
   }
 
   ForceReplication(id: string) {

@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, startWith, map } from 'rxjs';
 import { AssignedObject } from 'src/app/Models/AssignedObject';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 import { HttpService } from 'src/app/Services/http.service';
 
 @Component({
@@ -39,6 +40,8 @@ export class AssignedEditorComponent {
   public newAssignedObject: AssignedObject;
   public state: boolean = true;
   public options: SearchedObject[] = [];
+  public typeList: string[] = ['ItemOptions-Item',
+  'OptionItems-Item','ItemOptions-Item','Item','Item-ItemGroup']
 
   assignForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -52,12 +55,13 @@ export class AssignedEditorComponent {
 
   public constructor(
     private http: HttpService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public storage:StorageManagerService
   ) {
     this.newAssignedObject = new AssignedObject();
   }
   ngOnInit() {
-    console.log(this.AssignedObjects);
+    console.log(this.IsEnabled());
     switch (this.type) {
       case 'CategoryItems-Category':
         this.http.FilterItems({}).subscribe((data) => {
@@ -695,5 +699,19 @@ export class AssignedEditorComponent {
 
   ResetForm() {
     this.assignForm.reset({ name: '', order: 999 });
+  }
+
+  IsEnabled():boolean{
+      if (this.storage.CheckPermission(this.storage.userPermission) && this.IsType(this.type)){
+          return true
+      }
+      return false
+  }
+
+  IsType(type:string):boolean{
+    for(type in this.typeList){
+      return true;
+    }
+    return false;
   }
 }

@@ -9,6 +9,7 @@ import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 import { ModalItemComponent } from 'src/app/Pages/modal-item/modal-item.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 
 @Component({
   selector: 'app-item-filter',
@@ -20,12 +21,12 @@ export class ItemFilterComponent {
   public CSV?: string[];
   public imgPreviewList: any;
   public folderName!: string;
-
   constructor(
     private http: HttpService,
     public status: StatusService,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
+    public storage:StorageManagerService
 
 
 

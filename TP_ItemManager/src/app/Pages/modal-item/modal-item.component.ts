@@ -12,6 +12,7 @@ import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 import { ImagePickerComponent } from '../image-picker/image-picker.component';
 import { ItemVat } from 'src/app/Models/ItemVat';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 
 @Component({
   selector: 'app-modal-item',
@@ -19,6 +20,7 @@ import { ItemVat } from 'src/app/Models/ItemVat';
   styleUrls: ['./modal-item.component.scss'],
 })
 export class ModalItemComponent {
+
   item: Item;
   itemVat!: ItemVat;
   public flg_insert: boolean;
@@ -48,7 +50,8 @@ export class ModalItemComponent {
     private http: HttpService,
     public status: StatusService,
     private _snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public storage: StorageManagerService
   ) {
     {
       this.item = this.data || new Item();
@@ -63,6 +66,18 @@ export class ModalItemComponent {
 
       this.GetItemVat(data || '');
     });
+
+    if (!this.storage.CheckPermission(this.storage.userPermission)) {
+      console.log('permessi' + this.storage.CheckPermission(this.storage.userPermission))
+      this.itemForm.get('name')?.disable();
+      this.itemForm.get('description')?.disable();
+      this.itemForm.get('barcode')?.disable();
+      this.itemForm.get('flg_addToCart')?.disable();
+      this.itemForm.get('flg_verifyAdult')?.disable();
+      this.itemForm.get('flg_isMenu')?.disable();
+
+
+    }
   }
 
   public SubmitForm() {

@@ -4,6 +4,7 @@ export class Store {
   constructor(
     public id?: string,
     public name?: string,
+    public country_id?: string,
     public kiosks?: any,
     public formattedKiosk?: SearchedObject[]
   ) {}

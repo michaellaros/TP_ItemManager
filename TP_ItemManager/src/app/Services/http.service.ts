@@ -29,6 +29,8 @@ import { DiscountFilterModel } from '../Models/DiscountFilterModel';
 import { Discount } from '../Models/Discount';
 import { ItemGroup } from '../Models/ItemGroup';
 import { ItemGroupFilterModel } from '../Models/ItemGroupFilterModel';
+import { Country } from '../Models/Country';
+import { StorageManagerService } from './auth-services/storage-manager.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -42,11 +44,13 @@ export class HttpService {
     private http: HttpClient,
     @Inject('BASE_URL') baseUrl: string,
     @Inject('ASSETS_URL') assetsUrl: string,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private storage:StorageManagerService
   ) {
     this.urlAPI = baseUrl + '/';
     this.assetsUrl = assetsUrl;
   }
+
 
   FilterItems(filter: ItemFilterModel) {
     return this.http.post<any>(this.urlAPI + 'Items', filter, {
@@ -113,20 +117,20 @@ export class HttpService {
 
   InsertItem(item: Item) {
     console.log(item);
-    return this.http.post<Category>(this.urlAPI + 'InsertItem', item);
+    return this.http.post<Item>(this.urlAPI + 'InsertItem', item);
   }
   InsertDiscount(discount: Discount) {
     console.log(discount);
-    return this.http.post<Category>(this.urlAPI + 'InsertDiscount', discount);
+    return this.http.post<Discount>(this.urlAPI + 'InsertDiscount', discount);
   }
   InsertItemGroup(itemGroup: ItemGroup) {
     console.log(itemGroup);
-    return this.http.post<Category>(this.urlAPI + 'InsertItemGroup', itemGroup);
+    return this.http.post<ItemGroup>(this.urlAPI + 'InsertItemGroup', itemGroup);
   }
 
   UpdateItem(item: Item) {
     console.log(item);
-    return this.http.post<Category>(this.urlAPI + 'UpdateItem', item);
+    return this.http.post<Item>(this.urlAPI + 'UpdateItem', item);
   }
   UpdateDiscount(discount: Discount) {
     return this.http.post<Discount>(this.urlAPI + 'UpdateDiscount', discount);
@@ -134,12 +138,12 @@ export class HttpService {
 
   InsertOption(option: Option) {
     console.log(option);
-    return this.http.post<Category>(this.urlAPI + 'InsertOption', option);
+    return this.http.post<Option>(this.urlAPI + 'InsertOption', option);
   }
 
   UpdateOption(option: Option) {
     console.log(option);
-    return this.http.post<Category>(this.urlAPI + 'UpdateOption', option);
+    return this.http.post<Option>(this.urlAPI + 'UpdateOption', option);
   }
 
   InsertItemTranslation(id: string, translation: Translation) {
@@ -336,16 +340,25 @@ export class HttpService {
     return this.http.get<Language[]>(this.assetsUrl + 'i18n/languages.json');
   }
   Login(name: string, password: string) {
-    return this.http.post<Token>(this.urlAPI + 'DoLogin', { name, password });
+    return this.http.post<{token:string,role:string}>(this.urlAPI + 'DoLogin', null, {
+      params: new HttpParams().append('name', name)
+      .append('password', password)
+    });
+  }
+  GetRole(username:string){
+    return this.http.get<string>(this.urlAPI + 'GetRole',{
+      params: new HttpParams().append('username', username),
+    });
   }
   GetUsers(filter: any) {
     return this.http.post<any>(this.urlAPI + 'GetUsers', filter);
     //
   }
-  CreateUser(name: string, password: string) {
+  CreateUser(name: string, password: string,role:string) {
     return this.http.post<string>(this.urlAPI + 'CreateUser', {
       name,
       password,
+      role
     });
     //
   }
@@ -353,13 +366,14 @@ export class HttpService {
     return this.http.post<UserModelRequest>(this.urlAPI + 'UpdateUser', {
       id: user.id?.toString(),
       name: user.name,
+      role:user.role?.toString()!
     });
   }
 
   GetUser(id: string) {
     return this.http.post<UserModelRequest>(this.urlAPI + 'GetUser', {
       id: id,
-      name: '',
+      name: ''
     });
   }
   GetDiscount(id: string) {
@@ -404,4 +418,20 @@ export class HttpService {
   ReplicationDiscount(){
     return this.http.post<{id:string,ip:string}[]>(this.urlAPI + 'ReplicationDiscount', null);
   }
+  GetCountries(){
+    return this.http.post<Country[]>(this.urlAPI + 'GetCountries', null);
+  }
+  GetCountry(id:string){
+    return this.http.post<Country>(this.urlAPI + 'GetCountry', null, {
+      params: new HttpParams().append('id', id),
+    });
+  }
+  InsertCountry(country:Country){
+    return this.http.post<Country>(this.urlAPI + 'InsertCountry',country)
+  }
+  UpdateCountry(country:Country){
+    return this.http.post<Country>(this.urlAPI + 'UpdateCountry',country)
+
+  }
+
 }

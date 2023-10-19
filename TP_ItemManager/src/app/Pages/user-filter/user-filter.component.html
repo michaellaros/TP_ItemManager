@@ -37,6 +37,8 @@
         color="primary"
         (click)="OpenDialogAddUser()"
         class="mx-1"
+        [disabled]="this.storage.CheckPermission(this.storage.userPermission)"
+
       >
         {{ "Add user" | translate }}
       </button>

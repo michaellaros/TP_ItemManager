@@ -52,6 +52,7 @@ import { ItemgroupFilterComponent } from './Pages/itemgroup-filter/itemgroup-fil
 import { ModalItemgroupComponent } from './Pages/modal-itemgroup/modal-itemgroup.component';
 import { DiscountedItemEditorComponent } from './Pages/discounted-item-editor/discounted-item-editor.component';
 import { ModalErrorComponent } from './Pages/modal-error/modal-error.component';
+import { ModalCountryComponent } from './Pages/modal-country/modal-country.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -86,6 +87,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalItemgroupComponent,
     DiscountedItemEditorComponent,
     ModalErrorComponent,
+    ModalCountryComponent,
   ],
   imports: [
     BrowserModule,

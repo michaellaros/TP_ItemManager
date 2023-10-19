@@ -58,6 +58,7 @@
     </mat-form-field>
 
     <button
+      [disabled]="!this.IsEnabled()"
       mat-mini-fab
       color="primary"
       class="p-1 col-1"
@@ -66,10 +67,12 @@
       <mat-icon>save</mat-icon>
     </button>
     <button
+      [disabled]="!this.IsEnabled()"
       mat-mini-fab
       color="primary"
       class="p-1 col-1"
       (click)="DeleteAssignedObject(object)"
+
     >
       <mat-icon>delete</mat-icon>
     </button>
@@ -99,10 +102,10 @@
       </mat-form-field>
       <mat-form-field appearance="outline" class="col-2">
         <mat-label>{{ "Order" | translate }}</mat-label>
-        <input matInput formControlName="order" type="number" />
+        <input matInput formControlName="order" type="number"/>
       </mat-form-field>
 
-      <button type="submit" mat-mini-fab color="primary" class="m-1 col-2">
+      <button [disabled]="!this.IsEnabled()" type="submit" mat-mini-fab color="primary" class="m-1 col-2">
         <mat-icon>add</mat-icon>
       </button>
     </div>

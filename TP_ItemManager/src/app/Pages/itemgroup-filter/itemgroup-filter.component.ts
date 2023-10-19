@@ -7,6 +7,7 @@ import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 import { ModalItemgroupComponent } from 'src/app/Pages/modal-itemgroup/modal-itemgroup.component';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 
 @Component({
   selector: 'app-itemgroup-filter',
@@ -22,6 +23,7 @@ export class ItemgroupFilterComponent {
   public status: StatusService,
   public dialog: MatDialog,
   private _snackBar: MatSnackBar,
+  public storage:StorageManagerService
 
 
 

@@ -50,14 +50,14 @@
         color="primary"
         class="mx-1"
         (click)="DeleteObject(country.id!, 'Country')"
-        [disabled]="this.storage.CheckPermission(this.storage.userPermission)"
+        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
 
       >
         {{ "Remove country" | translate }}</button
       ><button
         mat-raised-button
         color="primary"
-        [disabled]="this.storage.CheckPermission(this.storage.userPermission)"
+        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
         class="mx-1"
         (click)="OpenDialogEditCountry(country.id!)"
 
@@ -68,7 +68,7 @@
         mat-raised-button
         color="primary"
         class="mx-1"
-        [disabled]="this.storage.CheckPermission(this.storage.userPermission)"
+        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
         (click)="OpenDialogAddCountry()"
 
       >
@@ -78,7 +78,7 @@
         (click)="OpenDialogAddStore(country)"
         mat-raised-button
         color="primary"
-        [disabled]="this.storage.CheckPermission(this.storage.userPermission)"
+        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
         class="mx-1"
       >
         {{ "Add store" | translate }}
@@ -95,7 +95,7 @@
         color="primary"
         (click)="DeleteObject(s.id!,'Store')"
         class="mx-1"
-        [disabled]="this.storage.CheckPermission(this.storage.userPermission)"
+        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
 
       >
         {{ "Remove store" | translate }}</button
@@ -104,7 +104,7 @@
         color="primary"
         (click)="OpenDialogEditStore(s.id!)"
         class="mx-1"
-        [disabled]="this.storage.CheckPermission(this.storage.userPermission)"
+        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
 
       >
         {{ "Edit store" | translate }}
@@ -114,7 +114,7 @@
         color="primary"
         (click)="OpenDialogAddKiosk(s)"
         class="mx-1"
-        [disabled]="this.storage.CheckPermission(this.storage.userPermission)"
+        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
       >
         {{ "Add kiosk" | translate }}
       </button>

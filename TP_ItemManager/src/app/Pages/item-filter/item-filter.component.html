@@ -45,7 +45,7 @@
       onclick="this.value = null"
     />
       <button
-      [disabled]="this.storage.CheckPermission(this.storage.userPermission)"
+      [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
         mat-raised-button
         color="primary"
         (click)="fileUpload.click()"
@@ -54,7 +54,7 @@
       {{"Upload prices" | translate}}
       </button>
       <button
-      [disabled]="this.storage.CheckPermission(this.storage.userPermission)"
+      [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
         mat-raised-button
         color="primary"
         (click)="OpenDialogModifyItem()"

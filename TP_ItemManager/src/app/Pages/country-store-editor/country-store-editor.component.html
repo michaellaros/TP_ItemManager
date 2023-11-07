@@ -1,0 +1,108 @@
+<mat-toolbar
+  class="w-100 position-relative"
+  color="primary"
+  [class.mt-4]="type == 'Discount'"
+>
+  <div>
+    <h1 class="px-0 my-2 text-white">
+      {{ "User relations" | translate }}
+    </h1>
+  </div>
+
+  <button
+    mat-icon-button
+    [disabled]="flg_insert"
+    (click)="toggle()"
+    class="m-2 position-absolute end-0"
+  >
+    <mat-icon>{{ this.state ? "expand_more" : "expand_less" }}</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div
+  class="container-fluid row"
+  [@bodyExpansion]="this.state ? 'collapsed' : 'expanded'"
+  class="expandable-content"
+>
+  <div class="row px-4 pt-4" *ngFor="let object of relatedObjects">
+    <mat-form-field appearance="outline" class="col-8">
+      <mat-label>{{ "Name" | translate }}</mat-label>
+      <input disabled matInput type="text" [(ngModel)]="object.name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col-2">
+      <mat-label>{{ "Type" | translate }}</mat-label>
+      <input disabled matInput type="text" [(ngModel)]="object.type" />
+    </mat-form-field>
+
+    <!-- <button mat-mini-fab color="primary" class="p-1 col-1" disabled>
+      <mat-icon>save</mat-icon>
+    </button> -->
+    <button
+      mat-mini-fab
+      color="primary"
+      class="p-1 col-1"
+      (click)="DeleteAssignedObject(object)"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  <form
+    [formGroup]="assignForm"
+    class="formGroup"
+    (ngSubmit)="InsertAssignedObject()"
+  >
+    <div class="row px-4 pt-4">
+      <mat-form-field appearance="outline" class="col-8">
+        <mat-label>{{ "Name" | translate }}</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="name"
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let option of filteredOptions"
+            [value]="option.name"
+          >
+            {{ option.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <!-- Type -->
+      <mat-form-field appearance="outline" class="col-2">
+        <mat-label>{{ "Type" | translate }}</mat-label>
+        <mat-select formControlName="type">
+          <mat-option
+            *ngFor="let discountType of types"
+            [value]="discountType"
+            >{{ discountType | translate }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <!-- <mat-form-field appearance="outline" class="col-2">
+        <mat-label>{{ "Type" | translate }}</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="type"
+          [matAutocomplete]="autoType"
+        />
+        <mat-autocomplete autoActiveFirstOption #autoType="matAutocomplete">
+          <mat-option *ngFor="let type of types" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field> -->
+      <!-- <mat-form-field appearance="outline" class="col-2">
+        <mat-label>{{ "Order" | translate }}</mat-label>
+        <input matInput formControlName="order" type="number" />
+      </mat-form-field> -->
+
+      <button type="submit" mat-mini-fab color="primary" class="m-1 col-2">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </form>
+</div>

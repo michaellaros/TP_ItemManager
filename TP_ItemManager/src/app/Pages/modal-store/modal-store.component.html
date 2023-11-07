@@ -58,4 +58,8 @@
       </button>
     </form>
   </div>
+  <app-country-store-editor
+  [id]="store!.id!" [type]="'Store'"
+  [relatedObjects]="store?.relationship!"
+  [flg_insert]="this.flg_insert" />
 </mat-dialog-content>

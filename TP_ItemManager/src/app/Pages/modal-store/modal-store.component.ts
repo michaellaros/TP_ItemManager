@@ -22,8 +22,8 @@ export class ModalStoreComponent {
     // store_id: new FormControl('', [Validators.required]),
     lRetailStoreID: new FormControl('', [Validators.required]),
     last_request_date: new FormControl(''),
-    country_name:new FormControl(''),
-    country_id: new FormControl('')
+    country_name: new FormControl(''),
+    country_id: new FormControl(''),
   });
 
   constructor(
@@ -31,8 +31,7 @@ export class ModalStoreComponent {
     private http: HttpService,
     public status: StatusService,
     private _snackBar: MatSnackBar,
-    public storage:StorageManagerService
-
+    public storage: StorageManagerService
   ) {
     {
       this.flg_insert = this.data.name == null;
@@ -40,19 +39,16 @@ export class ModalStoreComponent {
       this.store = this.data;
       this.storeForm.get('last_request_date')!.disable();
       this.storeForm.get('country_name')!.disable();
-
     }
   }
 
   ngOnInit() {
     this.UpdateForm();
+    console.log(this.store);
     if (!this.storage.CheckPermission(this.storage.userPermission)) {
       this.storeForm.get('name')?.disable();
       this.storeForm.get('store_ip')?.disable();
       this.storeForm.get('lRetailStoreID')?.disable();
-
-
-
     }
   }
 
@@ -94,7 +90,6 @@ export class ModalStoreComponent {
       this.storeForm.get('last_request_date')!.value!,
       this.storeForm.get('country_name')!.value!,
       this.storeForm.get('country_id')!.value!
-
     );
   }
 
@@ -105,15 +100,9 @@ export class ModalStoreComponent {
         store_ip: this.store.store_ip!,
         lRetailStoreID: this.store.lRetailStoreID!,
         last_request_date: this.store.last_request_date!,
-        country_name:this.store.country_name!,
-        country_id:this.store.country_id!
+        country_name: this.store.country_name!,
+        country_id: this.store.country_id!,
       });
-      // console.log({
-      //   name: this.store.name,
-      //   store_ip: this.store.store_ip!,
-      //   lRetailStoreID: this.store.lRetailStoreID!,
-      //   last_request_date: this.store.last_request_date!,
-      // });
     }
   }
 }

@@ -13,7 +13,7 @@ import {
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
 
-import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpService } from './Services/http.service';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
@@ -44,7 +44,6 @@ import {
   authInterceptorProviders,
 } from './Services/auth-services/auth.interceptor';
 import { errorInterceptorProviders } from './Services/auth-services/error.interceptor';
-import { MenuFilterComponent } from './Pages/menu-filter/menu-filter.component';
 import { ModalStoreComponent } from './Pages/modal-store/modal-store.component';
 import { DiscountFilterComponent } from './Pages/discount-filter/discount-filter.component';
 import { ModalDiscountComponent } from './Pages/modal-discount/modal-discount.component';
@@ -53,6 +52,7 @@ import { ModalItemgroupComponent } from './Pages/modal-itemgroup/modal-itemgroup
 import { DiscountedItemEditorComponent } from './Pages/discounted-item-editor/discounted-item-editor.component';
 import { ModalErrorComponent } from './Pages/modal-error/modal-error.component';
 import { ModalCountryComponent } from './Pages/modal-country/modal-country.component';
+import { CountryStoreEditorComponent } from './Pages/country-store-editor/country-store-editor.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -79,7 +79,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserFilterComponent,
     ModalUserComponent,
     ModifypasswordComponent,
-    MenuFilterComponent,
     ModalStoreComponent,
     DiscountFilterComponent,
     ModalDiscountComponent,
@@ -88,6 +87,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DiscountedItemEditorComponent,
     ModalErrorComponent,
     ModalCountryComponent,
+    CountryStoreEditorComponent,
   ],
   imports: [
     BrowserModule,

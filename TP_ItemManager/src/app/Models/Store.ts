@@ -1,3 +1,4 @@
+import { CountryStoreObject } from './CountryStoreObject';
 import { SearchedObject } from './SearchedObject';
 
 export class Store {

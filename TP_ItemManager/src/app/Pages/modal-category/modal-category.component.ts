@@ -49,7 +49,6 @@ export class ModalCategoryComponent {
     this.UpdateForm();
     if (!this.storage.CheckPermission(this.storage.userPermission)) {
       this.categoryForm.get('name')?.disable();
-      this.categoryForm.get('available')?.disable();
       this.categoryForm.get('takeAway')?.disable();
       this.categoryForm.get('dineIn')?.disable();
       this.categoryForm.get('order')?.disable();

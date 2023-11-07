@@ -56,7 +56,6 @@ export class ModalDiscountComponent {
 
   ngOnInit() {
     this.UpdateForm();
-
   }
 
   public SubmitForm() {

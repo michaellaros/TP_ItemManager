@@ -31,6 +31,7 @@ import { ItemGroup } from '../Models/ItemGroup';
 import { ItemGroupFilterModel } from '../Models/ItemGroupFilterModel';
 import { Country } from '../Models/Country';
 import { StorageManagerService } from './auth-services/storage-manager.service';
+import { FilterObjectModel } from '../Models/FilterObjectModel';
 @Injectable({
   providedIn: 'root',
 })
@@ -57,6 +58,7 @@ export class HttpService {
       params: new HttpParams().append('id', this.id).append('name', this.name),
     });
   }
+
   FilterDiscounts(filter: DiscountFilterModel) {
     return this.http.post<any>(this.urlAPI + 'Discounts', filter, {
       params: new HttpParams().append('id', this.id).append('name', this.name),
@@ -64,6 +66,15 @@ export class HttpService {
   }
   FilterItemGroups(filter: ItemGroupFilterModel) {
     return this.http.post<any>(this.urlAPI + 'ItemGroups', filter, {
+      params: new HttpParams().append('id', this.id).append('name', this.name),
+    });
+  }
+  FilterCountry(filter:FilterObjectModel){
+    return this.http.post<any>(this.urlAPI + 'GetCountries',filter,{params:new HttpParams().append('id',this.id).append('name',this.name)
+    }) //fare getcountry backend
+  }
+  FilterUser(filter: FilterObjectModel) {
+    return this.http.post<any>(this.urlAPI + 'Users', filter, {
       params: new HttpParams().append('id', this.id).append('name', this.name),
     });
   }
@@ -79,6 +90,7 @@ export class HttpService {
   FilterStore(filter: any) {
     return this.http.post<Store[]>(this.urlAPI + 'Stores', {});
   }
+
 
   GetItem(id: string) {
     return this.http.get<Item>(this.urlAPI + 'Item', {

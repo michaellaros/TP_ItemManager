@@ -12,14 +12,14 @@ import { StatusService } from 'src/app/Services/status.service';
 @Component({
   selector: 'app-modal-country',
   templateUrl: './modal-country.component.html',
-  styleUrls: ['./modal-country.component.scss']
+  styleUrls: ['./modal-country.component.scss'],
 })
 export class ModalCountryComponent {
-  country?: Country;
+  public country?: Country;
   public flg_insert: boolean;
 
   countryForm = new FormGroup({
-    name: new FormControl('', [Validators.required])
+    name: new FormControl('', [Validators.required]),
   });
 
   constructor(
@@ -27,7 +27,7 @@ export class ModalCountryComponent {
     private http: HttpService,
     public status: StatusService,
     private _snackBar: MatSnackBar,
-    public storage:StorageManagerService
+    public storage: StorageManagerService
   ) {
     {
       this.country = this.data;
@@ -39,9 +39,6 @@ export class ModalCountryComponent {
     this.UpdateForm();
     if (!this.storage.CheckPermission(this.storage.userPermission)) {
       this.countryForm.get('name')?.disable();
-
-
-
     }
   }
 
@@ -79,9 +76,6 @@ export class ModalCountryComponent {
     console.log(this.country);
     if (this.country != null) {
       this.countryForm.patchValue({
-        name: this.country.name,
-      });
-      console.log({
         name: this.country.name,
       });
     }

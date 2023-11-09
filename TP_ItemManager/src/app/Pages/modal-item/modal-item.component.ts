@@ -105,8 +105,10 @@ export class ModalItemComponent {
     return new Item(
       this.item?.id != undefined ? this.item.id : undefined,
       this.itemForm.get('name')!.value!,
-      this.itemForm.get('description')!.value !== undefined ? this.itemForm.get('description')!.value! : '' ,
-      this.itemForm.get('barcode')!.value!,
+      this.itemForm.get('description')!.value!,
+      this.itemForm.get('flg_addToCart')!.value!
+        ? this.itemForm.get('barcode')!.value!
+        : '',
       0,
       this.item.imagePath,
       this.itemForm.get('flg_addToCart')!.value!,

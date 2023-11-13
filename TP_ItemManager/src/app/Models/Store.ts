@@ -1,3 +1,4 @@
+import { AssignedObject } from './AssignedObject';
 import { CountryStoreObject } from './CountryStoreObject';
 import { SearchedObject } from './SearchedObject';
 

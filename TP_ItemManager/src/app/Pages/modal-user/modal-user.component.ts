@@ -90,9 +90,8 @@ export class ModalUserComponent {
           )
           .subscribe((data) => {
             this._snackBar.open('User successfully created!', 'Ok');
-            this.http.GetUser(data).subscribe((user) => {
-              this.userU = user;
-            });
+
+            this.userU = data;
             this.flg_insert = false;
           });
       } else {

@@ -58,6 +58,10 @@
       </button>
     </form>
   </div>
+  <app-assigned-editor [type]="'StoreDiscount'"
+  [id]="store?.id!"
+  [AssignedObjects]="store!.discounts"
+  [flg_insert]="this.flg_insert" />
   <app-country-store-editor
   [id]="store!.id!" [type]="'Store'"
   [relatedObjects]="store?.relationship!"

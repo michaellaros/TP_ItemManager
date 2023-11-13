@@ -1,3 +1,4 @@
+import { AssignedObject } from './AssignedObject';
 import { CountryStoreObject } from './CountryStoreObject';
 import { SearchedObject } from './SearchedObject';
 
@@ -10,6 +11,7 @@ export class StoreDetail {
     public last_request_date?: string,
     public country_name?: string,
     public country_id?: string,
-    public relationship?: CountryStoreObject[]
+    public relationship?: CountryStoreObject[],
+    public discounts?: AssignedObject[]
   ) {}
 }

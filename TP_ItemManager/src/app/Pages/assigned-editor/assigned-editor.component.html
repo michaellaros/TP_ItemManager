@@ -60,7 +60,7 @@
     </mat-form-field>
 
     <button
-      [disabled]="!this.IsEnabled()"
+      [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
       mat-mini-fab
       color="primary"
       class="p-1 col-1"
@@ -69,7 +69,7 @@
       <mat-icon>save</mat-icon>
     </button>
     <button
-      [disabled]="!this.IsEnabled()"
+      [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
       mat-mini-fab
       color="primary"
       class="p-1 col-1"
@@ -107,7 +107,7 @@
         <input matInput formControlName="order" type="number"/>
       </mat-form-field>
 
-      <button [disabled]="!this.IsEnabled()" type="submit" mat-mini-fab color="primary" class="m-1 col-2">
+      <button [disabled]="!this.storage.CheckPermission(this.storage.userPermission)" type="submit" mat-mini-fab color="primary" class="m-1 col-2">
         <mat-icon>add</mat-icon>
       </button>
     </div>

@@ -1,0 +1,37 @@
+
+<mat-toolbar class="w-100 position-relative mb-4 header" color="primary">
+  <div>
+    <h1 class="px-0 my-2 text-white">{{ "Item info" | translate }}</h1>
+  </div>
+
+  <button mat-icon-button class="m-2 position-absolute end-0" [mat-dialog-close]="null">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+<div class="container">
+<div *ngFor="let group of list" class="row">
+  <div class="col-11">
+    <h2>{{ group.name }} </h2>
+  </div>
+  <div class="col-1 ">
+    <mat-checkbox  [(ngModel)]="group.available" [checked]="group.available!" [indeterminate]="someComplete(group)"  (click)="ToggleGroup(group)"></mat-checkbox>
+  </div>
+<div *ngFor="let store of group.stores" class="row">
+  <div class="col-11">
+    <h3>{{ store.name }} </h3>
+  </div>
+  <div class="col-1 ">
+    <mat-checkbox [(ngModel)]="store.available" [checked]="store.available!" (click)="ToggleCountry(group)"
+     ></mat-checkbox>
+  </div>
+</div>
+
+</div>
+<div class="m-1">
+  <button mat-raised-button color="primary" (click)="SendAvailabilities()">
+   availability
+  </button>
+</div>
+
+
+

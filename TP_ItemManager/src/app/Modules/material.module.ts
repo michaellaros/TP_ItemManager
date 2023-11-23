@@ -20,9 +20,11 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatChipsModule } from '@angular/material/chips';
-import {MatRippleModule} from '@angular/material/core';
+import { MatRippleModule } from '@angular/material/core';
+import { MatListModule } from '@angular/material/list';
 const MaterialComponents = [
   MatButtonModule,
+  MatListModule,
   MatSlideToggleModule,
   MatButtonToggleModule,
   MatCheckboxModule,
@@ -41,7 +43,7 @@ const MaterialComponents = [
   MatSortModule,
   MatPaginatorModule,
   MatChipsModule,
-  MatRippleModule
+  MatRippleModule,
 ];
 
 @NgModule({

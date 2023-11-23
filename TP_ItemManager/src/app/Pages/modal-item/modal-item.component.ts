@@ -1,4 +1,14 @@
-import { Component, Inject } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+  ViewChild,
+  signal,
+  Inject,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
@@ -12,6 +22,7 @@ import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 import { ImagePickerComponent } from '../image-picker/image-picker.component';
 import { ItemVat } from 'src/app/Models/ItemVat';
+import { ModalAvailabilityComponent } from '../modal-availability/modal-availability.component';
 
 @Component({
   selector: 'app-modal-item',
@@ -22,6 +33,7 @@ export class ModalItemComponent {
   item: Item;
   itemVat!: ItemVat;
   public flg_insert: boolean;
+  @Output() public refresh = new EventEmitter();
 
   itemForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -101,6 +113,9 @@ export class ModalItemComponent {
     }
   }
 
+  OpenDialogModifyItem(item: string, type: string) {
+    this.status.OpenDialogModifyItem(item, type);
+  }
   GetItemFromForm(): Item {
     return new Item(
       this.item?.id != undefined ? this.item.id : undefined,

@@ -29,6 +29,7 @@ import { DiscountFilterModel } from '../Models/DiscountFilterModel';
 import { Discount } from '../Models/Discount';
 import { ItemGroup } from '../Models/ItemGroup';
 import { ItemGroupFilterModel } from '../Models/ItemGroupFilterModel';
+import { CountryAvailability } from '../Models/CountryAvailability';
 @Injectable({
   providedIn: 'root',
 })
@@ -102,30 +103,24 @@ export class HttpService {
   }
 
   InsertCategory(category: Category) {
-    console.log(category);
     return this.http.post<Category>(this.urlAPI + 'InsertCategory', category);
   }
 
   UpdateCategory(category: Category) {
-    console.log(category);
     return this.http.post<Category>(this.urlAPI + 'UpdateCategory', category);
   }
 
   InsertItem(item: Item) {
-    console.log(item);
     return this.http.post<Category>(this.urlAPI + 'InsertItem', item);
   }
   InsertDiscount(discount: Discount) {
-    console.log(discount);
     return this.http.post<Category>(this.urlAPI + 'InsertDiscount', discount);
   }
   InsertItemGroup(itemGroup: ItemGroup) {
-    console.log(itemGroup);
     return this.http.post<Category>(this.urlAPI + 'InsertItemGroup', itemGroup);
   }
 
   UpdateItem(item: Item) {
-    console.log(item);
     return this.http.post<Category>(this.urlAPI + 'UpdateItem', item);
   }
   UpdateDiscount(discount: Discount) {
@@ -133,15 +128,25 @@ export class HttpService {
   }
 
   InsertOption(option: Option) {
-    console.log(option);
     return this.http.post<Category>(this.urlAPI + 'InsertOption', option);
   }
 
   UpdateOption(option: Option) {
-    console.log(option);
     return this.http.post<Category>(this.urlAPI + 'UpdateOption', option);
   }
 
+  GetAvailability(id: string, type: string) {
+    return this.http.get<CountryAvailability[]>(
+      this.urlAPI + 'GetAvailability',
+      {
+        params: new HttpParams().append('id', id).append('type', type),
+      }
+    );
+  }
+
+  SetAvailability() {
+    return this.http.post(this.urlAPI + 'SetAvailability', {});
+  }
   InsertItemTranslation(id: string, translation: Translation) {
     console.log(id);
     return this.http.post<Translation[]>(
@@ -401,7 +406,10 @@ export class HttpService {
     return this.http.post<string[]>(this.urlAPI + 'UpdateCSV', formData);
   }
 
-  ReplicationDiscount(){
-    return this.http.post<{id:string,ip:string}[]>(this.urlAPI + 'ReplicationDiscount', null);
+  ReplicationDiscount() {
+    return this.http.post<{ id: string; ip: string }[]>(
+      this.urlAPI + 'ReplicationDiscount',
+      null
+    );
   }
 }

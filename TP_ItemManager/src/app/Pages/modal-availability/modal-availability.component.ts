@@ -1,15 +1,10 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroupName } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { CountryAvailability } from 'src/app/Models/CountryAvailability';
 import { StoreAvailability } from 'src/app/Models/StoreAvailability';
 import { HttpService } from 'src/app/Services/http.service';
-import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SetAvailabilityRequest } from 'src/app/Models/SetAvailabilityRequest';
-import { SetAvailabilityModel } from 'src/app/Models/SetAvailabilityModel';
 
 @Component({
   selector: 'app-modal-availability',
@@ -20,8 +15,7 @@ export class ModalAvailabilityComponent {
   list!: CountryAvailability[];
   id!: string;
   type!: string;
-  listToSend!: SetAvailabilityRequest;
-  // selectedOptions!:CountryAvailability;
+  listToSend: SetAvailabilityRequest = { id: '', type: '', availabilities: [] };
   constructor(
     private http: HttpService,
     @Inject(MAT_DIALOG_DATA)
@@ -44,15 +38,18 @@ export class ModalAvailabilityComponent {
     if (group.stores!.every((store) => store.available)) {
       return false;
     }
+
     if (group.stores!.some((store) => store.available)) {
       return true;
     }
     return false;
   }
-
-  ngOnInit(): void {
-    this.listToSend.id = this.id;
-    this.listToSend.type = this.type;
+  allIncomplete(group: CountryAvailability): boolean {
+    if (group.stores!.every((store) => !store.available)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   ToggleCountry(group: CountryAvailability) {
@@ -64,6 +61,7 @@ export class ModalAvailabilityComponent {
   }
 
   SendAvailabilities() {
+    this.listToSend = { id: this.id, type: this.type, availabilities: [] };
     this.list.forEach((country) => {
       if (this.someComplete(country)) {
         country.stores?.forEach((store) => {
@@ -74,14 +72,16 @@ export class ModalAvailabilityComponent {
             });
           }
         });
-      }
-      if (country.available) {
+      } else if (this.allIncomplete(country)) {
         this.listToSend.availabilities?.push({
           id: country.id,
           type: 'COUNTRY',
         });
       }
     });
-    console.log(this.listToSend);
+
+    if (this.listToSend.availabilities!.length > 0) {
+      this.http.SendAvailability(this.listToSend).subscribe();
+    }
   }
 }

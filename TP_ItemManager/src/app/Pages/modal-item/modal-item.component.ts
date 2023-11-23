@@ -113,8 +113,8 @@ export class ModalItemComponent {
     }
   }
 
-  OpenDialogModifyItem(item: string, type: string) {
-    this.status.OpenDialogModifyItem(item, type);
+  OpenDialogModifyItem(itemId: string, type: string) {
+    this.status.OpenDialogModifyItem(itemId, type);
   }
   GetItemFromForm(): Item {
     return new Item(

@@ -45,7 +45,10 @@ export class ModalCategoryComponent {
 
   ngOnInit() {
     this.UpdateForm();
+  }
 
+  OpenDialogModifyItem(itemId: string, type: string) {
+    this.status.OpenDialogModifyItem(itemId, type);
   }
 
   public SubmitForm() {
@@ -59,8 +62,8 @@ export class ModalCategoryComponent {
             this.UpdateForm();
             this.flg_insert = false;
             console.log(this.flg_insert);
-            this._snackBar.open('Category successfully created!', 'Ok',{
-              duration:this.status.snackbarDuration
+            this._snackBar.open('Category successfully created!', 'Ok', {
+              duration: this.status.snackbarDuration,
             });
           });
       } else {
@@ -69,8 +72,8 @@ export class ModalCategoryComponent {
           .subscribe((data) => {
             this.category = data;
             this.UpdateForm();
-            this._snackBar.open('Category successfully updated!', 'Ok',{
-              duration:this.status.snackbarDuration
+            this._snackBar.open('Category successfully updated!', 'Ok', {
+              duration: this.status.snackbarDuration,
             });
           });
       }

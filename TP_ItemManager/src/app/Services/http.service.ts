@@ -30,6 +30,7 @@ import { Discount } from '../Models/Discount';
 import { ItemGroup } from '../Models/ItemGroup';
 import { ItemGroupFilterModel } from '../Models/ItemGroupFilterModel';
 import { CountryAvailability } from '../Models/CountryAvailability';
+import { SetAvailabilityRequest } from '../Models/SetAvailabilityRequest';
 @Injectable({
   providedIn: 'root',
 })
@@ -143,10 +144,10 @@ export class HttpService {
       }
     );
   }
-
-  SetAvailability() {
-    return this.http.post(this.urlAPI + 'SetAvailability', {});
+  SendAvailability(object: SetAvailabilityRequest) {
+    return this.http.post(this.urlAPI + 'SetAvailability', object);
   }
+
   InsertItemTranslation(id: string, translation: Translation) {
     console.log(id);
     return this.http.post<Translation[]>(

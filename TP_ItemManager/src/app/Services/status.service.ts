@@ -32,7 +32,7 @@ export class StatusService {
       this.listAvailable = data;
       console.log(this.listAvailable);
       const dialogRef = this.dialog.open(ModalAvailabilityComponent, {
-        data: { lista: this.listAvailable, id: id, type: type },
+        data: { list: this.listAvailable, id: id, type: type },
         width: '60vw',
       });
       dialogRef.afterClosed().subscribe(() => {});

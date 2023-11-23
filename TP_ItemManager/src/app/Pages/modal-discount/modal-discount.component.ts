@@ -15,7 +15,6 @@ interface valueType {
   viewValue: string;
 }
 
-
 @Component({
   selector: 'app-modal-discount',
   templateUrl: './modal-discount.component.html',
@@ -25,21 +24,24 @@ export class ModalDiscountComponent {
   discount?: Discount;
   public flg_insert: boolean;
   discountType: valueType[] = [
-    {value: 'Percent', viewValue: 'Percentage'},
-    {value: 'FixPrice', viewValue: 'Fix price'},
-    {value: 'AmountOff', viewValue: 'Amount off'},
+    { value: 'Percent', viewValue: 'Percentage' },
+    { value: 'FixPrice', viewValue: 'Fix price' },
+    { value: 'AmountOff', viewValue: 'Amount off' },
   ];
 
   discountForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
     id: new FormControl(''),
-    type:new FormControl(this.discountType[0].viewValue),
-    value:new FormControl<number>(0, [Validators.required,Validators.min(1)]),
-    quantity:new FormControl<number>(1, [Validators.required,Validators.min(1),Validators.max(99)]),
-    flg_discountedItems:new FormControl<boolean>(true),
-    flg_distribute:new FormControl<boolean>(true)
-
+    type: new FormControl(this.discountType[0].viewValue),
+    value: new FormControl<number>(0, [Validators.required, Validators.min(1)]),
+    quantity: new FormControl<number>(1, [
+      Validators.required,
+      Validators.min(1),
+      Validators.max(99),
+    ]),
+    flg_discountedItems: new FormControl<boolean>(true),
+    flg_distribute: new FormControl<boolean>(true),
   });
 
   constructor(
@@ -56,9 +58,10 @@ export class ModalDiscountComponent {
 
   ngOnInit() {
     this.UpdateForm();
-
   }
-
+  OpenDialogModifyItem(itemId: string, type: string) {
+    this.status.OpenDialogModifyItem(itemId, type);
+  }
   public SubmitForm() {
     console.log('submit');
 
@@ -105,12 +108,13 @@ export class ModalDiscountComponent {
       this.discountForm.patchValue({
         name: this.discount.name,
         id: this.discount.id,
-        description:this.discount.description,
-        value:this.discount.value,
-        type:this.discount.type,
-        quantity:this.discount.quantity,
-        flg_discountedItems:this.discount.flg_discountedItems,
-        flg_distribute:this.discount.flg_distribute});
+        description: this.discount.description,
+        value: this.discount.value,
+        type: this.discount.type,
+        quantity: this.discount.quantity,
+        flg_discountedItems: this.discount.flg_discountedItems,
+        flg_distribute: this.discount.flg_distribute,
+      });
     }
   }
 }

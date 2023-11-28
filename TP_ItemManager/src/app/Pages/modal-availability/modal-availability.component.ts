@@ -66,16 +66,12 @@ export class ModalAvailabilityComponent {
       if (this.someComplete(country)) {
         country.stores?.forEach((store) => {
           if (!store.available) {
-            this.listToSend.availabilities!.push({
-              id: store.id,
-              type: 'STORE',
-            });
+            this.listToSend.availabilities!.push(store.id!);
           }
         });
       } else if (this.allIncomplete(country)) {
-        this.listToSend.availabilities?.push({
-          id: country.id,
-          type: 'COUNTRY',
+        country.stores?.forEach((store) => {
+          this.listToSend.availabilities?.push(store.id!);
         });
       }
     });

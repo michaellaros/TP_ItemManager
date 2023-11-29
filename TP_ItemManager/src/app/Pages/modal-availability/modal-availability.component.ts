@@ -76,8 +76,6 @@ export class ModalAvailabilityComponent {
       }
     });
 
-    if (this.listToSend.availabilities!.length > 0) {
-      this.http.SendAvailability(this.listToSend).subscribe();
-    }
+    this.http.SendAvailability(this.listToSend).subscribe();
   }
 }

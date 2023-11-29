@@ -123,6 +123,7 @@ export class DiscountedItemEditorComponent {
   }
 
   private _filter(value: string) {
+    console.log(this.DiscountedObjects);
     const filterValue = value.toLowerCase();
     switch (this.assignForm.get('type')!.value!) {
       case DiscountedItemType.Group:

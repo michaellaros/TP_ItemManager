@@ -35,8 +35,14 @@
           <input formControlName="last_request_date" matInput />
         </mat-form-field>
 
+        <mat-form-field class="col-3">
+          <mat-label>{{ "Country" | translate }}</mat-label>
+          <input formControlName="country_name" matInput />
+        </mat-form-field>
+
         <div class="col-3" *ngIf="!flg_insert">
           <button
+          [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
             mat-raised-button
             color="primary"
             type="button"
@@ -52,4 +58,12 @@
       </button>
     </form>
   </div>
+  <app-assigned-editor [type]="'StoreDiscount'"
+  [id]="store?.id!"
+  [AssignedObjects]="store!.discounts"
+  [flg_insert]="this.flg_insert" />
+  <app-country-store-editor
+  [id]="store!.id!" [type]="'Store'"
+  [relatedObjects]="store?.relationship!"
+  [flg_insert]="this.flg_insert" />
 </mat-dialog-content>

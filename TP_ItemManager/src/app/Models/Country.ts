@@ -1,13 +1,13 @@
-import { AssignedObject } from './AssignedObject';
 import { CountryStoreObject } from './CountryStoreObject';
 import { SearchedObject } from './SearchedObject';
+import { Store } from './Store';
 
-export class Store {
+export class Country {
+  forEach: any;
   constructor(
     public id?: string,
     public name?: string,
-    public country_id?: string,
-    public kiosks?: any,
-    public formattedKiosk?: SearchedObject[]
+    public stores?: Store[],
+    public relationship?: CountryStoreObject[]
   ) {}
 }

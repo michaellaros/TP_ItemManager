@@ -1,36 +1,11 @@
 <mat-toolbar
   class="w-100 position-relative"
-  [class.mt-4]="type == 'KioskCategory' || type == 'ItemGroup-Item'"
   color="primary"
+  [class.mt-4]="type == 'Discount'"
 >
   <div>
     <h1 class="px-0 my-2 text-white">
-      {{
-        (type == "CategoryItems-Category"
-          ? "Items in this category"
-          : type == "CategoryItems-Item"
-          ? "Category this item is in"
-          : type == "OptionItems-Item"
-          ? "Option this item is in"
-          : type == "OptionItems-Option"
-          ? "Item choises"
-          : type == "ItemOptions-Item"
-          ? "Options"
-          : type == "ItemOptions-Option"
-          ? "Items this option is used in"
-          : type == "KioskCategory"
-          ? "Categories enabled"
-          : type == "DiscountStore"
-          ? "Stores this discount is enabled in"
-          : type == "ItemGroup-Item"
-          ? "Items in this group"
-          : type == "Item-ItemGroup"
-          ? "Groups"
-          : type == "StoreDiscount"
-          ? "Discount this store is enabled in"
-          : ""
-        ) | translate
-      }}
+      {{ "User relations" | translate }}
     </h1>
   </div>
 
@@ -49,32 +24,25 @@
   [@bodyExpansion]="this.state ? 'collapsed' : 'expanded'"
   class="expandable-content"
 >
-  <div class="row px-4 pt-4" *ngFor="let object of AssignedObjects">
+  <div class="row px-4 pt-4" *ngFor="let object of relatedObjects">
     <mat-form-field appearance="outline" class="col-8">
       <mat-label>{{ "Name" | translate }}</mat-label>
       <input disabled matInput type="text" [(ngModel)]="object.name" />
     </mat-form-field>
+
     <mat-form-field appearance="outline" class="col-2">
-      <mat-label>{{ "Order" | translate }}</mat-label>
-      <input matInput type="number" [(ngModel)]="object.order" />
+      <mat-label>{{ "Type" | translate }}</mat-label>
+      <input disabled matInput type="text" [(ngModel)]="object.type" />
     </mat-form-field>
 
-    <button
-      [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
-      mat-mini-fab
-      color="primary"
-      class="p-1 col-1"
-      (click)="UpdateAssignedObject(object)"
-    >
+    <!-- <button mat-mini-fab color="primary" class="p-1 col-1" disabled>
       <mat-icon>save</mat-icon>
-    </button>
+    </button> -->
     <button
-      [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
       mat-mini-fab
       color="primary"
       class="p-1 col-1"
       (click)="DeleteAssignedObject(object)"
-
     >
       <mat-icon>delete</mat-icon>
     </button>
@@ -102,12 +70,37 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
+      <!-- Type -->
       <mat-form-field appearance="outline" class="col-2">
-        <mat-label>{{ "Order" | translate }}</mat-label>
-        <input matInput formControlName="order" type="number"/>
+        <mat-label>{{ "Type" | translate }}</mat-label>
+        <mat-select formControlName="type">
+          <mat-option
+            *ngFor="let discountType of types"
+            [value]="discountType"
+            >{{ discountType | translate }}</mat-option
+          >
+        </mat-select>
       </mat-form-field>
+      <!-- <mat-form-field appearance="outline" class="col-2">
+        <mat-label>{{ "Type" | translate }}</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="type"
+          [matAutocomplete]="autoType"
+        />
+        <mat-autocomplete autoActiveFirstOption #autoType="matAutocomplete">
+          <mat-option *ngFor="let type of types" [value]="type">
+            {{ type }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field> -->
+      <!-- <mat-form-field appearance="outline" class="col-2">
+        <mat-label>{{ "Order" | translate }}</mat-label>
+        <input matInput formControlName="order" type="number" />
+      </mat-form-field> -->
 
-      <button [disabled]="!this.storage.CheckPermission(this.storage.userPermission)" type="submit" mat-mini-fab color="primary" class="m-1 col-2">
+      <button type="submit" mat-mini-fab color="primary" class="m-1 col-2">
         <mat-icon>add</mat-icon>
       </button>
     </div>

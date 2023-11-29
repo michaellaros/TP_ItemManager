@@ -9,6 +9,7 @@ import { StatusService } from 'src/app/Services/status.service';
 import { ModalDiscountComponent } from 'src/app/Pages/modal-discount/modal-discount.component';
 import { ModalErrorComponent } from '../modal-error/modal-error.component';
 import { NgxSpinnerService } from "ngx-spinner";
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 
 @Component({
   selector: 'app-discount-filter',
@@ -27,6 +28,7 @@ export class DiscountFilterComponent {
     public status: StatusService,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
+    public storage:StorageManagerService
 
 
 

@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, startWith, map } from 'rxjs';
 import { AssignedObject } from 'src/app/Models/AssignedObject';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 import { HttpService } from 'src/app/Services/http.service';
 
 @Component({
@@ -39,6 +40,13 @@ export class AssignedEditorComponent {
   public newAssignedObject: AssignedObject;
   public state: boolean = true;
   public options: SearchedObject[] = [];
+  public typeList: string[] = [
+    'ItemOptions-Item',
+    'OptionItems-Item',
+    'ItemOptions-Item',
+    'Item',
+    'Item-ItemGroup',
+  ];
 
   assignForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -52,65 +60,65 @@ export class AssignedEditorComponent {
 
   public constructor(
     private http: HttpService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public storage: StorageManagerService
   ) {
     this.newAssignedObject = new AssignedObject();
   }
   ngOnInit() {
-    console.log(this.AssignedObjects);
     switch (this.type) {
       case 'CategoryItems-Category':
         this.http.FilterItems({}).subscribe((data) => {
           this.options = this.MapToArray(data);
-          this.filteredOptions = this.options;
+          this.filteredOptions = this._filter('');
         });
         break;
       case 'CategoryItems-Item':
         this.http.FilterCategory({}).subscribe((data) => {
           this.options = this.MapToArray(data);
-          this.filteredOptions = this.options;
+          this.filteredOptions = this._filter('');
         });
         break;
       case 'OptionItems-Item':
         this.http.FilterOption({}).subscribe((data) => {
           this.options = this.MapToArray(data);
-          this.filteredOptions = this.options;
+          this.filteredOptions = this._filter('');
         });
         break;
       case 'OptionItems-Option':
         this.http.FilterItems({}).subscribe((data) => {
           this.options = this.MapToArray(data);
-          this.filteredOptions = this.options;
+          this.filteredOptions = this._filter('');
         });
         break;
       case 'ItemOptions-Item':
         this.http.FilterOption({}).subscribe((data) => {
           this.options = this.MapToArray(data);
-          this.filteredOptions = this.options;
+          this.filteredOptions = this._filter('');
         });
         break;
       case 'ItemOptions-Option':
         this.http.FilterItems({}).subscribe((data) => {
           this.options = this.MapToArray(data);
-          this.filteredOptions = this.options;
+          this.filteredOptions = this._filter('');
         });
         break;
       case 'KioskCategory':
         this.http.FilterCategory({}).subscribe((data) => {
           this.options = this.MapToArray(data);
-          this.filteredOptions = this.options;
+          this.filteredOptions = this._filter('');
         });
         break;
       case 'Item-ItemGroup':
         this.http.FilterItemGroups({}).subscribe((data) => {
           this.options = this.MapToArray(data);
-          this.filteredOptions = this.options;
+          this.filteredOptions = this._filter('');
         });
         break;
-        case 'ItemGroup-Item':
+      case 'ItemGroup-Item':
         this.http.FilterItems({}).subscribe((data) => {
           this.options = this.MapToArray(data);
-          this.filteredOptions = this.options;
+          this.filteredOptions = this._filter('');
         });
         break;
       case 'DiscountStore':
@@ -120,7 +128,14 @@ export class AssignedEditorComponent {
             list.push(new SearchedObject(store.id, store.name));
           });
           this.options = list;
-          this.filteredOptions = this.options;
+          this.filteredOptions = this._filter('');
+          this._filter('');
+        });
+        break;
+      case 'StoreDiscount':
+        this.http.FilterDiscount({}).subscribe((data) => {
+          this.options = this.MapToArray(data);
+          this.filteredOptions = this._filter('');
         });
         break;
     }
@@ -139,7 +154,6 @@ export class AssignedEditorComponent {
 
   private _filter(value: string): SearchedObject[] {
     const filterValue = value.toLowerCase();
-
     return this.options.filter(
       (option) =>
         option.name?.toLowerCase().includes(filterValue) &&
@@ -150,7 +164,7 @@ export class AssignedEditorComponent {
   }
 
   UpdateAssignedObject(object: AssignedObject) {
-    console.log(this.type)
+    console.log(this.type);
     switch (this.type) {
       case 'CategoryItems-Category':
         this.http
@@ -268,9 +282,9 @@ export class AssignedEditorComponent {
         this.http
           .UpdateAssignedObject(
             {
-              Discount_id: this.id,
-              store_id: object.id,
-              StoreOrder: object.order,
+              idItemGroup: this.id,
+              idItem: object.id,
+              Order: object.order,
             },
             'UpdateItemGroupItem'
           )
@@ -297,7 +311,24 @@ export class AssignedEditorComponent {
           });
         break;
 
-        case 'Item-ItemGroup':
+      case 'StoreDiscount':
+        this.http
+          .UpdateAssignedObject(
+            {
+              Discount_id: object.id,
+              store_id: this.id,
+              StoreOrder: object.order,
+            },
+            'UpdateStoreDiscount'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+
+      case 'Item-ItemGroup':
         this.http
           .UpdateAssignedObject(
             {
@@ -306,7 +337,7 @@ export class AssignedEditorComponent {
               Order: object.order?.toString(),
             },
             'UpdateItemItemGroup'
-          ) //finire update
+          )
           .subscribe((data) => {
             this.AssignedObjects = data;
             console.log(this.AssignedObjects);
@@ -314,7 +345,7 @@ export class AssignedEditorComponent {
           });
         break;
 
-        case 'ItemGroup-Item':
+      case 'ItemGroup-Item':
         this.http
           .UpdateAssignedObject(
             {
@@ -323,14 +354,13 @@ export class AssignedEditorComponent {
               Order: object.order?.toString(),
             },
             'UpdateItemGroupItem'
-          ) //finire update
+          )
           .subscribe((data) => {
             this.AssignedObjects = data;
             console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
-
     }
   }
 
@@ -338,7 +368,7 @@ export class AssignedEditorComponent {
     if (!confirm('The element will be deleted permanently!')) {
       return;
     }
-    console.log(object)
+    console.log(object);
     switch (this.type) {
       case 'CategoryItems-Category':
         this.http
@@ -462,12 +492,28 @@ export class AssignedEditorComponent {
           });
         break;
 
-        case 'Item-ItemGroup':
+      case 'StoreDiscount':
+        this.http
+          .DeleteAssignedObject(
+            {
+              Discount_id: object.id,
+              Store_id: this.id,
+            },
+            'DeleteStoreDiscount'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+
+      case 'Item-ItemGroup':
         this.http
           .DeleteAssignedObject(
             {
               idItem: this.id,
-              idItemGroup: object.id
+              idItemGroup: object.id,
             },
             'DeleteItemItemGroup'
           )
@@ -478,12 +524,12 @@ export class AssignedEditorComponent {
           });
         break;
 
-        case 'ItemGroup-Item':
+      case 'ItemGroup-Item':
         this.http
           .DeleteAssignedObject(
             {
               idItem: object.id,
-              idItemGroup: this.id
+              idItemGroup: this.id,
             },
             'DeleteItemGroupItem'
           )
@@ -640,7 +686,24 @@ export class AssignedEditorComponent {
           });
         break;
 
-        case 'Item-ItemGroup':
+      case 'StoreDiscount':
+        this.http
+          .InsertAssignedObject(
+            {
+              Discount_id: id,
+              Store_id: this.id,
+              StoreOrder: this.assignForm.get('order')!.value!,
+            },
+            'InsertStoreDiscount'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+
+      case 'Item-ItemGroup':
         this.http
           .InsertAssignedObject(
             {
@@ -657,7 +720,7 @@ export class AssignedEditorComponent {
           });
         break;
 
-        case 'ItemGroup-Item':
+      case 'ItemGroup-Item':
         this.http
           .InsertAssignedObject(
             {
@@ -695,5 +758,22 @@ export class AssignedEditorComponent {
 
   ResetForm() {
     this.assignForm.reset({ name: '', order: 999 });
+  }
+
+  IsEnabled(): boolean {
+    if (
+      this.storage.CheckPermission(this.storage.userPermission) &&
+      this.IsType(this.type)
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  IsType(type: string): boolean {
+    for (type in this.typeList) {
+      return true;
+    }
+    return false;
   }
 }

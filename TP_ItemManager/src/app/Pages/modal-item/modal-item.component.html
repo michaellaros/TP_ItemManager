@@ -21,7 +21,7 @@
             style="aspect-ratio: 3/2"
             class="object-fit-contain w-100"
           />
-          <button
+          <button [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
             mat-raised-button
             color="primary"
             class="my-4"

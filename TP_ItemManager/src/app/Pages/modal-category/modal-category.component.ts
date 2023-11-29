@@ -10,6 +10,7 @@ import {
 } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ImagePickerComponent } from '../image-picker/image-picker.component';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 
 @Component({
   selector: 'app-modal-category',
@@ -35,7 +36,8 @@ export class ModalCategoryComponent {
     private http: HttpService,
     public status: StatusService,
     private _snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public storage: StorageManagerService
   ) {
     {
       this.category = this.data || new Category();
@@ -45,6 +47,12 @@ export class ModalCategoryComponent {
 
   ngOnInit() {
     this.UpdateForm();
+    if (!this.storage.CheckPermission(this.storage.userPermission)) {
+      this.categoryForm.get('name')?.disable();
+      this.categoryForm.get('takeAway')?.disable();
+      this.categoryForm.get('dineIn')?.disable();
+      this.categoryForm.get('order')?.disable();
+    }
   }
 
   OpenDialogModifyItem(itemId: string, type: string) {

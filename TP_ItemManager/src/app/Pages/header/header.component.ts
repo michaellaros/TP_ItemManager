@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { filter } from 'rxjs';
 import { Language } from 'src/app/Models/language';
 import { AuthService } from 'src/app/Services/auth-services/auth.service';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 import { StatusService } from 'src/app/Services/status.service';
 @Component({
   selector: 'app-header',
@@ -13,7 +14,7 @@ import { StatusService } from 'src/app/Services/status.service';
 export class HeaderComponent {
   currentRoute!: string;
   public language!: string;
-  constructor(public status: StatusService,private authService:AuthService, public router: Router,public translate: TranslateService) {
+  constructor(public status: StatusService,private authService:AuthService, public router: Router,public translate: TranslateService,public storage:StorageManagerService) {
 
     router.events
       .pipe(filter((event) => event instanceof NavigationEnd))

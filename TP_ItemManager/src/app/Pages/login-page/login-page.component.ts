@@ -12,7 +12,7 @@ import { Token } from 'src/app/Models/Token';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent {
-  public token!:Token;
+  public token!:string;
   public user:UserModelCreate = new UserModelCreate('pass','pass')
   loginForm = new FormGroup({
     Name: new FormControl('',[Validators.required]),
@@ -28,31 +28,32 @@ export class LoginPageComponent {
    public Submit() {
     this.user.name = this.loginForm.get('Name')!.value!
     this.user.password = this.loginForm.get('Password')!.value!
+    this.user.role = 'default'
     this.DoLogin();
-
-
   }
+
   DoLogin()
   {
+
 
     this.http.Login(this.user.name!,this.user.password!).subscribe((data)=>{
       // this.status.isLogged = 'true'
       // if(this.status.isLogged == 'true'){
-        this.token=data;
-        console.log(this.token);
-
-        this.storage.saveToken(this.token.token!);
-        console.log(this.storage.getToken())
+        this.storage.saveRole(data.role)
+        this.storage.saveToken(data.token);
         this.router.navigate(['/Kiosk']);
-    console.log(this.user);
 
+    })
+    this.http.GetRole(this.user.name!.toString()).subscribe((data)=>{
 
+      console.log(this.storage.var1);
 
+    })
+  }
 
-
-    })}
     ngOnInit(): void {
       this.status.error= false
 
     }
+
 }

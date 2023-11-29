@@ -63,10 +63,7 @@ export class ModalDiscountComponent {
     this.status.OpenDialogModifyItem(itemId, type);
   }
   public SubmitForm() {
-    console.log('submit');
-
     if (this.flg_insert) {
-      console.log(this.GetDiscountFromForm());
       this.http.InsertDiscount(this.GetDiscountFromForm()).subscribe((data) => {
         this.discount = data;
 
@@ -77,7 +74,6 @@ export class ModalDiscountComponent {
         });
       });
     } else {
-      console.log(this.GetDiscountFromForm());
       this.http.UpdateDiscount(this.GetDiscountFromForm()).subscribe((data) => {
         this.discount = data;
 

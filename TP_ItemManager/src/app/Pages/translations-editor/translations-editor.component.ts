@@ -9,6 +9,7 @@ import {
 } from '@angular/animations';
 import { HttpService } from 'src/app/Services/http.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 
 @Component({
   selector: 'app-translations-editor',
@@ -44,7 +45,8 @@ export class TranslationsEditorComponent {
     value: new FormControl(''),
   });
 
-  constructor(private http: HttpService) {}
+  constructor(private http: HttpService,
+              public storage:StorageManagerService) {}
 
   ngOnInit() {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.

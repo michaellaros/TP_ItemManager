@@ -45,6 +45,7 @@
 
         <div class="col-3" *ngIf="!flg_insert">
           <button
+          [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
             mat-raised-button
             color="primary"
             type="button"

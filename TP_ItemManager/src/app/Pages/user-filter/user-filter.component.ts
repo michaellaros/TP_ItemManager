@@ -6,6 +6,7 @@ import { UserModelRequest } from 'src/app/Models/UserModelRequest';
 import { StatusService } from 'src/app/Services/status.service';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { ModalUserComponent } from '../modal-user/modal-user.component';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class UserFilterComponent {
   constructor(
     private http: HttpService,
     public status: StatusService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public storage:StorageManagerService
   ) {}
 
   ngOnInit() {

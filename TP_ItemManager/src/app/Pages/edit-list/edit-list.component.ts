@@ -31,6 +31,7 @@ import { Discount } from 'src/app/Models/Discount';
 import { ModalDiscountComponent } from '../modal-discount/modal-discount.component';
 import { ItemGroup } from 'src/app/Models/ItemGroup';
 import { ModalItemgroupComponent } from 'src/app/Pages/modal-itemgroup/modal-itemgroup.component';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 @Component({
   selector: 'app-edit-list',
   templateUrl: './edit-list.component.html',
@@ -49,7 +50,8 @@ export class EditListComponent implements OnChanges {
   constructor(
     private status: StatusService,
     public http: HttpService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public storage:StorageManagerService
   ) {
     this.dataSource = new MatTableDataSource<SearchedObject>(this.parentData);
   }

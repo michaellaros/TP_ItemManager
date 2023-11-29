@@ -38,10 +38,10 @@ export class AuthService {
 
   public logout() {
     // localStorage.removeItem('ICashWebApplicationLanguage');
-
+    this.storageManager.var1=0;
     this.storageManager.removeToken('TP_ItemManager_AccessToken');
     // this.storageManager.removeUsername('ICashWebApplicationUsername');
-    // this.storageManager.removeRole('ICashWebApplicationRole');
+    this.storageManager.removeRole('TP_ItemManager_AccessToken');
     // this.storageManager.removeStore('ICashWebApplicationStore');
     // this.storageManager.removeLoadSetting('ICashWebApplicationLoadSetting');
     this.router.navigateByUrl('/login-page');

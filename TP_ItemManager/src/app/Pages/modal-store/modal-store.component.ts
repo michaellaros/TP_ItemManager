@@ -2,9 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Kiosk } from 'src/app/Models/Kiosk';
-import { Store } from 'src/app/Models/Store';
 import { StoreDetail } from 'src/app/Models/StoreDetail';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 
@@ -23,23 +22,34 @@ export class ModalStoreComponent {
     // store_id: new FormControl('', [Validators.required]),
     lRetailStoreID: new FormControl('', [Validators.required]),
     last_request_date: new FormControl(''),
+    country_name: new FormControl(''),
+    country_id: new FormControl(''),
   });
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: StoreDetail,
     private http: HttpService,
     public status: StatusService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public storage: StorageManagerService
   ) {
     {
+      this.flg_insert = this.data.name == null;
+
       this.store = this.data;
-      this.flg_insert = this.data == null;
       this.storeForm.get('last_request_date')!.disable();
+      this.storeForm.get('country_name')!.disable();
     }
   }
 
   ngOnInit() {
     this.UpdateForm();
+    console.log(this.store);
+    if (!this.storage.CheckPermission(this.storage.userPermission)) {
+      this.storeForm.get('name')?.disable();
+      this.storeForm.get('store_ip')?.disable();
+      this.storeForm.get('lRetailStoreID')?.disable();
+    }
   }
 
   ForceReplication(id: string) {
@@ -77,24 +87,21 @@ export class ModalStoreComponent {
       this.storeForm.get('name')!.value!,
       this.storeForm.get('store_ip')!.value!,
       this.storeForm.get('lRetailStoreID')!.value!,
-      this.storeForm.get('last_request_date')!.value!
+      this.storeForm.get('last_request_date')!.value!,
+      this.storeForm.get('country_name')!.value!,
+      this.storeForm.get('country_id')!.value!
     );
   }
 
   UpdateForm() {
-    console.log(this.store);
     if (this.store != null) {
       this.storeForm.patchValue({
         name: this.store.name,
         store_ip: this.store.store_ip!,
         lRetailStoreID: this.store.lRetailStoreID!,
         last_request_date: this.store.last_request_date!,
-      });
-      console.log({
-        name: this.store.name,
-        store_ip: this.store.store_ip!,
-        lRetailStoreID: this.store.lRetailStoreID!,
-        last_request_date: this.store.last_request_date!,
+        country_name: this.store.country_name!,
+        country_id: this.store.country_id!,
       });
     }
   }

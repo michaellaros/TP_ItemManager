@@ -7,6 +7,7 @@ import { StatusService } from 'src/app/Services/status.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Category } from 'src/app/Models/Category';
 import { ModalCategoryComponent } from 'src/app/Pages/modal-category/modal-category.component';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 @Component({
   selector: 'app-category-filter',
   templateUrl: './category-filter.component.html',
@@ -23,7 +24,8 @@ export class CategoryFilterComponent {
   constructor(
     private http: HttpService,
     public status: StatusService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public storage: StorageManagerService
   ) {}
 
   ngOnInit() {

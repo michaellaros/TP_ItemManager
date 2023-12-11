@@ -73,7 +73,7 @@ export class ModalStoreComponent {
         this.http.UpdateStore(this.GetStoreFromForm()).subscribe((data) => {
           this.store = data;
           this.UpdateForm();
-          this._snackBar.open('Kiosk successfully updated!', 'Ok', {
+          this._snackBar.open('Store successfully updated!', 'Ok', {
             duration: this.status.snackbarDuration,
           });
         });

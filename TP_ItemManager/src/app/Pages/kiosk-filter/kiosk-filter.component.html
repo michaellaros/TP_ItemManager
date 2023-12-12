@@ -38,11 +38,22 @@
     </div>
   </form>
 </div>
-<div *ngFor="let country of countries" >
+<div class = "container d-flex justify-content-end">
 
-  <div class="container d-flex justify-content-between">
+  <div class="mb-3">
+  <button mat-raised-button color="primary" class="mx-1"
+    [disabled]="!this.storage.CheckPermission(this.storage.userPermission)" (click)="OpenDialogAddCountry()">
+    {{ "Add country" | translate }}
+  </button>
+  </div>
+
+</div>
+
+<div *ngFor="let country of countries" class = " container quad mb-3 px-4 " >
+
+  <div class="container d-flex justify-content-between mt-3">
     <div class="col-3">
-      <h1  >{{ country.name }}</h1>
+      <h1>{{ country.name }}</h1>
     </div>
     <div>
       <button
@@ -64,16 +75,7 @@
       >
         {{ "Edit country" | translate }}
       </button>
-      <button
-        mat-raised-button
-        color="primary"
-        class="mx-1"
-        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
-        (click)="OpenDialogAddCountry()"
 
-      >
-        {{ "Add country" | translate }}
-      </button>
       <button
         (click)="OpenDialogAddStore(country)"
         mat-raised-button
@@ -87,12 +89,13 @@
 
   </div>
 <div *ngFor="let s of country.stores" class="my-2">
-  <div class="container d-flex justify-content-between">
-    <h2 class="col-3">{{ s.name }}</h2>
+
+    <mat-toolbar color="primary" class="container  justify-content-between ">
+    <h2 class="col-3 m-3">{{ s.name }}</h2>
     <div>
       <button
         mat-raised-button
-        color="primary"
+        color=""
         (click)="DeleteObject(s.id!,'Store')"
         class="mx-1"
         [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
@@ -101,7 +104,7 @@
         {{ "Remove store" | translate }}</button
       ><button
         mat-raised-button
-        color="primary"
+        color=""
         (click)="OpenDialogEditStore(s.id!)"
         class="mx-1"
         [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
@@ -111,7 +114,7 @@
       </button>
       <button
         mat-raised-button
-        color="primary"
+        color=""
         (click)="OpenDialogAddKiosk(s)"
         class="mx-1"
         [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
@@ -119,7 +122,7 @@
         {{ "Add kiosk" | translate }}
       </button>
     </div>
-  </div>
+    </mat-toolbar>
   <app-edit-list
     [parentData]="s.formattedKiosk"
     [columnName]="'Kiosk'"

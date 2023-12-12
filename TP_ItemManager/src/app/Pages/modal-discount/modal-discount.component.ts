@@ -34,7 +34,7 @@ export class ModalDiscountComponent {
     description: new FormControl('', [Validators.required]),
     id: new FormControl(''),
     type: new FormControl(this.discountType[0].viewValue),
-    value: new FormControl<number>(0, [Validators.required, Validators.min(1)]),
+    value: new FormControl<number>(0, [Validators.required, Validators.min(0)]),
     quantity: new FormControl<number>(1, [
       Validators.required,
       Validators.min(1),

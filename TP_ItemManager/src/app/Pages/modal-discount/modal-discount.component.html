@@ -15,12 +15,12 @@
   <div class="container-fluid">
     <form [formGroup]="discountForm" class="formGroup">
       <div class="row">
-        <div class="row col-6 d-flex flex-column">
-          <mat-form-field>
+        <div class="row d-flex flex-column ">
+          <mat-form-field class="text">
             <mat-label>{{ "Name" | translate }}</mat-label>
             <input formControlName="name" matInput />
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field class="text">
             <mat-label>{{ "Description" | translate }}</mat-label>
             <input formControlName="description" matInput />
           </mat-form-field>

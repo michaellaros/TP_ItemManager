@@ -27,6 +27,9 @@ export class ModalDiscountComponent {
     { value: 'Percent', viewValue: 'Percentage' },
     { value: 'FixPrice', viewValue: 'Fix price' },
     { value: 'AmountOff', viewValue: 'Amount off' },
+    { value: 'Percent', viewValue: 'Percentage' },
+    { value: 'FixPrice', viewValue: 'Fix price' },
+    { value: 'AmountOff', viewValue: 'Amount off' },
   ];
 
   discountForm = new FormGroup({
@@ -42,6 +45,7 @@ export class ModalDiscountComponent {
     ]),
     flg_discountedItems: new FormControl<boolean>(true),
     flg_distribute: new FormControl<boolean>(true),
+    flg_loyalty: new FormControl<boolean>(true),
   });
 
   constructor(
@@ -94,7 +98,8 @@ export class ModalDiscountComponent {
       this.discountForm.get('description')!.value!,
       this.discountForm.get('quantity')!.value!,
       this.discountForm.get('flg_discountedItems')!.value!,
-      this.discountForm.get('flg_distribute')!.value!
+      this.discountForm.get('flg_distribute')!.value!,
+      this.discountForm.get('flg_loyalty')!.value!
     );
   }
 
@@ -110,6 +115,7 @@ export class ModalDiscountComponent {
         quantity: this.discount.quantity,
         flg_discountedItems: this.discount.flg_discountedItems,
         flg_distribute: this.discount.flg_distribute,
+        flg_loyalty: this.discount.flg_loyalty,
       });
     }
   }

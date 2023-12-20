@@ -15,7 +15,7 @@
   <div class="container-fluid">
     <form [formGroup]="discountForm" class="formGroup">
       <div class="row">
-        <div class="row d-flex flex-column ">
+        <div class="row d-flex flex-column">
           <mat-form-field class="text">
             <mat-label>{{ "Name" | translate }}</mat-label>
             <input formControlName="name" matInput />
@@ -24,53 +24,49 @@
             <mat-label>{{ "Description" | translate }}</mat-label>
             <input formControlName="description" matInput />
           </mat-form-field>
-
-          <div class="row" >
-            <div class = "col-6">
-              <mat-form-field>
-                <mat-label>Discount type</mat-label>
-                <mat-select formControlName="type">
-                  <mat-option *ngFor="let type of discountType" [value]="type.value">
-                    {{type.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-
-
-            <mat-form-field appearance="outline" class="col-4">
-              <mat-label>{{ "Discount value" | translate }}</mat-label>
-              <input formControlName="value" matInput type="number"/>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="col-4">
-              <mat-label>{{ "Quantity" | translate }}</mat-label>
-              <input formControlName="quantity" matInput type="number"/>
-            </mat-form-field>
-
-              <div class="row">
-                <div class="col-6">
-                  <mat-checkbox
-                formControlName="flg_distribute"
-                matInput
-                color="primary"
+          <mat-form-field class="col-6">
+            <mat-label>Discount type</mat-label>
+            <mat-select formControlName="type">
+              <mat-option
+                *ngFor="let type of discountType"
+                [value]="type.value"
               >
-                {{ "Discount distributed" | translate }}
-              </mat-checkbox>
-                </div>
-                <div class="col-6">
-                  <mat-checkbox
-                  formControlName="flg_discountedItems"
-                  matInput
-                  color="primary"
-                >
-                  {{ "Apply on discounted items" | translate }}
-                </mat-checkbox>
-                </div>
-              </div>
-            </div>
+                {{ type.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-3">
+            <mat-label>{{ "Discount value" | translate }}</mat-label>
+            <input formControlName="value" matInput type="number" />
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-3">
+            <mat-label>{{ "Quantity" | translate }}</mat-label>
+            <input formControlName="quantity" matInput type="number" />
+          </mat-form-field>
+        </div>
+        <div class="col-3 d-flex flex-column">
+          <mat-checkbox
+            formControlName="flg_distribute"
+            matInput
+            color="primary"
+          >
+            {{ "Discount distributed" | translate }}
+          </mat-checkbox>
+
+          <mat-checkbox
+            formControlName="flg_discountedItems"
+            matInput
+            color="primary"
+          >
+            {{ "Apply on discounted items" | translate }}
+          </mat-checkbox>
+
+          <mat-checkbox formControlName="flg_loyalty" matInput color="primary">
+            {{ "Loyalty discount" | translate }}
+          </mat-checkbox>
         </div>
       </div>
-
     </form>
     <button
       mat-raised-button
@@ -81,7 +77,13 @@
       {{ (flg_insert ? "Create" : "Save") | translate }}
     </button>
 
-    <button mat-raised-button color="primary" type="button" class="ms-4" (click)="OpenDialogModifyItem(discount?.id!,'DISCOUNT')">
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      class="ms-4"
+      (click)="OpenDialogModifyItem(discount?.id!, 'DISCOUNT')"
+    >
       Set availability
     </button>
   </div>

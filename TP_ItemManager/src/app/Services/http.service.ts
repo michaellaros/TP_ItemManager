@@ -35,6 +35,8 @@ import { Country } from '../Models/Country';
 import { StorageManagerService } from './auth-services/storage-manager.service';
 import { FilterObjectModel } from '../Models/FilterObjectModel';
 import { ItemgroupFilterComponent } from '../Pages/itemgroup-filter/itemgroup-filter.component';
+import { ResponseStoreUpdate } from '../Models/ResponseStoreUpdate';
+import { StoreModel } from '../Models/StoreModel';
 @Injectable({
   providedIn: 'root',
 })
@@ -450,6 +452,22 @@ export class HttpService {
     return this.http.post(this.urlAPI + 'ForceStoreReplication', null, {
       params: new HttpParams().append('id', id),
     });
+  }
+
+  StoresUpdate(id: string) {
+    return this.http.post<StoreModel[]>(this.urlAPI + 'UpdateStores', null, {
+      params: new HttpParams().append('id', id),
+    });
+  }
+
+  StoreUpdate(id: string) {
+    return this.http.post<ResponseStoreUpdate>(
+      this.urlAPI + 'UpdateSingleStore',
+      null,
+      {
+        params: new HttpParams().append('id', id),
+      }
+    );
   }
   UploadCSV(CSV: File) {
     let formData = new FormData();

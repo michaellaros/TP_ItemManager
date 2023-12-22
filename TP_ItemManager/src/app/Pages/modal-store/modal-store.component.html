@@ -40,7 +40,7 @@
           <input formControlName="country_name" matInput />
         </mat-form-field>
 
-        <div class="col-3" *ngIf="!flg_insert">
+        <div class="col-4" *ngIf="!flg_insert">
           <button
           [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
             mat-raised-button
@@ -49,6 +49,10 @@
             (click)="ForceReplication(store!.id!)"
           >
             Force Update
+          </button>
+          <button class="ms-3"  [disabled]="!this.storage.CheckPermission(this.storage.userPermission)" mat-raised-button color="primary"
+            type="button" (click)="UpdateStores(this.store?.id!)">
+            Send Update
           </button>
         </div>
       </div>

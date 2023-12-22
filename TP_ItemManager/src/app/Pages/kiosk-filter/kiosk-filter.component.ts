@@ -12,6 +12,9 @@ import { ModalStoreComponent } from '../modal-store/modal-store.component';
 import { Country } from 'src/app/Models/Country';
 import { ModalCountryComponent } from '../modal-country/modal-country.component';
 import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ModalErrorComponent } from '../modal-error/modal-error.component';
+import { StoreModel } from 'src/app/Models/StoreModel';
 
 @Component({
   selector: 'app-kiosk-filter',
@@ -20,7 +23,9 @@ import { StorageManagerService } from 'src/app/Services/auth-services/storage-ma
 })
 export class KioskFilterComponent {
   public stores!: Store[];
-  public countries:Country[] = [];
+  public errorList!: StoreModel[];
+
+  public countries: Country[] = [];
   public list!: SearchedObject[];
   filterForm = new FormGroup({
     hostname: new FormControl(''),
@@ -31,22 +36,23 @@ export class KioskFilterComponent {
     private http: HttpService,
     public status: StatusService,
     public dialog: MatDialog,
-    public storage:StorageManagerService
+    public storage: StorageManagerService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit() {
     this.GetCountries();
-
   }
-  GetCountries(){
-
-    this.http.GetCountries().subscribe((data)=>{
-        this.countries = data;
-        this.countries.forEach((country) => country.stores!.forEach((store: Store) =>
-        store.formattedKiosk = this.GetStoreKioskFromCountry(store)))
-
-
-    })
+  GetCountries() {
+    this.http.GetCountries().subscribe((data) => {
+      this.countries = data;
+      this.countries.forEach((country) =>
+        country.stores!.forEach(
+          (store: Store) =>
+            (store.formattedKiosk = this.GetStoreKioskFromCountry(store))
+        )
+      );
+    });
   }
 
   GetStores() {
@@ -56,28 +62,23 @@ export class KioskFilterComponent {
     //     this.stores = [];
     //   } else {
     //     this.countries = data;
-
-
     //     });
-
-
-
-      }
-      // if (data == null) {
-      //   this.stores = data || [];
-      // } else {
-      //   Object.keys(data).forEach((key) => {
-      //     list.push(new SearchedObject(key, data[key]));
-      //   });
-      //   this.list = list;
-      // }
+  }
+  // if (data == null) {
+  //   this.stores = data || [];
+  // } else {
+  //   Object.keys(data).forEach((key) => {
+  //     list.push(new SearchedObject(key, data[key]));
+  //   });
+  //   this.list = list;
+  // }
   //   });
   // }
-  GetStoreKioskFromCountry(store:Store) : SearchedObject[]{
+  GetStoreKioskFromCountry(store: Store): SearchedObject[] {
     let list: SearchedObject[] = [];
-      Object.keys(store.kiosks).forEach((key) => {
-        list.push(new SearchedObject(key, store.kiosks[key]));
-      });
+    Object.keys(store.kiosks).forEach((key) => {
+      list.push(new SearchedObject(key, store.kiosks[key]));
+    });
     return list;
   }
 
@@ -86,6 +87,39 @@ export class KioskFilterComponent {
     this.GetKiosks();
   }
 
+  UpdateStores() {
+    this.spinner.show();
+
+    this.http.StoresUpdate('').subscribe(
+      (data) => {
+        console.log('subscribe');
+        this.errorList = data;
+        if (this.errorList.length > 0) {
+          // alert('error for store {{}}');
+          this.spinner.hide();
+          let errors: { id: string; ip: string }[] = [];
+          this.errorList.forEach((element) => {
+            errors.push({ id: element.id!, ip: element.ip! });
+          });
+          this.OpenDialogReturnError(errors);
+        } else {
+          this.spinner.hide();
+        }
+      },
+      (err) => {
+        this.spinner.hide();
+      }
+    );
+  }
+
+  OpenDialogReturnError(errors: { id: string; ip: string }[]) {
+    const dialogRef = this.dialog.open(ModalErrorComponent, {
+      data: errors,
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.GetCountries();
+    });
+  }
   GetKiosks() {
     let hostname =
       this.filterForm.get('hostname')?.value != undefined
@@ -110,7 +144,6 @@ export class KioskFilterComponent {
     });
   }
 
-
   OpenDialogAddKiosk(store: Store) {
     const dialogRef = this.dialog.open(ModalKioskComponent, {
       width: '60vw',
@@ -119,10 +152,10 @@ export class KioskFilterComponent {
     dialogRef.afterClosed().subscribe(() => this.GetCountries());
   }
 
-  OpenDialogAddStore(country:Country) {
+  OpenDialogAddStore(country: Country) {
     const dialogRef = this.dialog.open(ModalStoreComponent, {
       width: '60vw',
-      data:{country_name:country.name,country_id:country.id,store: null }
+      data: { country_name: country.name, country_id: country.id, store: null },
     });
     dialogRef.afterClosed().subscribe(() => this.GetCountries());
   }
@@ -145,19 +178,16 @@ export class KioskFilterComponent {
     return list;
   }
 
-  DeleteObject(id: string,type:string) {
+  DeleteObject(id: string, type: string) {
     if (confirm('The element will be deleted permanently!')) {
       //todo cambiare pop up
       this.http.DeleteObject(type, id).subscribe(() => {
-        this.GetCountries()
-      }
-      );
+        this.GetCountries();
+      });
     }
   }
 
-
-
-  OpenDialogEditCountry(id:string){
+  OpenDialogEditCountry(id: string) {
     this.http.GetCountry(id).subscribe((data) => {
       const dialogRef = this.dialog.open(ModalCountryComponent, {
         width: '60vw',

@@ -1,11 +1,15 @@
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { StoreDetail } from 'src/app/Models/StoreDetail';
 import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
+import { ModalErrorComponent } from '../modal-error/modal-error.component';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ResponseStoreUpdate } from 'src/app/Models/ResponseStoreUpdate';
+import { StoreModel } from 'src/app/Models/StoreModel';
 
 @Component({
   selector: 'app-modal-store',
@@ -15,6 +19,7 @@ import { StatusService } from 'src/app/Services/status.service';
 export class ModalStoreComponent {
   store?: StoreDetail;
   public flg_insert: boolean;
+  public errorListStore!: ResponseStoreUpdate;
 
   storeForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -31,6 +36,8 @@ export class ModalStoreComponent {
     private http: HttpService,
     public status: StatusService,
     private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    public spinner: NgxSpinnerService,
     public storage: StorageManagerService
   ) {
     {
@@ -56,6 +63,40 @@ export class ModalStoreComponent {
     this.http.ForceStoreReplication(id).subscribe(() => {
       this.storeForm.get('last_request_date')!.setValue(null);
     });
+    this.UpdateStores(id);
+  }
+
+  UpdateStores(id: string) {
+    this.spinner.show();
+
+    this.http.StoreUpdate(id).subscribe(
+      (data) => {
+        console.log('subscribe');
+        this.errorListStore = data;
+        if (this.errorListStore.lastUpdateDate == 'Update error') {
+          // alert('error for store {{}}');
+          this.spinner.hide();
+          let error!: { id: string; ip: string };
+          error.id = this.errorListStore.id!;
+          error.ip = this.errorListStore.ip!;
+          this.OpenDialogReturnError(error!);
+        } else {
+          this.spinner.hide();
+          this.storeForm.patchValue({
+            last_request_date: data.lastUpdateDate!,
+          });
+        }
+      },
+      (err) => {
+        this.spinner.hide();
+      }
+    );
+  }
+  OpenDialogReturnError(errors: { id: string; ip: string }) {
+    const dialogRef = this.dialog.open(ModalErrorComponent, {
+      data: errors,
+    });
+    dialogRef.afterClosed().subscribe(() => {});
   }
 
   public SubmitForm() {

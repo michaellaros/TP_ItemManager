@@ -97,9 +97,19 @@ export class KioskFilterComponent {
         if (this.errorList.length > 0) {
           // alert('error for store {{}}');
           this.spinner.hide();
-          let errors: { id: string; ip: string }[] = [];
+          let errors: {
+            id: string;
+            ip: string;
+            szRetailStoreId: string;
+            storeName: string;
+          }[] = [];
           this.errorList.forEach((element) => {
-            errors.push({ id: element.id!, ip: element.ip! });
+            errors.push({
+              id: element.id!,
+              ip: element.ip!,
+              szRetailStoreId: element.szRetailStoreId!,
+              storeName: element.storeName!,
+            });
           });
           this.OpenDialogReturnError(errors);
         } else {
@@ -112,7 +122,14 @@ export class KioskFilterComponent {
     );
   }
 
-  OpenDialogReturnError(errors: { id: string; ip: string }[]) {
+  OpenDialogReturnError(
+    errors: {
+      id: string;
+      ip: string;
+      szRetailStoreId: string;
+      storeName: string;
+    }[]
+  ) {
     const dialogRef = this.dialog.open(ModalErrorComponent, {
       data: errors,
     });

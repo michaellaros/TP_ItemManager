@@ -476,10 +476,14 @@ export class HttpService {
   }
 
   ReplicationDiscount() {
-    return this.http.post<{ id: string; ip: string }[]>(
-      this.urlAPI + 'ReplicationDiscount',
-      null
-    );
+    return this.http.post<
+      {
+        id: string;
+        ip: string;
+        szRetailStoreId: string;
+        storeName: string;
+      }[]
+    >(this.urlAPI + 'ReplicationDiscount', null);
   }
   GetCountries() {
     return this.http.post<Country[]>(this.urlAPI + 'GetCountries', null);

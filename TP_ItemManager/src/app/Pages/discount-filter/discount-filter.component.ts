@@ -8,19 +8,24 @@ import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 import { ModalDiscountComponent } from 'src/app/Pages/modal-discount/modal-discount.component';
 import { ModalErrorComponent } from '../modal-error/modal-error.component';
-import { NgxSpinnerService } from "ngx-spinner";
+import { NgxSpinnerService } from 'ngx-spinner';
 import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 
 @Component({
   selector: 'app-discount-filter',
   templateUrl: './discount-filter.component.html',
-  styleUrls: ['./discount-filter.component.scss']
+  styleUrls: ['./discount-filter.component.scss'],
 })
 export class DiscountFilterComponent {
   public list!: SearchedObject[];
   public imgPreviewList: any;
   public folderName!: string;
-  public errorList!: {id:string,ip:string}[]
+  public errorList!: {
+    id: string;
+    ip: string;
+    szRetailStoreId: string;
+    storeName: string;
+  }[];
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -28,10 +33,7 @@ export class DiscountFilterComponent {
     public status: StatusService,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
-    public storage:StorageManagerService
-
-
-
+    public storage: StorageManagerService
   ) {}
   filterForm = new FormGroup({
     id: new FormControl(''),
@@ -40,9 +42,8 @@ export class DiscountFilterComponent {
   });
   ngOnInit() {
     this.GetDiscounts();
-
   }
-  ResetForm(){
+  ResetForm() {
     this.filterForm.reset();
     this.GetDiscounts();
   }
@@ -55,7 +56,6 @@ export class DiscountFilterComponent {
       this.filterForm.get('name')?.value != undefined
         ? this.filterForm.get('name')?.value!
         : '';
-
 
     let list: SearchedObject[] = [];
 
@@ -80,36 +80,35 @@ export class DiscountFilterComponent {
     dialogRef.afterClosed().subscribe(() => this.GetDiscounts());
   }
 
-  OpenDialogReturnError(errors:{id:string,ip:string}[]) {
+  OpenDialogReturnError(
+    errors: {
+      id: string;
+      ip: string;
+      szRetailStoreId: string;
+      storeName: string;
+    }[]
+  ) {
     const dialogRef = this.dialog.open(ModalErrorComponent, {
-      data:errors
+      data: errors,
     });
     dialogRef.afterClosed().subscribe(() => this.GetDiscounts());
   }
 
-
-  UpdateDiscount(){
+  UpdateDiscount() {
     this.spinner.show();
     this.http.ReplicationDiscount().subscribe(
       (data) => {
         this.spinner.hide();
-        console.log("subscribe")
+        console.log('subscribe');
         this.errorList = data;
-        if(this.errorList.length >0)
-        // alert('error for store {{}}');
+        if (this.errorList.length > 0)
+          // alert('error for store {{}}');
 
-        this.OpenDialogReturnError(this.errorList);
-
-      },(err)=>{
-
+          this.OpenDialogReturnError(this.errorList);
+      },
+      (err) => {
         this.spinner.hide();
-
-      })
-
-
+      }
+    );
   }
-
-
-
-
 }

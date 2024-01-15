@@ -68,7 +68,8 @@
         {{ flg_insert ? ("Create" | translate) : ("Save" | translate) }}
       </button>
 
-      <button mat-raised-button color="primary" type="button" class="ms-4" (click)="OpenDialogModifyItem(category.id!,'CATEGORY')">
+
+      <button *ngIf="!flg_insert" [disabled]="categoryForm.invalid" mat-raised-button color="primary" type="button" class="ms-4" (click)="OpenDialogModifyItem(category.id!,'CATEGORY')">
         Set availability
       </button>
 

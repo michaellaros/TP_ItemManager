@@ -72,7 +72,7 @@
             {{ "Menu" | translate }}
           </mat-checkbox>
 
-          <button mat-raised-button color="primary" type="button" (click)="OpenDialogModifyItem(item.id!,'ITEM')" >
+          <button *ngIf="!flg_insert" mat-raised-button color="primary" type="button" (click)="OpenDialogModifyItem(item.id!,'ITEM')" >
            Set availability
           </button>
         </div>

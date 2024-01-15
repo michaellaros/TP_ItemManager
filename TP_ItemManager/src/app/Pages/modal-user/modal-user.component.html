@@ -45,7 +45,7 @@
       <button mat-raised-button color="primary" type="button" *ngIf="this.userU!=null" routerLink='/modify-password' [mat-dialog-close]="null">
         {{ ("Modify password" | translate) }}
       </button>
-    <button mat-raised-button color="primary" type="button" (click)="SubmitForm()">
+    <button [disabled]="userForm.invalid" mat-raised-button color="primary" type="button" (click)="SubmitForm()">
       {{ this.userU==null ? "Create" : ("Save" | translate) }}
     </button>
 

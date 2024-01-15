@@ -1,8 +1,8 @@
 <div class="container mt-3">
   <div class="row">
-    <h1>{{ "Kiosks" | translate }}</h1>
+    <h1>{{ "Countries" | translate }}</h1>
   </div>
-  <form [formGroup]="filterForm" class="formGroup">
+  <!-- <form [formGroup]="filterForm" class="formGroup">
     <div class="row container-fluid">
       <mat-form-field class="col-3 m-1">
         <mat-label>{{ "Hostname" | translate }}</mat-label>
@@ -18,7 +18,7 @@
         <button
           mat-raised-button
           color="primary"
-          class=" mb-3 ms-3 me-1"
+          class="mb-3 ms-3 me-1"
           (click)="GetKiosks()"
         >
           {{ "Search" | translate }}
@@ -33,24 +33,113 @@
         </button>
       </div>
 
-
-      <!--  (click)="OpenDialogAddKiosk(store.id!)" -->
+        (click)="OpenDialogAddKiosk(store.id!)"
     </div>
-  </form>
+  </form>-->
 </div>
-<div class = "container d-flex justify-content-end ">
-
+<div class="container d-flex justify-content-end">
   <div class="mb-3 me-3">
-  <button mat-raised-button color="primary" class="mx-1"
-    [disabled]="!this.storage.CheckPermission(this.storage.userPermission)" (click)="OpenDialogAddCountry()">
-    {{ "Add country" | translate }}
-  </button>
+    <button
+      mat-raised-button
+      color="primary"
+      class="mx-1"
+      [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
+      (click)="OpenDialogAddCountry()"
+    >
+      {{ "Add country" | translate }}
+    </button>
   </div>
-
+</div>
+<div class="container quad rounded p-1">
+  <mat-tree
+    [dataSource]="dataSource"
+    [treeControl]="treeControl"
+    class="example-tree"
+  >
+    <!-- This is the tree node template for leaf nodes -->
+    <!-- There is inline padding applied to this node using styles.
+    This padding value depends on the mat-icon-button width. -->
+    <mat-tree-node
+      *matTreeNodeDef="let node"
+      [class.pad-left-48px]="node.children.length === 0"
+      matTreeNodePadding
+    >
+      <button mat-button [matMenuTriggerFor]="menu" class="text-start">
+        {{ node.name }}
+      </button>
+      <!-- Store/Kiosk menu -->
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="OpenEditDialog(node)">Edit</button>
+        <button
+          *ngIf="node.type === 'store'"
+          mat-menu-item
+          (click)="OpenDialogAddKiosk(node)"
+        >
+          Add kiosk
+        </button>
+        <button
+          mat-menu-item
+          (click)="OpenDialogAddStore(node)"
+          *ngIf="node.type === 'country'"
+        >
+          Add store
+        </button>
+        <button mat-menu-item disabled>Delete</button>
+      </mat-menu>
+    </mat-tree-node>
+    <!-- This is the tree node template for expandable nodes -->
+    <mat-nested-tree-node
+      *matTreeNodeDef="let node; when: hasChild"
+      matTreeNodePadding
+    >
+      <div class="mat-tree-node">
+        <button
+          mat-icon-button
+          matTreeNodeToggle
+          [attr.aria-label]="'Toggle ' + node.name"
+        >
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
+          </mat-icon>
+        </button>
+        <button mat-button [matMenuTriggerFor]="menu" class="text-start">
+          {{ node.name }}
+        </button>
+        <!-- Country menu -->
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="OpenEditDialog(node)">Edit</button>
+          <button
+            *ngIf="node.type === 'store'"
+            mat-menu-item
+            (click)="OpenDialogAddKiosk(node)"
+          >
+            Add kiosk
+          </button>
+          <button
+            mat-menu-item
+            (click)="OpenDialogAddStore(node)"
+            *ngIf="node.type === 'country'"
+          >
+            Add store
+          </button>
+          <button mat-menu-item disabled>Delete</button>
+        </mat-menu>
+        <!-- <div (click)="OpenEditDialog(node.id, node.type)"></div> -->
+      </div>
+      <!-- There is inline padding applied to this div using styles.
+          This padding value depends on the mat-icon-button width.  -->
+      <div
+        [class.example-tree-invisible]="!treeControl.isExpanded(node)"
+        role="group"
+      >
+        <ng-container matTreeNodeOutlet></ng-container>
+      </div>
+    </mat-nested-tree-node>
+  </mat-tree>
 </div>
 
-<div *ngFor="let country of countries" class = "container quad mb-3 px-4 " >
-
+<!-- 
+<div *ngFor="let country of countries" class="container quad mb-3 px-4">
   <div class="d-flex justify-content-between mt-3">
     <div class="col-3">
       <h1>{{ country.name }}</h1>
@@ -70,13 +159,17 @@
         [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
         class="mx-1"
         (click)="OpenDialogEditCountry(country.id!)"
-
       >
         {{ "Edit country" | translate }}
       </button>
 
-      <button (click)="OpenDialogAddStore(country)" mat-raised-button color="primary"
-        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)" class="mx-1">
+      <button
+        (click)="OpenDialogAddStore(country)"
+        mat-raised-button
+        color="primary"
+        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
+        class="mx-1"
+      >
         {{ "Add store" | translate }}
       </button>
 
@@ -87,53 +180,53 @@
         (click)="UpdateStores()"
         [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
       >
-        {{ "Update stores" | translate }}</button
-      >
+        {{ "Update stores" | translate }}
+      </button>
     </div>
-
   </div>
-<div *ngFor="let s of country.stores" class="my-2">
-
-    <mat-toolbar color="primary" class="container  justify-content-between ">
-    <h2 class="col-3 m-3">{{ s.name }}</h2>
-    <div>
-      <button
-        mat-raised-button
-        color=""
-        (click)="DeleteObject(s.id!,'Store')"
-        class="mx-1"
-        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
-
-      >
-        {{ "Remove store" | translate }}</button
-      ><button
-        mat-raised-button
-        color=""
-        (click)="OpenDialogEditStore(s.id!)"
-        class="mx-1"
-        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
-
-      >
-        {{ "Edit store" | translate }}
-      </button>
-      <button
-        mat-raised-button
-        color=""
-        (click)="OpenDialogAddKiosk(s)"
-        class="mx-1"
-        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
-      >
-        {{ "Add kiosk" | translate }}
-      </button>
-    </div>
+  <div *ngFor="let s of country.stores" class="my-2">
+    <mat-toolbar color="primary" class="container justify-content-between">
+      <h2 class="col-3 m-3">{{ s.name }}</h2>
+      <div>
+        <button
+          mat-raised-button
+          color=""
+          (click)="DeleteObject(s.id!, 'Store')"
+          class="mx-1"
+          [disabled]="
+            !this.storage.CheckPermission(this.storage.userPermission)
+          "
+        >
+          {{ "Remove store" | translate }}</button
+        ><button
+          mat-raised-button
+          color=""
+          (click)="OpenDialogEditStore(s.id!)"
+          class="mx-1"
+          [disabled]="
+            !this.storage.CheckPermission(this.storage.userPermission)
+          "
+        >
+          {{ "Edit store" | translate }}
+        </button>
+        <button
+          mat-raised-button
+          color=""
+          (click)="OpenDialogAddKiosk(s)"
+          class="mx-1"
+          [disabled]="
+            !this.storage.CheckPermission(this.storage.userPermission)
+          "
+        >
+          {{ "Add kiosk" | translate }}
+        </button>
+      </div>
     </mat-toolbar>
-  <app-edit-list
-    [parentData]="s.formattedKiosk"
-    [columnName]="'Kiosk'"
-    (refresh)="this.GetCountries()"
-  >
-  </app-edit-list>
-
-
-</div>
-</div>
+    <app-edit-list
+      [parentData]="s.formattedKiosk"
+      [columnName]="'Kiosk'"
+      (refresh)="this.GetCountries()"
+    >
+    </app-edit-list>
+  </div>
+</div> -->

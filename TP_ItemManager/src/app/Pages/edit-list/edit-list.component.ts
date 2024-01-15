@@ -51,7 +51,7 @@ export class EditListComponent implements OnChanges {
     private status: StatusService,
     public http: HttpService,
     public dialog: MatDialog,
-    public storage:StorageManagerService
+    public storage: StorageManagerService
   ) {
     this.dataSource = new MatTableDataSource<SearchedObject>(this.parentData);
   }
@@ -85,12 +85,12 @@ export class EditListComponent implements OnChanges {
           this.OpenDialogModifyOption(data);
         });
         break;
-      case 'Kiosk':
-        this.http.GetKiosk(id).subscribe((data) => {
-          console.log(data);
-          this.OpenDialogModifyKiosk(data);
-        });
-        break;
+      // case 'Kiosk':
+      //   this.http.GetKiosk(id).subscribe((data) => {
+      //     console.log(data);
+      //     this.OpenDialogModifyKiosk(data);
+      //   });
+      //   break;
       case 'User':
         this.http.GetUser(id).subscribe((data) => {
           this.status.user = id;
@@ -98,19 +98,19 @@ export class EditListComponent implements OnChanges {
         });
         break;
 
-        case 'Discount':
-          this.http.GetDiscount(id).subscribe((data) => {
-            console.log(data);
-            this.OpenDialogModifyDiscount(data);
-          });
-          break;
+      case 'Discount':
+        this.http.GetDiscount(id).subscribe((data) => {
+          console.log(data);
+          this.OpenDialogModifyDiscount(data);
+        });
+        break;
 
-          case 'ItemGroup':
-          this.http.GetItemGroup(id).subscribe((data) => {
-            console.log(data);
-            this.OpenDialogModifyItemGroup(data);
-          });
-          break;
+      case 'ItemGroup':
+        this.http.GetItemGroup(id).subscribe((data) => {
+          console.log(data);
+          this.OpenDialogModifyItemGroup(data);
+        });
+        break;
     }
   }
 
@@ -141,15 +141,15 @@ export class EditListComponent implements OnChanges {
       this.refresh.emit(null);
     });
   }
-  OpenDialogModifyKiosk(kiosk: Kiosk) {
-    const dialogRef = this.dialog.open(ModalKioskComponent, {
-      data: { kiosk: kiosk },
-      width: '60vw',
-    });
-    dialogRef.afterClosed().subscribe(() => {
-      this.refresh.emit(null);
-    });
-  }
+  // OpenDialogModifyKiosk(kiosk: Kiosk) {
+  //   const dialogRef = this.dialog.open(ModalKioskComponent, {
+  //     data: { kiosk: kiosk },
+  //     width: '60vw',
+  //   });
+  //   dialogRef.afterClosed().subscribe(() => {
+  //     this.refresh.emit(null);
+  //   });
+  // }
 
   OpenDialogModifyUser(user: UserModelRequest) {
     const dialogRef = this.dialog.open(ModalUserComponent, {

@@ -9,6 +9,7 @@ import { ModalOptionComponent } from '../modal-option/modal-option.component';
 import { Store } from 'src/app/Models/Store';
 import { ForceReplicationModel } from 'src/app/Models/ForceReplicationModel';
 import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
+import { TreeObject } from 'src/app/Models/TreeObject';
 
 @Component({
   selector: 'app-modal-kiosk',
@@ -30,11 +31,11 @@ export class ModalKioskComponent {
   });
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: { kiosk: Kiosk; store: Store },
+    @Inject(MAT_DIALOG_DATA) private data: { kiosk: Kiosk; store: TreeObject },
     private http: HttpService,
     public status: StatusService,
     private _snackBar: MatSnackBar,
-    public storage:StorageManagerService
+    public storage: StorageManagerService
   ) {
     {
       this.kiosk = data.kiosk;
@@ -54,11 +55,7 @@ export class ModalKioskComponent {
       this.kioskForm.get('ip')?.disable();
       this.kioskForm.get('store_name')?.disable();
       this.kioskForm.get('flg_consumations')?.disable();
-
-
-
     }
-
   }
 
   ForceReplication(id: string) {

@@ -15,6 +15,9 @@ import { StorageManagerService } from 'src/app/Services/auth-services/storage-ma
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ModalErrorComponent } from '../modal-error/modal-error.component';
 import { StoreModel } from 'src/app/Models/StoreModel';
+import { NestedTreeControl } from '@angular/cdk/tree';
+import { MatTreeNestedDataSource } from '@angular/material/tree';
+import { TreeObject } from 'src/app/Models/TreeObject';
 
 @Component({
   selector: 'app-kiosk-filter',
@@ -31,6 +34,8 @@ export class KioskFilterComponent {
     hostname: new FormControl(''),
     ip: new FormControl(''),
   });
+  treeControl = new NestedTreeControl<TreeObject>((node) => node.children);
+  dataSource = new MatTreeNestedDataSource<TreeObject>();
 
   constructor(
     private http: HttpService,
@@ -45,15 +50,36 @@ export class KioskFilterComponent {
   }
   GetCountries() {
     this.http.GetCountries().subscribe((data) => {
-      this.countries = data;
-      this.countries.forEach((country) =>
-        country.stores!.forEach(
+      let countries = data;
+      countries.forEach((country) =>
+        country.stores?.forEach(
           (store: Store) =>
             (store.formattedKiosk = this.GetStoreKioskFromCountry(store))
         )
       );
+      return (this.dataSource.data = this.GetTreeFromCountries(countries));
     });
   }
+
+  GetTreeFromCountries(countries: Country[]) {
+    let tree: TreeObject[] = [];
+    countries.forEach((country) => {
+      let countryNode = new TreeObject(country.id, country.name, 'country', []);
+      country.stores?.forEach((store) => {
+        let storeNode = new TreeObject(store.id, store.name, 'store', []);
+        store.formattedKiosk?.forEach((kiosk) => {
+          storeNode.children?.push(
+            new TreeObject(kiosk.id, kiosk.name, 'kiosk', [])
+          );
+        });
+        countryNode.children?.push(storeNode);
+      });
+      tree.push(countryNode);
+    });
+    return tree;
+  }
+  hasChild = (_: number, node: TreeObject) =>
+    !!node.children && node.children.length > 0;
 
   GetStores() {
     // this.http.FilterStore({}).subscribe((data) => {
@@ -161,7 +187,7 @@ export class KioskFilterComponent {
     });
   }
 
-  OpenDialogAddKiosk(store: Store) {
+  OpenDialogAddKiosk(store: TreeObject) {
     const dialogRef = this.dialog.open(ModalKioskComponent, {
       width: '60vw',
       data: { store: store, kiosk: null },
@@ -169,7 +195,7 @@ export class KioskFilterComponent {
     dialogRef.afterClosed().subscribe(() => this.GetCountries());
   }
 
-  OpenDialogAddStore(country: Country) {
+  OpenDialogAddStore(country: TreeObject) {
     const dialogRef = this.dialog.open(ModalStoreComponent, {
       width: '60vw',
       data: { country_name: country.name, country_id: country.id, store: null },
@@ -218,5 +244,29 @@ export class KioskFilterComponent {
       width: '60vw',
     });
     dialogRef.afterClosed().subscribe(() => this.GetCountries());
+  }
+
+  OpenDialogEditKiosk(id: string) {
+    this.http.GetKiosk(id).subscribe((data) => {
+      const dialogRef = this.dialog.open(ModalKioskComponent, {
+        data: { kiosk: data },
+        width: '60vw',
+      });
+      dialogRef.afterClosed().subscribe(() => this.GetCountries());
+    });
+  }
+
+  OpenEditDialog(node: TreeObject) {
+    switch (node.type) {
+      case 'country':
+        this.OpenDialogEditCountry(node.id!);
+        break;
+      case 'store':
+        this.OpenDialogEditStore(node.id!);
+        break;
+      case 'kiosk':
+        this.OpenDialogEditKiosk(node.id!);
+        break;
+    }
   }
 }

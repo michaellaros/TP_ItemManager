@@ -1,12 +1,39 @@
 .quad {
-  border-radius: 1%;
-  border:2px solid rgb(189, 188, 188);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  background-color: rgb(245, 245, 245);
+  border: 1px solid rgb(189, 188, 188);
+  //  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  // background-color: rgb(245, 245, 245);
 }
-.container{
-  padding-left:0;
+.container {
+  padding-left: 0;
 }
 
+.example-tree-invisible {
+  display: none;
+}
 
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
 
+/*
+ * This padding sets alignment of the nested nodes.
+ */
+.example-tree .mat-nested-tree-node div[role="group"] {
+  padding-left: 48px;
+}
+
+/*
+ * Padding for leaf nodes.
+ * Leaf nodes need to have padding so as to align with other non-leaf nodes
+ * under the same parent.
+ */
+.example-tree div[role="group"] > .mat-tree-node {
+  padding-left: 48px;
+}
+
+.pad-left-48px {
+  padding-left: 48px;
+}

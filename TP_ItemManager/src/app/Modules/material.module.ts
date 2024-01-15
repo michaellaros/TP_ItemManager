@@ -22,6 +22,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatRippleModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatMenuModule } from '@angular/material/menu';
+
 const MaterialComponents = [
   MatButtonModule,
   MatListModule,
@@ -44,6 +47,8 @@ const MaterialComponents = [
   MatPaginatorModule,
   MatChipsModule,
   MatRippleModule,
+  MatTreeModule,
+  MatMenuModule,
 ];
 
 @NgModule({

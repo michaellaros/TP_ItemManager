@@ -101,7 +101,7 @@ export class DiscountFilterComponent {
         this.spinner.hide();
         console.log('subscribe');
         this.errorList = data;
-        if (this.errorList.length > 0)
+        if (this.errorList != undefined && this.errorList.length > 0)
           // alert('error for store {{}}');
 
           this.OpenDialogReturnError(this.errorList);

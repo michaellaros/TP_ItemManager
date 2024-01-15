@@ -15,6 +15,7 @@ import { StorageManagerService } from 'src/app/Services/auth-services/storage-ma
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ModalErrorComponent } from '../modal-error/modal-error.component';
 import { StoreModel } from 'src/app/Models/StoreModel';
+import { ResponseStoreUpdate } from 'src/app/Models/ResponseStoreUpdate';
 
 @Component({
   selector: 'app-kiosk-filter',
@@ -94,24 +95,11 @@ export class KioskFilterComponent {
       (data) => {
         console.log('subscribe');
         this.errorList = data;
-        if (this.errorList.length > 0) {
+        if (this.errorList != undefined && this.errorList.length > 0) {
           // alert('error for store {{}}');
           this.spinner.hide();
-          let errors: {
-            id: string;
-            ip: string;
-            szRetailStoreId: string;
-            storeName: string;
-          }[] = [];
-          this.errorList.forEach((element) => {
-            errors.push({
-              id: element.id!,
-              ip: element.ip!,
-              szRetailStoreId: element.szRetailStoreId!,
-              storeName: element.storeName!,
-            });
-          });
-          this.OpenDialogReturnError(errors);
+
+          this.OpenDialogReturnError(this.errorList);
         } else {
           this.spinner.hide();
         }
@@ -122,14 +110,7 @@ export class KioskFilterComponent {
     );
   }
 
-  OpenDialogReturnError(
-    errors: {
-      id: string;
-      ip: string;
-      szRetailStoreId: string;
-      storeName: string;
-    }[]
-  ) {
+  OpenDialogReturnError(errors: ResponseStoreUpdate[]) {
     const dialogRef = this.dialog.open(ModalErrorComponent, {
       data: errors,
     });

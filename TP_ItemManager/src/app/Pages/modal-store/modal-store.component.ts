@@ -19,7 +19,7 @@ import { StoreModel } from 'src/app/Models/StoreModel';
 export class ModalStoreComponent {
   store?: StoreDetail;
   public flg_insert: boolean;
-  public errorListStore!: ResponseStoreUpdate;
+  public errorListStore: ResponseStoreUpdate[] = [];
 
   storeForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -68,23 +68,20 @@ export class ModalStoreComponent {
 
   UpdateStores(id: string) {
     this.spinner.show();
-
+    console.log(id);
     this.http.StoreUpdate(id).subscribe(
       (data) => {
-        console.log('subscribe');
-        this.errorListStore = data;
-        if (this.errorListStore.lastUpdateDate == 'Update error') {
-          // alert('error for store {{}}');
+        console.log(data);
+        this.errorListStore.push(data);
+        if (
+          this.errorListStore != undefined &&
+          this.errorListStore.length > 0
+        ) {
           this.spinner.hide();
-          let error!: { id: string; ip: string };
-          error.id = this.errorListStore.id!;
-          error.ip = this.errorListStore.ip!;
-          this.OpenDialogReturnError(error!);
+          console.log(this.errorListStore); // { "id": "1011","ip": "172.16.3.88","szRetailStoreId": undefined,"storeName": "basiglio"}
+          this.OpenDialogReturnError(this.errorListStore);
         } else {
           this.spinner.hide();
-          this.storeForm.patchValue({
-            last_request_date: data.lastUpdateDate!,
-          });
         }
       },
       (err) => {
@@ -92,7 +89,7 @@ export class ModalStoreComponent {
       }
     );
   }
-  OpenDialogReturnError(errors: { id: string; ip: string }) {
+  OpenDialogReturnError(errors: ResponseStoreUpdate[]) {
     const dialogRef = this.dialog.open(ModalErrorComponent, {
       data: errors,
     });

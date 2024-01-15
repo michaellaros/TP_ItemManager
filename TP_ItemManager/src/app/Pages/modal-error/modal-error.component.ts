@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ResponseStoreUpdate } from 'src/app/Models/ResponseStoreUpdate';
 
 @Component({
   selector: 'app-modal-error',
@@ -7,24 +8,13 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./modal-error.component.scss'],
 })
 export class ModalErrorComponent {
-  public errorList!: {
-    id: string;
-    ip: string;
-    szRetailStoreId: string;
-    storeName: string;
-  }[];
+  public errorList!: ResponseStoreUpdate[];
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    private data: {
-      id: string;
-      ip: string;
-      szRetailStoreId: string;
-      storeName: string;
-    }[]
+    private data: ResponseStoreUpdate[]
   ) {
     {
       this.errorList = this.data;
-      console.log(this.errorList);
     }
   }
 

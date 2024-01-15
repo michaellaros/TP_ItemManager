@@ -379,7 +379,7 @@ export class HttpService {
     return this.http.get<Language[]>(this.assetsUrl + 'i18n/languages.json');
   }
   Login(name: string, password: string) {
-    return this.http.post<{ token: string; role: string }>(
+    return this.http.post<{ token: string; role: string; id: string }>(
       this.urlAPI + 'DoLogin',
       null,
       {

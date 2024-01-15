@@ -1,33 +1,43 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StorageManagerService {
+  public var1!: number; //role
+  public userPermission: number = 101;
 
-  public var1!:number; //role
-  public userPermission:number = 101;
+  constructor() {}
+  // ---- id
+  public getId() {
+    return localStorage.getItem('TP_ItemManager_id')!;
+  }
 
-  constructor() { }
+  public saveId(id: string) {
+    localStorage.setItem('TP_ItemManager_id', id);
+  }
 
+  public removeId(id: string) {
+    localStorage.removeItem(id);
+  }
   // ---- token
-  public getToken(){
+  public getToken() {
     return localStorage.getItem('TP_ItemManager_AccessToken')!;
   }
 
-  public saveToken(token: string){
+  public saveToken(token: string) {
     localStorage.setItem('TP_ItemManager_AccessToken', token);
   }
 
-  public removeToken(token: string){
+  public removeToken(token: string) {
     localStorage.removeItem(token);
   }
 
-  public CheckPermission(value:number):boolean{
-   if(parseInt(this.getRole())>value){
-    return true
-   }
-   return false;
+  public CheckPermission(value: number): boolean {
+    if (parseInt(this.getRole()) > value) {
+      return true;
+    }
+    return false;
   }
   // // ---- username
   // public getUsername(){
@@ -43,15 +53,15 @@ export class StorageManagerService {
   // }
 
   // ---- role
-  public getRole(){
+  public getRole() {
     return localStorage.getItem('TP_ItemManager_role')!;
   }
 
-  public saveRole(role: string){
+  public saveRole(role: string) {
     localStorage.setItem('TP_ItemManager_role', role);
   }
 
-  public removeRole(role: string){
+  public removeRole(role: string) {
     localStorage.removeItem(role);
   }
 
@@ -81,11 +91,10 @@ export class StorageManagerService {
   //   localStorage.removeItem(loadSetting);
   // }
 
-  public isLogged(){
-    if(this.getToken()){
+  public isLogged() {
+    if (this.getToken()) {
       return true;
     }
     return false;
   }
-
 }

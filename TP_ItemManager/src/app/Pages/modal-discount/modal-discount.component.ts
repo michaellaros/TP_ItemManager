@@ -27,9 +27,6 @@ export class ModalDiscountComponent {
     { value: 'Percent', viewValue: 'Percentage' },
     { value: 'FixPrice', viewValue: 'Fix price' },
     { value: 'AmountOff', viewValue: 'Amount off' },
-    { value: 'Percent', viewValue: 'Percentage' },
-    { value: 'FixPrice', viewValue: 'Fix price' },
-    { value: 'AmountOff', viewValue: 'Amount off' },
   ];
 
   discountForm = new FormGroup({

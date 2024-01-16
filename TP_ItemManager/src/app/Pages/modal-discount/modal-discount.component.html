@@ -112,13 +112,13 @@
   <app-discounted-item-editor
     [id]="discount?.id!"
     [type]="'Discount'"
-    [DiscountedObjects]="discount?.items"
+    [DiscountedObjects]="discount?.items!"
     [flg_insert]="this.flg_insert"
   />
   <app-assigned-editor
     [type]="'DiscountStore'"
     [id]="discount?.id!"
-    [AssignedObjects]="discount?.stores"
+    [AssignedObjects]="discount?.stores!"
     [flg_insert]="this.flg_insert"
   />
 </mat-dialog-content>

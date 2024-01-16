@@ -99,6 +99,9 @@ export class HttpService {
   FilterDiscount(filter: any) {
     return this.http.post<Discount[]>(this.urlAPI + 'Discounts', filter);
   }
+  GetCountriesForLoggedUser() {
+    return this.http.get(this.urlAPI + 'GetCountriesForLoggedUser');
+  }
 
   GetItem(id: string) {
     return this.http.get<Item>(this.urlAPI + 'Item', {

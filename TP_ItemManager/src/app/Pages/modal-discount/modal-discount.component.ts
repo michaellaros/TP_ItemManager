@@ -7,6 +7,7 @@ import {
 } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Discount } from 'src/app/Models/Discount';
+import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 
@@ -29,6 +30,8 @@ export class ModalDiscountComponent {
     { value: 'AmountOff', viewValue: 'Amount off' },
   ];
 
+  public countries: SearchedObject[] = [];
+
   discountForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
@@ -40,6 +43,7 @@ export class ModalDiscountComponent {
       Validators.min(1),
       Validators.max(99),
     ]),
+    country_id: new FormControl('', [Validators.required]),
     flg_discountedItems: new FormControl<boolean>(true),
     flg_distribute: new FormControl<boolean>(true),
     flg_loyalty: new FormControl<boolean>(true),
@@ -59,6 +63,7 @@ export class ModalDiscountComponent {
 
   ngOnInit() {
     this.UpdateForm();
+    this.GetCountries();
   }
   OpenDialogModifyItem(itemId: string, type: string) {
     this.status.OpenDialogModifyItem(itemId, type);
@@ -75,6 +80,7 @@ export class ModalDiscountComponent {
         });
       });
     } else {
+      console.log(this.GetDiscountFromForm());
       this.http.UpdateDiscount(this.GetDiscountFromForm()).subscribe((data) => {
         this.discount = data;
 
@@ -94,6 +100,7 @@ export class ModalDiscountComponent {
       this.discountForm.get('value')!.value!,
       this.discountForm.get('description')!.value!,
       this.discountForm.get('quantity')!.value!,
+      this.discountForm.get('country_id')!.value!,
       this.discountForm.get('flg_discountedItems')!.value!,
       this.discountForm.get('flg_distribute')!.value!,
       this.discountForm.get('flg_loyalty')!.value!
@@ -110,10 +117,22 @@ export class ModalDiscountComponent {
         value: this.discount.value,
         type: this.discount.type,
         quantity: this.discount.quantity,
+        country_id: this.discount.country_id,
         flg_discountedItems: this.discount.flg_discountedItems,
         flg_distribute: this.discount.flg_distribute,
         flg_loyalty: this.discount.flg_loyalty,
       });
     }
+  }
+
+  GetCountries() {
+    this.http.GetCountriesForLoggedUser().subscribe((data: any) => {
+      let list: SearchedObject[] = [];
+      Object.keys(data).forEach((key) => {
+        list.push(new SearchedObject(key, data[key]));
+      });
+
+      this.countries = list.sort((a, b) => (a.name! < b.name! ? -1 : 1));
+    });
   }
 }

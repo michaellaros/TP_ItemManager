@@ -21,7 +21,10 @@
             style="aspect-ratio: 3/2"
             class="object-fit-contain w-100"
           />
-          <button [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
+          <button
+            [disabled]="
+              !this.storage.CheckPermission(this.storage.userPermission)
+            "
             mat-raised-button
             color="primary"
             class="my-4"
@@ -52,7 +55,7 @@
             <input type="number" formControlName="price" matInput />
           </mat-form-field> -->
         </div>
-        <div class="row col-3 d-flex flex-column">
+        <div class="row 12 d-flex">
           <mat-checkbox
             formControlName="flg_addToCart"
             matInput
@@ -72,8 +75,14 @@
             {{ "Menu" | translate }}
           </mat-checkbox>
 
-          <button *ngIf="!flg_insert" mat-raised-button color="primary" type="button" (click)="OpenDialogModifyItem(item.id!,'ITEM')" >
-           Set availability
+          <button
+            *ngIf="!flg_insert"
+            mat-raised-button
+            color="primary"
+            type="button"
+            (click)="OpenDialogModifyItem(item.id!, 'ITEM')"
+          >
+            Set availability
           </button>
         </div>
       </div>

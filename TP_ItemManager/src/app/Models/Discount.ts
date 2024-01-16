@@ -9,6 +9,7 @@ export class Discount {
     public value?: number,
     public description?: string,
     public quantity?: number,
+    public country_id?: string,
     public flg_distribute?: boolean, //distribute discount on all items discounted
     public flg_discountedItems?: boolean,
     public flg_loyalty?: boolean,

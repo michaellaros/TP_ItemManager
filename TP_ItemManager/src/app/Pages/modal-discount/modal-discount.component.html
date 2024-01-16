@@ -15,36 +15,57 @@
   <div class="container-fluid">
     <form [formGroup]="discountForm" class="formGroup">
       <div class="row">
-        <div class="row d-flex flex-column">
-          <mat-form-field class="text">
-            <mat-label>{{ "Name" | translate }}</mat-label>
-            <input formControlName="name" matInput />
-          </mat-form-field>
-          <mat-form-field class="text">
-            <mat-label>{{ "Description" | translate }}</mat-label>
-            <input formControlName="description" matInput />
-          </mat-form-field>
-          <mat-form-field class="col-6">
-            <mat-label>Discount type</mat-label>
-            <mat-select formControlName="type">
-              <mat-option
-                *ngFor="let type of discountType"
-                [value]="type.value"
-              >
-                {{ type.viewValue }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+        <mat-form-field class="text">
+          <mat-label>{{ "Name" | translate }}</mat-label>
+          <input formControlName="name" matInput />
+        </mat-form-field>
+        <mat-form-field class="text">
+          <mat-label>{{ "Description" | translate }}</mat-label>
+          <input formControlName="description" matInput />
+        </mat-form-field>
+        <mat-form-field class="col-3">
+          <mat-label>Discount type</mat-label>
+          <mat-select formControlName="type">
+            <mat-option *ngFor="let type of discountType" [value]="type.value">
+              {{ type.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-          <mat-form-field appearance="outline" class="col-3">
-            <mat-label>{{ "Discount value" | translate }}</mat-label>
-            <input formControlName="value" matInput type="number" />
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="col-3">
-            <mat-label>{{ "Quantity" | translate }}</mat-label>
-            <input formControlName="quantity" matInput type="number" />
-          </mat-form-field>
-        </div>
+        <mat-form-field appearance="outline" class="col-3">
+          <mat-label>{{ "Discount value" | translate }}</mat-label>
+          <input formControlName="value" matInput type="number" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-3">
+          <mat-label>{{ "Quantity" | translate }}</mat-label>
+          <input formControlName="quantity" matInput type="number" />
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-3">
+          <mat-label>{{ "Country" | translate }}</mat-label>
+          <mat-select formControlName="country_id">
+            <mat-option *ngFor="let country of countries" [value]="country.id">
+              {{ country.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- <mat-form-field appearance="outline" class="col-8">
+            <mat-label>{{ "Country" | translate }}</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="country_id"
+              [matAutocomplete]="auto"
+            />
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option
+                *ngFor="let country of countries"
+                [value]="country.id"
+              >
+                {{ country.name }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field> -->
+
         <div class="col-3 d-flex flex-column">
           <mat-checkbox
             formControlName="flg_distribute"
@@ -78,7 +99,7 @@
     </button>
 
     <button
-    *ngIf="!flg_insert"
+      *ngIf="!flg_insert"
       mat-raised-button
       color="primary"
       type="button"

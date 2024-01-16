@@ -24,7 +24,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Kiosk } from 'src/app/Models/Kiosk';
 import { ModalKioskComponent } from '../modal-kiosk/modal-kiosk.component';
-import { UserModelRequest } from 'src/app/Models/UserModelRequest';
+import { UserModelResult } from 'src/app/Models/UserModelRequest';
 import { ModalUserComponent } from '../modal-user/modal-user.component';
 import { StatusService } from 'src/app/Services/status.service';
 import { Discount } from 'src/app/Models/Discount';
@@ -151,7 +151,7 @@ export class EditListComponent implements OnChanges {
   //   });
   // }
 
-  OpenDialogModifyUser(user: UserModelRequest) {
+  OpenDialogModifyUser(user: UserModelResult) {
     const dialogRef = this.dialog.open(ModalUserComponent, {
       data: user,
       width: '60vw',

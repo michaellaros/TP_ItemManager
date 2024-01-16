@@ -6,7 +6,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { UserModelRequest } from 'src/app/Models/UserModelRequest';
+import { UserModelResult } from 'src/app/Models/UserModelRequest';
 import { UserModelCreate } from 'src/app/Models/UserModelCreate';
 
 import { HttpService } from 'src/app/Services/http.service';
@@ -25,7 +25,7 @@ interface valueType {
 })
 export class ModalUserComponent {
   userC?: UserModelCreate;
-  userU?: UserModelRequest;
+  userU?: UserModelResult;
   public flg_insert: boolean;
 
   roleType: valueType[] = [
@@ -43,7 +43,7 @@ export class ModalUserComponent {
 
   constructor(
     private router: Router,
-    @Inject(MAT_DIALOG_DATA) private data: UserModelRequest,
+    @Inject(MAT_DIALOG_DATA) private data: UserModelResult,
     private http: HttpService,
     public status: StatusService,
     private _snackBar: MatSnackBar,
@@ -114,7 +114,7 @@ export class ModalUserComponent {
     } else {
       this.http
         .UpdateUser(
-          new UserModelRequest(
+          new UserModelResult(
             this.userU?.id,
             this.userForm.get('name')!.value!,
             this.userForm.get('role')!.value!

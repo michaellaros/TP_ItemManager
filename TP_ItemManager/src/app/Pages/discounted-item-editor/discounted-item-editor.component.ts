@@ -31,7 +31,7 @@ import { HttpService } from 'src/app/Services/http.service';
   ],
 })
 export class DiscountedItemEditorComponent {
-  @Input() DiscountedObjects?: DiscountedObject[];
+  @Input() DiscountedObjects!: DiscountedObject[];
   @Input() public type!: string;
   @Input() flg_insert!: boolean;
   @Input() id!: string;
@@ -54,7 +54,7 @@ export class DiscountedItemEditorComponent {
   public items: DiscountedObject[] = [];
   public itemGroups: DiscountedObject[] = [];
   public discounts: DiscountedObject[] = [];
-  public filteredOptions?: DiscountedObject[];
+  public filteredOptions?: DiscountedObject[] = [];
 
   public constructor(
     private http: HttpService,
@@ -123,10 +123,11 @@ export class DiscountedItemEditorComponent {
   }
 
   private _filter(value: string) {
-    console.log(this.DiscountedObjects);
     const filterValue = value.toLowerCase();
     switch (this.assignForm.get('type')!.value!) {
       case DiscountedItemType.Group:
+        console.log('gruppo');
+
         this.filteredOptions = this.itemGroups.filter(
           (itemGroup) =>
             itemGroup.name?.toLowerCase().includes(filterValue) &&
@@ -136,6 +137,7 @@ export class DiscountedItemEditorComponent {
         );
         break;
       case DiscountedItemType.Discount:
+        console.log('ciao');
         this.filteredOptions = this.discounts.filter(
           (discount) =>
             discount.name?.toLowerCase().includes(filterValue) &&
@@ -146,13 +148,18 @@ export class DiscountedItemEditorComponent {
         break;
       case DiscountedItemType.Item:
       default:
-        this.filteredOptions = this.items.filter(
-          (item) =>
+        console.log('item');
+        console.log(this.DiscountedObjects);
+
+        this.filteredOptions = this.items.filter((item) => {
+          return (
             item.name?.toLowerCase().includes(filterValue) &&
             this.DiscountedObjects?.findIndex(
               (assigned) => assigned.id == item.id
             ) == -1
-        );
+          );
+        });
+        console.log(this.filteredOptions);
     }
   }
 

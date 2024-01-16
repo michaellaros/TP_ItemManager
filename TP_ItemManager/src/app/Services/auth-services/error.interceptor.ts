@@ -12,12 +12,14 @@ import { StorageManagerService } from './storage-manager.service';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { StatusService } from '../status.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(
     private authService: AuthService,
-    private status:StatusService
+    private status: StatusService,
+    private _snackBar: MatSnackBar
   ) {}
 
   intercept(
@@ -26,15 +28,19 @@ export class ErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((err) => {
-        console.log(err)
+        console.log(err);
         if (err.status === 401) {
           this.authService.logout();
-          this.status.error=true
+          this.status.error = true;
+        }
+        if (err.status === 409) {
+          this._snackBar.open('This user already exist', 'Ok', {
+            duration: this.status.snackbarDuration,
+          });
         }
 
-
         const error = err.error.message || err.statusText;
-        return throwError(() => new Error(error.message || 'Server error!'))
+        return throwError(() => new Error(error.message || 'Server error!'));
       })
     );
   }

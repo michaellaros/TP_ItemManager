@@ -19,7 +19,7 @@ export class StatusService {
   public languages: Language[] = [];
   public isLogged: string = 'false';
   public user: string = '';
-  public snackbarDuration: number = 3000;
+  public snackbarDuration: number = 1500;
   public listAvailable!: CountryAvailability[];
   @Output() public refresh = new EventEmitter();
 

@@ -36,6 +36,7 @@ export class AssignedEditorComponent {
   @Input() flg_insert!: boolean;
   @Input() type!: string;
   @Input() id!: string;
+  @Input() country_id?: string;
 
   public newAssignedObject: AssignedObject;
   public state: boolean = true;
@@ -122,18 +123,13 @@ export class AssignedEditorComponent {
         });
         break;
       case 'DiscountStore':
-        this.http.FilterStore({}).subscribe((data) => {
-          let list: SearchedObject[] = [];
-          data.forEach((store) => {
-            list.push(new SearchedObject(store.id, store.name));
-          });
-          this.options = list;
+        this.http.GetStoresForLoggedUser(this.country_id!).subscribe((data) => {
+          this.options = this.MapToArray(data);
           this.filteredOptions = this._filter('');
-          this._filter('');
         });
         break;
       case 'StoreDiscount':
-        this.http.FilterDiscount({}).subscribe((data) => {
+        this.http.GetCountryDiscounts(this.country_id!).subscribe((data) => {
           this.options = this.MapToArray(data);
           this.filteredOptions = this._filter('');
         });

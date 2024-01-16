@@ -64,6 +64,7 @@ export class ModalDiscountComponent {
   ngOnInit() {
     this.UpdateForm();
     this.GetCountries();
+    if (!this.flg_insert) this.discountForm.get('country_id')!.disable();
   }
   OpenDialogModifyItem(itemId: string, type: string) {
     this.status.OpenDialogModifyItem(itemId, type);

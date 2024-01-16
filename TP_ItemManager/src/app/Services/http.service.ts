@@ -99,8 +99,20 @@ export class HttpService {
   FilterDiscount(filter: any) {
     return this.http.post<Discount[]>(this.urlAPI + 'Discounts', filter);
   }
+  GetCountryDiscounts(country_id: string) {
+    return this.http.get<any>(this.urlAPI + 'GetCountryDiscounts', {
+      params: new HttpParams().append('country_id', country_id),
+    });
+  }
+
   GetCountriesForLoggedUser() {
     return this.http.get(this.urlAPI + 'GetCountriesForLoggedUser');
+  }
+
+  GetStoresForLoggedUser(country_id: string) {
+    return this.http.get<any>(this.urlAPI + 'GetStoresForLoggedUser', {
+      params: new HttpParams().append('country_id', country_id),
+    });
   }
 
   GetItem(id: string) {

@@ -42,7 +42,9 @@
 
         <div class="col-4" *ngIf="!flg_insert">
           <button
-          [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
+            [disabled]="
+              !this.storage.CheckPermission(this.storage.userPermission)
+            "
             mat-raised-button
             color="primary"
             type="button"
@@ -50,8 +52,16 @@
           >
             Force Update
           </button>
-          <button class="ms-3"  [disabled]="!this.storage.CheckPermission(this.storage.userPermission)" mat-raised-button color="primary"
-            type="button" (click)="UpdateStores(this.store?.id!)">
+          <button
+            class="ms-3"
+            [disabled]="
+              !this.storage.CheckPermission(this.storage.userPermission)
+            "
+            mat-raised-button
+            color="primary"
+            type="button"
+            (click)="UpdateStores(this.store?.id!)"
+          >
             Send Update
           </button>
         </div>
@@ -62,12 +72,17 @@
       </button>
     </form>
   </div>
-  <app-assigned-editor [type]="'StoreDiscount'"
-  [id]="store?.id!"
-  [AssignedObjects]="store!.discounts"
-  [flg_insert]="this.flg_insert" />
+  <app-assigned-editor
+    [type]="'StoreDiscount'"
+    [id]="store?.id!"
+    [AssignedObjects]="store!.discounts"
+    [flg_insert]="this.flg_insert"
+    [country_id]="store?.country_id!"
+  />
   <app-country-store-editor
-  [id]="store!.id!" [type]="'Store'"
-  [relatedObjects]="store?.relationship!"
-  [flg_insert]="this.flg_insert" />
+    [id]="store!.id!"
+    [type]="'Store'"
+    [relatedObjects]="store?.relationship!"
+    [flg_insert]="this.flg_insert"
+  />
 </mat-dialog-content>

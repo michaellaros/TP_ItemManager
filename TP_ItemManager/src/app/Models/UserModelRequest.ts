@@ -1,7 +1,7 @@
 import { CountryStoreObject } from './CountryStoreObject';
 import { UserRelationshipType } from './Enums/UserRelationshipType';
 
-export class UserModelRequest {
+export class UserModelResult {
   constructor(
     public id?: string,
     public name?: string,

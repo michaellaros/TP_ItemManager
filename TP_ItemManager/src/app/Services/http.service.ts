@@ -18,7 +18,7 @@ import { Timespan } from '../Models/Timespan';
 import { Kiosk } from '../Models/Kiosk';
 import { Language } from '../Models/language';
 import { SearchedObject } from '../Models/SearchedObject';
-import { UserModelRequest } from '../Models/UserModelRequest';
+import { UserModelResult } from '../Models/UserModelRequest';
 import { Token } from '../Models/Token';
 import { ItemVat } from '../Models/ItemVat';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -402,15 +402,15 @@ export class HttpService {
     //
   }
   CreateUser(name: string, password: string, role: string) {
-    return this.http.post<UserModelRequest>(this.urlAPI + 'CreateUser', {
+    return this.http.post<UserModelResult>(this.urlAPI + 'CreateUser', {
       name,
       password,
       role,
     });
     //
   }
-  UpdateUser(user: UserModelRequest) {
-    return this.http.post<UserModelRequest>(this.urlAPI + 'UpdateUser', {
+  UpdateUser(user: UserModelResult) {
+    return this.http.post<UserModelResult>(this.urlAPI + 'UpdateUser', {
       id: user.id?.toString(),
       name: user.name,
       role: user.role?.toString()!,
@@ -418,9 +418,8 @@ export class HttpService {
   }
 
   GetUser(id: string) {
-    return this.http.post<UserModelRequest>(this.urlAPI + 'GetUser', {
-      id: id,
-      name: '',
+    return this.http.get<UserModelResult>(this.urlAPI + 'GetUser', {
+      params: new HttpParams().append('id', id),
     });
   }
   GetDiscount(id: string) {

@@ -9,51 +9,43 @@ import { Token } from 'src/app/Models/Token';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent {
-  public token!:string;
-  public user:UserModelCreate = new UserModelCreate('pass','pass')
+  public token!: string;
+  public user: UserModelCreate = new UserModelCreate('pass', 'pass');
   loginForm = new FormGroup({
-    Name: new FormControl('',[Validators.required]),
-    Password: new FormControl('',[Validators.required])
-
+    Name: new FormControl('', [Validators.required]),
+    Password: new FormControl('', [Validators.required]),
   });
-  constructor(private http:HttpService,
-    public status:StatusService,
+  constructor(
+    private http: HttpService,
+    public status: StatusService,
     private router: Router,
-    private storage:StorageManagerService){
-
-   }
-   public Submit() {
-    this.user.name = this.loginForm.get('Name')!.value!
-    this.user.password = this.loginForm.get('Password')!.value!
-    this.user.role = 'default'
+    private storage: StorageManagerService
+  ) {}
+  public Submit() {
+    this.user.name = this.loginForm.get('Name')!.value!;
+    this.user.password = this.loginForm.get('Password')!.value!;
+    this.user.role = 'default';
     this.DoLogin();
   }
 
-  DoLogin()
-  {
-
-
-    this.http.Login(this.user.name!,this.user.password!).subscribe((data)=>{
+  DoLogin() {
+    this.http.Login(this.user.name!, this.user.password!).subscribe((data) => {
       // this.status.isLogged = 'true'
       // if(this.status.isLogged == 'true'){
-        this.storage.saveRole(data.role)
-        this.storage.saveToken(data.token);
-        this.router.navigate(['/Kiosk']);
-
-    })
-    this.http.GetRole(this.user.name!.toString()).subscribe((data)=>{
-
+      this.storage.saveRole(data.role);
+      this.storage.saveToken(data.token);
+      this.storage.saveId(data.id);
+      this.router.navigate(['/Kiosk']);
+    });
+    this.http.GetRole(this.user.name!.toString()).subscribe((data) => {
       console.log(this.storage.var1);
-
-    })
+    });
   }
 
-    ngOnInit(): void {
-      this.status.error= false
-
-    }
-
+  ngOnInit(): void {
+    this.status.error = false;
+  }
 }

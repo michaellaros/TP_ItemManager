@@ -55,6 +55,7 @@ export class ModalUserComponent {
     }
   }
   ngOnInit() {
+    console.log(this.storage.getRole());
     this.UpdateForm();
     if (!this.storage.CheckPermission(this.storage.userPermission)) {
       this.userForm.get('role')?.disable();
@@ -70,6 +71,17 @@ export class ModalUserComponent {
         role: this.userU.role!,
       });
     } else {
+    }
+  }
+  public ModifyPasswordButtonCheck(): boolean {
+    if (this.storage.getRole() != '999') {
+      if (this.storage.getId() != this.userU!.id) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return true;
     }
   }
   public ModifyPassword() {

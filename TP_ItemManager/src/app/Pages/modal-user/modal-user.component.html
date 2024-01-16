@@ -42,7 +42,7 @@
       </mat-form-field>
       </div>
 
-      <button mat-raised-button color="primary" type="button" *ngIf="this.userU!=null" routerLink='/modify-password' [mat-dialog-close]="null">
+      <button mat-raised-button [disabled]="!ModifyPasswordButtonCheck()" color="primary" type="button" *ngIf="this.userU!=null" routerLink='/modify-password' [mat-dialog-close]="null">
         {{ ("Modify password" | translate) }}
       </button>
     <button [disabled]="userForm.invalid" mat-raised-button color="primary" type="button" (click)="SubmitForm()">

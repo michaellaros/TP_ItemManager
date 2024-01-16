@@ -13,6 +13,7 @@ import { Country } from 'src/app/Models/Country';
 import { CountryStoreObject } from 'src/app/Models/CountryStoreObject';
 import { UserRelationshipType } from 'src/app/Models/Enums/UserRelationshipType';
 import { Store } from 'src/app/Models/Store';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 import { HttpService } from 'src/app/Services/http.service';
 
 @Component({
@@ -60,7 +61,8 @@ export class CountryStoreEditorComponent {
 
   public constructor(
     private http: HttpService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public storage: StorageManagerService
   ) {
     this.newAssignedObject = new CountryStoreObject();
   }

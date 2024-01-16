@@ -27,8 +27,6 @@ import { TreeObject } from 'src/app/Models/TreeObject';
 })
 export class KioskFilterComponent {
   public stores!: Store[];
-  public errorList!: StoreModel[];
-
   public countries: Country[] = [];
   public list!: SearchedObject[];
   filterForm = new FormGroup({
@@ -120,12 +118,13 @@ export class KioskFilterComponent {
     this.http.StoresUpdate('').subscribe(
       (data) => {
         console.log('subscribe');
-        this.errorList = data;
-        if (this.errorList != undefined && this.errorList.length > 0) {
+        let errorList: StoreModel[] = [];
+        errorList = data;
+        if (errorList != undefined && errorList.length > 0) {
           // alert('error for store {{}}');
           this.spinner.hide();
 
-          this.OpenDialogReturnError(this.errorList);
+          this.OpenDialogReturnError(errorList);
         } else {
           this.spinner.hide();
         }

@@ -19,7 +19,6 @@ import { StoreModel } from 'src/app/Models/StoreModel';
 export class ModalStoreComponent {
   store?: StoreDetail;
   public flg_insert: boolean;
-  public errorListStore: ResponseStoreUpdate[] = [];
 
   storeForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -72,14 +71,12 @@ export class ModalStoreComponent {
     this.http.StoreUpdate(id).subscribe(
       (data) => {
         console.log(data);
-        this.errorListStore.push(data);
-        if (
-          this.errorListStore != undefined &&
-          this.errorListStore.length > 0
-        ) {
+        let errorListStore: ResponseStoreUpdate[] = [];
+        errorListStore.push(data);
+        if (errorListStore != undefined && errorListStore.length > 0) {
           this.spinner.hide();
-          console.log(this.errorListStore); // { "id": "1011","ip": "172.16.3.88","szRetailStoreId": undefined,"storeName": "basiglio"}
-          this.OpenDialogReturnError(this.errorListStore);
+          console.log(errorListStore); // { "id": "1011","ip": "172.16.3.88","szRetailStoreId": undefined,"storeName": "basiglio"}
+          this.OpenDialogReturnError(errorListStore);
         } else {
           this.spinner.hide();
         }

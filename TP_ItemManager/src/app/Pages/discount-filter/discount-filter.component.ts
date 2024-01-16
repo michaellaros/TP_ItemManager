@@ -20,12 +20,6 @@ export class DiscountFilterComponent {
   public list!: SearchedObject[];
   public imgPreviewList: any;
   public folderName!: string;
-  public errorList!: {
-    id: string;
-    ip: string;
-    szRetailStoreId: string;
-    storeName: string;
-  }[];
 
   constructor(
     private spinner: NgxSpinnerService,
@@ -100,11 +94,17 @@ export class DiscountFilterComponent {
       (data) => {
         this.spinner.hide();
         console.log('subscribe');
-        this.errorList = data;
-        if (this.errorList != undefined && this.errorList.length > 0)
+        let errorList: {
+          id: string;
+          ip: string;
+          szRetailStoreId: string;
+          storeName: string;
+        }[] = [];
+        errorList = data;
+        if (errorList != undefined && errorList.length > 0)
           // alert('error for store {{}}');
 
-          this.OpenDialogReturnError(this.errorList);
+          this.OpenDialogReturnError(errorList);
       },
       (err) => {
         this.spinner.hide();

@@ -39,7 +39,7 @@ export class AssignedEditorComponent {
   @Input() id!: string;
   @Input() country_id?: string;
 
-  public newAssignedObject: AssignedObject;
+  // public newAssignedObject: AssignedObject;
   public state: boolean = true;
   public options: SearchedObject[] = [];
   public typeList: string[] = [
@@ -66,9 +66,18 @@ export class AssignedEditorComponent {
     public storage: StorageManagerService,
     private status: StatusService
   ) {
-    this.newAssignedObject = new AssignedObject();
+    // this.newAssignedObject = new AssignedObject();
   }
   ngOnInit() {
+    console.log(this.flg_insert);
+    if (!this.flg_insert) this.GetOptionList();
+  }
+
+  ngOnChanges() {
+    if (!this.flg_insert) this.GetOptionList();
+  }
+
+  GetOptionList() {
     switch (this.type) {
       case 'CategoryItems-Category':
         this.http.FilterItems({}).subscribe((data) => {

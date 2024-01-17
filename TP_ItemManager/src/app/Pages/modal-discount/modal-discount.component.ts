@@ -65,6 +65,10 @@ export class ModalDiscountComponent {
     this.UpdateForm();
     this.GetCountries();
     if (!this.flg_insert) this.discountForm.get('country_id')!.disable();
+    // this.country_id = this.discountForm.get('country_id')?.value!;
+    // this.discountForm.get('country_id')?.valueChanges.subscribe((id) => {
+    //   if (id != null) this.country_id = id;
+    // });
   }
   OpenDialogModifyItem(itemId: string, type: string) {
     this.status.OpenDialogModifyItem(itemId, type);
@@ -79,6 +83,8 @@ export class ModalDiscountComponent {
         this._snackBar.open('Discount successfully created!', 'Ok', {
           duration: this.status.snackbarDuration,
         });
+        this.discountForm.get('country_id')!.disable();
+        // this.country_id = this.discountForm.get('country_id')!.value!;
       });
     } else {
       this.http.UpdateDiscount(this.GetDiscountFromForm()).subscribe((data) => {

@@ -65,6 +65,15 @@ export class DiscountedItemEditorComponent {
   }
 
   ngOnInit() {
+    console.log(this.flg_insert);
+    if (!this.flg_insert) this.GetOptionList();
+  }
+
+  ngOnChanges() {
+    if (!this.flg_insert) this.GetOptionList();
+  }
+
+  GetOptionList() {
     this.types =
       this.type === 'Discount'
         ? [DiscountedItemType.Item, DiscountedItemType.Group]
@@ -115,7 +124,6 @@ export class DiscountedItemEditorComponent {
       .get('type')!
       .valueChanges.subscribe(() => this.assignForm.patchValue({ name: '' }));
   }
-
   toggle(): void {
     if (!this.flg_insert) {
       this.state = !this.state;

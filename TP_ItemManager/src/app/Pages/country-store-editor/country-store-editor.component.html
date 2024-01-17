@@ -57,7 +57,6 @@
       <mat-form-field appearance="outline" class="col-8">
         <mat-label>{{ "Name" | translate }}</mat-label>
         <input
-        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
           matInput
           type="text"
           formControlName="name"

@@ -93,6 +93,14 @@ export class CountryStoreEditorComponent {
   }
 
   ngOnInit() {
+    if (!this.flg_insert) this.GetOptionList();
+  }
+
+  ngOnChanges() {
+    if (!this.flg_insert) this.GetOptionList();
+  }
+
+  GetOptionList() {
     this.types =
       this.type === 'User'
         ? [UserRelationshipType.Country, UserRelationshipType.Store]
@@ -132,7 +140,6 @@ export class CountryStoreEditorComponent {
       .get('type')!
       .valueChanges.subscribe(() => this.assignForm.patchValue({ name: '' }));
   }
-
   toggle(): void {
     if (!this.flg_insert) {
       this.state = !this.state;

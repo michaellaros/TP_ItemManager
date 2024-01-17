@@ -101,7 +101,9 @@ export class ModalUserComponent {
             this.userForm.get('role')!.value!.toString()
           )
           .subscribe((data) => {
-            this._snackBar.open('User successfully created!', 'Ok');
+            this._snackBar.open('User successfully created!', 'Ok', {
+              duration: this.status.snackbarDuration,
+            });
 
             this.userU = data;
             this.flg_insert = false;

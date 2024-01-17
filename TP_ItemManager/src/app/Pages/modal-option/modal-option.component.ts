@@ -45,7 +45,6 @@ export class ModalOptionComponent {
   ) {
     {
       this.option = this.data;
-
       this.flg_insert = this.data == null;
     }
   }

@@ -12,6 +12,7 @@ import { map } from 'rxjs';
 import { DiscountedObject } from 'src/app/Models/DiscountedObject';
 import { DiscountedItemType } from 'src/app/Models/Enums/DiscountedItemType';
 import { HttpService } from 'src/app/Services/http.service';
+import { StatusService } from 'src/app/Services/status.service';
 
 @Component({
   selector: 'app-discounted-item-editor',
@@ -55,10 +56,10 @@ export class DiscountedItemEditorComponent {
   public itemGroups: DiscountedObject[] = [];
   public discounts: DiscountedObject[] = [];
   public filteredOptions?: DiscountedObject[] = [];
-
   public constructor(
     private http: HttpService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private status: StatusService
   ) {
     this.newAssignedObject = new DiscountedObject();
     console.log(this.type);
@@ -257,7 +258,9 @@ export class DiscountedItemEditorComponent {
     }
 
     if (id == null) {
-      this._snackBar.open('Select a valid item!', 'Ok');
+      this._snackBar.open('Select a valid item!', 'Ok', {
+        duration: this.status.snackbarDuration,
+      });
       return;
     }
     switch (this.assignForm.get('type')!.value!) {

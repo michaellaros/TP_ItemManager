@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Category } from 'src/app/Models/Category';
@@ -26,10 +26,7 @@ export class ItemFilterComponent {
     public status: StatusService,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
-    public storage:StorageManagerService
-
-
-
+    public storage: StorageManagerService
   ) {}
   filterForm = new FormGroup({
     id: new FormControl(''),
@@ -38,9 +35,8 @@ export class ItemFilterComponent {
   });
   ngOnInit() {
     this.GetItems();
-
   }
-  ResetForm(){
+  ResetForm() {
     this.filterForm.reset();
     this.GetItems();
   }
@@ -81,18 +77,17 @@ export class ItemFilterComponent {
     dialogRef.afterClosed().subscribe(() => this.GetItems());
   }
 
-
   UploadFile(files: any) {
     console.log(files.target.files);
     console.log(URL.createObjectURL(files.target.files[0]));
     let CSV = files.target.files[0];
-    console.log(CSV.name)
+    console.log(CSV.name);
     if (CSV)
       this.http.UploadCSV(CSV).subscribe((data) => {
         CSV = data;
-        this._snackBar.open('CSV successfully uploaded!', 'Confirm');
-
+        this._snackBar.open('CSV successfully uploaded!', 'Confirm', {
+          duration: this.status.snackbarDuration,
+        });
       });
   }
-
 }

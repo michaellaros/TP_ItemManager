@@ -5,6 +5,7 @@ import { HttpService } from 'src/app/Services/http.service';
 import { FormsModule } from '@angular/forms';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
+import { StatusService } from 'src/app/Services/status.service';
 
 @Component({
   selector: 'app-image-picker',
@@ -27,6 +28,7 @@ export class ImagePickerComponent {
     @Inject(MAT_DIALOG_DATA) data: any,
     private http: HttpService,
     private _snackBar: MatSnackBar,
+    private status: StatusService,
     router: Router
   ) {
     this.folderName = data.folderName;
@@ -78,14 +80,14 @@ export class ImagePickerComponent {
             ) == -1
         );
         this.FilterImages();
-        this._snackBar.open('Image successfully uploaded!', 'Confirm');
+        this._snackBar.open('Image successfully uploaded!', 'Confirm', {
+          duration: this.status.snackbarDuration,
+        });
       });
-
   }
 
   GetUrlFromFile(file: File) {
     return URL.createObjectURL(file);
-
   }
 
   RemoveFile() {
@@ -111,7 +113,9 @@ export class ImagePickerComponent {
           (img) => img.name != imageName
         );
         this.FilterImages();
-        this._snackBar.open('Image successfully deleted!', 'Confirm');
+        this._snackBar.open('Image successfully deleted!', 'Confirm', {
+          duration: this.status.snackbarDuration,
+        });
       });
     }
   }
@@ -121,6 +125,8 @@ export class ImagePickerComponent {
   }
 
   SnackbarCurrentlySelected() {
-    this._snackBar.open("Can't delete the selected image!", 'Confirm');
+    this._snackBar.open("Can't delete the selected image!", 'Confirm', {
+      duration: this.status.snackbarDuration,
+    });
   }
 }

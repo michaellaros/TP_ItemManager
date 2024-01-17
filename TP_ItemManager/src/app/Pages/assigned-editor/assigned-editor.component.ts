@@ -13,6 +13,7 @@ import { AssignedObject } from 'src/app/Models/AssignedObject';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 import { HttpService } from 'src/app/Services/http.service';
+import { StatusService } from 'src/app/Services/status.service';
 
 @Component({
   selector: 'app-assigned-editor',
@@ -62,7 +63,8 @@ export class AssignedEditorComponent {
   public constructor(
     private http: HttpService,
     private _snackBar: MatSnackBar,
-    public storage: StorageManagerService
+    public storage: StorageManagerService,
+    private status: StatusService
   ) {
     this.newAssignedObject = new AssignedObject();
   }
@@ -547,7 +549,9 @@ export class AssignedEditorComponent {
     )?.id;
 
     if (id == null) {
-      this._snackBar.open('Select a valid item!', 'Ok');
+      this._snackBar.open('Select a valid item!', 'Ok', {
+        duration: this.status.snackbarDuration,
+      });
       return;
     }
 

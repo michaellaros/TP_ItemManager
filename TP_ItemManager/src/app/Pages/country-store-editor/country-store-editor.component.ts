@@ -15,6 +15,7 @@ import { UserRelationshipType } from 'src/app/Models/Enums/UserRelationshipType'
 import { Store } from 'src/app/Models/Store';
 import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 import { HttpService } from 'src/app/Services/http.service';
+import { StatusService } from 'src/app/Services/status.service';
 
 @Component({
   selector: 'app-country-store-editor',
@@ -62,7 +63,8 @@ export class CountryStoreEditorComponent {
   public constructor(
     private http: HttpService,
     private _snackBar: MatSnackBar,
-    public storage: StorageManagerService
+    public storage: StorageManagerService,
+    private status: StatusService
   ) {
     this.newAssignedObject = new CountryStoreObject();
   }
@@ -266,7 +268,9 @@ export class CountryStoreEditorComponent {
     }
 
     if (id == null) {
-      this._snackBar.open('Select a valid item!', 'Ok');
+      this._snackBar.open('Select a valid item!', 'Ok', {
+        duration: this.status.snackbarDuration,
+      });
       return;
     }
     switch (this.assignForm.get('type')!.value!) {

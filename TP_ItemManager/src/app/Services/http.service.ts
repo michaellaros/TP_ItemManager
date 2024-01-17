@@ -475,7 +475,7 @@ export class HttpService {
   }
 
   StoreUpdate(id: string) {
-    return this.http.post<ResponseStoreUpdate>(
+    return this.http.post<ResponseStoreUpdate[]>(
       this.urlAPI + 'UpdateSingleStore',
       null,
       {

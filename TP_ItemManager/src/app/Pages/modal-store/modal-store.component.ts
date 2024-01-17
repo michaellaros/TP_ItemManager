@@ -70,16 +70,24 @@ export class ModalStoreComponent {
     console.log(id);
     this.http.StoreUpdate(id).subscribe(
       (data) => {
-        console.log(data);
-        let errorListStore: ResponseStoreUpdate[] = [];
-        errorListStore.push(data);
-        if (errorListStore != undefined && errorListStore.length > 0) {
-          this.spinner.hide();
-          console.log(errorListStore); // { "id": "1011","ip": "172.16.3.88","szRetailStoreId": undefined,"storeName": "basiglio"}
-          this.OpenDialogReturnError(errorListStore);
+        this.spinner.hide();
+        if (data.length > 0) {
+          this.OpenDialogReturnError(data);
         } else {
-          this.spinner.hide();
+          this._snackBar.open('Store data successfully updated!', 'Ok', {
+            duration: this.status.snackbarDuration,
+          });
         }
+        // console.log(data);
+        // let errorListStore: ResponseStoreUpdate[] = [];
+        // errorListStore.push(data);
+        // if (errorListStore != undefined && errorListStore.length > 0) {
+        //   this.spinner.hide();
+        //   console.log(errorListStore); // { "id": "1011","ip": "172.16.3.88","szRetailStoreId": undefined,"storeName": "basiglio"}
+        //   this.OpenDialogReturnError(errorListStore);
+        // } else {
+        //   this.spinner.hide();
+        // }
       },
       (err) => {
         this.spinner.hide();

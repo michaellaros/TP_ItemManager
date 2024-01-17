@@ -40,9 +40,7 @@ export class LoginPageComponent {
       this.storage.saveId(data.id);
       this.router.navigate(['/Kiosk']);
     });
-    this.http.GetRole(this.user.name!.toString()).subscribe((data) => {
-      console.log(this.storage.var1);
-    });
+    this.http.GetRole(this.user.name!.toString()).subscribe((data) => {});
   }
 
   ngOnInit(): void {

@@ -93,7 +93,6 @@ export class DiscountFilterComponent {
     this.http.ReplicationDiscount().subscribe(
       (data) => {
         this.spinner.hide();
-        console.log('subscribe');
         let errorList: {
           id: string;
           ip: string;

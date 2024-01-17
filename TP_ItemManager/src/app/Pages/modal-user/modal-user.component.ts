@@ -55,12 +55,10 @@ export class ModalUserComponent {
     }
   }
   ngOnInit() {
-    console.log(this.storage.getRole());
     this.UpdateForm();
     if (!this.storage.CheckPermission(this.storage.userPermission)) {
       this.userForm.get('role')?.disable();
     }
-    console.log(this.userU);
   }
 
   UpdateForm() {

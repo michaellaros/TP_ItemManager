@@ -162,7 +162,6 @@ export class AssignedEditorComponent {
   }
 
   UpdateAssignedObject(object: AssignedObject) {
-    console.log(this.type);
     switch (this.type) {
       case 'CategoryItems-Category':
         this.http
@@ -176,7 +175,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -192,7 +190,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -208,7 +205,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -224,7 +220,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -240,7 +235,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -256,7 +250,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -272,7 +265,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -288,7 +280,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -304,7 +295,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -321,7 +311,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -338,7 +327,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -355,7 +343,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -366,7 +353,6 @@ export class AssignedEditorComponent {
     if (!confirm('The element will be deleted permanently!')) {
       return;
     }
-    console.log(object);
     switch (this.type) {
       case 'CategoryItems-Category':
         this.http
@@ -379,7 +365,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -394,7 +379,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -409,7 +393,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -424,7 +407,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -438,9 +420,7 @@ export class AssignedEditorComponent {
             'DeleteItemOptionFromItem'
           )
           .subscribe((data) => {
-            console.log(data);
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -455,7 +435,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -470,7 +449,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -485,7 +463,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -501,7 +478,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -517,7 +493,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -533,7 +508,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -541,7 +515,6 @@ export class AssignedEditorComponent {
   }
 
   InsertAssignedObject() {
-    console.log(this.type);
     if (!this.assignForm.valid) return;
 
     const id = this.options.find(
@@ -568,7 +541,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -584,7 +556,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -600,12 +571,10 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
       case 'OptionItems-Option':
-        console.log('pogo');
         this.http
           .InsertAssignedObject(
             {
@@ -617,7 +586,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -633,7 +601,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -649,7 +616,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -665,7 +631,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -681,7 +646,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -698,7 +662,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -715,7 +678,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;
@@ -732,7 +694,6 @@ export class AssignedEditorComponent {
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
-            console.log(this.AssignedObjects);
             this.ResetForm();
           });
         break;

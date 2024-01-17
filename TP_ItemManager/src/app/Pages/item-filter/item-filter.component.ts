@@ -78,10 +78,7 @@ export class ItemFilterComponent {
   }
 
   UploadFile(files: any) {
-    console.log(files.target.files);
-    console.log(URL.createObjectURL(files.target.files[0]));
     let CSV = files.target.files[0];
-    console.log(CSV.name);
     if (CSV)
       this.http.UploadCSV(CSV).subscribe((data) => {
         CSV = data;

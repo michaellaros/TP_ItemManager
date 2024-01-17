@@ -65,11 +65,9 @@ export class ModalCategoryComponent {
         this.http
           .InsertCategory(this.GetCategoryFromForm())
           .subscribe((data) => {
-            console.log(data);
             this.category = data;
             this.UpdateForm();
             this.flg_insert = false;
-            console.log(this.flg_insert);
             this._snackBar.open('Category successfully created!', 'Ok', {
               duration: this.status.snackbarDuration,
             });

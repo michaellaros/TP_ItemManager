@@ -131,7 +131,6 @@ export class CountryStoreEditorComponent {
     this.assignForm
       .get('type')!
       .valueChanges.subscribe(() => this.assignForm.patchValue({ name: '' }));
-    console.log(this.type);
   }
 
   toggle(): void {
@@ -183,7 +182,6 @@ export class CountryStoreEditorComponent {
     if (!confirm('The element will be deleted permanently!')) {
       return;
     }
-    console.log(this.type + 'sono type');
 
     switch (object.type) {
       case UserRelationshipType.Store:

@@ -81,7 +81,6 @@ export class ModalDiscountComponent {
         });
       });
     } else {
-      console.log(this.GetDiscountFromForm());
       this.http.UpdateDiscount(this.GetDiscountFromForm()).subscribe((data) => {
         this.discount = data;
 
@@ -109,7 +108,6 @@ export class ModalDiscountComponent {
   }
 
   UpdateForm() {
-    console.log(this.discount);
     if (this.discount != null) {
       this.discountForm.patchValue({
         name: this.discount.name,

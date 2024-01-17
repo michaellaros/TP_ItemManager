@@ -28,9 +28,7 @@ export class StatusService {
 
   OpenDialogModifyItem(id: string, type: string) {
     this.http.GetAvailability(id, type).subscribe((data) => {
-      console.log(data);
       this.listAvailable = data;
-      console.log(this.listAvailable);
       const dialogRef = this.dialog.open(ModalAvailabilityComponent, {
         data: { list: this.listAvailable, id: id, type: type },
         width: '60vw',

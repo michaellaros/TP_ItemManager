@@ -73,15 +73,10 @@ export class ModalItemComponent {
   ngOnInit() {
     this.UpdateForm();
     this.itemForm.get('barcode')?.valueChanges.subscribe((data) => {
-      console.log(data);
-
       this.GetItemVat(data || '');
     });
 
     if (!this.storage.CheckPermission(this.storage.userPermission)) {
-      console.log(
-        'permessi' + this.storage.CheckPermission(this.storage.userPermission)
-      );
       this.itemForm.get('name')?.disable();
       this.itemForm.get('description')?.disable();
       this.itemForm.get('barcode')?.disable();
@@ -92,7 +87,6 @@ export class ModalItemComponent {
   }
 
   public SubmitForm() {
-    console.log('submit');
     if (this.itemForm.valid) {
       if (this.item.imagePath == null) {
         this._snackBar.open('Select item image!', 'Ok', {
@@ -101,7 +95,6 @@ export class ModalItemComponent {
         return;
       } else {
         if (this.flg_insert) {
-          console.log(this.GetItemFromForm());
           this.http.InsertItem(this.GetItemFromForm()).subscribe((data) => {
             this.item = data;
 
@@ -112,7 +105,6 @@ export class ModalItemComponent {
             });
           });
         } else {
-          console.log(this.GetItemFromForm());
           this.http.UpdateItem(this.GetItemFromForm()).subscribe((data) => {
             this.item = data;
 
@@ -148,9 +140,6 @@ export class ModalItemComponent {
   }
 
   GetItemVat(barcode: string) {
-    console.log(barcode != null);
-    console.log(barcode != undefined);
-    console.log(barcode != '');
     if (barcode == undefined || barcode == null || barcode == '') {
       this.itemvatform.patchValue({
         price: '',
@@ -168,7 +157,6 @@ export class ModalItemComponent {
   }
 
   UpdateForm() {
-    console.log(this.item);
     if (this.item != null) {
       this.itemForm.patchValue({
         name: this.item.name,

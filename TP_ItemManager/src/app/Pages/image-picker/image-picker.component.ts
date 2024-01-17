@@ -34,7 +34,6 @@ export class ImagePickerComponent {
     this.folderName = data.folderName;
     this.selectedImage = data.image;
     this.imgPath = imageUrl;
-    console.log(this.folderName);
   }
   ngOnInit() {
     this.http.GetImages(this.folderName).subscribe((data) => {
@@ -54,9 +53,6 @@ export class ImagePickerComponent {
   }
 
   UploadFile(files: any) {
-    console.log(files.target.files);
-    console.log(URL.createObjectURL(files.target.files[0]));
-
     if (
       this.images?.includes(files.target.files[0].name!) ||
       this.imgPreviewList?.includes(files.target.files[0].name!)
@@ -92,7 +88,6 @@ export class ImagePickerComponent {
 
   RemoveFile() {
     this.deleteMode = !this.deleteMode;
-    console.log(this.deleteMode);
   }
 
   SaveChanges() {
@@ -120,9 +115,7 @@ export class ImagePickerComponent {
     }
   }
 
-  Stampa(s: any) {
-    console.log(s);
-  }
+  Stampa(s: any) {}
 
   SnackbarCurrentlySelected() {
     this._snackBar.open("Can't delete the selected image!", 'Confirm', {

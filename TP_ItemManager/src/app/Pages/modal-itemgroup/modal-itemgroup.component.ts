@@ -45,10 +45,7 @@ export class ModalItemgroupComponent {
   }
 
   public SubmitForm() {
-    console.log('submit');
-
     if (this.flg_insert) {
-      console.log(this.GetItemGroupFromForm());
       this.http
         .InsertItemGroup(this.GetItemGroupFromForm())
         .subscribe((data) => {
@@ -56,18 +53,17 @@ export class ModalItemgroupComponent {
 
           this.UpdateForm();
           this.flg_insert = false;
-          this._snackBar.open('Item successfully created!', 'Ok', {
+          this._snackBar.open('Item group successfully created!', 'Ok', {
             duration: this.status.snackbarDuration,
           });
         });
     } else {
-      console.log(this.GetItemGroupFromForm());
       this.http
         .UpdateItemGroup(this.GetItemGroupFromForm())
         .subscribe((data) => {
           this.itemGroup = data;
           this.UpdateForm();
-          this._snackBar.open('Item successfully updated!', 'Ok', {
+          this._snackBar.open('Item group successfully updated!', 'Ok', {
             duration: this.status.snackbarDuration,
           });
         });
@@ -85,7 +81,6 @@ export class ModalItemgroupComponent {
   }
 
   UpdateForm() {
-    console.log(this.itemGroup);
     if (this.itemGroup != null) {
       this.itemGroupForm.patchValue({
         name: this.itemGroup.name,

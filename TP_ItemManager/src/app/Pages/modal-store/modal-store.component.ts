@@ -50,7 +50,6 @@ export class ModalStoreComponent {
 
   ngOnInit() {
     this.UpdateForm();
-    console.log(this.store);
     if (!this.storage.CheckPermission(this.storage.userPermission)) {
       this.storeForm.get('name')?.disable();
       this.storeForm.get('store_ip')?.disable();
@@ -67,7 +66,6 @@ export class ModalStoreComponent {
 
   UpdateStores(id: string) {
     this.spinner.show();
-    console.log(id);
     this.http.StoreUpdate(id).subscribe(
       (data) => {
         this.spinner.hide();
@@ -78,16 +76,11 @@ export class ModalStoreComponent {
             duration: this.status.snackbarDuration,
           });
         }
-        // console.log(data);
-        // let errorListStore: ResponseStoreUpdate[] = [];
-        // errorListStore.push(data);
-        // if (errorListStore != undefined && errorListStore.length > 0) {
-        //   this.spinner.hide();
-        //   console.log(errorListStore); // { "id": "1011","ip": "172.16.3.88","szRetailStoreId": undefined,"storeName": "basiglio"}
-        //   this.OpenDialogReturnError(errorListStore);
-        // } else {
-        //   this.spinner.hide();
-        // }
+        this.http.GetStore(this.store?.id!).subscribe((data) => {
+          this.storeForm.patchValue({
+            last_request_date: data.last_request_date,
+          });
+        });
       },
       (err) => {
         this.spinner.hide();

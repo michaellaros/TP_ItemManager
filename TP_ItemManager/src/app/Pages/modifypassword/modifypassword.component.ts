@@ -28,7 +28,6 @@ export class ModifypasswordComponent {
   ) {}
   ngOnInit(): void {
     this.user = this.status.user;
-    console.log(this.user);
   }
   ErrorSnack() {
     this._snackBar.open('Old password is not correct', 'Ok', {

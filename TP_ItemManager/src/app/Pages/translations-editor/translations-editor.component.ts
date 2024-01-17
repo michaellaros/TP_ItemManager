@@ -45,13 +45,12 @@ export class TranslationsEditorComponent {
     value: new FormControl(''),
   });
 
-  constructor(private http: HttpService,
-              public storage:StorageManagerService) {}
+  constructor(
+    private http: HttpService,
+    public storage: StorageManagerService
+  ) {}
 
   ngOnInit() {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    console.log(this.flg_isEditable);
     if (this.type != 'Item') {
       this.translationForm.get('field')!.disable();
     }
@@ -59,7 +58,6 @@ export class TranslationsEditorComponent {
   toggle(): void {
     if (this.flg_isEditable) {
       this.state = !this.state;
-      console.log(this.state);
     }
   }
   GetTranslationFromForm(): Translation {
@@ -84,7 +82,6 @@ export class TranslationsEditorComponent {
           .UpdateItemTranslation(this.id, translation)
           .subscribe((data) => {
             this.translations = data;
-            console.log(data);
           });
         break;
 
@@ -93,7 +90,6 @@ export class TranslationsEditorComponent {
           .UpdateCategoryTranslation(this.id, translation)
           .subscribe((data) => {
             this.translations = data;
-            console.log(data);
           });
         break;
 
@@ -102,7 +98,6 @@ export class TranslationsEditorComponent {
           .UpdateOptionTranslation(this.id, translation)
           .subscribe((data) => {
             this.translations = data;
-            console.log(data);
           });
         break;
     }

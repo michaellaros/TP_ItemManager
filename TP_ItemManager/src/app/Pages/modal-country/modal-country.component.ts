@@ -49,7 +49,7 @@ export class ModalCountryComponent {
           this.country = data;
           this.UpdateForm();
           this.flg_insert = false;
-          this._snackBar.open('country successfully created!', 'Ok', {
+          this._snackBar.open('Country successfully created!', 'Ok', {
             duration: this.status.snackbarDuration,
           });
         });
@@ -57,7 +57,7 @@ export class ModalCountryComponent {
         this.http.UpdateCountry(this.GetCountryFromForm()).subscribe((data) => {
           this.country = data;
           this.UpdateForm();
-          this._snackBar.open('country successfully updated!', 'Ok', {
+          this._snackBar.open('Country successfully updated!', 'Ok', {
             duration: this.status.snackbarDuration,
           });
         });
@@ -73,7 +73,6 @@ export class ModalCountryComponent {
   }
 
   UpdateForm() {
-    console.log(this.country);
     if (this.country != null) {
       this.countryForm.patchValue({
         name: this.country.name,

@@ -149,15 +149,12 @@ export class HttpService {
   }
 
   InsertItem(item: Item) {
-    console.log(item);
     return this.http.post<Item>(this.urlAPI + 'InsertItem', item);
   }
   InsertDiscount(discount: Discount) {
-    console.log(discount);
     return this.http.post<Discount>(this.urlAPI + 'InsertDiscount', discount);
   }
   InsertItemGroup(itemGroup: ItemGroup) {
-    console.log(itemGroup);
     return this.http.post<ItemGroup>(
       this.urlAPI + 'InsertItemGroup',
       itemGroup
@@ -171,7 +168,6 @@ export class HttpService {
     );
   }
   UpdateItem(item: Item) {
-    console.log(item);
     return this.http.post<Item>(this.urlAPI + 'UpdateItem', item);
   }
   UpdateDiscount(discount: Discount) {
@@ -179,12 +175,10 @@ export class HttpService {
   }
 
   InsertOption(option: Option) {
-    console.log(option);
     return this.http.post<Option>(this.urlAPI + 'InsertOption', option);
   }
 
   UpdateOption(option: Option) {
-    console.log(option);
     return this.http.post<Option>(this.urlAPI + 'UpdateOption', option);
   }
 
@@ -201,7 +195,6 @@ export class HttpService {
   }
 
   InsertItemTranslation(id: string, translation: Translation) {
-    console.log(id);
     return this.http.post<Translation[]>(
       this.urlAPI + 'InsertItemTranslation',
       translation,
@@ -212,7 +205,6 @@ export class HttpService {
   }
 
   UpdateItemTranslation(id: string, translation: Translation) {
-    console.log(id);
     return this.http.post<Translation[]>(
       this.urlAPI + 'UpdateItemTranslation',
       translation,
@@ -223,7 +215,6 @@ export class HttpService {
   }
 
   InsertCategoryTranslation(id: string, translation: Translation) {
-    console.log(id);
     return this.http.post<Translation[]>(
       this.urlAPI + 'InsertCategoryTranslation',
       translation,
@@ -234,7 +225,6 @@ export class HttpService {
   }
 
   UpdateCategoryTranslation(id: string, translation: Translation) {
-    console.log(id);
     return this.http.post<Translation[]>(
       this.urlAPI + 'UpdateCategoryTranslation',
       translation,
@@ -245,7 +235,6 @@ export class HttpService {
   }
 
   InsertOptionTranslation(id: string, translation: Translation) {
-    console.log(translation);
     return this.http.post<Translation[]>(
       this.urlAPI + 'InsertOptionTranslation',
       translation,
@@ -256,7 +245,6 @@ export class HttpService {
   }
 
   UpdateOptionTranslation(id: string, translation: Translation) {
-    console.log(id);
     return this.http.post<Translation[]>(
       this.urlAPI + 'UpdateOptionTranslation',
       translation,
@@ -267,16 +255,13 @@ export class HttpService {
   }
 
   InsertAssignedObject(data: any, methodName: string) {
-    console.log(data);
     return this.http.post<AssignedObject[]>(this.urlAPI + methodName, data);
   }
   UpdateAssignedObject(data: any, methodName: string) {
-    console.log(data);
     return this.http.post<AssignedObject[]>(this.urlAPI + methodName, data);
   }
 
   DeleteAssignedObject(data: any, methodName: string) {
-    console.log(data);
     return this.http.post<AssignedObject[]>(this.urlAPI + methodName, data);
   }
 
@@ -365,22 +350,18 @@ export class HttpService {
   }
 
   InsertKiosk(kiosk: Kiosk) {
-    console.log(kiosk);
     return this.http.post<Kiosk>(this.urlAPI + 'InsertKiosk', kiosk);
   }
 
   UpdateKiosk(kiosk: Kiosk) {
-    console.log(kiosk);
     return this.http.post<Kiosk>(this.urlAPI + 'UpdateKiosk', kiosk);
   }
 
   InsertStore(store: StoreDetail) {
-    console.log(store);
     return this.http.post<StoreDetail>(this.urlAPI + 'InsertStore', store);
   }
 
   UpdateStore(store: StoreDetail) {
-    console.log(store);
     return this.http.post<StoreDetail>(this.urlAPI + 'UpdateStore', store);
   }
 

@@ -76,7 +76,6 @@ export class ModalKioskComponent {
           });
         });
       } else {
-        console.log(this.GetKioskFromForm());
         this.http.UpdateKiosk(this.GetKioskFromForm()).subscribe((data) => {
           this.kiosk = data;
           this.UpdateForm();
@@ -102,17 +101,8 @@ export class ModalKioskComponent {
   }
 
   UpdateForm() {
-    console.log(this.kiosk);
     if (this.kiosk != null) {
       this.kioskForm.patchValue({
-        name: this.kiosk.name,
-        ip: this.kiosk.ip!,
-        store_name: this.kiosk.store_name,
-        store_id: this.kiosk.store_id,
-        flg_consumations: this.kiosk.flg_consumations!,
-        last_request_date: this.kiosk.last_request_date!,
-      });
-      console.log({
         name: this.kiosk.name,
         ip: this.kiosk.ip!,
         store_name: this.kiosk.store_name,

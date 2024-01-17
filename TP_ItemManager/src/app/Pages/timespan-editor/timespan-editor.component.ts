@@ -48,7 +48,6 @@ export class TimespanEditorComponent {
   toggle(): void {
     if (this.flg_isEditable) {
       this.state = !this.state;
-      console.log(this.state);
     }
   }
   // GetTimespanFromForm(): Timespan {

@@ -69,28 +69,19 @@ export class EditListComponent implements OnChanges {
     switch (this.columnName) {
       case 'Item':
         this.http.GetItem(id).subscribe((data) => {
-          console.log(data);
           this.OpenDialogModifyItem(data);
         });
         break;
       case 'Category':
         this.http.GetCategory(id).subscribe((data) => {
-          console.log(data);
           this.OpenDialogModifyCategory(data);
         });
         break;
       case 'Option':
         this.http.GetOption(id).subscribe((data) => {
-          console.log(data);
           this.OpenDialogModifyOption(data);
         });
         break;
-      // case 'Kiosk':
-      //   this.http.GetKiosk(id).subscribe((data) => {
-      //     console.log(data);
-      //     this.OpenDialogModifyKiosk(data);
-      //   });
-      //   break;
       case 'User':
         this.http.GetUser(id).subscribe((data) => {
           this.status.user = id;
@@ -100,14 +91,12 @@ export class EditListComponent implements OnChanges {
 
       case 'Discount':
         this.http.GetDiscount(id).subscribe((data) => {
-          console.log(data);
           this.OpenDialogModifyDiscount(data);
         });
         break;
 
       case 'ItemGroup':
         this.http.GetItemGroup(id).subscribe((data) => {
-          console.log(data);
           this.OpenDialogModifyItemGroup(data);
         });
         break;

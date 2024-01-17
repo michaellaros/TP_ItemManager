@@ -82,7 +82,6 @@ export class KioskFilterComponent {
 
   GetStores() {
     // this.http.FilterStore({}).subscribe((data) => {
-    //   console.log(data);
     //   if (data == null) {
     //     this.stores = [];
     //   } else {
@@ -117,7 +116,6 @@ export class KioskFilterComponent {
 
     this.http.StoresUpdate('').subscribe(
       (data) => {
-        console.log('subscribe');
         let errorList: StoreModel[] = [];
         errorList = data;
         if (errorList != undefined && errorList.length > 0) {

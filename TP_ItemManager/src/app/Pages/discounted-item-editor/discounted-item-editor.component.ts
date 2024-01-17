@@ -62,7 +62,6 @@ export class DiscountedItemEditorComponent {
     private status: StatusService
   ) {
     this.newAssignedObject = new DiscountedObject();
-    console.log(this.type);
   }
 
   ngOnInit() {
@@ -127,8 +126,6 @@ export class DiscountedItemEditorComponent {
     const filterValue = value.toLowerCase();
     switch (this.assignForm.get('type')!.value!) {
       case DiscountedItemType.Group:
-        console.log('gruppo');
-
         this.filteredOptions = this.itemGroups.filter(
           (itemGroup) =>
             itemGroup.name?.toLowerCase().includes(filterValue) &&
@@ -138,7 +135,6 @@ export class DiscountedItemEditorComponent {
         );
         break;
       case DiscountedItemType.Discount:
-        console.log('ciao');
         this.filteredOptions = this.discounts.filter(
           (discount) =>
             discount.name?.toLowerCase().includes(filterValue) &&
@@ -149,9 +145,6 @@ export class DiscountedItemEditorComponent {
         break;
       case DiscountedItemType.Item:
       default:
-        console.log('item');
-        console.log(this.DiscountedObjects);
-
         this.filteredOptions = this.items.filter((item) => {
           return (
             item.name?.toLowerCase().includes(filterValue) &&
@@ -160,7 +153,6 @@ export class DiscountedItemEditorComponent {
             ) == -1
           );
         });
-        console.log(this.filteredOptions);
     }
   }
 
@@ -168,7 +160,6 @@ export class DiscountedItemEditorComponent {
     if (!confirm('The element will be deleted permanently!')) {
       return;
     }
-    console.log(this.assignForm.get('type')!.value!);
 
     switch (object.type) {
       case DiscountedItemType.Group:
@@ -229,7 +220,6 @@ export class DiscountedItemEditorComponent {
           )
           .subscribe((data) => {
             this.DiscountedObjects = data;
-            console.log(this.DiscountedObjects);
             this.ResetForm();
           });
     }
@@ -320,7 +310,6 @@ export class DiscountedItemEditorComponent {
           )
           .subscribe((data) => {
             this.DiscountedObjects = data;
-            console.log(this.DiscountedObjects);
             this.ResetForm();
           });
     }

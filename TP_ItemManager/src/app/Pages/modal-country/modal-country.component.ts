@@ -17,6 +17,7 @@ import { StatusService } from 'src/app/Services/status.service';
 export class ModalCountryComponent {
   public country?: Country;
   public flg_insert: boolean;
+  public flg_hasChanges: boolean = false;
 
   countryForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -44,6 +45,7 @@ export class ModalCountryComponent {
 
   public SubmitForm() {
     if (this.countryForm.valid) {
+      this.flg_hasChanges = true;
       if (this.flg_insert) {
         this.http.InsertCountry(this.GetCountryFromForm()).subscribe((data) => {
           this.country = data;

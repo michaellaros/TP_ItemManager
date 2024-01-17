@@ -19,6 +19,7 @@ import { StoreModel } from 'src/app/Models/StoreModel';
 export class ModalStoreComponent {
   store?: StoreDetail;
   public flg_insert: boolean;
+  public flg_hasChanges: boolean = false;
 
   storeForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -96,6 +97,7 @@ export class ModalStoreComponent {
 
   public SubmitForm() {
     if (this.storeForm.valid) {
+      this.flg_hasChanges = true;
       if (this.flg_insert) {
         this.http.InsertStore(this.GetStoreFromForm()).subscribe((data) => {
           this.store = data;

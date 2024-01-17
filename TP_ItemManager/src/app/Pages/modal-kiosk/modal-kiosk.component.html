@@ -6,7 +6,7 @@
   <button
     mat-icon-button
     class="m-2 position-absolute end-0"
-    [mat-dialog-close]="null"
+    [mat-dialog-close]="this.flg_hasChanges"
   >
     <mat-icon>close</mat-icon>
   </button>
@@ -45,7 +45,9 @@
 
         <div class="col-3" *ngIf="!flg_insert">
           <button
-          [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
+            [disabled]="
+              !this.storage.CheckPermission(this.storage.userPermission)
+            "
             mat-raised-button
             color="primary"
             type="button"

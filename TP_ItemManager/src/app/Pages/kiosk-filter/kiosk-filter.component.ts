@@ -170,7 +170,9 @@ export class KioskFilterComponent {
       width: '60vw',
       data: { store: store, kiosk: null },
     });
-    dialogRef.afterClosed().subscribe(() => this.GetCountries());
+    dialogRef.afterClosed().subscribe((data: boolean) => {
+      if (data) this.GetCountries();
+    });
   }
 
   OpenDialogAddStore(country: TreeObject) {
@@ -178,7 +180,9 @@ export class KioskFilterComponent {
       width: '60vw',
       data: { country_name: country.name, country_id: country.id, store: null },
     });
-    dialogRef.afterClosed().subscribe(() => this.GetCountries());
+    dialogRef.afterClosed().subscribe((data: boolean) => {
+      if (data) this.GetCountries();
+    });
   }
 
   OpenDialogEditStore(id: string) {
@@ -187,7 +191,9 @@ export class KioskFilterComponent {
         width: '60vw',
         data: data,
       });
-      dialogRef.afterClosed().subscribe(() => this.GetCountries());
+      dialogRef.afterClosed().subscribe((data: boolean) => {
+        if (data) this.GetCountries();
+      });
     });
   }
 
@@ -214,14 +220,18 @@ export class KioskFilterComponent {
         width: '60vw',
         data: data,
       });
-      dialogRef.afterClosed().subscribe(() => this.GetCountries());
+      dialogRef.afterClosed().subscribe((data: boolean) => {
+        if (data) this.GetCountries();
+      });
     });
   }
   OpenDialogAddCountry() {
     const dialogRef = this.dialog.open(ModalCountryComponent, {
       width: '60vw',
     });
-    dialogRef.afterClosed().subscribe(() => this.GetCountries());
+    dialogRef.afterClosed().subscribe((data: boolean) => {
+      if (data) this.GetCountries();
+    });
   }
 
   OpenDialogEditKiosk(id: string) {
@@ -230,7 +240,14 @@ export class KioskFilterComponent {
         data: { kiosk: data },
         width: '60vw',
       });
-      dialogRef.afterClosed().subscribe(() => this.GetCountries());
+      // const { data, role } = await modal.onWillDismiss();
+      // if (role === 'confirm') {
+      //   this.code = data;
+      //   this.Search(codeType);
+      // }
+      dialogRef.afterClosed().subscribe((data: boolean) => {
+        if (data) this.GetCountries();
+      });
     });
   }
 

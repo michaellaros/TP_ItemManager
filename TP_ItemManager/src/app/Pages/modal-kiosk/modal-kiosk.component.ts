@@ -20,6 +20,7 @@ export class ModalKioskComponent {
   kiosk?: Kiosk;
 
   public flg_insert: boolean;
+  public flg_hasChanges: boolean = false;
 
   kioskForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -66,6 +67,7 @@ export class ModalKioskComponent {
 
   public SubmitForm() {
     if (this.kioskForm.valid) {
+      this.flg_hasChanges = true;
       if (this.flg_insert) {
         this.http.InsertKiosk(this.GetKioskFromForm()).subscribe((data) => {
           this.kiosk = data;

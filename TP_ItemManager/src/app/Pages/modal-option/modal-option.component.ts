@@ -5,6 +5,7 @@ import { StatusService } from '../../Services/status.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Option } from '../../Models/Option';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 
 @Component({
   selector: 'app-modal-option',
@@ -41,7 +42,8 @@ export class ModalOptionComponent {
     public dialogRef: MatDialogRef<ModalOptionComponent>,
     private http: HttpService,
     public status: StatusService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public storage: StorageManagerService
   ) {
     {
       this.option = this.data;
@@ -51,6 +53,9 @@ export class ModalOptionComponent {
 
   ngOnInit() {
     this.UpdateForm();
+    if (!this.storage.CheckPermission(this.storage.CountryManagerPermission)) {
+      this.optionForm.disable();
+    }
   }
 
   OpenDialogModifyItem(itemId: string, type: string) {

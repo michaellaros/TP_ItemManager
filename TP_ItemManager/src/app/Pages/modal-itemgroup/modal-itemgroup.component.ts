@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AssignedObject } from 'src/app/Models/AssignedObject';
 import { Item } from 'src/app/Models/Item';
 import { ItemGroup } from 'src/app/Models/ItemGroup';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 
@@ -32,6 +33,7 @@ export class ModalItemgroupComponent {
     private http: HttpService,
     public status: StatusService,
     private _snackBar: MatSnackBar,
+    public storage: StorageManagerService,
     private dialog: MatDialog
   ) {
     {

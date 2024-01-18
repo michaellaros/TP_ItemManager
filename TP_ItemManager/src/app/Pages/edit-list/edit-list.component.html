@@ -9,7 +9,7 @@
         <th mat-header-cell *matHeaderCellDef class="col-2" mat-sort-header>
           {{"ID" | translate}}
         </th>
-        <td mat-cell matRipple  *matCellDef="let element" class="col-2 ripple" (click)="ModifyItem(element.id!)">
+        <td mat-cell matRipple  *matCellDef="let element" class="col-2 ripple"  (click)="ModifyItem(element.id!)">
           {{ element.id }}
         </td>
       </ng-container>
@@ -52,7 +52,7 @@
               mat-mini-fab
               color="primary"
               class="m-1"
-              [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
+              [disabled]="!this.storage.CheckPermission( this.columnName === 'user' ? this.storage.CountryManagerPermission :  this.storage.adminPermission)"
 
               (click)="DeleteObject(element.id)"
             >

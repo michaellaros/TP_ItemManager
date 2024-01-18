@@ -34,12 +34,13 @@
           <input type="number" formControlName="max_quantity" matInput />
         </mat-form-field>
 
-        <mat-checkbox formControlName="flg_addToCart" matInput color="primary"
+        <mat-checkbox  formControlName="flg_addToCart" matInput color="primary"
           >{{ "Add to transaction" | translate }}
         </mat-checkbox>
       </div>
 
-      <button mat-raised-button color="primary" type="submit">
+      <button [disabled]="
+         !this.storage.CheckPermission(this.storage.CountryManagerPermission)" mat-raised-button color="primary" type="submit">
         {{ flg_insert ? ("Create" | translate) : ("Save" | translate) }}
       </button>
       <button *ngIf="!flg_insert"   mat-raised-button color="primary" class="ms-4" type="button" (click)="OpenDialogModifyItem(option?.id!,'OPTION')">

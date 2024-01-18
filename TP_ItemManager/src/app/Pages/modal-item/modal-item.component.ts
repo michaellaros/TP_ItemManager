@@ -86,6 +86,13 @@ export class ModalItemComponent {
     }
   }
 
+  public IsDataChanged(): boolean {
+    if (this.item != this.GetItemFromForm()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   public SubmitForm() {
     if (this.itemForm.valid) {
       if (this.item.imagePath == null) {

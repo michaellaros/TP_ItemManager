@@ -8,6 +8,7 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Discount } from 'src/app/Models/Discount';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 
@@ -53,7 +54,8 @@ export class ModalDiscountComponent {
     @Inject(MAT_DIALOG_DATA) private data: Discount,
     private http: HttpService,
     public status: StatusService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public storage: StorageManagerService
   ) {
     {
       this.discount = this.data;
@@ -65,6 +67,9 @@ export class ModalDiscountComponent {
     this.UpdateForm();
     this.GetCountries();
     if (!this.flg_insert) this.discountForm.get('country_id')!.disable();
+    if (!this.storage.CheckPermission(this.storage.CountryManagerPermission)) {
+      this.discountForm.disable();
+    }
     // this.country_id = this.discountForm.get('country_id')?.value!;
     // this.discountForm.get('country_id')?.valueChanges.subscribe((id) => {
     //   if (id != null) this.country_id = id;

@@ -21,9 +21,9 @@
           <input formControlName="name" matInput />
         </mat-form-field>
         <mat-form-field class="m-2">
-          <mat-label>User type</mat-label>
-          <mat-select formControlName="role">
-            <mat-option *ngFor="let type of roleType" [value]="type.value">
+          <mat-label  >User type</mat-label>
+          <mat-select  formControlName="role">
+            <mat-option  *ngFor="let type of roleType" [value]="type.value">
               {{ type.viewValue }}
             </mat-option>
           </mat-select>
@@ -54,7 +54,8 @@
       {{ "Modify password" | translate }}
     </button>
     <button
-      [disabled]="userForm.invalid"
+      [disabled]="userForm.invalid ||
+         !this.storage.CheckPermission(this.storage.CountryManagerPermission)"
       mat-raised-button
       color="primary"
       type="button"

@@ -76,6 +76,7 @@
           </mat-checkbox>
 
           <button
+          [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
             *ngIf="!flg_insert"
             mat-raised-button
             color="primary"
@@ -105,7 +106,8 @@
       color="primary"
       [disabled]="
         itemForm.invalid ||
-        (this.itemvatform.get('price')!.value! == '' && flg_addToCart.checked)
+        (this.itemvatform.get('price')!.value! == '' && flg_addToCart.checked) ||
+         !this.storage.CheckPermission(this.storage.CountryManagerPermission)
       "
       (click)="SubmitForm()"
     >

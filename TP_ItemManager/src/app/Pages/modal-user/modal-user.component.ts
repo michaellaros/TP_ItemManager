@@ -30,6 +30,7 @@ export class ModalUserComponent {
 
   roleType: valueType[] = [
     { value: '100', viewValue: 'User' },
+    { value: '200', viewValue: 'Country manager' },
     { value: '999', viewValue: 'Admin' },
   ];
 
@@ -56,8 +57,14 @@ export class ModalUserComponent {
   }
   ngOnInit() {
     this.UpdateForm();
-    if (!this.storage.CheckPermission(this.storage.CountryManagerPermission)) {
+    if (!this.storage.CheckPermission(this.storage.adminPermission)) {
       this.userForm.get('role')?.disable();
+    }
+    if (
+      !this.storage.CheckPermission(this.storage.adminPermission) ||
+      this.userForm.get('name')?.value === this.storage.getUsername()
+    ) {
+      this.userForm.get('name')?.disable();
     }
   }
 

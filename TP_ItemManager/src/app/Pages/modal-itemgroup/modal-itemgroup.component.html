@@ -29,7 +29,8 @@
       </div>
     </form>
 
-    <button mat-raised-button color="primary" (click)="SubmitForm()">
+    <button [disabled]="
+         !this.storage.CheckPermission(this.storage.CountryManagerPermission)" mat-raised-button color="primary" (click)="SubmitForm()">
       {{ flg_insert ? "Create" : ("Save" | translate) }}
     </button>
   </div>

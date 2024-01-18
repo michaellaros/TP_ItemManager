@@ -92,7 +92,8 @@
     <button
       mat-raised-button
       color="primary"
-      [disabled]="discountForm.invalid"
+      [disabled]="discountForm.invalid ||
+         !this.storage.CheckPermission(this.storage.CountryManagerPermission)"
       (click)="SubmitForm()"
     >
       {{ (flg_insert ? "Create" : "Save") | translate }}

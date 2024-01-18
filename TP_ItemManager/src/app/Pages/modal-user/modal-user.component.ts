@@ -37,9 +37,9 @@ export class ModalUserComponent {
     id: new FormControl(),
     name: new FormControl('', [Validators.required]),
     role: new FormControl('', [Validators.required]),
+    password: new FormControl(''),
+    confirmPassword: new FormControl(''),
   });
-  password = new FormControl('', [Validators.required]);
-  confirmPassword = new FormControl('', [Validators.required]);
 
   constructor(
     private router: Router,
@@ -89,13 +89,14 @@ export class ModalUserComponent {
   public SubmitForm() {
     if (this.flg_insert) {
       if (
-        this.password.value != null &&
-        this.password.value === this.confirmPassword.value
+        this.userForm.get('password')!.value! != null &&
+        this.userForm.get('password')!.value! ===
+          this.userForm.get('confirmPassword')!.value!
       ) {
         this.http
           .CreateUser(
             this.userForm.get('name')!.value!,
-            this.password.value,
+            this.userForm.get('password')!.value!,
             this.userForm.get('role')!.value!.toString()
           )
           .subscribe((data) => {

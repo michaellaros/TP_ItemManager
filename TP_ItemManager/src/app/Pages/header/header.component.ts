@@ -60,12 +60,17 @@ export class HeaderComponent {
     //   return (this.dataSource.data = this.GetTreeFromCountries(countries));
     // });
   }
+
   OpenDialogAddCountry() {
     const dialogRef = this.dialog.open(ModalCountryComponent, {
       width: '60vw',
     });
     dialogRef.afterClosed().subscribe((data: boolean) => {
-      if (data) this.GetCountries();
+      if (data) {
+        if (this.currentRoute == '/Kiosk') window.location.reload();
+        else this.router.navigate(['/Kiosk']);
+        // this.GetCountries();
+      }
     });
   }
 }

@@ -207,10 +207,10 @@ export class KioskFilterComponent {
     return list;
   }
 
-  DeleteObject(id: string, type: string) {
+  DeleteObject(node: TreeObject) {
     if (confirm('The element will be deleted permanently!')) {
       //todo cambiare pop up
-      this.http.DeleteObject(type, id).subscribe(() => {
+      this.http.DeleteObject(node.type!, node.id!).subscribe(() => {
         this.GetCountries();
       });
     }

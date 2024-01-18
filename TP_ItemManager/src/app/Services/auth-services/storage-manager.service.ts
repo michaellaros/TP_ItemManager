@@ -39,18 +39,18 @@ export class StorageManagerService {
     }
     return false;
   }
-  // // ---- username
-  // public getUsername(){
-  //   return localStorage.getItem('ICashWebApplicationUsername')!;
-  // }
+  // ---- username
+  public getUsername() {
+    return localStorage.getItem('TP_ItemManager_Username')!;
+  }
 
-  // public saveUsername(username: string){
-  //   localStorage.setItem('ICashWebApplicationUsername', username);
-  // }
+  public saveUsername(username: string) {
+    localStorage.setItem('TP_ItemManager_Username', username);
+  }
 
-  // public removeUsername(username: string){
-  //   localStorage.removeItem(username);
-  // }
+  public removeUsername(username: string) {
+    localStorage.removeItem(username);
+  }
 
   // ---- role
   public getRole() {

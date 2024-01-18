@@ -375,15 +375,16 @@ export class HttpService {
     return this.http.get<Language[]>(this.assetsUrl + 'i18n/languages.json');
   }
   Login(name: string, password: string) {
-    return this.http.post<{ token: string; role: string; id: string }>(
-      this.urlAPI + 'DoLogin',
-      null,
-      {
-        params: new HttpParams()
-          .append('name', name)
-          .append('password', password),
-      }
-    );
+    return this.http.post<{
+      token: string;
+      role: string;
+      id: string;
+      username: string;
+    }>(this.urlAPI + 'DoLogin', null, {
+      params: new HttpParams()
+        .append('name', name)
+        .append('password', password),
+    });
   }
   GetRole(username: string) {
     return this.http.get<string>(this.urlAPI + 'GetRole', {

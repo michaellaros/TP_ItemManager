@@ -35,6 +35,7 @@ export class LoginPageComponent {
     this.http.Login(this.user.name!, this.user.password!).subscribe((data) => {
       // this.status.isLogged = 'true'
       // if(this.status.isLogged == 'true'){
+      this.storage.saveUsername(data.username);
       this.storage.saveRole(data.role);
       this.storage.saveToken(data.token);
       this.storage.saveId(data.id);

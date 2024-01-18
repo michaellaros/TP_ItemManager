@@ -18,6 +18,7 @@ export class StatusService {
   public buttonValue: string = 'category';
   public languages: Language[] = [];
   public isLogged: string = 'false';
+  public deleteMode: boolean = false;
   public user: string = '';
   public snackbarDuration: number = 1500;
   public listAvailable!: CountryAvailability[];

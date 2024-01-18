@@ -51,7 +51,7 @@ export class ModalKioskComponent {
 
   ngOnInit() {
     this.UpdateForm();
-    if (!this.storage.CheckPermission(this.storage.userPermission)) {
+    if (!this.storage.CheckPermission(this.storage.CountryManagerPermission)) {
       this.kioskForm.get('name')?.disable();
       this.kioskForm.get('ip')?.disable();
       this.kioskForm.get('store_name')?.disable();

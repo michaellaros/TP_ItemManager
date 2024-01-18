@@ -51,7 +51,7 @@ export class ModalStoreComponent {
 
   ngOnInit() {
     this.UpdateForm();
-    if (!this.storage.CheckPermission(this.storage.userPermission)) {
+    if (!this.storage.CheckPermission(this.storage.CountryManagerPermission)) {
       this.storeForm.get('name')?.disable();
       this.storeForm.get('store_ip')?.disable();
       this.storeForm.get('lRetailStoreID')?.disable();

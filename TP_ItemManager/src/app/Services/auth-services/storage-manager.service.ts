@@ -5,7 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class StorageManagerService {
   public var1!: number; //role
-  public userPermission: number = 101;
+  public userPermission: number = 1;
+  public CountryManagerPermission: number = 101;
+  public adminPermission: number = 201;
 
   constructor() {}
   // ---- id

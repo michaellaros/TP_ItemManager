@@ -44,6 +44,7 @@ export class AuthService {
     // this.storageManager.removeUsername('ICashWebApplicationUsername');
     this.storageManager.removeRole('TP_ItemManager_role');
     this.storageManager.removeId('TP_ItemManager_id');
+    this.storageManager.removeUsername('TP_ItemManager_Username');
     // this.storageManager.removeStore('ICashWebApplicationStore');
     // this.storageManager.removeLoadSetting('ICashWebApplicationLoadSetting');
     this.router.navigateByUrl('/login-page');

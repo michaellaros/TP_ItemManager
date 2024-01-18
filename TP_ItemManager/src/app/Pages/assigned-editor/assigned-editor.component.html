@@ -60,7 +60,7 @@
     </mat-form-field>
 
     <button
-      [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
+      [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
       mat-mini-fab
       color="primary"
       class="p-1 col-1"
@@ -69,7 +69,7 @@
       <mat-icon>save</mat-icon>
     </button>
     <button
-      [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
+      [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
       mat-mini-fab
       color="primary"
       class="p-1 col-1"
@@ -107,7 +107,7 @@
       </mat-form-field>
 
       <button
-        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
+        [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
         type="submit"
         mat-mini-fab
         color="primary"

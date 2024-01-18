@@ -2,7 +2,6 @@
   <div class="row">
     <mat-toolbar color="primary">
       <img src=".\assets\mylogo.png" class="logo" alt="" />
-
       <div>
         <h1 class="text-white m-2">{{ "Item Manager" | translate }}</h1>
       </div>
@@ -69,6 +68,22 @@
       >
         {{ "Discount item groups" | translate }}
       </button>
+
+
+      <button mat-button [matMenuTriggerFor]="menu" class="text-start">
+        Admin
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>Edit</button>
+        <button mat-menu-item>
+
+          Add kiosk
+        </button>
+        <button mat-menu-item>
+          Add store
+        </button>
+        <button mat-menu-item (click)="handleButtonClick($event)">Delete mode<mat-slide-toggle class="m-1"  [checked]="this.status.deleteMode"></mat-slide-toggle></button>
+      </mat-menu>
 
 
       <div class=" d-flex language position-absolute end-0" >

@@ -40,7 +40,7 @@
 
       <button
         mat-raised-button
-        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
+        [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
         color="primary"
         (click)="OpenDialogModifyItemGroup()"
         class="mx-1"

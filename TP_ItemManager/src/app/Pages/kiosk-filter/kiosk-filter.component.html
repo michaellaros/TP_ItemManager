@@ -44,7 +44,7 @@
       color="primary"
       class="mx-1"
       (click)="UpdateStores()"
-      [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
+      [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
     >
       {{ "Update stores" | translate }}
     </button>
@@ -52,7 +52,7 @@
       mat-raised-button
       color="primary"
       class="mx-1"
-      [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
+      [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
       (click)="OpenDialogAddCountry()"
     >
       {{ "Add country" | translate }}
@@ -147,7 +147,7 @@
   </mat-tree>
 </div>
 
-<!-- 
+<!--
 <div *ngFor="let country of countries" class="container quad mb-3 px-4">
   <div class="d-flex justify-content-between mt-3">
     <div class="col-3">
@@ -159,13 +159,13 @@
         color="primary"
         class="mx-1"
         (click)="DeleteObject(country.id!, 'Country')"
-        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
+        [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
       >
         {{ "Remove country" | translate }}</button
       ><button
         mat-raised-button
         color="primary"
-        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
+        [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
         class="mx-1"
         (click)="OpenDialogEditCountry(country.id!)"
       >
@@ -176,7 +176,7 @@
         (click)="OpenDialogAddStore(country)"
         mat-raised-button
         color="primary"
-        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
+        [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
         class="mx-1"
       >
         {{ "Add store" | translate }}
@@ -187,7 +187,7 @@
         color="primary"
         class="mx-1"
         (click)="UpdateStores()"
-        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
+        [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
       >
         {{ "Update stores" | translate }}
       </button>
@@ -203,7 +203,7 @@
           (click)="DeleteObject(s.id!, 'Store')"
           class="mx-1"
           [disabled]="
-            !this.storage.CheckPermission(this.storage.userPermission)
+            !this.storage.CheckPermission(this.storage.CountryManagerPermission)
           "
         >
           {{ "Remove store" | translate }}</button
@@ -213,7 +213,7 @@
           (click)="OpenDialogEditStore(s.id!)"
           class="mx-1"
           [disabled]="
-            !this.storage.CheckPermission(this.storage.userPermission)
+            !this.storage.CheckPermission(this.storage.CountryManagerPermission)
           "
         >
           {{ "Edit store" | translate }}
@@ -224,7 +224,7 @@
           (click)="OpenDialogAddKiosk(s)"
           class="mx-1"
           [disabled]="
-            !this.storage.CheckPermission(this.storage.userPermission)
+            !this.storage.CheckPermission(this.storage.CountryManagerPermission)
           "
         >
           {{ "Add kiosk" | translate }}

@@ -37,7 +37,7 @@
         color="primary"
         (click)="OpenDialogAddUser()"
         class="mx-1"
-        [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
+        [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
 
       >
         {{ "Add user" | translate }}

@@ -8,6 +8,11 @@ import { StorageManagerService } from 'src/app/Services/auth-services/storage-ma
 import { StatusService } from 'src/app/Services/status.service';
 import { ModalCountryComponent } from '../modal-country/modal-country.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ModalErrorComponent } from '../modal-error/modal-error.component';
+import { ResponseStoreUpdate } from 'src/app/Models/ResponseStoreUpdate';
+import { StoreModel } from 'src/app/Models/StoreModel';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { HttpService } from 'src/app/Services/http.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -22,7 +27,9 @@ export class HeaderComponent {
     public router: Router,
     public dialog: MatDialog,
     public translate: TranslateService,
-    public storage: StorageManagerService
+    public storage: StorageManagerService,
+    private spinner: NgxSpinnerService,
+    private http: HttpService
   ) {
     router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
@@ -59,6 +66,37 @@ export class HeaderComponent {
     //   );
     //   return (this.dataSource.data = this.GetTreeFromCountries(countries));
     // });
+  }
+
+  OpenDialogReturnError(errors: ResponseStoreUpdate[]) {
+    const dialogRef = this.dialog.open(ModalErrorComponent, {
+      data: errors,
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.GetCountries();
+    });
+  }
+
+  UpdateStores() {
+    this.spinner.show();
+
+    this.http.StoresUpdate('').subscribe(
+      (data) => {
+        let errorList: StoreModel[] = [];
+        errorList = data;
+        if (errorList != undefined && errorList.length > 0) {
+          // alert('error for store {{}}');
+          this.spinner.hide();
+
+          this.OpenDialogReturnError(errorList);
+        } else {
+          this.spinner.hide();
+        }
+      },
+      (err) => {
+        this.spinner.hide();
+      }
+    );
   }
 
   OpenDialogAddCountry() {

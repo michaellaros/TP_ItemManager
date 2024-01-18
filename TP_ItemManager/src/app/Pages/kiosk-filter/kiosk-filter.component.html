@@ -94,7 +94,7 @@
           Add store
         </button>
         <button
-          *ngIf="status.deleteMode"
+          *ngIf="status.deleteMode || node.type === 'kiosk'"
           (click)="DeleteObject(node)"
           mat-menu-item
         >

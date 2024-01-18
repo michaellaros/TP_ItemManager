@@ -1,4 +1,11 @@
-<div class="container-fluid" *ngIf="currentRoute != '/login-page' && currentRoute != '/' && currentRoute != '/modify-password'" >
+<div
+  class="container-fluid"
+  *ngIf="
+    currentRoute != '/login-page' &&
+    currentRoute != '/' &&
+    currentRoute != '/modify-password'
+  "
+>
   <div class="row">
     <mat-toolbar color="primary">
       <img src=".\assets\mylogo.png" class="logo" alt="" />
@@ -7,9 +14,7 @@
       </div>
       <button
         mat-raised-button
-        [color]="
-          currentRoute == '/Kiosk'  ? '' : 'primary'
-        "
+        [color]="currentRoute == '/Kiosk' ? '' : 'primary'"
         class="m-2"
         routerLink="/Kiosk"
       >
@@ -50,9 +55,7 @@
       </button>
       <button
         mat-raised-button
-        [color]="
-          currentRoute == '/Discount'  ? '' : 'primary'
-        "
+        [color]="currentRoute == '/Discount' ? '' : 'primary'"
         class="m-2"
         routerLink="/Discount"
       >
@@ -60,43 +63,40 @@
       </button>
       <button
         mat-raised-button
-        [color]="
-          currentRoute == '/ItemGroup'  ? '' : 'primary'
-        "
+        [color]="currentRoute == '/ItemGroup' ? '' : 'primary'"
         class="m-2"
         routerLink="/ItemGroup"
       >
         {{ "Discount item groups" | translate }}
       </button>
 
-
       <button mat-button [matMenuTriggerFor]="menu" class="text-start">
         Admin
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>Edit</button>
+        <!-- <button mat-menu-item>Edit</button>
         <button mat-menu-item>
 
           Add kiosk
+        </button> -->
+        <button mat-menu-item (click)="OpenDialogAddCountry()">
+          Add country
         </button>
-        <button mat-menu-item>
-          Add store
+        <button mat-menu-item (click)="handleButtonClick($event)">
+          Delete mode<mat-slide-toggle
+            class="m-1"
+            [checked]="this.status.deleteMode"
+          ></mat-slide-toggle>
         </button>
-        <button mat-menu-item (click)="handleButtonClick($event)">Delete mode<mat-slide-toggle class="m-1"  [checked]="this.status.deleteMode"></mat-slide-toggle></button>
       </mat-menu>
 
-
-      <div class=" d-flex language position-absolute end-0" >
+      <div class="d-flex language position-absolute end-0">
         <h3 class="mt-3">
-          {{this.storage.getUsername()}}
+          {{ this.storage.getUsername() }}
         </h3>
-        <button
-        mat-icon-button
-        class="m-1"
-        (click)="Logout()"
-      >
-        <mat-icon>logout</mat-icon>
-      </button>
+        <button mat-icon-button class="m-1" (click)="Logout()">
+          <mat-icon>logout</mat-icon>
+        </button>
 
         <!-- <mat-form-field >
           <mat-select [(value)]="status.languages[1].value">

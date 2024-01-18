@@ -93,7 +93,13 @@
         >
           Add store
         </button>
-        <button mat-menu-item disabled>Delete</button>
+        <button
+          *ngIf="status.deleteMode || node.type === 'kiosk'"
+          (click)="DeleteObject(node)"
+          mat-menu-item
+        >
+          Delete
+        </button>
       </mat-menu>
     </mat-tree-node>
     <!-- This is the tree node template for expandable nodes -->
@@ -139,7 +145,13 @@
           >
             Add store
           </button>
-          <button mat-menu-item disabled>Delete</button>
+          <button
+            *ngIf="status.deleteMode"
+            (click)="DeleteObject(node)"
+            mat-menu-item
+          >
+            Delete
+          </button>
         </mat-menu>
         <!-- <div (click)="OpenEditDialog(node.id, node.type)"></div> -->
       </div>

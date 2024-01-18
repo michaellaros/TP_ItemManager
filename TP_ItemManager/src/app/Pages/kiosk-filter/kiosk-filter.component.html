@@ -106,9 +106,17 @@
           mat-icon-button
           matTreeNodeToggle
           [attr.aria-label]="'Toggle ' + node.name"
+          [disabled]="
+            this.dataSource.data.length == 1 && node.type == 'country'
+          "
         >
           <mat-icon class="mat-icon-rtl-mirror">
-            {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
+            {{
+              treeControl.isExpanded(node) ||
+              (this.dataSource.data.length == 1 && node.type == "country")
+                ? "expand_more"
+                : "chevron_right"
+            }}
           </mat-icon>
         </button>
         <button mat-button [matMenuTriggerFor]="menu" class="text-start">
@@ -138,7 +146,10 @@
       <!-- There is inline padding applied to this div using styles.
           This padding value depends on the mat-icon-button width.  -->
       <div
-        [class.example-tree-invisible]="!treeControl.isExpanded(node)"
+        [class.example-tree-invisible]="
+          !treeControl.isExpanded(node) &&
+          !(this.dataSource.data.length == 1 && node.type == 'country')
+        "
         role="group"
       >
         <ng-container matTreeNodeOutlet></ng-container>

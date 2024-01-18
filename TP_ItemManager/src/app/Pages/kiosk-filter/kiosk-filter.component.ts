@@ -19,6 +19,7 @@ import { ResponseStoreUpdate } from 'src/app/Models/ResponseStoreUpdate';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { TreeObject } from 'src/app/Models/TreeObject';
+import { count } from 'rxjs';
 
 @Component({
   selector: 'app-kiosk-filter',
@@ -50,6 +51,7 @@ export class KioskFilterComponent {
   GetCountries() {
     this.http.GetCountries().subscribe((data) => {
       let countries = data;
+      console.log(countries);
       countries.forEach((country) =>
         country.stores?.forEach(
           (store: Store) =>
@@ -263,5 +265,9 @@ export class KioskFilterComponent {
         this.OpenDialogEditKiosk(node.id!);
         break;
     }
+  }
+
+  GetAlwaysOpen(node: TreeObject) {
+    return this.dataSource.data.length == 1 && node.type == 'country';
   }
 }

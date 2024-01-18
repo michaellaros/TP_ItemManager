@@ -732,7 +732,7 @@ export class AssignedEditorComponent {
 
   IsEnabled(): boolean {
     if (
-      this.storage.CheckPermission(this.storage.userPermission) &&
+      this.storage.CheckPermission(this.storage.CountryManagerPermission) &&
       this.IsType(this.type)
     ) {
       return true;

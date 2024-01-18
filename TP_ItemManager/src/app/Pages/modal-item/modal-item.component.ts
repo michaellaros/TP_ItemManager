@@ -76,7 +76,7 @@ export class ModalItemComponent {
       this.GetItemVat(data || '');
     });
 
-    if (!this.storage.CheckPermission(this.storage.userPermission)) {
+    if (!this.storage.CheckPermission(this.storage.CountryManagerPermission)) {
       this.itemForm.get('name')?.disable();
       this.itemForm.get('description')?.disable();
       this.itemForm.get('barcode')?.disable();

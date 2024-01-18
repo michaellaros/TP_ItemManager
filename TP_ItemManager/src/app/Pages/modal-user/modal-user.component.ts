@@ -56,7 +56,7 @@ export class ModalUserComponent {
   }
   ngOnInit() {
     this.UpdateForm();
-    if (!this.storage.CheckPermission(this.storage.userPermission)) {
+    if (!this.storage.CheckPermission(this.storage.CountryManagerPermission)) {
       this.userForm.get('role')?.disable();
     }
   }

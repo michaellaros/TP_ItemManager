@@ -47,7 +47,7 @@ export class ModalCategoryComponent {
 
   ngOnInit() {
     this.UpdateForm();
-    if (!this.storage.CheckPermission(this.storage.userPermission)) {
+    if (!this.storage.CheckPermission(this.storage.CountryManagerPermission)) {
       this.categoryForm.get('name')?.disable();
       this.categoryForm.get('takeAway')?.disable();
       this.categoryForm.get('dineIn')?.disable();

@@ -6,6 +6,8 @@ import { Language } from 'src/app/Models/language';
 import { AuthService } from 'src/app/Services/auth-services/auth.service';
 import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 import { StatusService } from 'src/app/Services/status.service';
+import { ModalCountryComponent } from '../modal-country/modal-country.component';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -18,6 +20,7 @@ export class HeaderComponent {
     public status: StatusService,
     private authService: AuthService,
     public router: Router,
+    public dialog: MatDialog,
     public translate: TranslateService,
     public storage: StorageManagerService
   ) {
@@ -38,5 +41,31 @@ export class HeaderComponent {
   }
   Logout() {
     this.authService.logout();
+  }
+
+  handleButtonClick(event: Event): void {
+    event.stopPropagation();
+    this.status.deleteMode = !this.status.deleteMode;
+  }
+
+  GetCountries() {
+    // this.http.GetCountries().subscribe((data) => {
+    //   let countries = data;
+    //   countries.forEach((country) =>
+    //     country.stores?.forEach(
+    //       (store: Store) =>
+    //         (store.formattedKiosk = this.GetStoreKioskFromCountry(store))
+    //     )
+    //   );
+    //   return (this.dataSource.data = this.GetTreeFromCountries(countries));
+    // });
+  }
+  OpenDialogAddCountry() {
+    const dialogRef = this.dialog.open(ModalCountryComponent, {
+      width: '60vw',
+    });
+    dialogRef.afterClosed().subscribe((data: boolean) => {
+      if (data) this.GetCountries();
+    });
   }
 }

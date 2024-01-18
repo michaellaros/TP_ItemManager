@@ -32,15 +32,15 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="col-3">
+        <mat-form-field class="col-3">
           <mat-label>{{ "Discount value" | translate }}</mat-label>
           <input formControlName="value" matInput type="number" />
         </mat-form-field>
-        <mat-form-field appearance="outline" class="col-3">
+        <mat-form-field class="col-3">
           <mat-label>{{ "Quantity" | translate }}</mat-label>
           <input formControlName="quantity" matInput type="number" />
         </mat-form-field>
-        <mat-form-field appearance="outline" class="col-3">
+        <mat-form-field class="col-3">
           <mat-label>{{ "Country" | translate }}</mat-label>
           <mat-select formControlName="country_id">
             <mat-option *ngFor="let country of countries" [value]="country.id">

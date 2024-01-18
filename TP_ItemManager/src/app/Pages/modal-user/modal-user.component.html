@@ -14,41 +14,53 @@
 
 <mat-dialog-content class="p-0 overflow-x-hidden" style="max-height: 80vh">
   <div class="container-fluid">
-
-      <div class="row">
-        <form [formGroup]="userForm" class="formGroup" >
+    <div class="row">
+      <form [formGroup]="userForm" class="formGroup">
         <mat-form-field class="col-12">
           <mat-label>{{ "Username" | translate }}</mat-label>
-          <input  formControlName="name" matInput />
+          <input formControlName="name" matInput />
         </mat-form-field>
         <mat-form-field class="m-2">
           <mat-label>User type</mat-label>
           <mat-select formControlName="role">
             <mat-option *ngFor="let type of roleType" [value]="type.value">
-              {{type.viewValue}}
+              {{ type.viewValue }}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </form>
 
-      <mat-form-field class="col-12" *ngIf="this.userU==null">
+      <mat-form-field class="col-12" *ngIf="this.userU == null">
         <mat-label>{{ "Password" | translate }}</mat-label>
-        <input type="password" [formControl]=password matInput />
+        <input type="password" [formControl]="password" matInput />
       </mat-form-field>
 
-      <mat-form-field class="col-12" *ngIf="this.userU==null">
+      <mat-form-field class="col-12" *ngIf="this.userU == null">
         <mat-label>{{ "Confirm Password" | translate }}</mat-label>
-        <input type="password" [formControl]=confirmPassword matInput />
+        <input type="password" [formControl]="confirmPassword" matInput />
       </mat-form-field>
-      </div>
+    </div>
 
-      <button mat-raised-button [disabled]="!ModifyPasswordButtonCheck()" color="primary" type="button" *ngIf="this.userU!=null" routerLink='/modify-password' [mat-dialog-close]="null">
-        {{ ("Modify password" | translate) }}
-      </button>
-    <button [disabled]="userForm.invalid" mat-raised-button color="primary" type="button" (click)="SubmitForm()">
-      {{ this.userU==null ? "Create" : ("Save" | translate) }}
+    <button
+      mat-raised-button
+      [disabled]="!ModifyPasswordButtonCheck()"
+      color="primary"
+      type="button"
+      *ngIf="this.userU != null"
+      routerLink="/modify-password"
+      [mat-dialog-close]="null"
+    >
+      {{ "Modify password" | translate }}
     </button>
-
+    <button
+      [disabled]="userForm.invalid"
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="SubmitForm()"
+    >
+      {{ this.userU == null ? "Create" : ("Save" | translate) }}
+    </button>
   </div>
   <app-country-store-editor
     [id]="userU?.id!"
@@ -56,4 +68,4 @@
     [relatedObjects]="userU?.relationship"
     [flg_insert]="this.flg_insert"
   />
-  </mat-dialog-content>
+</mat-dialog-content>

@@ -21,12 +21,12 @@
   <div class="row px-4 pt-4" *ngFor="let timespan of timespans">
     <mat-form-field class="col-5">
       <mat-label>{{"Available from" | translate}}:</mat-label>
-      <input matInput type="number" [(ngModel)]="timespan.availableFrom" />
+      <input matInput type="number"     [disabled]="(!this.storage.CheckPermission(this.storage.CountryManagerPermission))" [(ngModel)]="timespan.availableFrom" />
     </mat-form-field>
 
     <mat-form-field class="col-5">
       <mat-label>{{"Available to" | translate}}:</mat-label>
-      <input matInput type="number" [(ngModel)]="timespan.availableTo" />
+      <input matInput type="number"     [disabled]="(!this.storage.CheckPermission(this.storage.CountryManagerPermission))" [(ngModel)]="timespan.availableTo" />
     </mat-form-field>
 
     <button
@@ -34,11 +34,12 @@
       color="primary"
       class="p-1 col-1"
       (click)="UpdateTimespan(timespan)"
-      [disabled]="timespan.availableFrom! > timespan.availableTo!"
+      [disabled]="(timespan.availableFrom! > timespan.availableTo!) || (!this.storage.CheckPermission(this.storage.CountryManagerPermission)) "
     >
       <mat-icon>edit</mat-icon>
     </button>
     <button
+    [disabled]="(!this.storage.CheckPermission(this.storage.CountryManagerPermission))"
       mat-mini-fab
       color="primary"
       class="p-1 col-1"
@@ -63,7 +64,10 @@
         <input matInput formControlName="availableTo" type="number" />
       </mat-form-field>
 
-      <button type="submit" mat-mini-fab color="primary" class="m-1 col-2">
+    <button
+    [disabled]="(!this.storage.CheckPermission(this.storage.CountryManagerPermission))"
+
+    type="submit" mat-mini-fab color="primary" class="m-1 col-2">
         <mat-icon>add</mat-icon>
       </button>
     </div>

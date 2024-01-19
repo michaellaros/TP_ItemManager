@@ -98,6 +98,7 @@ export class CountryStoreEditorComponent {
       this.type === 'Country' &&
       !this.storage.CheckPermission(this.storage.adminPermission)
     ) {
+    } else {
       this.assignForm.disable();
     }
   }

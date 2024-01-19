@@ -8,6 +8,7 @@ import {
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Timespan } from 'src/app/Models/Timespan';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 
 import { HttpService } from 'src/app/Services/http.service';
 
@@ -42,9 +43,16 @@ export class TimespanEditorComponent {
     availableTo: new FormControl(24, [Validators.min(0), Validators.max(24)]),
   });
 
-  constructor(private http: HttpService) {}
+  constructor(
+    private http: HttpService,
+    public storage: StorageManagerService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (!this.storage.CheckPermission(this.storage.CountryManagerPermission)) {
+      this.timespanForm.disable();
+    }
+  }
   toggle(): void {
     if (this.flg_isEditable) {
       this.state = !this.state;

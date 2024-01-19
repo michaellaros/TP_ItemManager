@@ -94,7 +94,13 @@
           Add store
         </button>
         <button
-          *ngIf="status.deleteMode || node.type === 'kiosk'"
+          *ngIf="
+            status.deleteMode ||
+            (node.type === 'kiosk' &&
+              this.storage.CheckPermission(
+                this.storage.CountryManagerPermission
+              ))
+          "
           (click)="DeleteObject(node)"
           mat-menu-item
         >

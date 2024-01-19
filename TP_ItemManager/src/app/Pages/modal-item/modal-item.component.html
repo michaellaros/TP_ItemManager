@@ -113,6 +113,12 @@
     >
       {{ flg_insert ? "Create" : ("Save" | translate) }}
     </button>
+
+    <button *ngIf="!flg_insert" [disabled]="itemForm.invalid ||
+                   !this.storage.CheckPermission(this.storage.CountryManagerPermission) " mat-raised-button color="warn" [mat-dialog-close]="null"
+      type="button" class="ms-4" (click)="this.status.DeleteObject(item.id!,'Item')">
+      Delete
+    </button>
   </div>
   <app-translations-editor
     [id]="item.id!"

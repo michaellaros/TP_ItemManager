@@ -53,6 +53,13 @@
     >
       {{ this.userU == null ? "Create" : ("Save" | translate) }}
     </button>
+
+    <button *ngIf="!flg_insert" [disabled]="userForm.invalid ||
+                   !this.storage.CheckPermission(this.storage.CountryManagerPermission) " mat-raised-button color="warn"
+      type="button" [mat-dialog-close]="null" class="ms-4" (click)="this.status.DeleteObject(userU?.id!,'User')">
+      Delete
+    </button>
+
     <button
       mat-raised-button
       [disabled]="!ModifyPasswordButtonCheck()"

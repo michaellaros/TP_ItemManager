@@ -65,6 +65,11 @@
         {{ flg_insert ? ("Create" | translate) : ("Save" | translate) }}
       </button>
 
+      <button *ngIf="!flg_insert" [disabled]="categoryForm.invalid ||
+               !this.storage.CheckPermission(this.storage.CountryManagerPermission) " mat-raised-button color="warn" [mat-dialog-close]="null"
+        type="button" class="ms-4" (click)="this.status.DeleteObject(category.id!,'Category')">
+        Delete
+      </button>
 
       <button
       *ngIf="!flg_insert"

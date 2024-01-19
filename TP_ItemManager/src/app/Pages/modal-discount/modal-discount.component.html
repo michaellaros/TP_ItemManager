@@ -103,6 +103,12 @@
       {{ (flg_insert ? "Create" : "Save") | translate }}
     </button>
 
+    <button *ngIf="!flg_insert" [disabled]="discountForm.invalid ||
+                  !this.storage.CheckPermission(this.storage.CountryManagerPermission) " mat-raised-button color="warn" [mat-dialog-close]="null"
+      type="button" class="ms-4" (click)="this.status.DeleteObject(discount?.id!,'Discount')">
+      Delete
+    </button>
+
     <button
       *ngIf="!flg_insert"
       mat-raised-button

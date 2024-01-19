@@ -41,7 +41,7 @@ export class EditListComponent implements OnChanges {
   @Input() public parentData?: SearchedObject[];
   @Input() public columnName: string = 'Name';
   @Output() public refresh = new EventEmitter();
-  displayedColumns: string[] = ['id', 'name', 'delete'];
+  displayedColumns: string[] = ['id', 'name'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -168,14 +168,5 @@ export class EditListComponent implements OnChanges {
     dialogRef.afterClosed().subscribe(() => {
       this.refresh.emit(null);
     });
-  }
-
-  DeleteObject(id: string) {
-    if (confirm('The element will be deleted permanently!')) {
-      //todo cambiare pop up
-      this.http
-        .DeleteObject(this.columnName, id)
-        .subscribe(() => this.refresh.emit(null));
-    }
   }
 }

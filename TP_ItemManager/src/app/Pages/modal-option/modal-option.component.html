@@ -43,6 +43,11 @@
          !this.storage.CheckPermission(this.storage.CountryManagerPermission)" mat-raised-button color="primary" type="submit">
         {{ flg_insert ? ("Create" | translate) : ("Save" | translate) }}
       </button>
+      <button *ngIf="!flg_insert" [disabled]="optionForm.invalid ||
+                     !this.storage.CheckPermission(this.storage.CountryManagerPermission) " mat-raised-button color="warn"
+        type="button" [mat-dialog-close]="null" class="ms-4" (click)="this.status.DeleteObject(option?.id!,'Option')">
+        Delete
+      </button>
       <button *ngIf="!flg_insert"   mat-raised-button color="primary" class="ms-4" type="button" (click)="OpenDialogModifyItem(option?.id!,'OPTION')">
         Set availability
       </button>

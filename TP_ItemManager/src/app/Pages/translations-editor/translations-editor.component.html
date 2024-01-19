@@ -76,6 +76,10 @@
     [formGroup]="translationForm"
     class="formGroup"
     (ngSubmit)="InsertTranslation()"
+    *ngIf="
+      this.storage.CheckPermission(this.storage.CountryManagerPermission) ||
+      this.translations!.length == 0
+    "
   >
     <div class="row px-4 pt-4">
       <mat-form-field class="col-2">

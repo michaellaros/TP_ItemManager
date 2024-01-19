@@ -97,7 +97,10 @@
     [formGroup]="assignForm"
     class="formGroup"
     (ngSubmit)="InsertAssignedObject()"
-    *ngIf="this.storage.CheckPermission(this.storage.CountryManagerPermission)"
+    *ngIf="
+      this.storage.CheckPermission(this.storage.CountryManagerPermission) ||
+      AssignedObjects!.length == 0
+    "
   >
     <div class="row px-4 pt-4">
       <mat-form-field appearance="outline" class="col-8">
@@ -107,7 +110,13 @@
           type="text"
           formControlName="name"
           [matAutocomplete]="auto"
+          [disabled]="
+            !this.storage.CheckPermission(this.storage.CountryManagerPermission)
+          "
         />
+        <!-- [disabled]="
+            !this.storage.CheckPermission(this.storage.CountryManagerPermission)
+          " -->
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
           <mat-option
             *ngFor="let option of filteredOptions"
@@ -119,7 +128,14 @@
       </mat-form-field>
       <mat-form-field appearance="outline" class="col-2">
         <mat-label>{{ "Order" | translate }}</mat-label>
-        <input matInput formControlName="order" type="number" />
+        <input
+          matInput
+          formControlName="order"
+          type="number"
+          [disabled]="
+            !this.storage.CheckPermission(this.storage.CountryManagerPermission)
+          "
+        />
       </mat-form-field>
 
       <button

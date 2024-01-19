@@ -94,17 +94,22 @@ export class CountryStoreEditorComponent {
 
   ngOnInit() {
     if (!this.flg_insert) this.GetOptionList();
-    if (
-      this.type === 'Country' &&
-      !this.storage.CheckPermission(this.storage.adminPermission)
-    ) {
+    if (this.storage.CheckPermission(this.storage.CountryManagerPermission)) {
+      this.assignForm.enable();
     } else {
       this.assignForm.disable();
     }
   }
 
   ngOnChanges() {
-    if (!this.flg_insert) this.GetOptionList();
+    if (!this.flg_insert) {
+      this.GetOptionList();
+      if (this.storage.CheckPermission(this.storage.CountryManagerPermission)) {
+        this.assignForm.enable();
+      } else {
+        this.assignForm.disable();
+      }
+    }
   }
 
   GetOptionList() {

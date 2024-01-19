@@ -1,13 +1,15 @@
 <div class="container mt-3">
-  <div class="row"><h1>{{"Discount item groups" | translate}}</h1></div>
+  <div class="row">
+    <h1>{{ "Discount item groups" | translate }}</h1>
+  </div>
   <form [formGroup]="filterForm" class="formGroup">
     <div class="row container-fluid">
       <mat-form-field class="col-3 m-1">
-        <mat-label>{{"Name" | translate}}</mat-label>
+        <mat-label>{{ "Name" | translate }}</mat-label>
         <input formControlName="name" matInput />
       </mat-form-field>
       <mat-form-field class="col-3 m-1">
-        <mat-label>{{"ID" | translate}}</mat-label>
+        <mat-label>{{ "ID" | translate }}</mat-label>
         <input formControlName="id" matInput />
       </mat-form-field>
 
@@ -24,7 +26,7 @@
           class="mx-1 mb-3"
           (click)="GetItemGroups()"
         >
-        {{"Search" | translate}}
+          {{ "Search" | translate }}
         </button>
         <button
           mat-raised-button
@@ -33,19 +35,21 @@
           class="mx-1 mb-3"
           type=""
         >
-        {{"Clear" | translate}}
+          {{ "Clear" | translate }}
         </button>
       </div>
       <div class="col"></div>
 
       <button
         mat-raised-button
-        [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
+        *ngIf="
+          this.storage.CheckPermission(this.storage.CountryManagerPermission)
+        "
         color="primary"
         (click)="OpenDialogModifyItemGroup()"
         class="mx-1"
       >
-      {{"Add item group" | translate}}
+        {{ "Add item group" | translate }}
       </button>
     </div>
   </form>

@@ -1,18 +1,20 @@
 <div class="container mt-3">
-  <div class="row"><h1>{{"Items" | translate}}</h1></div>
+  <div class="row">
+    <h1>{{ "Items" | translate }}</h1>
+  </div>
   <form [formGroup]="filterForm" class="formGroup">
     <div class="row container-fluid">
       <mat-form-field class="col-3 m-1">
-        <mat-label>{{"Name" | translate}}</mat-label>
+        <mat-label>{{ "Name" | translate }}</mat-label>
         <input formControlName="name" matInput />
       </mat-form-field>
       <mat-form-field class="col-3 m-1">
-        <mat-label>{{"ID" | translate}}</mat-label>
+        <mat-label>{{ "ID" | translate }}</mat-label>
         <input formControlName="id" matInput />
       </mat-form-field>
 
       <mat-form-field class="col-3 m-1">
-        <mat-label>{{"Barcode" | translate}}</mat-label>
+        <mat-label>{{ "Barcode" | translate }}</mat-label>
         <input formControlName="barcode" matInput />
       </mat-form-field>
     </div>
@@ -24,7 +26,7 @@
           class="mx-1 mb-3"
           (click)="GetItems()"
         >
-        {{"Search" | translate}}
+          {{ "Search" | translate }}
         </button>
         <button
           mat-raised-button
@@ -33,34 +35,38 @@
           class="mx-1 mb-3"
           type=""
         >
-        {{"Clear" | translate}}
+          {{ "Clear" | translate }}
         </button>
       </div>
       <div class="col"></div>
       <input
-      type="file"
-      (change)="UploadFile($event)"
-      style="display: none"
-      #fileUpload
-      onclick="this.value = null"
-    />
+        type="file"
+        (change)="UploadFile($event)"
+        style="display: none"
+        #fileUpload
+        onclick="this.value = null"
+      />
       <button
-      [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
+        *ngIf="
+          this.storage.CheckPermission(this.storage.CountryManagerPermission)
+        "
         mat-raised-button
         color="primary"
         (click)="fileUpload.click()"
         class="mx-1"
       >
-      {{"Upload prices" | translate}}
+        {{ "Upload prices" | translate }}
       </button>
       <button
-      [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
+        *ngIf="
+          this.storage.CheckPermission(this.storage.CountryManagerPermission)
+        "
         mat-raised-button
         color="primary"
         (click)="OpenDialogModifyItem()"
         class="mx-1"
       >
-      {{"Add item" | translate}}
+        {{ "Add item" | translate }}
       </button>
     </div>
   </form>

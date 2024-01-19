@@ -40,7 +40,9 @@
       </div>
       <div class="col"></div>
       <button
-        [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
+        *ngIf="
+          this.storage.CheckPermission(this.storage.CountryManagerPermission)
+        "
         mat-raised-button
         color="primary"
         (click)="UpdateDiscount()"
@@ -49,7 +51,9 @@
         {{ "Update Discount" | translate }}
       </button>
       <button
-        [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
+        *ngIf="
+          this.storage.CheckPermission(this.storage.CountryManagerPermission)
+        "
         mat-raised-button
         color="primary"
         (click)="OpenDialogModifyDiscount()"

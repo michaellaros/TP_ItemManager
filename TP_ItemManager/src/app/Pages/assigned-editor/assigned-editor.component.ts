@@ -70,11 +70,25 @@ export class AssignedEditorComponent {
   }
   ngOnInit() {
     console.log(this.flg_insert);
-    if (!this.flg_insert) this.GetOptionList();
+    if (!this.flg_insert) {
+      this.GetOptionList();
+      if (this.storage.CheckPermission(this.storage.CountryManagerPermission)) {
+        this.assignForm.enable();
+      } else {
+        this.assignForm.disable();
+      }
+    }
   }
 
   ngOnChanges() {
-    if (!this.flg_insert) this.GetOptionList();
+    if (!this.flg_insert) {
+      this.GetOptionList();
+      if (this.storage.CheckPermission(this.storage.CountryManagerPermission)) {
+        this.assignForm.enable();
+      } else {
+        this.assignForm.disable();
+      }
+    }
   }
 
   GetOptionList() {

@@ -1,5 +1,7 @@
 <div class="container mt-3">
-  <div class="row"><h1>{{"Options"| translate }}</h1></div>
+  <div class="row">
+    <h1>{{ "Options" | translate }}</h1>
+  </div>
   <form [formGroup]="filterForm" class="formGroup">
     <div class="row container-fluid">
       <mat-form-field class="col-3 m-1">
@@ -36,8 +38,9 @@
         color="primary"
         (click)="OpenDialogModifyOption()"
         class="mx-1"
-        [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
-
+        *ngIf="
+          this.storage.CheckPermission(this.storage.CountryManagerPermission)
+        "
       >
         {{ "Add option" | translate }}
       </button>

@@ -139,13 +139,13 @@
       </mat-form-field>
 
       <button
-        [disabled]="
-          !this.storage.CheckPermission(this.storage.CountryManagerPermission)
-        "
         type="submit"
         mat-mini-fab
         color="primary"
         class="m-1 col-2"
+        [disabled]="
+          !this.storage.CheckPermission(this.storage.CountryManagerPermission)
+        "
       >
         <mat-icon>add</mat-icon>
       </button>

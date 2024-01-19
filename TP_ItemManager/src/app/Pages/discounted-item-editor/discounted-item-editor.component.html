@@ -58,7 +58,10 @@
     [formGroup]="assignForm"
     class="formGroup"
     (ngSubmit)="InsertAssignedObject()"
-    *ngIf="this.storage.CheckPermission(this.storage.CountryManagerPermission)"
+    *ngIf="
+      this.storage.CheckPermission(this.storage.CountryManagerPermission) ||
+      DiscountedObjects!.length == 0
+    "
   >
     <div class="row px-4 pt-4">
       <mat-form-field appearance="outline" class="col-8">

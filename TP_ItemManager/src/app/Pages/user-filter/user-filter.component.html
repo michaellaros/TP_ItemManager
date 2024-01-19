@@ -1,5 +1,7 @@
 <div class="container mt-3">
-  <div class="row"><h1>{{"Users" | translate}}</h1></div>
+  <div class="row">
+    <h1>{{ "Users" | translate }}</h1>
+  </div>
   <form [formGroup]="filterForm" class="formGroup">
     <div class="row container-fluid">
       <mat-form-field class="col-3 m-1">
@@ -10,7 +12,6 @@
         <mat-label>{{ "Name" | translate }}</mat-label>
         <input formControlName="name" matInput />
       </mat-form-field>
-
     </div>
     <div class="container-fluid d-flex justify-content-between">
       <div>
@@ -37,8 +38,7 @@
         color="primary"
         (click)="OpenDialogAddUser()"
         class="mx-1"
-        [disabled]="!this.storage.CheckPermission(this.storage.adminPermission)"
-
+        *ngIf="this.storage.CheckPermission(this.storage.adminPermission)"
       >
         {{ "Add user" | translate }}
       </button>

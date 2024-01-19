@@ -2,17 +2,21 @@
   class="w-100 position-relative"
   color="primary"
   [class.mt-4]="type == 'Discount'"
+  (click)="flg_insert ? '' : toggle()"
+  [matRippleDisabled]="flg_insert"
+  [style]="flg_insert ? '' : 'cursor: pointer'"
+  matRipple
+  [matRippleRadius]="20"
 >
-  <div>
+  <span>
     <h1 class="px-0 my-2 text-white">
       {{ "Items to discount" | translate }}
     </h1>
-  </div>
+  </span>
 
   <button
     mat-icon-button
     [disabled]="flg_insert"
-    (click)="toggle()"
     class="m-2 position-absolute end-0"
   >
     <mat-icon>{{ this.state ? "expand_more" : "expand_less" }}</mat-icon>
@@ -43,6 +47,9 @@
       color="primary"
       class="p-1 col-1"
       (click)="DeleteAssignedObject(object)"
+      *ngIf="
+        this.storage.CheckPermission(this.storage.CountryManagerPermission)
+      "
     >
       <mat-icon>delete</mat-icon>
     </button>
@@ -51,6 +58,7 @@
     [formGroup]="assignForm"
     class="formGroup"
     (ngSubmit)="InsertAssignedObject()"
+    *ngIf="this.storage.CheckPermission(this.storage.CountryManagerPermission)"
   >
     <div class="row px-4 pt-4">
       <mat-form-field appearance="outline" class="col-8">

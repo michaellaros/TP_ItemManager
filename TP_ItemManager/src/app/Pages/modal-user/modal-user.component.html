@@ -14,34 +14,45 @@
 
 <mat-dialog-content class="p-0 overflow-x-hidden" style="max-height: 80vh">
   <div class="container-fluid">
-    <div class="row">
-      <form [formGroup]="userForm" class="formGroup">
-        <mat-form-field class="col-12">
+    <form [formGroup]="userForm" class="formGroup">
+      <div class="row">
+        <mat-form-field class="col-6">
           <mat-label>{{ "Username" | translate }}</mat-label>
           <input formControlName="name" matInput />
         </mat-form-field>
-        <mat-form-field class="m-2">
-          <mat-label  >User type</mat-label>
-          <mat-select  formControlName="role">
-            <mat-option  *ngFor="let type of roleType" [value]="type.value">
+        <mat-form-field class="m-6">
+          <mat-label>User type</mat-label>
+          <mat-select formControlName="role">
+            <mat-option *ngFor="let type of roleType" [value]="type.value">
               {{ type.viewValue }}
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="col-12" *ngIf="this.userU == null">
+      </div>
+      <div class="row" *ngIf="this.userU == null">
+        <mat-form-field class="col-6">
           <mat-label>{{ "Password" | translate }}</mat-label>
           <input type="password" formControlName="password" matInput />
         </mat-form-field>
 
-        <mat-form-field class="col-12" *ngIf="this.userU == null">
+        <mat-form-field class="col-6">
           <mat-label>{{ "Confirm Password" | translate }}</mat-label>
           <input type="password" formControlName="confirmPassword" matInput />
         </mat-form-field>
-      </form>
-
-
-    </div>
-
+      </div>
+    </form>
+    <button
+      [disabled]="
+        userForm.invalid ||
+        !this.storage.CheckPermission(this.storage.adminPermission)
+      "
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="SubmitForm()"
+    >
+      {{ this.userU == null ? "Create" : ("Save" | translate) }}
+    </button>
     <button
       mat-raised-button
       [disabled]="!ModifyPasswordButtonCheck()"
@@ -52,16 +63,6 @@
       [mat-dialog-close]="null"
     >
       {{ "Modify password" | translate }}
-    </button>
-    <button
-      [disabled]="userForm.invalid ||
-         !this.storage.CheckPermission(this.storage.CountryManagerPermission)"
-      mat-raised-button
-      color="primary"
-      type="button"
-      (click)="SubmitForm()"
-    >
-      {{ this.userU == null ? "Create" : ("Save" | translate) }}
     </button>
   </div>
   <app-country-store-editor

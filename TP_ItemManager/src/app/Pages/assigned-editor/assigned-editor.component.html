@@ -2,6 +2,11 @@
   class="w-100 position-relative"
   [class.mt-4]="type == 'KioskCategory' || type == 'ItemGroup-Item'"
   color="primary"
+  (click)="flg_insert ? '' : toggle()"
+  [matRippleDisabled]="flg_insert"
+  [style]="flg_insert ? '' : 'cursor: pointer'"
+  matRipple
+  [matRippleRadius]="20"
 >
   <div>
     <h1 class="px-0 my-2 text-white">
@@ -37,7 +42,6 @@
   <button
     mat-icon-button
     [disabled]="flg_insert"
-    (click)="toggle()"
     class="m-2 position-absolute end-0"
   >
     <mat-icon>{{ this.state ? "expand_more" : "expand_less" }}</mat-icon>
@@ -56,11 +60,20 @@
     </mat-form-field>
     <mat-form-field appearance="outline" class="col-2">
       <mat-label>{{ "Order" | translate }}</mat-label>
-      <input matInput type="number" [(ngModel)]="object.order" />
+      <input
+        matInput
+        type="number"
+        [(ngModel)]="object.order"
+        [disabled]="
+          !this.storage.CheckPermission(this.storage.CountryManagerPermission)
+        "
+      />
     </mat-form-field>
 
     <button
-      [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
+      *ngIf="
+        this.storage.CheckPermission(this.storage.CountryManagerPermission)
+      "
       mat-mini-fab
       color="primary"
       class="p-1 col-1"
@@ -69,7 +82,9 @@
       <mat-icon>save</mat-icon>
     </button>
     <button
-      [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
+      *ngIf="
+        this.storage.CheckPermission(this.storage.CountryManagerPermission)
+      "
       mat-mini-fab
       color="primary"
       class="p-1 col-1"
@@ -82,6 +97,7 @@
     [formGroup]="assignForm"
     class="formGroup"
     (ngSubmit)="InsertAssignedObject()"
+    *ngIf="this.storage.CheckPermission(this.storage.CountryManagerPermission)"
   >
     <div class="row px-4 pt-4">
       <mat-form-field appearance="outline" class="col-8">
@@ -107,7 +123,9 @@
       </mat-form-field>
 
       <button
-        [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
+        [disabled]="
+          !this.storage.CheckPermission(this.storage.CountryManagerPermission)
+        "
         type="submit"
         mat-mini-fab
         color="primary"

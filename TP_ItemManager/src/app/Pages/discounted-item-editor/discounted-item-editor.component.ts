@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { map } from 'rxjs';
 import { DiscountedObject } from 'src/app/Models/DiscountedObject';
 import { DiscountedItemType } from 'src/app/Models/Enums/DiscountedItemType';
+import { StorageManagerService } from 'src/app/Services/auth-services/storage-manager.service';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 
@@ -59,7 +60,8 @@ export class DiscountedItemEditorComponent {
   public constructor(
     private http: HttpService,
     private _snackBar: MatSnackBar,
-    private status: StatusService
+    private status: StatusService,
+    public storage: StorageManagerService
   ) {
     this.newAssignedObject = new DiscountedObject();
   }

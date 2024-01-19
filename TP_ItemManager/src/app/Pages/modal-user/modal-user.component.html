@@ -64,6 +64,10 @@
     >
       {{ "Modify password" | translate }}
     </button>
+    <button mat-raised-button *ngIf="this.storage.CheckPermission(this.storage.adminPermission)" color="primary" type="button"
+      (click)="ResetPassword(this.userU?.id!)" >
+      {{ "Reset password" | translate }}
+    </button>
   </div>
   <app-country-store-editor
     [id]="userU?.id!"

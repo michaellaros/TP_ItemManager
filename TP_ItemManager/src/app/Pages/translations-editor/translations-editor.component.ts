@@ -54,6 +54,9 @@ export class TranslationsEditorComponent {
     if (this.type != 'Item') {
       this.translationForm.get('field')!.disable();
     }
+    if (!this.storage.CheckPermission(this.storage.CountryManagerPermission)) {
+      this.translationForm.disable();
+    }
   }
   toggle(): void {
     if (this.flg_isEditable) {

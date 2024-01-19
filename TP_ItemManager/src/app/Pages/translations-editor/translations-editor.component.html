@@ -38,7 +38,13 @@
 
     <mat-form-field class="col-6">
       <mat-label>{{ "Value" | translate }}</mat-label>
-      <textarea matInput [(ngModel)]="translation.value"></textarea>
+      <textarea
+        matInput
+        [disabled]="
+          !this.storage.CheckPermission(this.storage.CountryManagerPermission)
+        "
+        [(ngModel)]="translation.value"
+      ></textarea>
     </mat-form-field>
 
     <button
@@ -48,8 +54,7 @@
       (click)="UpdateTranslation(translation)"
       [disabled]="
         translation.value === '' ||
-        (!this.storage.CheckPermission(this.storage.CountryManagerPermission) &&
-          this.type === 'Item')
+        !this.storage.CheckPermission(this.storage.CountryManagerPermission)
       "
     >
       <mat-icon>edit</mat-icon>
@@ -61,8 +66,7 @@
       (click)="DeleteTranslation(translation)"
       [disabled]="
         translation.value === '' ||
-        (!this.storage.CheckPermission(this.storage.CountryManagerPermission) &&
-          this.type === 'Item')
+        !this.storage.CheckPermission(this.storage.CountryManagerPermission)
       "
     >
       <mat-icon>delete</mat-icon>
@@ -104,9 +108,7 @@
         color="primary"
         class="m-1 col-1"
         [disabled]="
-          !this.storage.CheckPermission(
-            this.storage.CountryManagerPermission
-          ) && this.type === 'Item'
+          !this.storage.CheckPermission(this.storage.CountryManagerPermission)
         "
       >
         <mat-icon>add</mat-icon>

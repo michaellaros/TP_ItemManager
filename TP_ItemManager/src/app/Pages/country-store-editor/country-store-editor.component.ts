@@ -94,6 +94,13 @@ export class CountryStoreEditorComponent {
 
   ngOnInit() {
     if (!this.flg_insert) this.GetOptionList();
+    if (
+      this.type === 'Country' &&
+      !this.storage.CheckPermission(this.storage.adminPermission)
+    ) {
+    } else {
+      this.assignForm.disable();
+    }
   }
 
   ngOnChanges() {

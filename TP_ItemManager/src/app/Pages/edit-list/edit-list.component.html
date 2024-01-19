@@ -52,7 +52,7 @@
               mat-mini-fab
               color="primary"
               class="m-1"
-              [disabled]="!this.storage.CheckPermission( this.columnName === 'user' ? this.storage.CountryManagerPermission :  this.storage.adminPermission)"
+              [disabled]="!this.storage.CheckPermission( this.columnName === 'User' ? this.storage.adminPermission  :  this.storage.CountryManagerPermission)"
 
               (click)="DeleteObject(element.id)"
             >

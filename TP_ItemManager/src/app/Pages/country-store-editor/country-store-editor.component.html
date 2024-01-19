@@ -39,7 +39,7 @@
       <mat-icon>save</mat-icon>
     </button> -->
     <button
-    [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
+    [disabled]="!this.storage.CheckPermission( this.type === 'Country' ? this.storage.adminPermission  :  this.storage.CountryManagerPermission)"
       mat-mini-fab
       color="primary"
       class="p-1 col-1"
@@ -54,7 +54,7 @@
     (ngSubmit)="InsertAssignedObject()"
   >
     <div class="row px-4 pt-4">
-      <mat-form-field appearance="outline" class="col-8">
+      <mat-form-field  appearance="outline" class="col-8">
         <mat-label>{{ "Name" | translate }}</mat-label>
         <input
           matInput
@@ -64,7 +64,6 @@
         />
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
           <mat-option
-[disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)"
             *ngFor="let option of filteredOptions"
             [value]="option.name"
           >
@@ -102,7 +101,8 @@
         <input matInput formControlName="order" type="number" />
       </mat-form-field> -->
 
-      <button [disabled]="!this.storage.CheckPermission(this.storage.CountryManagerPermission)" type="submit" mat-mini-fab color="primary" class="m-1 col-2">
+      <button             [disabled]="!this.storage.CheckPermission( this.type === 'Country' ? this.storage.adminPermission  :  this.storage.CountryManagerPermission)"
+ type="submit" mat-mini-fab color="primary" class="m-1 col-2">
         <mat-icon>add</mat-icon>
       </button>
     </div>

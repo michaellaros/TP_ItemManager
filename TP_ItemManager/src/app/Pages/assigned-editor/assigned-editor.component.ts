@@ -46,6 +46,8 @@ export class AssignedEditorComponent {
     //need manager role or higher
     'DiscountStore',
     'StoreDiscount',
+    'Item-ItemGroup',
+    'ItemGroup-Item',
   ];
 
   assignForm = new FormGroup({

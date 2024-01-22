@@ -41,29 +41,32 @@
         </mat-form-field>
       </div>
     </form>
-    <button
-      [disabled]="
-        userForm.invalid ||
-        !this.storage.CheckPermission(this.storage.adminPermission)
-      "
-      mat-raised-button
-      color="primary"
-      type="button"
-      (click)="SubmitForm()"
-    >
-      {{ this.userU == null ? "Create" : ("Save" | translate) }}
-    </button>
-    <button
-      mat-raised-button
-      [disabled]="!ModifyPasswordButtonCheck()"
-      color="primary"
-      type="button"
-      *ngIf="this.userU != null"
-      routerLink="/modify-password"
-      [mat-dialog-close]="null"
-    >
-      {{ "Modify password" | translate }}
-    </button>
+    <div class="d-flex">
+      <div class="col-6">
+        <button [disabled]="
+                userForm.invalid ||
+                !this.storage.CheckPermission(this.storage.adminPermission)
+              " mat-raised-button color="primary" type="button" (click)="SubmitForm()">
+          {{ this.userU == null ? "Create" : ("Save" | translate) }}
+        </button>
+        <button mat-raised-button [disabled]="!ModifyPasswordButtonCheck()" color="primary" type="button"
+          *ngIf="this.userU != null" routerLink="/modify-password" [mat-dialog-close]="null">
+          {{ "Modify password" | translate }}
+        </button>
+        <button mat-raised-button *ngIf="this.storage.CheckPermission(this.storage.adminPermission)" color="primary"
+          type="button" (click)="ResetPassword(this.userU?.id!)">
+          {{ "Reset password" | translate }}
+        </button>
+      </div>
+      <div class="col-6 text-end">
+        <button *ngIf="!flg_insert" [disabled]="userForm.invalid ||
+                           !this.storage.CheckPermission(this.storage.CountryManagerPermission) " mat-raised-button
+          color="warn" type="button" [mat-dialog-close]="null" class="ms-4"
+          (click)="this.status.DeleteObject(userU?.id!,'User')">
+          Delete
+        </button>
+      </div>
+    </div>
   </div>
   <app-country-store-editor
     [id]="userU?.id!"

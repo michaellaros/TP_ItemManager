@@ -37,4 +37,10 @@ export class StatusService {
       dialogRef.afterClosed().subscribe(() => {});
     });
   }
+
+  DeleteObject(id: string, type: string) {
+    if (confirm('The element will be deleted permanently!')) {
+      this.http.DeleteObject(type, id).subscribe(() => this.refresh.emit(null));
+    }
+  }
 }

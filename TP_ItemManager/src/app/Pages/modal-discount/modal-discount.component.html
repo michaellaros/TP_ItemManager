@@ -91,28 +91,26 @@
         </div>
       </div>
     </form>
-    <button
-      mat-raised-button
-      color="primary"
-      [disabled]="
-        discountForm.invalid ||
-        !this.storage.CheckPermission(this.storage.CountryManagerPermission)
-      "
-      (click)="SubmitForm()"
-    >
-      {{ (flg_insert ? "Create" : "Save") | translate }}
-    </button>
-
-    <button
-      *ngIf="!flg_insert"
-      mat-raised-button
-      color="primary"
-      type="button"
-      class="ms-4"
-      (click)="OpenDialogModifyItem(discount?.id!, 'DISCOUNT')"
-    >
-      Set availability
-    </button>
+    <div class="d-flex">
+      <div class="col-6"><button mat-raised-button color="primary" [disabled]="
+              discountForm.invalid ||
+              !this.storage.CheckPermission(this.storage.CountryManagerPermission)
+            " (click)="SubmitForm()">
+        {{ (flg_insert ? "Create" : "Save") | translate }}
+      </button>
+      <button *ngIf="!flg_insert" mat-raised-button color="primary" type="button" class="ms-4"
+        (click)="OpenDialogModifyItem(discount?.id!, 'DISCOUNT')">
+        Set availability
+      </button>
+    </div>
+      <div class="col-6 text-end">
+        <button *ngIf="!flg_insert" [disabled]="discountForm.invalid ||
+                          !this.storage.CheckPermission(this.storage.CountryManagerPermission) " mat-raised-button color="warn"
+          [mat-dialog-close]="null" type="button" class="ms-4" (click)="this.status.DeleteObject(discount?.id!,'Discount')">
+          Delete
+        </button>
+      </div>
+    </div>
   </div>
   <app-discounted-item-editor
     [id]="discount?.id!"

@@ -83,6 +83,11 @@ export class HttpService {
       params: new HttpParams().append('id', this.id).append('name', this.name),
     });
   }
+  ResetPassword(id: string) {
+    return this.http.post<string>(this.urlAPI + 'ResetPassword', null, {
+      params: new HttpParams().append('id', id),
+    });
+  }
   FilterCategory(filter: CategoryFilterModel) {
     return this.http.post<any>(this.urlAPI + 'Categories', filter);
   }

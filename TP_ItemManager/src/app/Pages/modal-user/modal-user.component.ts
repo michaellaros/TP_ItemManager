@@ -68,6 +68,13 @@ export class ModalUserComponent {
     }
   }
 
+  ResetPassword(id: string) {
+    this.http.ResetPassword(id).subscribe((data) => {
+      this._snackBar.open('Password successfully restored!', 'Ok', {
+        duration: this.status.snackbarDuration,
+      });
+    });
+  }
   UpdateForm() {
     if (this.userU != null) {
       this.userForm.patchValue({

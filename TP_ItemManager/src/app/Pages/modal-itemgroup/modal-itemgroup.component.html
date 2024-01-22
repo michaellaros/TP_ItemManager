@@ -13,9 +13,9 @@
 </mat-toolbar>
 <mat-dialog-content class="p-0 overflow-x-hidden" style="max-height: 80vh">
   <div class="container-fluid">
+    <div class="row">
     <form [formGroup]="itemGroupForm" class="formGroup">
-      <div class="row">
-        <div class="row col-6 d-flex flex-column">
+        <div class="d-flex flex-column col-6">
           <mat-form-field>
             <mat-label>{{ "Name" | translate }}</mat-label>
             <input formControlName="name" matInput />
@@ -26,18 +26,30 @@
             <textarea formControlName="description" matInput></textarea>
           </mat-form-field>
         </div>
-      </div>
     </form>
+    </div>
 
-    <button [disabled]="
-         !this.storage.CheckPermission(this.storage.CountryManagerPermission)" mat-raised-button color="primary" (click)="SubmitForm()">
-      {{ flg_insert ? "Create" : ("Save" | translate) }}
-    </button>
-    <button *ngIf="!flg_insert" [disabled]="itemGroupForm.invalid ||
-                   !this.storage.CheckPermission(this.storage.CountryManagerPermission) " mat-raised-button color="warn" [mat-dialog-close]="null"
-      type="button" class="ms-4" (click)="this.status.DeleteObject(itemGroup.id!,'ItemGroup')">
-      Delete
-    </button>
+
+    <div class="row d-flex">
+      <div class="col-6">
+        <button [disabled]="
+                !this.storage.CheckPermission(this.storage.CountryManagerPermission)" mat-raised-button color="primary"
+          (click)="SubmitForm()">
+          {{ flg_insert ? "Create" : ("Save" | translate) }}
+        </button>
+
+      </div>
+      <div class="col-6 text-end">
+        <button *ngIf="!flg_insert" [disabled]="itemGroupForm.invalid ||
+                          !this.storage.CheckPermission(this.storage.CountryManagerPermission) " mat-raised-button
+          color="warn" [mat-dialog-close]="null" type="button" class="ms-4"
+          (click)="this.status.DeleteObject(itemGroup.id!,'ItemGroup')">
+          Delete
+        </button>
+      </div>
+    </div>
+
+
   </div>
 
   <app-assigned-editor

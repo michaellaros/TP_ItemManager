@@ -75,16 +75,6 @@
             {{ "Menu" | translate }}
           </mat-checkbox>
 
-          <button
-          [disabled]="!this.storage.CheckPermission(this.storage.userPermission)"
-            *ngIf="!flg_insert"
-            mat-raised-button
-            color="primary"
-            type="button"
-            (click)="OpenDialogModifyItem(item.id!, 'ITEM')"
-          >
-            Set availability
-          </button>
         </div>
       </div>
     </form>
@@ -101,24 +91,31 @@
         </mat-form-field>
       </div>
     </form>
-    <button
-      mat-raised-button
-      color="primary"
-      [disabled]="
-        itemForm.invalid ||
-        (this.itemvatform.get('price')!.value! == '' && flg_addToCart.checked) ||
-         !this.storage.CheckPermission(this.storage.CountryManagerPermission)
-      "
-      (click)="SubmitForm()"
-    >
-      {{ flg_insert ? "Create" : ("Save" | translate) }}
-    </button>
+    <div class="d-flex">
+      <div class="col-6">
+        <button mat-raised-button color="primary" [disabled]="
+                itemForm.invalid ||
+                (this.itemvatform.get('price')!.value! == '' && flg_addToCart.checked) ||
+                !this.storage.CheckPermission(this.storage.CountryManagerPermission)
+              " (click)="SubmitForm()">
+          {{ flg_insert ? "Create" : ("Save" | translate) }}
+        </button>
+        <button [disabled]="!this.storage.CheckPermission(this.storage.userPermission)" *ngIf="!flg_insert" mat-raised-button
+          color="primary" type="button" class="ms-4" (click)="OpenDialogModifyItem(item.id!, 'ITEM')">
+          Set availability
+        </button>
+      </div>
+      <div class="col-6 text-end">
+        <button *ngIf="!flg_insert" [disabled]="itemForm.invalid ||
+                           !this.storage.CheckPermission(this.storage.CountryManagerPermission) " mat-raised-button
+          color="warn" [mat-dialog-close]="null" type="button" class="ms-4" (click)="this.status.DeleteObject(item.id!,'Item')">
+          Delete
+        </button>
+      </div>
+    </div>
 
-    <button *ngIf="!flg_insert" [disabled]="itemForm.invalid ||
-                   !this.storage.CheckPermission(this.storage.CountryManagerPermission) " mat-raised-button color="warn" [mat-dialog-close]="null"
-      type="button" class="ms-4" (click)="this.status.DeleteObject(item.id!,'Item')">
-      Delete
-    </button>
+
+
   </div>
   <app-translations-editor
     [id]="item.id!"

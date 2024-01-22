@@ -43,13 +43,7 @@
       <mat-icon>save</mat-icon>
     </button> -->
     <button
-      *ngIf="
-        !this.storage.CheckPermission(
-          this.type === 'Country'
-            ? this.storage.adminPermission
-            : this.storage.CountryManagerPermission
-        )
-      "
+      *ngIf="this.storage.CheckPermission(this.storage.adminPermission)"
       mat-mini-fab
       color="primary"
       class="p-1 col-1"
@@ -78,9 +72,6 @@
         />
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
           <mat-option
-            [disabled]="
-              !this.storage.CheckPermission(this.storage.adminPermission)
-            "
             *ngFor="let option of filteredOptions"
             [value]="option.name"
           >

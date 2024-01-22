@@ -46,13 +46,24 @@ export class CountryStoreEditorComponent {
   public state: boolean = true;
 
   assignForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    type: new FormControl(''),
-    order: new FormControl(999, [
-      Validators.max(999),
-      Validators.min(1),
-      Validators.required,
-    ]),
+    name: new FormControl(
+      {
+        value: '',
+        disabled: !this.storage.CheckPermission(this.storage.adminPermission),
+      },
+      [Validators.required]
+    ),
+    type: new FormControl({
+      value: '',
+      disabled: !this.storage.CheckPermission(this.storage.adminPermission),
+    }),
+    order: new FormControl(
+      {
+        value: 999,
+        disabled: !this.storage.CheckPermission(this.storage.adminPermission),
+      },
+      [Validators.max(999), Validators.min(1), Validators.required]
+    ),
   });
 
   public country: CountryStoreObject[] = [];

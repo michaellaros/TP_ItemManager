@@ -42,21 +42,31 @@ export class AssignedEditorComponent {
   // public newAssignedObject: AssignedObject;
   public state: boolean = true;
   public options: SearchedObject[] = [];
-  public typeList: string[] = [
-    'ItemOptions-Item',
-    'OptionItems-Item',
-    'ItemOptions-Item',
-    'Item',
-    'Item-ItemGroup',
+  public managerLeveltypeList: string[] = [
+    //need manager role or higher
+    'DiscountStore',
+    'StoreDiscount',
   ];
 
   assignForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    order: new FormControl(999, [
-      Validators.max(999),
-      Validators.min(1),
-      Validators.required,
-    ]),
+    name: new FormControl(
+      {
+        value: '',
+        disabled: !this.storage.CheckPermission(
+          this.storage.CountryManagerPermission
+        ),
+      },
+      [Validators.required]
+    ),
+    order: new FormControl(
+      {
+        value: 999,
+        disabled: !this.storage.CheckPermission(
+          this.storage.CountryManagerPermission
+        ),
+      },
+      [Validators.max(999), Validators.min(1), Validators.required]
+    ),
   });
   public filteredOptions?: SearchedObject[];
 
@@ -72,10 +82,10 @@ export class AssignedEditorComponent {
     console.log(this.flg_insert);
     if (!this.flg_insert) {
       this.GetOptionList();
-      if (this.storage.CheckPermission(this.storage.CountryManagerPermission)) {
-        this.assignForm.enable();
-      } else {
+      if (this.IsDisabled()) {
         this.assignForm.disable();
+      } else {
+        this.assignForm.enable();
       }
     }
   }
@@ -83,10 +93,10 @@ export class AssignedEditorComponent {
   ngOnChanges() {
     if (!this.flg_insert) {
       this.GetOptionList();
-      if (this.storage.CheckPermission(this.storage.CountryManagerPermission)) {
-        this.assignForm.enable();
-      } else {
+      if (this.IsDisabled()) {
         this.assignForm.disable();
+      } else {
+        this.assignForm.enable();
       }
     }
   }
@@ -744,20 +754,22 @@ export class AssignedEditorComponent {
     this.assignForm.reset({ name: '', order: 999 });
   }
 
-  IsEnabled(): boolean {
-    if (
-      this.storage.CheckPermission(this.storage.CountryManagerPermission) &&
-      this.IsType(this.type)
-    ) {
-      return true;
-    }
-    return false;
+  public IsDisabled(): boolean {
+    return (
+      !this.storage.CheckPermission(this.storage.CountryManagerPermission) &&
+      this.managerLeveltypeList.includes(this.type)
+      // this.IsType(this.type)
+    );
+    // return (
+    //   this.storage.CheckPermission(this.storage.CountryManagerPermission) &&
+    //   this.IsType(this.type)
+    // );
   }
 
-  IsType(type: string): boolean {
-    for (type in this.typeList) {
-      return true;
-    }
-    return false;
-  }
+  // IsType(type: string): boolean {
+  //   for (type in this.typeList) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 }

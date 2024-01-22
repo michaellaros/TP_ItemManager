@@ -39,8 +39,24 @@ export class TimespanEditorComponent {
   public state: boolean = true;
 
   timespanForm = new FormGroup({
-    availableFrom: new FormControl(0, [Validators.min(0), Validators.max(24)]),
-    availableTo: new FormControl(24, [Validators.min(0), Validators.max(24)]),
+    availableFrom: new FormControl(
+      {
+        value: 0,
+        disabled: !this.storage.CheckPermission(
+          this.storage.CountryManagerPermission
+        ),
+      },
+      [Validators.min(0), Validators.max(24)]
+    ),
+    availableTo: new FormControl(
+      {
+        value: 24,
+        disabled: !this.storage.CheckPermission(
+          this.storage.CountryManagerPermission
+        ),
+      },
+      [Validators.min(0), Validators.max(24)]
+    ),
   });
 
   constructor(

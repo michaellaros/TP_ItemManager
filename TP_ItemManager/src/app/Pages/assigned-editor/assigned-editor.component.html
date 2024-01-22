@@ -64,16 +64,12 @@
         matInput
         type="number"
         [(ngModel)]="object.order"
-        [disabled]="
-          !this.storage.CheckPermission(this.storage.CountryManagerPermission)
-        "
+        [disabled]="this.IsDisabled()"
       />
     </mat-form-field>
 
     <button
-      *ngIf="
-        this.storage.CheckPermission(this.storage.CountryManagerPermission)
-      "
+      *ngIf="!this.IsDisabled()"
       mat-mini-fab
       color="primary"
       class="p-1 col-1"
@@ -82,9 +78,7 @@
       <mat-icon>save</mat-icon>
     </button>
     <button
-      *ngIf="
-        this.storage.CheckPermission(this.storage.CountryManagerPermission)
-      "
+      *ngIf="!this.IsDisabled()"
       mat-mini-fab
       color="primary"
       class="p-1 col-1"
@@ -97,10 +91,7 @@
     [formGroup]="assignForm"
     class="formGroup"
     (ngSubmit)="InsertAssignedObject()"
-    *ngIf="
-      this.storage.CheckPermission(this.storage.CountryManagerPermission) ||
-      AssignedObjects!.length == 0
-    "
+    *ngIf="!this.IsDisabled() || AssignedObjects!.length == 0"
   >
     <div class="row px-4 pt-4">
       <mat-form-field appearance="outline" class="col-8">
@@ -110,9 +101,6 @@
           type="text"
           formControlName="name"
           [matAutocomplete]="auto"
-          [disabled]="
-            !this.storage.CheckPermission(this.storage.CountryManagerPermission)
-          "
         />
         <!-- [disabled]="
             !this.storage.CheckPermission(this.storage.CountryManagerPermission)
@@ -128,14 +116,7 @@
       </mat-form-field>
       <mat-form-field appearance="outline" class="col-2">
         <mat-label>{{ "Order" | translate }}</mat-label>
-        <input
-          matInput
-          formControlName="order"
-          type="number"
-          [disabled]="
-            !this.storage.CheckPermission(this.storage.CountryManagerPermission)
-          "
-        />
+        <input matInput formControlName="order" type="number" />
       </mat-form-field>
 
       <button
@@ -143,9 +124,7 @@
         mat-mini-fab
         color="primary"
         class="m-1 col-2"
-        [disabled]="
-          !this.storage.CheckPermission(this.storage.CountryManagerPermission)
-        "
+        [disabled]="this.IsDisabled()"
       >
         <mat-icon>add</mat-icon>
       </button>

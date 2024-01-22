@@ -135,6 +135,28 @@ export class KioskFilterComponent {
     );
   }
 
+  UpdateStore(id: string) {
+    this.spinner.show();
+
+    this.http.StoresUpdate(id).subscribe(
+      (data) => {
+        let errorList: StoreModel[] = [];
+        errorList = data;
+        if (errorList != undefined && errorList.length > 0) {
+          // alert('error for store {{}}');
+          this.spinner.hide();
+
+          this.OpenDialogReturnError(errorList);
+        } else {
+          this.spinner.hide();
+        }
+      },
+      (err) => {
+        this.spinner.hide();
+      }
+    );
+  }
+
   OpenDialogReturnError(errors: ResponseStoreUpdate[]) {
     const dialogRef = this.dialog.open(ModalErrorComponent, {
       data: errors,

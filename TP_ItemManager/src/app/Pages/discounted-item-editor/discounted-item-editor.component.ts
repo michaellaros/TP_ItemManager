@@ -84,7 +84,6 @@ export class DiscountedItemEditorComponent {
   }
 
   ngOnInit() {
-    console.log(this.flg_insert);
     if (!this.flg_insert) {
       this.GetOptionList();
       if (this.storage.CheckPermission(this.storage.CountryManagerPermission)) {

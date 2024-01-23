@@ -46,6 +46,8 @@ export class AssignedEditorComponent {
     //need manager role or higher
     'DiscountStore',
     'StoreDiscount',
+    'Item-ItemGroup',
+    'ItemGroup-Item',
   ];
 
   assignForm = new FormGroup({
@@ -79,7 +81,6 @@ export class AssignedEditorComponent {
     // this.newAssignedObject = new AssignedObject();
   }
   ngOnInit() {
-    console.log(this.flg_insert);
     if (!this.flg_insert) {
       this.GetOptionList();
       if (this.IsDisabled()) {

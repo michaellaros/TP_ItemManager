@@ -51,7 +51,6 @@ export class KioskFilterComponent {
   GetCountries() {
     this.http.GetCountries().subscribe((data) => {
       let countries = data;
-      console.log(countries);
       countries.forEach((country) =>
         country.stores?.forEach(
           (store: Store) =>

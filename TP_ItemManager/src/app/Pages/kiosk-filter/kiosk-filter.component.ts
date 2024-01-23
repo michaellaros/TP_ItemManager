@@ -19,7 +19,7 @@ import { ResponseStoreUpdate } from 'src/app/Models/ResponseStoreUpdate';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { TreeObject } from 'src/app/Models/TreeObject';
-import { count } from 'rxjs';
+import { Observable, count } from 'rxjs';
 
 @Component({
   selector: 'app-kiosk-filter',
@@ -215,9 +215,7 @@ export class KioskFilterComponent {
         width: '60vw',
         data: data,
       });
-      dialogRef.afterClosed().subscribe((data: boolean) => {
-        if (data) this.GetCountries();
-      });
+      this.RefreshOnModified(dialogRef.afterClosed());
     });
   }
 
@@ -244,9 +242,7 @@ export class KioskFilterComponent {
         width: '60vw',
         data: data,
       });
-      dialogRef.afterClosed().subscribe((data: boolean) => {
-        if (data) this.GetCountries();
-      });
+      this.RefreshOnModified(dialogRef.afterClosed());
     });
   }
   OpenDialogAddCountry() {
@@ -269,9 +265,7 @@ export class KioskFilterComponent {
       //   this.code = data;
       //   this.Search(codeType);
       // }
-      dialogRef.afterClosed().subscribe((data: boolean) => {
-        if (data) this.GetCountries();
-      });
+      this.RefreshOnModified(dialogRef.afterClosed());
     });
   }
 
@@ -291,5 +285,14 @@ export class KioskFilterComponent {
 
   GetAlwaysOpen(node: TreeObject) {
     return this.dataSource.data.length == 1 && node.type == 'country';
+  }
+
+  RefreshOnModified(onCloseObsevable: Observable<boolean>) {
+    onCloseObsevable
+      // .pipe(map((result?: boolean) => (result == undefined ? true : result)))
+      .subscribe((data?: boolean) => {
+        console.log(data);
+        if (data || data == undefined) this.GetCountries();
+      });
   }
 }

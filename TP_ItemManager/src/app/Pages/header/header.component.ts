@@ -103,8 +103,9 @@ export class HeaderComponent {
     const dialogRef = this.dialog.open(ModalCountryComponent, {
       width: '60vw',
     });
-    dialogRef.afterClosed().subscribe((data: boolean) => {
-      if (data) {
+    dialogRef.afterClosed().subscribe((data?: boolean) => {
+      console.log(data);
+      if (data || data == undefined) {
         if (this.currentRoute == '/Kiosk') window.location.reload();
         else this.router.navigate(['/Kiosk']);
         // this.GetCountries();

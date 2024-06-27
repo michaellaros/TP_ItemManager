@@ -1,4 +1,11 @@
-<div class="container-fluid" *ngIf="currentRoute != '/login-page' && currentRoute != '/' && currentRoute != '/modify-password'" >
+<div
+  class="container-fluid"
+  *ngIf="
+    currentRoute != '/login-page' &&
+    currentRoute != '/' &&
+    currentRoute != '/modify-password'
+  "
+>
   <div class="row">
     <mat-toolbar color="primary">
       <img src=".\assets\mylogo.png" class="logo" alt="" />
@@ -8,9 +15,7 @@
       </div>
       <button
         mat-raised-button
-        [color]="
-          currentRoute == '/Kiosk'  ? '' : 'primary'
-        "
+        [color]="currentRoute == '/Kiosk' ? '' : 'primary'"
         class="m-2"
         routerLink="/Kiosk"
       >
@@ -28,7 +33,7 @@
         mat-raised-button
         [color]="currentRoute == '/Item' ? '' : 'primary'"
         class="m-2"
-        routerLink="/Item"
+        [routerLink]="['/Item']"
       >
         {{ "Items" | translate }}
       </button>
@@ -49,15 +54,10 @@
         {{ "Users" | translate }}
       </button>
 
-
-      <div class=" d-flex language position-absolute   end-0" >
-        <button
-        mat-icon-button
-        class="m-1"
-        (click)="Logout()"
-      >
-        <mat-icon>logout</mat-icon>
-      </button>
+      <div class="d-flex language position-absolute end-0">
+        <button mat-icon-button class="m-1" (click)="Logout()">
+          <mat-icon>logout</mat-icon>
+        </button>
 
         <!-- <mat-form-field >
           <mat-select [(value)]="status.languages[1].value">

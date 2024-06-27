@@ -33,7 +33,6 @@ import { StatusService } from 'src/app/Services/status.service';
   styleUrls: ['./edit-list.component.scss'],
 })
 export class EditListComponent implements OnChanges {
-
   @Input() public parentData?: SearchedObject[];
   @Input() public columnName: string = 'Name';
   @Output() public refresh = new EventEmitter();
@@ -43,7 +42,11 @@ export class EditListComponent implements OnChanges {
   @ViewChild(MatSort) sort!: MatSort;
 
   dataSource: MatTableDataSource<SearchedObject>;
-  constructor(private status:StatusService,public http: HttpService, public dialog: MatDialog) {
+  constructor(
+    private status: StatusService,
+    public http: HttpService,
+    public dialog: MatDialog
+  ) {
     this.dataSource = new MatTableDataSource<SearchedObject>(this.parentData);
   }
 
@@ -82,7 +85,7 @@ export class EditListComponent implements OnChanges {
           this.OpenDialogModifyKiosk(data);
         });
         break;
-        case 'User':
+      case 'User':
         this.http.GetUser(id).subscribe((data) => {
           this.status.user = id;
           this.OpenDialogModifyUser(data);
@@ -94,7 +97,8 @@ export class EditListComponent implements OnChanges {
   OpenDialogModifyItem(item: Item) {
     const dialogRef = this.dialog.open(ModalItemComponent, {
       data: item,
-      width: '60vw',
+      minWidth: '100%',
+      height: '100%',
     });
     dialogRef.afterClosed().subscribe(() => {
       this.refresh.emit(null);
@@ -103,7 +107,8 @@ export class EditListComponent implements OnChanges {
   OpenDialogModifyCategory(category: Category) {
     const dialogRef = this.dialog.open(ModalCategoryComponent, {
       data: category,
-      width: '60vw',
+      minWidth: '100%',
+      height: '100%',
     });
     dialogRef.afterClosed().subscribe(() => {
       this.refresh.emit(null);

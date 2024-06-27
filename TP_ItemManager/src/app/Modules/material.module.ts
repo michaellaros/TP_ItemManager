@@ -20,7 +20,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatChipsModule } from '@angular/material/chips';
-import {MatRippleModule} from '@angular/material/core';
+import { MatRippleModule } from '@angular/material/core';
+import { MatTabsModule } from '@angular/material/tabs';
 const MaterialComponents = [
   MatButtonModule,
   MatSlideToggleModule,
@@ -41,7 +42,8 @@ const MaterialComponents = [
   MatSortModule,
   MatPaginatorModule,
   MatChipsModule,
-  MatRippleModule
+  MatRippleModule,
+  MatTabsModule,
 ];
 
 @NgModule({

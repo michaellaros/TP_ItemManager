@@ -1,4 +1,4 @@
-<mat-toolbar class="w-100 position-relative mt-4" color="primary">
+<!-- <mat-toolbar class="w-100 position-relative" color="primary">
   <div>
     <h1 class="px-0 my-2 text-white">{{ "Translations" | translate }}</h1>
   </div>
@@ -11,13 +11,9 @@
   >
     <mat-icon>{{ this.state ? "expand_more" : "expand_less" }}</mat-icon>
   </button>
-</mat-toolbar>
+</mat-toolbar> -->
 
-<div
-  class="container-fluid row"
-  [@bodyExpansion]="this.state ? 'collapsed' : 'expanded'"
-  class="expandable-content"
->
+<div class="container-fluid row" class="expandable-content">
   <div class="row px-4 pt-4" *ngFor="let translation of translations">
     <mat-form-field class="col-2">
       <mat-label>{{ "Language" | translate }}</mat-label>

@@ -15,7 +15,7 @@ export const getBaseUrl = () => {
 
 export const getImagesUrl = () => {
   if (isDevMode()) {
-    return 'http://localhost/KioskImages/';
+    return 'http://172.16.0.66/KioskImages/';
   } else {
     const url = document.getElementsByTagName('base')[0].href;
     const arr = url.split('/');

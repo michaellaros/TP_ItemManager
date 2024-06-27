@@ -1,12 +1,12 @@
-<mat-toolbar
+<!-- <mat-toolbar
   class="w-100 position-relative"
   [class.mt-4]="type == 'KioskCategory'"
   color="primary"
 >
   <div>
     <h1 class="px-0 my-2 text-white">
-      {{(
-        type == "CategoryItems-Category"
+      {{
+        (type == "CategoryItems-Category"
           ? "Items in this category"
           : type == "CategoryItems-Item"
           ? "Category this item is in"
@@ -20,7 +20,8 @@
           ? "Items this option is used in"
           : type == "KioskCategory"
           ? "Categories enabled"
-          : "") | translate
+          : ""
+        ) | translate
       }}
     </h1>
   </div>
@@ -33,15 +34,11 @@
   >
     <mat-icon>{{ this.state ? "expand_more" : "expand_less" }}</mat-icon>
   </button>
-</mat-toolbar>
+</mat-toolbar> -->
 
-<div
-  class="container-fluid row"
-  [@bodyExpansion]="this.state ? 'collapsed' : 'expanded'"
-  class="expandable-content"
->
-  <div class="row px-4 pt-4" *ngFor="let object of AssignedObjects">
-    <mat-form-field appearance="outline" class="col-8">
+<div class="container-fluid row" class="expandable-content">
+  <div class="row px-4 pt-4 w-100" *ngFor="let object of AssignedObjects">
+    <mat-form-field appearance="outline" class="col-6">
       <mat-label>{{ "Name" | translate }}</mat-label>
       <input disabled matInput type="text" [(ngModel)]="object.name" />
     </mat-form-field>
@@ -72,8 +69,8 @@
     class="formGroup"
     (ngSubmit)="InsertAssignedObject()"
   >
-    <div class="row px-4 pt-4">
-      <mat-form-field appearance="outline" class="col-8">
+    <div class="row px-4 pt-4 w-100">
+      <mat-form-field appearance="outline" class="col-6">
         <mat-label>{{ "Name" | translate }}</mat-label>
         <input
           matInput

@@ -36,8 +36,13 @@
   </button>
 </mat-toolbar> -->
 
-<div class="container-fluid row" class="expandable-content">
-  <div class="row px-4 pt-4 w-100" *ngFor="let object of AssignedObjects">
+<div
+  class="container-fluid row"
+  class="expandable-content"
+  style="height: 87vh"
+  class="overflow-auto"
+>
+  <div class="row px-4 pt-2 w-100" *ngFor="let object of AssignedObjects">
     <mat-form-field appearance="outline" class="col-6">
       <mat-label>{{ "Name" | translate }}</mat-label>
       <input disabled matInput type="text" [(ngModel)]="object.name" />

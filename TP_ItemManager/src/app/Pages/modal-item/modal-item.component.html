@@ -5,6 +5,9 @@
 >
   <div>
     <h1 class="px-0 my-2 text-white">{{ "Item info" | translate }}</h1>
+    <a href="http://172.16.0.66/kioskimages/app-release.apk" download>
+      Download Android App
+    </a>
   </div>
 
   <button
@@ -17,118 +20,136 @@
 </mat-toolbar>
 <mat-dialog-content class="p-0 overflow-x-hidden" style="max-height: 93vh">
   <div class="container-fluid my-4">
-    <form [formGroup]="itemForm" class="formGroup">
-      <div class="row">
-        <div class="d-flex justify-content-between flex-column col-2">
-          <img
-            [src]="imageUrl + item.imagePath"
-            style="aspect-ratio: 3/2"
-            class="object-fit-contain w-100"
-          />
-          <button
-            mat-raised-button
-            color="primary"
-            class="my-4"
-            type="button"
-            (click)="ChangeImage()"
-          >
-            {{ "Change image" | translate }}
-          </button>
-        </div>
-        <div class="row col-3 d-flex flex-column">
-          <mat-form-field>
-            <mat-label>{{ "Name" | translate }}</mat-label>
-            <input formControlName="name" matInput />
-          </mat-form-field>
+    <div class="row">
+      <div class="d-flex justify-content-between flex-column col-4">
+        <form [formGroup]="itemForm" class="formGroup">
+          <div class="row">
+            <div class="d-flex justify-content-between flex-column col-12">
+              <img
+                [src]="imageUrl + item.imagePath"
+                style="aspect-ratio: 3/2"
+                class="object-fit-contain w-100"
+              />
+              <!-- <button
+                mat-raised-button
+                color="primary"
+                class="my-4"
+                type="button"
+                (click)="ChangeImage()"
+              >
+                {{ "Change image" | translate }}
+              </button> -->
+            </div>
+            <div class="row col-12 d-flex flex-column">
+              <mat-form-field>
+                <mat-label>{{ "Name" | translate }}</mat-label>
+                <input formControlName="name" matInput />
+              </mat-form-field>
 
-          <mat-form-field>
-            <mat-label>{{ "Description" | translate }}</mat-label>
-            <textarea formControlName="description" matInput></textarea>
-          </mat-form-field>
+              <mat-form-field>
+                <mat-label>{{ "Description" | translate }}</mat-label>
+                <textarea formControlName="description" matInput></textarea>
+              </mat-form-field>
 
-          <mat-form-field>
-            <mat-label>{{ "Barcode" | translate }}</mat-label>
-            <input formControlName="barcode" matInput />
-          </mat-form-field>
-        </div>
-        <form [formGroup]="itemvatform" class="row col-3 d-flex flex-column">
-          <mat-form-field>
-            <mat-label>{{ "Price" | translate }}</mat-label>
-            <input formControlName="price" matInput />
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>{{ "Vat" | translate }}</mat-label>
-            <input formControlName="vat" matInput />
-          </mat-form-field>
+              <div class="col-12 d-flex">
+                <mat-form-field class="col-4">
+                  <mat-label>{{ "Barcode" | translate }}</mat-label>
+                  <input formControlName="barcode" matInput />
+                </mat-form-field>
+                <form [formGroup]="itemvatform" class="col-8 d-flex">
+                  <mat-form-field class="col-6">
+                    <mat-label>{{ "Price" | translate }}</mat-label>
+                    <input formControlName="price" matInput />
+                  </mat-form-field>
+                  <mat-form-field class="col-6">
+                    <mat-label>{{ "Vat" | translate }}</mat-label>
+                    <input formControlName="vat" matInput />
+                  </mat-form-field>
+                </form>
+              </div>
+            </div>
+            <div class="row col-12 d-flex flex-column">
+              <mat-checkbox
+                formControlName="flg_addToCart"
+                matInput
+                color="primary"
+              >
+                {{ "Add item to transaction" | translate }}
+              </mat-checkbox>
+              <mat-checkbox
+                formControlName="flg_verifyAdult"
+                matInput
+                color="primary"
+              >
+                {{ "Article 18+" | translate }}
+              </mat-checkbox>
+              <mat-checkbox
+                formControlName="flg_isMenu"
+                matInput
+                color="primary"
+              >
+                {{ "Menu" | translate }}
+              </mat-checkbox>
+              <mat-checkbox
+                formControlName="available"
+                matInput
+                color="primary"
+              >
+                {{ "Available" | translate }}
+              </mat-checkbox>
+            </div>
+            <button
+              mat-raised-button
+              color="primary"
+              class="col-12"
+              [disabled]="
+                itemForm.invalid || this.itemvatform.get('price')!.value! == ''
+              "
+              (click)="SubmitForm()"
+            >
+              {{ flg_insert ? "Create" : ("Save" | translate) }}
+            </button>
+          </div>
         </form>
-        <div class="row col-3 d-flex flex-column">
-          <mat-checkbox
-            formControlName="flg_addToCart"
-            matInput
-            color="primary"
-          >
-            {{ "Add item to transaction" | translate }}
-          </mat-checkbox>
-          <mat-checkbox
-            formControlName="flg_verifyAdult"
-            matInput
-            color="primary"
-          >
-            {{ "Article 18+" | translate }}
-          </mat-checkbox>
-          <mat-checkbox formControlName="flg_isMenu" matInput color="primary">
-            {{ "Menu" | translate }}
-          </mat-checkbox>
-          <mat-checkbox formControlName="available" matInput color="primary">
-            {{ "Available" | translate }}
-          </mat-checkbox>
-        </div>
       </div>
-    </form>
 
-    <button
-      mat-raised-button
-      color="primary"
-      [disabled]="
-        itemForm.invalid || this.itemvatform.get('price')!.value! == ''
-      "
-      (click)="SubmitForm()"
-    >
-      {{ flg_insert ? "Create" : ("Save" | translate) }}
-    </button>
+      <!-- <div class="d-flex justify-content-between flex-column col-1"></div> -->
+      <div class="d-flex justify-content-between flex-column col-8">
+        <mat-tab-group>
+          <mat-tab [label]="'Translations' | translate">
+            <app-translations-editor
+              [id]="item.id!"
+              [translations]="item.translations!"
+              [flg_isEditable]="!this.flg_insert"
+              [type]="'Item'"
+            />
+          </mat-tab>
+          <mat-tab [label]="'Options' | translate">
+            <app-assigned-editor
+              class="overflow-hidden"
+              [type]="'ItemOptions-Item'"
+              [id]="item.id!"
+              [AssignedObjects]="item.options"
+              [flg_insert]="this.flg_insert"
+            />
+          </mat-tab>
+          <mat-tab [label]="'Categories this item is in' | translate"
+            ><app-assigned-editor
+              [type]="'CategoryItems-Item'"
+              [id]="item.id!"
+              [AssignedObjects]="item.categoriesItsIn"
+              [flg_insert]="this.flg_insert"
+          /></mat-tab>
+
+          <mat-tab [label]="'Options this item is in' | translate"
+            ><app-assigned-editor
+              [type]="'OptionItems-Item'"
+              [id]="item.id!"
+              [AssignedObjects]="item.optionsItsIn"
+              [flg_insert]="this.flg_insert"
+          /></mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
   </div>
-  <mat-tab-group>
-    <mat-tab [label]="'Translations' | translate">
-      <app-translations-editor
-        [id]="item.id!"
-        [translations]="item.translations!"
-        [flg_isEditable]="!this.flg_insert"
-        [type]="'Item'"
-      />
-    </mat-tab>
-    <mat-tab [label]="'Options' | translate">
-      <app-assigned-editor
-        class="overflow-hidden"
-        [type]="'ItemOptions-Item'"
-        [id]="item.id!"
-        [AssignedObjects]="item.options"
-        [flg_insert]="this.flg_insert"
-      />
-    </mat-tab>
-    <mat-tab [label]="'Categories this item is in' | translate"
-      ><app-assigned-editor
-        [type]="'CategoryItems-Item'"
-        [id]="item.id!"
-        [AssignedObjects]="item.categoriesItsIn"
-        [flg_insert]="this.flg_insert"
-    /></mat-tab>
-
-    <mat-tab [label]="'Options this item is in' | translate"
-      ><app-assigned-editor
-        [type]="'OptionItems-Item'"
-        [id]="item.id!"
-        [AssignedObjects]="item.optionsItsIn"
-        [flg_insert]="this.flg_insert"
-    /></mat-tab>
-  </mat-tab-group>
 </mat-dialog-content>

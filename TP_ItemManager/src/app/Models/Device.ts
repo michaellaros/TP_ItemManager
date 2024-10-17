@@ -1,6 +1,3 @@
-import { AssignedObject } from './AssignedObject';
-import { Translation } from './Translation';
-
 export class Device {
   constructor(
     public id?: string,
@@ -8,6 +5,6 @@ export class Device {
     public macAddress?: string,
     public szWorkstationID?: string,
     public store_id?: number,
-    public Active_menu_id?: number
+    public active_menu_id?: number
   ) {}
 }

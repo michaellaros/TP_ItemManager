@@ -27,6 +27,8 @@ import { ModalKioskComponent } from '../modal-kiosk/modal-kiosk.component';
 import { UserModelRequest } from 'src/app/Models/UserModelRequest';
 import { ModalUserComponent } from '../modal-user/modal-user.component';
 import { StatusService } from 'src/app/Services/status.service';
+import { Device } from 'src/app/Models/Device';
+import { ModalDeviceComponent } from '../modal-device/modal-device.component';
 @Component({
   selector: 'app-edit-list',
   templateUrl: './edit-list.component.html',
@@ -85,6 +87,12 @@ export class EditListComponent implements OnChanges {
           this.OpenDialogModifyKiosk(data);
         });
         break;
+      case 'Device':
+        this.http.GetDevice(id).subscribe((data) => {
+          console.log(data);
+          this.OpenDialogModifyDevice(data);
+        });
+        break;
       case 'User':
         this.http.GetUser(id).subscribe((data) => {
           this.status.user = id;
@@ -127,6 +135,16 @@ export class EditListComponent implements OnChanges {
     const dialogRef = this.dialog.open(ModalKioskComponent, {
       data: kiosk,
       width: '60vw',
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.refresh.emit(null);
+    });
+  }
+  OpenDialogModifyDevice(device: Device) {
+    const dialogRef = this.dialog.open(ModalDeviceComponent, {
+      data: device,
+      minWidth: '100%',
+      height: '100%',
     });
     dialogRef.afterClosed().subscribe(() => {
       this.refresh.emit(null);

@@ -314,6 +314,15 @@ export class HttpService {
     console.log(kiosk);
     return this.http.post<Kiosk>(this.urlAPI + 'UpdateKiosk', kiosk);
   }
+  InsertDevice(device: Device) {
+    console.log(device);
+    return this.http.post<Device>(this.urlAPI + 'InsertDevice', device);
+  }
+
+  UpdateDevice(device: Device) {
+    console.log(device);
+    return this.http.post<Device>(this.urlAPI + 'UpdateDevice', device);
+  }
   GetLanguages() {
     return this.http.get<Language[]>(this.assetsUrl + 'i18n/languages.json');
   }

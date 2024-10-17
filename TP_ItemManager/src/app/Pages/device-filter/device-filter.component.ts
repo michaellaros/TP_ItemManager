@@ -5,6 +5,7 @@ import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 import { ModalKioskComponent } from '../modal-kiosk/modal-kiosk.component';
+import { ModalDeviceComponent } from '../modal-device/modal-device.component';
 
 @Component({
   selector: 'app-device-filter',
@@ -25,40 +26,47 @@ export class DeviceFilterComponent {
   ) {}
 
   ngOnInit() {
-    this.GetKiosks();
+    this.GetDevices();
   }
   ResetForm() {
     this.filterForm.reset();
-    this.GetKiosks();
+    this.GetDevices();
   }
 
-  GetKiosks() {
-    let hostname =
-      this.filterForm.get('hostname')?.value != undefined
-        ? this.filterForm.get('hostname')?.value!
+  GetDevices() {
+    let Id =
+      this.filterForm.get('Id')?.value != undefined
+        ? this.filterForm.get('Id')?.value!
         : '';
-    let ip =
-      this.filterForm.get('ip')?.value != undefined
-        ? this.filterForm.get('ip')?.value!
+    let NameWorkstation =
+      this.filterForm.get('NameWorkstation')?.value != undefined
+        ? this.filterForm.get('NameWorkstation')?.value!
+        : '';
+    let Store =
+      this.filterForm.get('Store')?.value != undefined
+        ? this.filterForm.get('Store')?.value!
         : '';
 
     let list: SearchedObject[] = [];
 
-    this.http.FilterKiosk({ Hostname: hostname, IP: ip }).subscribe((data) => {
-      if (data == null) {
-        this.list = [];
-      } else {
-        Object.keys(data).forEach((key) => {
-          list.push(new SearchedObject(key, data[key]));
-        });
-        this.list = list;
-      }
-    });
+    this.http
+      .FilterDevice({ Id: Id, NameWorkstation: NameWorkstation, Store: Store })
+      .subscribe((data) => {
+        if (data == null) {
+          this.list = [];
+        } else {
+          Object.keys(data).forEach((key) => {
+            list.push(new SearchedObject(key, data[key]));
+          });
+          this.list = list;
+        }
+      });
   }
-  OpenDialogAddKiosk() {
-    const dialogRef = this.dialog.open(ModalKioskComponent, {
-      width: '60vw',
+  OpenDialogAddDevice() {
+    const dialogRef = this.dialog.open(ModalDeviceComponent, {
+      minWidth: '100%',
+      height: '100%',
     });
-    dialogRef.afterClosed().subscribe(() => this.GetKiosks());
+    dialogRef.afterClosed().subscribe(() => this.GetDevices());
   }
 }

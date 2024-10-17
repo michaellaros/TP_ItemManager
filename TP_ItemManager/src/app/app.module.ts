@@ -45,6 +45,7 @@ import {
 } from './Services/auth-services/auth.interceptor';
 import { errorInterceptorProviders } from './Services/auth-services/error.interceptor';
 import { DeviceFilterComponent } from './Pages/device-filter/device-filter.component';
+import { ModalDeviceComponent } from './Pages/modal-device/modal-device.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -73,6 +74,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModifypasswordComponent,
     DeviceFilterComponent,
     MenuFilterComponent,
+    ModalDeviceComponent,
   ],
   imports: [
     BrowserModule,

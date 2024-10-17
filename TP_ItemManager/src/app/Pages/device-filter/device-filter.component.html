@@ -1,0 +1,56 @@
+<div class="container mt-3">
+  <div class="row">
+    <h1>{{ "Devices" | translate }}</h1>
+  </div>
+  <form [formGroup]="filterForm" class="formGroup">
+    <div class="row container-fluid">
+      <mat-form-field class="col-3 m-1">
+        <mat-label>{{ "Hostname" | translate }}</mat-label>
+        <input formControlName="hostname" matInput />
+      </mat-form-field>
+      <mat-form-field class="col-3 m-1">
+        <mat-label>{{ "IP" | translate }}</mat-label>
+        <input formControlName="ip" matInput />
+      </mat-form-field>
+      <mat-form-field class="col-3 m-1">
+        <mat-label>{{ "Hostname" | translate }}</mat-label>
+        <input formControlName="hostname" matInput />
+      </mat-form-field>
+    </div>
+    <div class="container-fluid d-flex justify-content-between">
+      <div>
+        <button
+          mat-raised-button
+          color="primary"
+          class="mx-1 mb-3"
+          (click)="GetKiosks()"
+        >
+          {{ "Search" | translate }}
+        </button>
+        <button
+          mat-raised-button
+          color="primary"
+          class="mx-1 mb-3"
+          (click)="ResetForm()"
+        >
+          {{ "Clear" | translate }}
+        </button>
+      </div>
+
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="OpenDialogAddKiosk()"
+        class="mx-1"
+      >
+        {{ "Add kiosk" | translate }}
+      </button>
+    </div>
+  </form>
+</div>
+<app-edit-list
+  *ngIf="this.list != null"
+  [parentData]="this.list"
+  [columnName]="'Kiosk'"
+  (refresh)="this.GetKiosks()"
+></app-edit-list>

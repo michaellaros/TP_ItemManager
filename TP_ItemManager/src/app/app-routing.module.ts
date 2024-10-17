@@ -9,6 +9,8 @@ import { UserFilterComponent } from './Pages/user-filter/user-filter.component';
 import { ModifypasswordComponent } from './Pages/modifypassword/modifypassword.component';
 import { AuthGuard } from './Services/auth-services/auth.guard';
 import { ModalItemComponent } from './Pages/modal-item/modal-item.component';
+import { DeviceFilterComponent } from './Pages/device-filter/device-filter.component';
+import { MenuFilterComponent } from './Pages/menu-filter/menu-filter.component';
 const routes: Routes = [
   {
     path: 'Category',
@@ -34,9 +36,21 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
   },
+  // {
+  //   path: 'Kiosk',
+  //   component: KioskFilterComponent,
+  //   canLoad: [AuthGuard],
+  //   canActivate: [AuthGuard],
+  // },
   {
-    path: 'Kiosk',
-    component: KioskFilterComponent,
+    path: 'Device',
+    component: DeviceFilterComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'Menu',
+    component: MenuFilterComponent,
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
   },

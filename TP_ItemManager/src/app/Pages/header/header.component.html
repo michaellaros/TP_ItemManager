@@ -15,11 +15,19 @@
       </div>
       <button
         mat-raised-button
-        [color]="currentRoute == '/Kiosk' ? '' : 'primary'"
+        [color]="currentRoute == '/Device' ? '' : 'primary'"
         class="m-2"
-        routerLink="/Kiosk"
+        routerLink="/Device"
       >
-        {{ "Kiosks" | translate }}
+        {{ "Devices" | translate }}
+      </button>
+      <button
+        mat-raised-button
+        [color]="currentRoute == '/Menu' ? '' : 'primary'"
+        class="m-2"
+        routerLink="/Menu"
+      >
+        {{ "Menu" | translate }}
       </button>
       <button
         mat-raised-button
@@ -37,14 +45,14 @@
       >
         {{ "Items" | translate }}
       </button>
-      <button
+      <!-- <button
         mat-raised-button
         [color]="currentRoute == '/Option' ? '' : 'primary'"
         class="m-2"
         routerLink="/Option"
       >
         {{ "Options" | translate }}
-      </button>
+      </button> -->
       <button
         mat-raised-button
         [color]="currentRoute == '/User' ? '' : 'primary'"

@@ -1,0 +1,42 @@
+<mat-toolbar class="w-100 position-relative mb-4 header" color="primary">
+  <div>
+    <h1 class="px-0 my-2 text-white">{{ "Device info" | translate }}</h1>
+  </div>
+
+  <button
+    mat-icon-button
+    class="m-2 position-absolute end-0"
+    [mat-dialog-close]="null"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-dialog-content class="p-0 overflow-hidden" style="max-height: 80vh">
+  <div class="container-fluid">
+    <form [formGroup]="storeForm" class="formGroup" (ngSubmit)="SubmitForm()">
+      <div class="row">
+        <mat-form-field class="col-12">
+          <mat-label>{{ "Store name" | translate }}</mat-label>
+          <input formControlName="name" matInput />
+        </mat-form-field>
+        <mat-form-field class="col-6">
+          <mat-label>{{ "Retail store ID" | translate }}</mat-label>
+          <input formControlName="lRetailStoreID" matInput />
+          <mat-error
+            *ngIf="storeForm.controls['lRetailStoreID'].hasError('pattern')"
+          >
+            {{ "Retail store ID must be a number" | translate }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-6">
+          <mat-label>{{ "IP address" | translate }}</mat-label>
+          <input formControlName="ip_address" matInput />
+        </mat-form-field>
+      </div>
+
+      <button mat-raised-button color="primary" type="submit">
+        {{ flg_insert ? ("Create" | translate) : ("Save" | translate) }}
+      </button>
+    </form>
+  </div>
+</mat-dialog-content>

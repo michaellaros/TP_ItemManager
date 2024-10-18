@@ -9,50 +9,40 @@ import { Token } from 'src/app/Models/Token';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent {
-  public token!:Token;
-  public user:UserModelCreate = new UserModelCreate('pass','pass')
+  public token!: Token;
+  public user: UserModelCreate = new UserModelCreate('pass', 'pass');
   loginForm = new FormGroup({
-    Name: new FormControl('',[Validators.required]),
-    Password: new FormControl('',[Validators.required])
-
+    Name: new FormControl('', [Validators.required]),
+    Password: new FormControl('', [Validators.required]),
   });
-  constructor(private http:HttpService,
-    public status:StatusService,
+  constructor(
+    private http: HttpService,
+    public status: StatusService,
     private router: Router,
-    private storage:StorageManagerService){
-
-   }
-   public Submit() {
-    this.user.name = this.loginForm.get('Name')!.value!
-    this.user.password = this.loginForm.get('Password')!.value!
+    private storage: StorageManagerService
+  ) {}
+  public Submit() {
+    this.user.name = this.loginForm.get('Name')!.value!;
+    this.user.password = this.loginForm.get('Password')!.value!;
     this.DoLogin();
-
-
   }
-  DoLogin()
-  {
-
-    this.http.Login(this.user.name!,this.user.password!).subscribe((data)=>{
+  DoLogin() {
+    this.http.Login(this.user.name!, this.user.password!).subscribe((data) => {
       // this.status.isLogged = 'true'
       // if(this.status.isLogged == 'true'){
-        this.token=data;
-        console.log(this.token);
+      this.token = data;
+      console.log(this.token);
 
-        this.storage.saveToken(this.token.token!);
-        console.log(this.storage.getToken())
-        this.router.navigate(['/Kiosk']);
-    console.log(this.user);
-
-
-
-
-
-    })}
-    ngOnInit(): void {
-      this.status.error= false
-
-    }
+      this.storage.saveToken(this.token.token!);
+      console.log(this.storage.getToken());
+      this.router.navigate(['/Device']);
+      console.log(this.user);
+    });
+  }
+  ngOnInit(): void {
+    this.status.error = false;
+  }
 }

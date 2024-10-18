@@ -23,6 +23,14 @@
       </button>
       <button
         mat-raised-button
+        [color]="currentRoute == '/Store' ? '' : 'primary'"
+        class="m-2"
+        routerLink="/Store"
+      >
+        {{ "Store" | translate }}
+      </button>
+      <button
+        mat-raised-button
         [color]="currentRoute == '/Menu' ? '' : 'primary'"
         class="m-2"
         routerLink="/Menu"

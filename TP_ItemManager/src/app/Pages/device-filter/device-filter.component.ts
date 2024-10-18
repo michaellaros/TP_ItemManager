@@ -15,8 +15,9 @@ import { ModalDeviceComponent } from '../modal-device/modal-device.component';
 export class DeviceFilterComponent {
   public list!: SearchedObject[];
   filterForm = new FormGroup({
-    hostname: new FormControl(''),
-    ip: new FormControl(''),
+    Id: new FormControl(''),
+    NameWorkstation: new FormControl(''),
+    Store_id: new FormControl(null),
   });
 
   constructor(
@@ -43,14 +44,18 @@ export class DeviceFilterComponent {
         ? this.filterForm.get('NameWorkstation')?.value!
         : '';
     let Store =
-      this.filterForm.get('Store')?.value != undefined
-        ? this.filterForm.get('Store')?.value!
-        : '';
+      this.filterForm.get('Store_id')?.value != undefined
+        ? this.filterForm.get('Store_id')?.value!
+        : null;
 
     let list: SearchedObject[] = [];
 
     this.http
-      .FilterDevice({ Id: Id, NameWorkstation: NameWorkstation, Store: Store })
+      .FilterDevice({
+        Id: Id,
+        NameWorkstation: NameWorkstation,
+        Store_id: Store,
+      })
       .subscribe((data) => {
         if (data == null) {
           this.list = [];

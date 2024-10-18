@@ -6,6 +6,6 @@ export class Store {
     public id?: string,
     public name?: string,
     public lRetailStoreID?: number,
-    public Ip_address?: string
+    public ip_address?: string
   ) {}
 }

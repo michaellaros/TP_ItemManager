@@ -29,6 +29,10 @@ import { ModalUserComponent } from '../modal-user/modal-user.component';
 import { StatusService } from 'src/app/Services/status.service';
 import { Device } from 'src/app/Models/Device';
 import { ModalDeviceComponent } from '../modal-device/modal-device.component';
+import { Store } from 'src/app/Models/Store';
+import { ModalStoreComponent } from '../modal-store/modal-store.component';
+import { Menu } from 'src/app/Models/Menu';
+import { ModalMenuComponent } from '../modal-menu/modal-menu.component';
 @Component({
   selector: 'app-edit-list',
   templateUrl: './edit-list.component.html',
@@ -93,6 +97,18 @@ export class EditListComponent implements OnChanges {
           this.OpenDialogModifyDevice(data);
         });
         break;
+      case 'Store':
+        this.http.GetStore(id).subscribe((data) => {
+          console.log(data);
+          this.OpenDialogModifyStore(data);
+        });
+        break;
+      case 'Menu':
+        this.http.GetMenu(id).subscribe((data) => {
+          console.log(data);
+          this.OpenDialogModifyMenu(data);
+        });
+        break;
       case 'User':
         this.http.GetUser(id).subscribe((data) => {
           this.status.user = id;
@@ -143,6 +159,26 @@ export class EditListComponent implements OnChanges {
   OpenDialogModifyDevice(device: Device) {
     const dialogRef = this.dialog.open(ModalDeviceComponent, {
       data: device,
+      minWidth: '100%',
+      height: '100%',
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.refresh.emit(null);
+    });
+  }
+  OpenDialogModifyStore(store: Store) {
+    const dialogRef = this.dialog.open(ModalStoreComponent, {
+      data: store,
+      minWidth: '100%',
+      height: '100%',
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.refresh.emit(null);
+    });
+  }
+  OpenDialogModifyMenu(menu: Menu) {
+    const dialogRef = this.dialog.open(ModalMenuComponent, {
+      data: menu,
       minWidth: '100%',
       height: '100%',
     });

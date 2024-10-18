@@ -46,6 +46,9 @@ import {
 import { errorInterceptorProviders } from './Services/auth-services/error.interceptor';
 import { DeviceFilterComponent } from './Pages/device-filter/device-filter.component';
 import { ModalDeviceComponent } from './Pages/modal-device/modal-device.component';
+import { ModalStoreComponent } from './Pages/modal-store/modal-store.component';
+import { ModalMenuComponent } from './Pages/modal-menu/modal-menu.component';
+import { StoreFilterComponent } from './Pages/store-filter/store-filter.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -75,6 +78,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     DeviceFilterComponent,
     MenuFilterComponent,
     ModalDeviceComponent,
+    ModalStoreComponent,
+    ModalMenuComponent,
+    StoreFilterComponent,
   ],
   imports: [
     BrowserModule,

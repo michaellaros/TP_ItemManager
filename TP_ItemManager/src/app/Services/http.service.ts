@@ -25,6 +25,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginPageComponent } from '../Pages/login-page/login-page.component';
 import { Device } from '../Models/Device';
 import { Store } from '../Models/Store';
+import { Menu } from '../Models/Menu';
 @Injectable({
   providedIn: 'root',
 })
@@ -318,10 +319,25 @@ export class HttpService {
     console.log(device);
     return this.http.post<Device>(this.urlAPI + 'InsertDevice', device);
   }
-
   UpdateDevice(device: Device) {
     console.log(device);
     return this.http.post<Device>(this.urlAPI + 'UpdateDevice', device);
+  }
+  InsertStore(store: Store) {
+    console.log(store);
+    return this.http.post<Store>(this.urlAPI + 'InsertStore', store);
+  }
+  UpdateStore(store: Store) {
+    console.log(store);
+    return this.http.post<Store>(this.urlAPI + 'UpdateStore', store);
+  }
+  InsertMenu(menu: Menu) {
+    console.log(menu);
+    return this.http.post<Menu>(this.urlAPI + 'InsertMenu', menu);
+  }
+  UpdateMenu(menu: Menu) {
+    console.log(menu);
+    return this.http.post<Menu>(this.urlAPI + 'UpdateMenu', menu);
   }
   GetLanguages() {
     return this.http.get<Language[]>(this.assetsUrl + 'i18n/languages.json');

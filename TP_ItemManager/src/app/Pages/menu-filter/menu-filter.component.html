@@ -1,16 +1,16 @@
 <div class="container mt-3">
   <div class="row">
-    <h1>{{ "Kiosks" | translate }}</h1>
+    <h1>{{ "Menus" | translate }}</h1>
   </div>
   <form [formGroup]="filterForm" class="formGroup">
     <div class="row container-fluid">
       <mat-form-field class="col-3 m-1">
-        <mat-label>{{ "Hostname" | translate }}</mat-label>
-        <input formControlName="hostname" matInput />
+        <mat-label>{{ "Name" | translate }}</mat-label>
+        <input formControlName="name" matInput />
       </mat-form-field>
       <mat-form-field class="col-3 m-1">
-        <mat-label>{{ "IP" | translate }}</mat-label>
-        <input formControlName="ip" matInput />
+        <mat-label>{{ "ID" | translate }}</mat-label>
+        <input formControlName="id" matInput />
       </mat-form-field>
     </div>
     <div class="container-fluid d-flex justify-content-between">
@@ -19,7 +19,7 @@
           mat-raised-button
           color="primary"
           class="mx-1 mb-3"
-          (click)="GetKiosks()"
+          (click)="GetMenus()"
         >
           {{ "Search" | translate }}
         </button>
@@ -36,10 +36,10 @@
       <button
         mat-raised-button
         color="primary"
-        (click)="OpenDialogAddKiosk()"
+        (click)="OpenDialogAddMenu()"
         class="mx-1"
       >
-        {{ "Add kiosk" | translate }}
+        {{ "Add menu" | translate }}
       </button>
     </div>
   </form>
@@ -47,6 +47,6 @@
 <app-edit-list
   *ngIf="this.list != null"
   [parentData]="this.list"
-  [columnName]="'Kiosk'"
-  (refresh)="this.GetKiosks()"
+  [columnName]="'Menu'"
+  (refresh)="this.GetMenus()"
 ></app-edit-list>

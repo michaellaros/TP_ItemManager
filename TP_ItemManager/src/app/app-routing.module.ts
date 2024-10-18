@@ -11,6 +11,7 @@ import { AuthGuard } from './Services/auth-services/auth.guard';
 import { ModalItemComponent } from './Pages/modal-item/modal-item.component';
 import { DeviceFilterComponent } from './Pages/device-filter/device-filter.component';
 import { MenuFilterComponent } from './Pages/menu-filter/menu-filter.component';
+import { StoreFilterComponent } from './Pages/store-filter/store-filter.component';
 const routes: Routes = [
   {
     path: 'Category',
@@ -51,6 +52,12 @@ const routes: Routes = [
   {
     path: 'Menu',
     component: MenuFilterComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'Store',
+    component: StoreFilterComponent,
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
   },

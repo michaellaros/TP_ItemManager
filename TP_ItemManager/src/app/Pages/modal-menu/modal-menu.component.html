@@ -1,6 +1,10 @@
-<mat-toolbar class="w-100 position-relative mb-4 header" color="primary">
+<mat-toolbar
+  class="w-100 position-relative header"
+  color="primary"
+  style="height: 7vh"
+>
   <div>
-    <h1 class="px-0 my-2 text-white">{{ "Device info" | translate }}</h1>
+    <h1 class="px-0 my-2 text-white">{{ "Menu info" | translate }}</h1>
   </div>
 
   <button
@@ -11,19 +15,41 @@
     <mat-icon>close</mat-icon>
   </button>
 </mat-toolbar>
-<mat-dialog-content class="p-0 overflow-hidden" style="max-height: 80vh">
-  <div class="container-fluid">
-    <form [formGroup]="storeForm" class="formGroup" (ngSubmit)="SubmitForm()">
+<mat-dialog-content
+  class="p-0 overflow-hidden container-fluid"
+  style="max-height: 93vh"
+>
+  <div class="row">
+    <form [formGroup]="menuForm" class="formGroup row p-4 col-sm-12 col-md-5">
       <div class="row">
         <mat-form-field class="col-12">
-          <mat-label>{{ "Store name" | translate }}</mat-label>
+          <mat-label>{{ "Name" | translate }}</mat-label>
           <input formControlName="name" matInput />
         </mat-form-field>
       </div>
 
-      <button mat-raised-button color="primary" type="submit">
-        {{ flg_insert ? ("Create" | translate) : ("Save" | translate) }}
+      <button
+        mat-raised-button
+        color="primary"
+        class="col-12"
+        [disabled]="menuForm.invalid"
+        (click)="SubmitForm()"
+      >
+        {{ flg_insert ? "Create" : ("Save" | translate) }}
       </button>
     </form>
+
+    <!-- <div class="d-flex justify-content-between flex-column col-1"></div> -->
+    <div class="d-flex justify-content-between flex-column col-sm-12 col-md-7">
+      <mat-tab-group>
+        <mat-tab [label]="'Categories' | translate"
+          ><app-assigned-editor
+            [type]="'MenuCategory-Menu'"
+            [id]="menu!.id!"
+            [AssignedObjects]="menu!.categories!"
+            [flg_insert]="this.flg_insert"
+        /></mat-tab>
+      </mat-tab-group>
+    </div>
   </div>
 </mat-dialog-content>

@@ -1,4 +1,4 @@
-<mat-toolbar class="w-100 position-relative mb-4 header" color="primary">
+<!-- <mat-toolbar class="w-100 position-relative mb-4 header" color="primary">
   <div>
     <h1 class="px-0 my-2 text-white">{{ "Category info" | translate }}</h1>
   </div>
@@ -32,7 +32,11 @@
             type="button"
             (click)="ChangeImage()"
           >
-            {{ category.imagePath != null ? ( "Change image" | translate ) :  ("Choose image" | translate ) }}
+            {{
+              category.imagePath != null
+                ? ("Change image" | translate)
+                : ("Choose image" | translate)
+            }}
           </button>
         </div>
         <div class="row col-9">
@@ -41,10 +45,6 @@
               <mat-label>{{ "Name" | translate }}</mat-label>
               <input formControlName="name" matInput />
             </mat-form-field>
-            <!-- <mat-form-field >
-              <mat-label>{{ "Order" | translate }}</mat-label>
-              <input type="number" formControlName="order" matInput />
-            </mat-form-field> -->
           </div>
           <div class="col-6 d-flex flex-column">
             <h4 class="mb-0">{{ "Available" | translate }}:</h4>
@@ -86,4 +86,104 @@
     [AssignedObjects]="category.items"
     [flg_insert]="this.flg_insert"
   />
+</mat-dialog-content> -->
+<mat-toolbar
+  class="w-100 position-relative header"
+  color="primary"
+  style="height: 7vh"
+>
+  <div>
+    <h1 class="px-0 my-2 text-white">{{ "Category info" | translate }}</h1>
+  </div>
+
+  <button
+    mat-icon-button
+    class="m-2 position-absolute end-0"
+    [mat-dialog-close]="null"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-dialog-content
+  class="p-0 overflow-hidden container-fluid"
+  style="height: 93vh"
+>
+  <div class="row" style="height: 93vh">
+    <form
+      [formGroup]="categoryForm"
+      class="formGroup row p-4 col-sm-12 col-md-5"
+    >
+      <div class="row">
+        <img
+          [src]="
+            imageUrl +
+            (category.imagePath != '' ? category.imagePath : 'no-photo.jpg')
+          "
+          class="w-100 object-fit-contain"
+          style="aspect-ratio: 16/9"
+          (click)="ChangeImage()"
+        />
+      </div>
+
+      <div class="row">
+        <mat-form-field class="col-12">
+          <mat-label>{{ "Name" | translate }}</mat-label>
+          <input formControlName="name" matInput />
+        </mat-form-field>
+      </div>
+
+      <div class="row col-12 d-flex flex-column">
+        <h4 class="mb-0">{{ "Available" | translate }}:</h4>
+        <mat-checkbox formControlName="available" matInput color="primary">
+          {{ "Available" | translate }}
+        </mat-checkbox>
+
+        <h4 class="mb-0">{{ "Visible if" | translate }}:</h4>
+        <mat-checkbox formControlName="dineIn" matInput color="primary">
+          {{ "Dine in" | translate }}
+        </mat-checkbox>
+        <mat-checkbox formControlName="takeAway" matInput color="primary">
+          {{ "Take away" | translate }}
+        </mat-checkbox>
+      </div>
+      <button
+        mat-raised-button
+        color="primary"
+        class="col-12"
+        [disabled]="categoryForm.invalid"
+        (click)="SubmitForm()"
+      >
+        {{ flg_insert ? "Create" : ("Save" | translate) }}
+      </button>
+    </form>
+
+    <!-- <div class="d-flex justify-content-between flex-column col-1"></div> -->
+    <div class="col-sm-12 col-md-7">
+      <mat-tab-group style="height: 93vh">
+        <mat-tab [label]="'Translations' | translate">
+          <app-translations-editor
+            [id]="category.id!"
+            [translations]="category.translations!"
+            [flg_isEditable]="!this.flg_insert"
+            [type]="'Category'"
+          />
+        </mat-tab>
+
+        <mat-tab [label]="'Items' | translate"
+          ><app-assigned-editor
+            [type]="'CategoryItems-Category'"
+            [id]="category.id!"
+            [AssignedObjects]="category.items"
+            [flg_insert]="this.flg_insert"
+        /></mat-tab>
+        <mat-tab [label]="'Menu this category is in' | translate"
+          ><app-assigned-editor
+            [type]="'MenuCategory-Category'"
+            [id]="category.id!"
+            [AssignedObjects]="category.menuItsIn"
+            [flg_insert]="this.flg_insert"
+        /></mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
 </mat-dialog-content>

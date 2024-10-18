@@ -16,11 +16,12 @@ export class ModalMenuComponent {
   menu?: Menu;
   public flg_insert: boolean;
 
-  storeForm = new FormGroup({
+  menuForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
   });
 
   constructor(
+    @Inject('IMAGES_URL') public imageUrl: string,
     @Inject(MAT_DIALOG_DATA) private data: Store,
     private http: HttpService,
     public status: StatusService,
@@ -37,7 +38,7 @@ export class ModalMenuComponent {
   }
 
   public SubmitForm() {
-    if (this.storeForm.valid) {
+    if (this.menuForm.valid) {
       if (this.flg_insert) {
         this.http.InsertMenu(this.GetMenuFromForm()).subscribe((data) => {
           this.menu = data;
@@ -62,14 +63,14 @@ export class ModalMenuComponent {
   GetMenuFromForm(): Store {
     return new Store(
       this.menu?.id != undefined ? this.menu.id : undefined,
-      this.storeForm.get('name')!.value!
+      this.menuForm.get('name')!.value!
     );
   }
 
   UpdateForm() {
     console.log(JSON.stringify(this.menu));
     if (this.menu != null) {
-      this.storeForm.patchValue({
+      this.menuForm.patchValue({
         name: this.menu.name,
       });
       console.log(JSON.stringify(this.menu));

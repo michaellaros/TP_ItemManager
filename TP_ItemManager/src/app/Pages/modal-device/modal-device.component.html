@@ -11,29 +11,29 @@
     <mat-icon>close</mat-icon>
   </button>
 </mat-toolbar>
-<mat-dialog-content class="p-0 overflow-hidden" style="max-height: 80vh">
+<mat-dialog-content class="p-0 overflow-hidden" style="max-height: 93vh">
   <div class="container-fluid">
     <form [formGroup]="deviceForm" class="formGroup" (ngSubmit)="SubmitForm()">
       <div class="row">
-        <mat-form-field class="col-12">
+        <mat-form-field class="col-4">
           <mat-label>{{ "Device name" | translate }}</mat-label>
           <input formControlName="name" matInput />
         </mat-form-field>
 
-        <mat-form-field class="col-8">
+        <mat-form-field class="col-4">
           <mat-label>{{ "Mac address" | translate }}</mat-label>
           <input formControlName="macAddress" matInput />
         </mat-form-field>
 
-        <mat-form-field class="col-8">
+        <mat-form-field class="col-4">
           <mat-label>{{ "Workstation ID" | translate }}</mat-label>
           <input formControlName="szWorkstationID" matInput />
         </mat-form-field>
-        <mat-form-field class="col-8">
+        <mat-form-field class="col-4">
           <mat-label>{{ "Store" | translate }}</mat-label>
           <input formControlName="store_id" matInput />
         </mat-form-field>
-        <mat-form-field class="col-8">
+        <mat-form-field class="col-4">
           <mat-label>{{ "Active menu" | translate }}</mat-label>
           <input formControlName="active_menu_id" matInput />
         </mat-form-field>

@@ -12,6 +12,7 @@ export class Category {
     public categoryOrder?: number,
     public translations?: Translation[],
     public items?: AssignedObject[],
+    public menuItsIn?: AssignedObject[],
     public timespans?: Timespan[]
   ) {}
 }

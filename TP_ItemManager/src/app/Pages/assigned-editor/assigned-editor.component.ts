@@ -100,6 +100,12 @@ export class AssignedEditorComponent {
           this.filteredOptions = this.options;
         });
         break;
+      case 'MenuCategory-Category':
+        this.http.FilterMenu({}).subscribe((data) => {
+          this.options = this.MapToArray(data);
+          this.filteredOptions = this.options;
+        });
+        break;
       case 'KioskCategory':
         this.http.FilterCategory({}).subscribe((data) => {
           this.options = this.MapToArray(data);
@@ -230,6 +236,38 @@ export class AssignedEditorComponent {
             this.ResetForm();
           });
         break;
+      case 'MenuCategory-Menu':
+        this.http
+          .UpdateAssignedObject(
+            {
+              Menu_id: this.id,
+              Category_id: object.id,
+              CategoryOrder: object.order,
+            },
+            'UpdateMenuCategoryFromMenu'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+      case 'MenuCategory-Category':
+        this.http
+          .UpdateAssignedObject(
+            {
+              Menu_id: object.id,
+              Category_id: this.id,
+              CategoryOrder: object.order,
+            },
+            'UpdateMenuCategoryFromCategory'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
       case 'KioskCategory':
         this.http
           .UpdateAssignedObject(
@@ -338,6 +376,36 @@ export class AssignedEditorComponent {
               idOption: this.id,
             },
             'DeleteItemOptionFromOption'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+      case 'MenuCategory-Menu':
+        this.http
+          .DeleteAssignedObject(
+            {
+              menu_id: this.id,
+              category_id: object.id,
+            },
+            'DeleteMenuCategoryFromMenu'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+      case 'MenuCategory-Category':
+        this.http
+          .DeleteAssignedObject(
+            {
+              menu_id: object.id,
+              category_id: this.id,
+            },
+            'DeleteMenuCategoryFromCategory'
           )
           .subscribe((data) => {
             this.AssignedObjects = data;
@@ -467,6 +535,38 @@ export class AssignedEditorComponent {
               order: this.assignForm.get('order')!.value!.toString(),
             },
             'InsertItemOptionFromOption'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+      case 'MenuCategory-Menu':
+        this.http
+          .InsertAssignedObject(
+            {
+              idMenu: this.id,
+              idCategory: id,
+              order: this.assignForm.get('order')!.value!.toString(),
+            },
+            'InsertMenuCategoryFromMenu'
+          )
+          .subscribe((data) => {
+            this.AssignedObjects = data;
+            console.log(this.AssignedObjects);
+            this.ResetForm();
+          });
+        break;
+      case 'MenuCategory-Category':
+        this.http
+          .InsertAssignedObject(
+            {
+              idMenu: id,
+              idCategory: this.id,
+              order: this.assignForm.get('order')!.value!.toString(),
+            },
+            'InsertMenuCategoryFromCategory'
           )
           .subscribe((data) => {
             this.AssignedObjects = data;

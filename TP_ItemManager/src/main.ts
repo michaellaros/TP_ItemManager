@@ -15,7 +15,7 @@ export const getBaseUrl = () => {
 
 export const getImagesUrl = () => {
   if (isDevMode()) {
-    return 'http://172.16.0.66/KioskImages/';
+    return 'http://172.16.0.44/KioskImages/';
   } else {
     const url = document.getElementsByTagName('base')[0].href;
     const arr = url.split('/');

@@ -382,4 +382,10 @@ export class HttpService {
       params: new HttpParams().append('id', id),
     });
   }
+
+  GetConfig() {
+    return this.http.get<{
+      Flg_enableOptions: boolean;
+    }>(this.assetsUrl + '/config.json');
+  }
 }

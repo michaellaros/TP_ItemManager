@@ -94,6 +94,12 @@ export class AssignedEditorComponent {
           this.filteredOptions = this.options;
         });
         break;
+      case 'MenuCategory-Menu':
+        this.http.FilterCategory({}).subscribe((data) => {
+          this.options = this.MapToArray(data);
+          this.filteredOptions = this.options;
+        });
+        break;
       case 'KioskCategory':
         this.http.FilterCategory({}).subscribe((data) => {
           this.options = this.MapToArray(data);

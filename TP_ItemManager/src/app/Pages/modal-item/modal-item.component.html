@@ -121,7 +121,10 @@
               [type]="'Item'"
             />
           </mat-tab>
-          <mat-tab [label]="'Options' | translate">
+          <mat-tab
+            [label]="'Options' | translate"
+            *ngIf="status.Flg_enableOptions"
+          >
             <app-assigned-editor
               class="overflow-hidden"
               [type]="'ItemOptions-Item'"
@@ -138,7 +141,9 @@
               [flg_insert]="this.flg_insert"
           /></mat-tab>
 
-          <mat-tab [label]="'Options this item is in' | translate"
+          <mat-tab
+            [label]="'Options this item is in' | translate"
+            *ngIf="status.Flg_enableOptions"
             ><app-assigned-editor
               [type]="'OptionItems-Item'"
               [id]="item.id!"

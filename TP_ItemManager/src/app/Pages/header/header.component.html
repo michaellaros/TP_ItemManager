@@ -53,14 +53,15 @@
       >
         {{ "Items" | translate }}
       </button>
-      <!-- <button
+      <button
         mat-raised-button
         [color]="currentRoute == '/Option' ? '' : 'primary'"
         class="m-2"
         routerLink="/Option"
+        *ngIf="status.Flg_enableOptions"
       >
         {{ "Options" | translate }}
-      </button> -->
+      </button>
       <button
         mat-raised-button
         [color]="currentRoute == '/User' ? '' : 'primary'"

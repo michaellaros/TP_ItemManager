@@ -12,6 +12,7 @@ export class StatusService {
   public user: string = '';
   public snackbarDuration: number = 3000;
   public Flg_enableOptions: Boolean = true;
+  public Flg_enableTranslations: Boolean = true;
 
   error: Boolean = false;
   constructor() {}

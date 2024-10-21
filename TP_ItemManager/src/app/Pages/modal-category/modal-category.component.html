@@ -156,7 +156,10 @@
   <!-- <div class="d-flex justify-content-between flex-column col-1"></div> -->
   <div class="col-sm-12 col-md-7">
     <mat-tab-group>
-      <mat-tab [label]="'Translations' | translate">
+      <mat-tab
+        [label]="'Translations' | translate"
+        *ngIf="status.Flg_enableTranslations"
+      >
         <app-translations-editor
           [id]="category.id!"
           [translations]="category.translations!"

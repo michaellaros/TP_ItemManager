@@ -29,6 +29,7 @@ export class AppComponent {
     });
     this.http.GetConfig().subscribe((data) => {
       this.status.Flg_enableOptions = data.Flg_enableOptions;
+      this.status.Flg_enableTranslations = data.Flg_enableTranslations;
     });
   }
 

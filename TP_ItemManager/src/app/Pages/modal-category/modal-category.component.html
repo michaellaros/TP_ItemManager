@@ -104,15 +104,10 @@
     <mat-icon>close</mat-icon>
   </button>
 </mat-toolbar>
-<mat-dialog-content
-  class="p-0 overflow-hidden container-fluid"
-  style="height: 93vh"
->
-  <div class="row" style="height: 93vh">
-    <form
-      [formGroup]="categoryForm"
-      class="formGroup row p-4 col-sm-12 col-md-5"
-    >
+
+<div class="row w-100 p-0 container-fluid" style="height: 93vh">
+  <div class="row p-4 col-sm-12 col-md-5">
+    <form [formGroup]="categoryForm" class="formGroup">
       <div class="row">
         <img
           [src]="
@@ -156,34 +151,34 @@
         {{ flg_insert ? "Create" : ("Save" | translate) }}
       </button>
     </form>
-
-    <!-- <div class="d-flex justify-content-between flex-column col-1"></div> -->
-    <div class="col-sm-12 col-md-7">
-      <mat-tab-group style="height: 93vh">
-        <mat-tab [label]="'Translations' | translate">
-          <app-translations-editor
-            [id]="category.id!"
-            [translations]="category.translations!"
-            [flg_isEditable]="!this.flg_insert"
-            [type]="'Category'"
-          />
-        </mat-tab>
-
-        <mat-tab [label]="'Items' | translate"
-          ><app-assigned-editor
-            [type]="'CategoryItems-Category'"
-            [id]="category.id!"
-            [AssignedObjects]="category.items"
-            [flg_insert]="this.flg_insert"
-        /></mat-tab>
-        <mat-tab [label]="'Menu this category is in' | translate"
-          ><app-assigned-editor
-            [type]="'MenuCategory-Category'"
-            [id]="category.id!"
-            [AssignedObjects]="category.menuItsIn"
-            [flg_insert]="this.flg_insert"
-        /></mat-tab>
-      </mat-tab-group>
-    </div>
   </div>
-</mat-dialog-content>
+
+  <!-- <div class="d-flex justify-content-between flex-column col-1"></div> -->
+  <div class="col-sm-12 col-md-7">
+    <mat-tab-group>
+      <mat-tab [label]="'Translations' | translate">
+        <app-translations-editor
+          [id]="category.id!"
+          [translations]="category.translations!"
+          [flg_isEditable]="!this.flg_insert"
+          [type]="'Category'"
+        />
+      </mat-tab>
+
+      <mat-tab [label]="'Items' | translate"
+        ><app-assigned-editor
+          [type]="'CategoryItems-Category'"
+          [id]="category.id!"
+          [AssignedObjects]="category.items"
+          [flg_insert]="this.flg_insert"
+      /></mat-tab>
+      <mat-tab [label]="'Menu this category is in' | translate"
+        ><app-assigned-editor
+          [type]="'MenuCategory-Category'"
+          [id]="category.id!"
+          [AssignedObjects]="category.menuItsIn"
+          [flg_insert]="this.flg_insert"
+      /></mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

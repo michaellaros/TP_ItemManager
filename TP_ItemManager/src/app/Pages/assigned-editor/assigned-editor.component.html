@@ -41,33 +41,6 @@
   class="expandable-content"
   style="height: 87vh"
 >
-  <div class="row px-4 pt-4 w-100" *ngFor="let object of AssignedObjects">
-    <mat-form-field appearance="outline" class="col-6">
-      <mat-label>{{ "Name" | translate }}</mat-label>
-      <input disabled matInput type="text" [(ngModel)]="object.name" />
-    </mat-form-field>
-    <mat-form-field appearance="outline" class="col-2">
-      <mat-label>{{ "Order" | translate }}</mat-label>
-      <input matInput type="number" [(ngModel)]="object.order" />
-    </mat-form-field>
-
-    <button
-      mat-mini-fab
-      color="primary"
-      class="p-1 col-1"
-      (click)="UpdateAssignedObject(object)"
-    >
-      <mat-icon>save</mat-icon>
-    </button>
-    <button
-      mat-mini-fab
-      color="primary"
-      class="p-1 col-1"
-      (click)="DeleteAssignedObject(object)"
-    >
-      <mat-icon>delete</mat-icon>
-    </button>
-  </div>
   <form
     [formGroup]="assignForm"
     class="formGroup"
@@ -101,4 +74,31 @@
       </button>
     </div>
   </form>
+  <div class="row px-4 pt-4 w-100" *ngFor="let object of AssignedObjects">
+    <mat-form-field appearance="outline" class="col-6">
+      <mat-label>{{ "Name" | translate }}</mat-label>
+      <input disabled matInput type="text" [(ngModel)]="object.name" />
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-2">
+      <mat-label>{{ "Order" | translate }}</mat-label>
+      <input matInput type="number" [(ngModel)]="object.order" />
+    </mat-form-field>
+
+    <button
+      mat-mini-fab
+      color="primary"
+      class="p-1 col-1"
+      (click)="UpdateAssignedObject(object)"
+    >
+      <mat-icon>save</mat-icon>
+    </button>
+    <button
+      mat-mini-fab
+      color="primary"
+      class="p-1 col-1"
+      (click)="DeleteAssignedObject(object)"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
 </div>

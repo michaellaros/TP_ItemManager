@@ -15,12 +15,9 @@
     <mat-icon>close</mat-icon>
   </button>
 </mat-toolbar>
-<mat-dialog-content
-  class="p-0 overflow-hidden container-fluid"
-  style="max-height: 93vh"
->
-  <div class="row">
-    <form [formGroup]="menuForm" class="formGroup row p-4 col-sm-12 col-md-5">
+<div class="row w-100 p-0 container-fluid" style="height: 93vh">
+  <div class="row p-4 col-sm-12 col-md-5">
+    <form [formGroup]="menuForm" class="formGroup">
       <div class="row">
         <mat-form-field class="col-12">
           <mat-label>{{ "Name" | translate }}</mat-label>
@@ -38,18 +35,17 @@
         {{ flg_insert ? "Create" : ("Save" | translate) }}
       </button>
     </form>
-
-    <!-- <div class="d-flex justify-content-between flex-column col-1"></div> -->
-    <div class="d-flex justify-content-between flex-column col-sm-12 col-md-7">
-      <mat-tab-group>
-        <mat-tab [label]="'Categories' | translate"
-          ><app-assigned-editor
-            [type]="'MenuCategory-Menu'"
-            [id]="menu!.id!"
-            [AssignedObjects]="menu!.categories!"
-            [flg_insert]="this.flg_insert"
-        /></mat-tab>
-      </mat-tab-group>
-    </div>
   </div>
-</mat-dialog-content>
+  <!-- <div class="d-flex justify-content-between flex-column col-1"></div> -->
+  <div class="d-flex justify-content-between flex-column col-sm-12 col-md-7">
+    <mat-tab-group>
+      <mat-tab [label]="'Categories' | translate"
+        ><app-assigned-editor
+          [type]="'MenuCategory-Menu'"
+          [id]="menu!.id!"
+          [AssignedObjects]="menu!.categories!"
+          [flg_insert]="this.flg_insert"
+      /></mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

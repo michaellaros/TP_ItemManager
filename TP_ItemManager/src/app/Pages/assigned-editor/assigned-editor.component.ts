@@ -546,8 +546,8 @@ export class AssignedEditorComponent {
         this.http
           .InsertAssignedObject(
             {
-              idMenu: this.id,
-              idCategory: id,
+              menu_id: this.id,
+              category_id: id,
               order: this.assignForm.get('order')!.value!.toString(),
             },
             'InsertMenuCategoryFromMenu'
@@ -562,8 +562,8 @@ export class AssignedEditorComponent {
         this.http
           .InsertAssignedObject(
             {
-              idMenu: id,
-              idCategory: this.id,
+              menu_id: id,
+              category_id: this.id,
               order: this.assignForm.get('order')!.value!.toString(),
             },
             'InsertMenuCategoryFromCategory'

@@ -9,7 +9,7 @@ export const getBaseUrl = () => {
   } else {
     const url = document.getElementsByTagName('base')[0].href;
     const arr = url.split('/');
-    return arr[0] + '//' + arr[2] + '/TPItemManagerAPI';
+    return arr[0] + '//' + arr[2] + '/TPItemManagerAPICCO';
   }
 };
 

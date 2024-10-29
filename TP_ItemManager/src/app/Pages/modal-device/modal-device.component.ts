@@ -70,7 +70,7 @@ export class ModalDeviceComponent {
       this.deviceForm.get('macAddress')!.value!,
       this.deviceForm.get('szWorkstationID')!.value!,
       this.deviceForm.get('store_id')!.value!,
-      this.deviceForm.get('Active_menu_id')!.value!
+      this.deviceForm.get('active_menu_id')!.value!
     );
   }
 

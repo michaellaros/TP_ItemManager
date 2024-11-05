@@ -18,7 +18,7 @@ export class ModalDeviceComponent {
 
   deviceForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    macAddress: new FormControl('', [Validators.required]),
+    androidId: new FormControl('', [Validators.required]),
     szWorkstationID: new FormControl(''),
     store_id: new FormControl(),
     active_menu_id: new FormControl(),
@@ -67,7 +67,7 @@ export class ModalDeviceComponent {
     return new Device(
       this.device?.id != undefined ? this.device.id : undefined,
       this.deviceForm.get('name')!.value!,
-      this.deviceForm.get('macAddress')!.value!,
+      this.deviceForm.get('androidId')!.value!,
       this.deviceForm.get('szWorkstationID')!.value!,
       this.deviceForm.get('store_id')!.value!,
       this.deviceForm.get('active_menu_id')!.value!
@@ -79,7 +79,7 @@ export class ModalDeviceComponent {
     if (this.device != null) {
       this.deviceForm.patchValue({
         name: this.device.name,
-        macAddress: this.device.macAddress!,
+        androidId: this.device.androidId!,
         szWorkstationID: this.device.szWorkstationID!,
         store_id: this.device.store_id!,
         active_menu_id: this.device.active_menu_id!,

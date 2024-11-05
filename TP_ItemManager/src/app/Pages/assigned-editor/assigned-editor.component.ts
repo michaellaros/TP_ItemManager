@@ -240,9 +240,9 @@ export class AssignedEditorComponent {
         this.http
           .UpdateAssignedObject(
             {
-              Menu_id: this.id,
-              Category_id: object.id,
-              CategoryOrder: object.order,
+              menu_id: this.id,
+              category_id: object.id,
+              order: object.order,
             },
             'UpdateMenuCategoryFromMenu'
           )
@@ -256,9 +256,9 @@ export class AssignedEditorComponent {
         this.http
           .UpdateAssignedObject(
             {
-              Menu_id: object.id,
-              Category_id: this.id,
-              CategoryOrder: object.order,
+              menu_id: object.id,
+              category_id: this.id,
+              order: object.order,
             },
             'UpdateMenuCategoryFromCategory'
           )

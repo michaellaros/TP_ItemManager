@@ -14,9 +14,18 @@
         <mat-label>{{ "ID" | translate }}</mat-label>
         <input formControlName="Id" matInput />
       </mat-form-field>
-      <mat-form-field class="col-3 m-1">
+      <!-- <mat-form-field class="col-3 m-1">
         <mat-label>{{ "Store" | translate }}</mat-label>
         <input formControlName="Store_id" matInput />
+      </mat-form-field> -->
+      <mat-form-field class="col-3 m-1">
+        <mat-label>{{ "Store" | translate }}</mat-label>
+        <input matInput formControlName="Store_id" [matAutocomplete]="auto" />
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let store of filteredStores" [value]="store.name">
+            {{ store.name }}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
     </div>
     <div class="container-fluid d-flex justify-content-between">

@@ -31,11 +31,32 @@
         </mat-form-field>
         <mat-form-field class="col-4">
           <mat-label>{{ "Store" | translate }}</mat-label>
-          <input formControlName="store_id" matInput />
+          <input
+            matInput
+            formControlName="store_id"
+            [matAutocomplete]="storeAuto"
+          />
+          <mat-autocomplete autoActiveFirstOption #storeAuto="matAutocomplete">
+            <mat-option
+              *ngFor="let store of filteredStores"
+              [value]="store.name"
+            >
+              {{ store.name }}
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
         <mat-form-field class="col-4">
           <mat-label>{{ "Active menu" | translate }}</mat-label>
-          <input formControlName="active_menu_id" matInput />
+          <input
+            formControlName="active_menu_id"
+            matInput
+            [matAutocomplete]="menuAuto"
+          />
+          <mat-autocomplete autoActiveFirstOption #menuAuto="matAutocomplete">
+            <mat-option *ngFor="let menu of filteredMenus" [value]="menu.name">
+              {{ menu.name }}
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
       </div>
 

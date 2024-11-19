@@ -29,7 +29,7 @@ export class CategoryFilterComponent {
   ngOnInit() {
     this.GetCategory();
   }
-  ResetForm(){
+  ResetForm() {
     this.filterForm.reset();
     this.GetCategory();
   }
@@ -59,7 +59,8 @@ export class CategoryFilterComponent {
 
   OpenDialogModifyCategory() {
     const dialogRef = this.dialog.open(ModalCategoryComponent, {
-      width: '60vw',
+      minWidth: '100%',
+      height: '100%',
     });
     dialogRef.afterClosed().subscribe(() => this.GetCategory());
   }

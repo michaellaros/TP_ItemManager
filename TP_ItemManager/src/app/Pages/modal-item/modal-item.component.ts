@@ -25,7 +25,7 @@ export class ModalItemComponent {
 
   itemForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
+    description: new FormControl(''),
     barcode: new FormControl('', [Validators.required]),
     flg_addToCart: new FormControl(true),
     flg_verifyAdult: new FormControl(false),
@@ -33,11 +33,10 @@ export class ModalItemComponent {
     available: new FormControl(true),
   });
 
-  itemvatform= new FormGroup({
-    price: new FormControl({value:'0',disabled:true}),
-    vat: new FormControl({value:'0',disabled:true})
-  })
-
+  itemvatform = new FormGroup({
+    price: new FormControl({ value: '0', disabled: true }),
+    vat: new FormControl({ value: '0', disabled: true }),
+  });
 
   constructor(
     @Inject('IMAGES_URL') public imageUrl: string,
@@ -56,28 +55,29 @@ export class ModalItemComponent {
 
   ngOnInit() {
     this.UpdateForm();
-    this.itemForm.get("barcode")?.valueChanges.subscribe((data)=>{
-      if(this.itemForm.get("barcode")?.value == undefined || this.itemForm.get("barcode")?.value == null || this.itemForm.get("barcode")?.value == '')
-      {this.itemvatform.patchValue({
-        price:'',
-        vat:''
-      });}
-       else this.GetItemVat();
-    })
+    this.itemForm.get('barcode')?.valueChanges.subscribe((data) => {
+      if (
+        this.itemForm.get('barcode')?.value == undefined ||
+        this.itemForm.get('barcode')?.value == null ||
+        this.itemForm.get('barcode')?.value == ''
+      ) {
+        this.itemvatform.patchValue({
+          price: '',
+          vat: '',
+        });
+      } else this.GetItemVat();
+    });
   }
-
 
   public SubmitForm() {
     console.log('submit');
     if (this.itemForm.valid) {
-    if(this.item.imagePath == null){
-      this._snackBar.open('Select item image!', 'Ok',{
-        duration:this.status.snackbarDuration
-      });
-      return;
-    }
-    else{
-
+      if (this.item.imagePath == null) {
+        this._snackBar.open('Select item image!', 'Ok', {
+          duration: this.status.snackbarDuration,
+        });
+        return;
+      } else {
         if (this.flg_insert) {
           console.log(this.GetItemFromForm());
           this.http.InsertItem(this.GetItemFromForm()).subscribe((data) => {
@@ -85,8 +85,8 @@ export class ModalItemComponent {
 
             this.UpdateForm();
             this.flg_insert = false;
-            this._snackBar.open('Item successfully created!', 'Ok',{
-              duration:this.status.snackbarDuration
+            this._snackBar.open('Item successfully created!', 'Ok', {
+              duration: this.status.snackbarDuration,
             });
           });
         } else {
@@ -96,14 +96,13 @@ export class ModalItemComponent {
 
             this.GetItemVat();
             this.UpdateForm();
-            this._snackBar.open('Item successfully updated!', 'Ok',{
-              duration:this.status.snackbarDuration
+            this._snackBar.open('Item successfully updated!', 'Ok', {
+              duration: this.status.snackbarDuration,
             });
           });
         }
       }
     }
-
   }
 
   GetItemFromForm(): Item {
@@ -113,7 +112,7 @@ export class ModalItemComponent {
       this.itemForm.get('description')!.value!,
       this.itemForm.get('barcode')!.value!,
       0,
-      this.item.imagePath,
+      this.item.imagePath || '',
       this.itemForm.get('flg_addToCart')!.value!,
       this.itemForm.get('flg_verifyAdult')!.value!,
       this.itemForm.get('flg_isMenu')!.value!,
@@ -121,24 +120,26 @@ export class ModalItemComponent {
     );
   }
 
-  GetItemVat(){
-    this.http.GetItemVat(this.itemForm.get("barcode")?.value!).subscribe((data)=>{
-      if(data != null){this.itemvatform.patchValue({
-        price:data.price + '€',
-        vat:data.vat + '%'
+  GetItemVat() {
+    this.http
+      .GetItemVat(this.itemForm.get('barcode')?.value!)
+      .subscribe((data) => {
+        if (data != null) {
+          this.itemvatform.patchValue({
+            price: data.price + '€',
+            vat: data.vat + '%',
+          });
+        } else {
+          this.itemvatform.patchValue({
+            price: '',
+            vat: '',
+          });
+        }
       });
-    }
-      else {this.itemvatform.patchValue({
-        price:'',
-        vat:''
-      });
-    }
-    })
   }
   UpdateForm() {
     console.log(this.item);
     if (this.item != null) {
-
       this.itemForm.patchValue({
         name: this.item.name,
         description: this.item.description,
@@ -148,10 +149,9 @@ export class ModalItemComponent {
         flg_isMenu: this.item.flg_isMenu,
         available: this.item.available,
       });
-      if(this.itemForm.get('barcode')!.value! !=''){
+      if (this.itemForm.get('barcode')!.value! != '') {
         console.log(this.item);
-      this.GetItemVat();
-
+        this.GetItemVat();
       }
     }
   }

@@ -13,7 +13,7 @@ import { StatusService } from 'src/app/Services/status.service';
   styleUrls: ['./modal-menu.component.scss'],
 })
 export class ModalMenuComponent {
-  menu?: Menu;
+  menu: Menu;
   public flg_insert: boolean;
 
   menuForm = new FormGroup({
@@ -28,7 +28,7 @@ export class ModalMenuComponent {
     private _snackBar: MatSnackBar
   ) {
     {
-      this.menu = this.data;
+      this.menu = this.data || new Menu();
       this.flg_insert = this.data == null;
     }
   }

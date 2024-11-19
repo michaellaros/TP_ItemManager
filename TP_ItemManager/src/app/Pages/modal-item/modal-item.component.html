@@ -65,21 +65,22 @@
             formControlName="flg_addToCart"
             matInput
             color="primary"
+            value="true"
           >
             {{ "Add item to transaction" | translate }}
           </mat-checkbox>
-          <mat-checkbox
+          <!-- <mat-checkbox
             formControlName="flg_verifyAdult"
             matInput
             color="primary"
           >
             {{ "Article 18+" | translate }}
-          </mat-checkbox>
+          </mat-checkbox> -->
         </div>
         <div class="col-6 d-flex flex-column">
-          <mat-checkbox formControlName="flg_isMenu" matInput color="primary">
+          <!-- <mat-checkbox formControlName="flg_isMenu" matInput color="primary">
             {{ "Menu" | translate }}
-          </mat-checkbox>
+          </mat-checkbox> -->
           <mat-checkbox formControlName="available" matInput color="primary">
             {{ "Available" | translate }}
           </mat-checkbox>
@@ -89,9 +90,7 @@
         mat-raised-button
         color="primary"
         class="col-12"
-        [disabled]="
-          itemForm.invalid || this.itemvatform.get('price')!.value! == ''
-        "
+        [disabled]="itemForm.invalid"
         (click)="SubmitForm()"
       >
         {{ flg_insert ? "Create" : ("Save" | translate) }}

@@ -28,9 +28,8 @@ export class ItemFilterComponent {
   });
   ngOnInit() {
     this.GetItems();
-
   }
-  ResetForm(){
+  ResetForm() {
     this.filterForm.reset();
     this.GetItems();
   }
@@ -66,7 +65,8 @@ export class ItemFilterComponent {
 
   OpenDialogModifyItem() {
     const dialogRef = this.dialog.open(ModalItemComponent, {
-      width: '60vw',
+      minWidth: '100%',
+      height: '100%',
     });
     dialogRef.afterClosed().subscribe(() => this.GetItems());
   }

@@ -5,7 +5,7 @@ import { environment } from './app/enviroments/environment';
 
 export const getBaseUrl = () => {
   if (isDevMode()) {
-    return 'http://localhost:5172';
+    return 'http://172.27.17.68/VYItemManagerAPI';
   } else {
     const url = document.getElementsByTagName('base')[0].href;
     const arr = url.split('/');

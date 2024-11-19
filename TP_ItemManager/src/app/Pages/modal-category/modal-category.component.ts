@@ -45,7 +45,6 @@ export class ModalCategoryComponent {
 
   ngOnInit() {
     this.UpdateForm();
-
   }
 
   public SubmitForm() {
@@ -59,8 +58,8 @@ export class ModalCategoryComponent {
             this.UpdateForm();
             this.flg_insert = false;
             console.log(this.flg_insert);
-            this._snackBar.open('Category successfully created!', 'Ok',{
-              duration:this.status.snackbarDuration
+            this._snackBar.open('Category successfully created!', 'Ok', {
+              duration: this.status.snackbarDuration,
             });
           });
       } else {
@@ -69,8 +68,8 @@ export class ModalCategoryComponent {
           .subscribe((data) => {
             this.category = data;
             this.UpdateForm();
-            this._snackBar.open('Category successfully updated!', 'Ok',{
-              duration:this.status.snackbarDuration
+            this._snackBar.open('Category successfully updated!', 'Ok', {
+              duration: this.status.snackbarDuration,
             });
           });
       }
@@ -81,7 +80,7 @@ export class ModalCategoryComponent {
     return new Category(
       this.category.id != undefined ? this.category.id : undefined,
       this.categoryForm.get('name')!.value!,
-      this.category.imagePath,
+      this.category.imagePath || '',
       this.categoryForm.get('available')!.value!,
       this.categoryForm.get('dineIn')!.value! &&
       this.categoryForm.get('takeAway')!.value!

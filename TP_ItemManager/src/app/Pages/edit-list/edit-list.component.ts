@@ -190,7 +190,8 @@ export class EditListComponent implements OnChanges {
   OpenDialogModifyUser(user: UserModelRequest) {
     const dialogRef = this.dialog.open(ModalUserComponent, {
       data: user,
-      width: '60vw',
+      minWidth: '100%',
+      height: '100%',
     });
     dialogRef.afterClosed().subscribe(() => {
       this.refresh.emit(null);

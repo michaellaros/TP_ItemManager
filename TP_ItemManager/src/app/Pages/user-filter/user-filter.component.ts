@@ -7,19 +7,17 @@ import { StatusService } from 'src/app/Services/status.service';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { ModalUserComponent } from '../modal-user/modal-user.component';
 
-
 @Component({
   selector: 'app-user-filter',
   templateUrl: './user-filter.component.html',
-  styleUrls: ['./user-filter.component.scss']
+  styleUrls: ['./user-filter.component.scss'],
 })
 export class UserFilterComponent {
   public list!: SearchedObject[];
   filterForm = new FormGroup({
     id: new FormControl(''),
-    name: new FormControl('')
+    name: new FormControl(''),
   });
-
 
   constructor(
     private http: HttpService,
@@ -31,22 +29,21 @@ export class UserFilterComponent {
     this.GetUsers();
   }
 
-  ResetForm(){
+  ResetForm() {
     this.filterForm.reset();
     this.GetUsers();
   }
   GetUsers() {
     let name =
-    this.filterForm.get('name')?.value != undefined
-    ? this.filterForm.get('name')?.value!
-    : '';
-    let id=
-    this.filterForm.get('id')?.value != undefined
+      this.filterForm.get('name')?.value != undefined
+        ? this.filterForm.get('name')?.value!
+        : '';
+    let id =
+      this.filterForm.get('id')?.value != undefined
         ? this.filterForm.get('id')?.value!
         : '';
 
-
-    this.http.GetUsers({Name:name,Id:id}).subscribe((data) => {
+    this.http.GetUsers({ Name: name, Id: id }).subscribe((data) => {
       if (data == null) {
         this.list = [];
       } else {
@@ -56,11 +53,10 @@ export class UserFilterComponent {
   }
 
   OpenDialogAddUser() {
-
     const dialogRef = this.dialog.open(ModalUserComponent, {
-      width: '60vw',
+      minWidth: '100%',
+      height: '100%',
     });
     dialogRef.afterClosed().subscribe(() => this.GetUsers());
   }
-
 }

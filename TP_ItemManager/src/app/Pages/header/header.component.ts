@@ -13,19 +13,23 @@ import { StatusService } from 'src/app/Services/status.service';
 export class HeaderComponent {
   currentRoute!: string;
   public language!: string;
-  constructor(public status: StatusService,private authService:AuthService, public router: Router,public translate: TranslateService) {
 
+  constructor(
+    public status: StatusService,
+    private authService: AuthService,
+    public router: Router,
+    public translate: TranslateService
+  ) {
     router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event) => {
         this.currentRoute = (event as NavigationEnd).url;
         console.log(this.currentRoute);
       });
-
-
   }
   ngOnInit() {
-    console.log(this.currentRoute)
+    console.log(this.currentRoute);
+
     this.language = this.translate.currentLang;
     this.translate.onLangChange.subscribe((lang) => {
       this.language = lang.lang;
@@ -33,11 +37,9 @@ export class HeaderComponent {
   }
   setLanguage(language: any) {
     this.translate.use(language);
-    console.log(language)
+    console.log(language);
   }
-  Logout()
-  {
+  Logout() {
     this.authService.logout();
-
   }
 }

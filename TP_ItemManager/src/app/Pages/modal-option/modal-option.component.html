@@ -1,4 +1,8 @@
-<mat-toolbar class="w-100 position-relative mb-4 header" color="primary">
+<mat-toolbar
+  class="w-100 position-relative header"
+  color="primary"
+  style="height: 7vh"
+>
   <div>
     <h1 class="px-0 my-2 text-white">{{ "Option info" | translate }}</h1>
   </div>
@@ -11,14 +15,16 @@
     <mat-icon>close</mat-icon>
   </button>
 </mat-toolbar>
-<mat-dialog-content class="p-0 overflow-x-hidden" style="max-height: 80vh">
-  <div class="container-fluid">
-    <form [formGroup]="optionForm" class="formGroup" (ngSubmit)="SubmitForm()">
+<div class="row w-100 p-0 container-fluid" style="height: 93vh">
+  <div class="row p-4 col-sm-12 col-md-5">
+    <form [formGroup]="optionForm" class="formGroup">
       <div class="row">
         <mat-form-field class="col-12">
           <mat-label>{{ "Option name" | translate }}</mat-label>
-          <input formControlName="name" matInput value="" />
+          <input formControlName="name" matInput />
         </mat-form-field>
+      </div>
+      <div class="row" *ngIf="status.Flg_enableDetailedOptions">
         <mat-form-field class="col-4">
           <mat-label>{{ "Default quantity" | translate }}</mat-label>
           <input type="number" formControlName="default_quantity" matInput />
@@ -33,37 +39,54 @@
           <mat-label>{{ "Max quantity" | translate }}</mat-label>
           <input type="number" formControlName="max_quantity" matInput />
         </mat-form-field>
+      </div>
 
+      <div class="row col-12">
         <mat-checkbox formControlName="available" matInput color="primary"
           >{{ "Is available" | translate }}
         </mat-checkbox>
-        <mat-checkbox formControlName="flg_addToCart" matInput color="primary"
+        <mat-checkbox
+          formControlName="flg_addToCart"
+          matInput
+          color="primary"
+          *ngIf="status.Flg_enableDetailedOptions"
           >{{ "Add to transaction" | translate }}
         </mat-checkbox>
       </div>
 
-      <button mat-raised-button color="primary" type="submit">
+      <button mat-raised-button color="primary" (click)="SubmitForm()">
         {{ flg_insert ? ("Create" | translate) : ("Save" | translate) }}
       </button>
     </form>
   </div>
-
-  <app-translations-editor
-    [translations]="option?.translations!"
-    [type]="'Option'"
-    [id]="option?.id!"
-    [flg_isEditable]="!this.flg_insert"
-  />
-  <app-assigned-editor
-    [type]="'OptionItems-Option'"
-    [id]="option?.id!"
-    [AssignedObjects]="option?.items"
-    [flg_insert]="this.flg_insert"
-  />
-  <app-assigned-editor
-    [type]="'ItemOptions-Option'"
-    [id]="option?.id!"
-    [AssignedObjects]="option?.itemsItsIn"
-    [flg_insert]="this.flg_insert"
-  />
-</mat-dialog-content>
+  <div class="d-flex justify-content-between flex-column col-sm-12 col-md-7">
+    <mat-tab-group>
+      <mat-tab
+        [label]="'Translations' | translate"
+        *ngIf="status.Flg_enableTranslations"
+      >
+        <app-translations-editor
+          [translations]="option?.translations!"
+          [type]="'Option'"
+          [id]="option?.id!"
+          [flg_isEditable]="!this.flg_insert"
+        />
+      </mat-tab>
+      <mat-tab [label]="'Items' | translate">
+        <app-assigned-editor
+          [type]="'OptionItems-Option'"
+          [id]="option?.id!"
+          [AssignedObjects]="option?.items"
+          [flg_insert]="this.flg_insert"
+        />
+      </mat-tab>
+      <mat-tab [label]="'Items this option is in' | translate">
+        <app-assigned-editor
+          [type]="'ItemOptions-Option'"
+          [id]="option?.id!"
+          [AssignedObjects]="option?.itemsItsIn"
+          [flg_insert]="this.flg_insert"
+      /></mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

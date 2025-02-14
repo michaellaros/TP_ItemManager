@@ -28,8 +28,12 @@ export class AppComponent {
       status.languages = data;
     });
     this.http.GetConfig().subscribe((data) => {
-      this.status.Flg_enableOptions = data.Flg_enableOptions;
-      this.status.Flg_enableTranslations = data.Flg_enableTranslations;
+      this.status.Flg_enableOptions = data['Flg_enableOptions'];
+      this.status.Flg_enableDetailedOptions = data['Flg_enableDetailedOptions'];
+      this.status.Flg_enableTranslations = data['Flg_enableTranslations'];
+      this.status.Flg_enableStores = data['Flg_enableStores'];
+      this.status.Flg_enableCategoryImages = data['Flg_enableCategoryImages'];
+      this.status.updateRoutes();
     });
   }
 

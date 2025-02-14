@@ -26,7 +26,7 @@ export class ModalDeviceComponent {
 
   deviceForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    androidId: new FormControl('', [Validators.required]),
+    deviceIdentifier: new FormControl('', [Validators.required]),
     szWorkstationID: new FormControl(''),
     store_id: new FormControl(),
     active_menu_id: new FormControl(),
@@ -45,26 +45,33 @@ export class ModalDeviceComponent {
   }
 
   ngOnInit() {
-    const storeObservable = this.http.FilterStore({});
-    const menuObservable = this.http.FilterMenu({});
-    forkJoin([storeObservable, menuObservable]).subscribe(
-      ([storeData, menuData]) => {
-        this.stores = this.MapToArray(storeData);
+    const observables = [];
+    if (this.status.Flg_enableStores) {
+      observables.push(this.http.FilterStore({}));
+    }
+    observables.push(this.http.FilterMenu({}));
+    forkJoin(observables).subscribe((results) => {
+      let index = 0;
+      if (this.status.Flg_enableStores) {
+        this.stores = this.MapToArray(results[index++]);
         this.filteredStores = this.stores;
-        this.menus = this.MapToArray(menuData);
-        this.filteredMenus = this.menus;
-        this.UpdateForm();
       }
-    );
+
+      this.menus = this.MapToArray(results[index]);
+      this.filteredMenus = this.menus;
+      this.UpdateForm();
+    });
 
     this.deviceForm
       .get('store_id')!
       .valueChanges.pipe(map((value) => this._filterStore(value || '')))
       .subscribe((data) => (this.filteredStores = data));
-    this.deviceForm
-      .get('active_menu_id')!
-      .valueChanges.pipe(map((value) => this._filterMenu(value || '')))
-      .subscribe((data) => (this.filteredMenus = data));
+    if (this.status.Flg_enableStores) {
+      this.deviceForm
+        .get('active_menu_id')!
+        .valueChanges.pipe(map((value) => this._filterMenu(value || '')))
+        .subscribe((data) => (this.filteredMenus = data));
+    }
   }
 
   public SubmitForm() {
@@ -72,7 +79,7 @@ export class ModalDeviceComponent {
       (store) => store.name == this.deviceForm.get('store_id')!.value!
     )?.id;
 
-    if (storeId == null) {
+    if (this.status.Flg_enableStores && storeId == null) {
       this._snackBar.open('Select a valid store!', 'Ok');
     }
 
@@ -83,9 +90,15 @@ export class ModalDeviceComponent {
     if (menuId == null) {
       this._snackBar.open('Select a valid menu!', 'Ok');
     }
-    if (this.deviceForm.valid && storeId != null && menuId != null) {
+    if (
+      this.deviceForm.valid &&
+      (storeId != null || !this.status.Flg_enableStores) &&
+      menuId != null
+    ) {
       let device = this.GetDeviceFromForm();
-      device.store_id = Number.parseInt(storeId!);
+      device.store_id = this.status.Flg_enableStores
+        ? Number.parseInt(storeId!)
+        : undefined;
       device.active_menu_id = Number.parseInt(menuId!);
       if (this.flg_insert) {
         this.http.InsertDevice(device).subscribe((data) => {
@@ -112,9 +125,9 @@ export class ModalDeviceComponent {
     return new Device(
       this.device?.id != undefined ? this.device.id : undefined,
       this.deviceForm.get('name')!.value!,
-      this.deviceForm.get('androidId')!.value!,
+      this.deviceForm.get('deviceIdentifier')!.value!,
       this.deviceForm.get('szWorkstationID')!.value!,
-      this.deviceForm.get('store_id')!.value!,
+      this.deviceForm.get('store_id')?.value,
       this.deviceForm.get('active_menu_id')!.value!
     );
   }
@@ -123,17 +136,19 @@ export class ModalDeviceComponent {
     console.log(JSON.stringify(this.device));
 
     if (this.device != null) {
-      const storeName = this.stores.find(
-        (store) => store.id! == this.device!.store_id!.toString()
-      )?.name;
-
+      let storeName;
+      if (this.status.Flg_enableStores) {
+        storeName = this.stores.find(
+          (store) => store.id! == this.device!.store_id!.toString()
+        )?.name;
+      }
       const menuName = this.menus.find(
         (menu) => menu.id! == this.device!.active_menu_id!.toString()
       )?.name;
 
       this.deviceForm.patchValue({
         name: this.device.name,
-        androidId: this.device.androidId!,
+        deviceIdentifier: this.device.deviceIdentifier!,
         szWorkstationID: this.device.szWorkstationID!,
         store_id: storeName,
         active_menu_id: menuName,

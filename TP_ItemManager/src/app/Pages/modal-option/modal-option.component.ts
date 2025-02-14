@@ -52,26 +52,26 @@ export class ModalOptionComponent {
 
   ngOnInit() {
     this.UpdateForm();
-
   }
 
   public SubmitForm() {
+    console.log(this.optionForm.valid);
     if (this.optionForm.valid) {
       if (this.flg_insert) {
         this.http.InsertOption(this.GetOptionFromForm()).subscribe((data) => {
           this.option = data;
           this.UpdateForm();
           this.flg_insert = false;
-          this._snackBar.open('Option successfully created!', 'Ok',{
-            duration:this.status.snackbarDuration
+          this._snackBar.open('Option successfully created!', 'Ok', {
+            duration: this.status.snackbarDuration,
           });
         });
       } else {
         this.http.UpdateOption(this.GetOptionFromForm()).subscribe((data) => {
           this.option = data;
           this.UpdateForm();
-          this._snackBar.open('Option successfully updated!', 'Ok',{
-            duration:this.status.snackbarDuration
+          this._snackBar.open('Option successfully updated!', 'Ok', {
+            duration: this.status.snackbarDuration,
           });
         });
       }

@@ -108,7 +108,7 @@
 <div class="row w-100 p-0 container-fluid" style="height: 93vh">
   <div class="row p-4 col-sm-12 col-md-5">
     <form [formGroup]="categoryForm" class="formGroup">
-      <div class="row">
+      <div class="row" *ngIf="status.Flg_enableCategoryImages">
         <img
           [src]="
             imageUrl +

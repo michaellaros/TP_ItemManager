@@ -384,9 +384,8 @@ export class HttpService {
   }
 
   GetConfig() {
-    return this.http.get<{
-      Flg_enableOptions: boolean;
-      Flg_enableTranslations: boolean;
-    }>(this.assetsUrl + '/config.json');
+    return this.http.get<{ [key: string]: any }>(
+      this.assetsUrl + '/config.json'
+    );
   }
 }

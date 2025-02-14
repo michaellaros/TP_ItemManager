@@ -28,7 +28,7 @@ export class OptionFilterComponent {
   ngOnInit() {
     this.GetOptions();
   }
-  ResetForm(){
+  ResetForm() {
     this.filterForm.reset();
     this.GetOptions();
   }
@@ -59,7 +59,8 @@ export class OptionFilterComponent {
   }
   OpenDialogModifyOption() {
     const dialogRef = this.dialog.open(ModalOptionComponent, {
-      width: '60vw',
+      minWidth: '100%',
+      height: '100%',
     });
     dialogRef.afterClosed().subscribe(() => this.GetOptions());
   }

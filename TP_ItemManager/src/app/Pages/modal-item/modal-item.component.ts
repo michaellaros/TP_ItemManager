@@ -153,6 +153,11 @@ export class ModalItemComponent {
         console.log(this.item);
         this.GetItemVat();
       }
+    } else {
+      this.itemForm.patchValue({
+        flg_addToCart: true,
+        available: true,
+      });
     }
   }
   ChangeImage() {

@@ -1,6 +1,6 @@
-<div class="container">
-  <div class="row my-2">
-    <h1 class="m-0">{{ "Items" | translate }}</h1>
+<div class="container mt-3">
+  <div class="row">
+    <h1>{{ "Items" | translate }}</h1>
   </div>
   <form [formGroup]="filterForm" class="formGroup">
     <div class="row container-fluid">
@@ -12,7 +12,6 @@
         <mat-label>{{ "ID" | translate }}</mat-label>
         <input formControlName="id" matInput />
       </mat-form-field>
-
       <mat-form-field class="col-3 m-1">
         <mat-label>{{ "Barcode" | translate }}</mat-label>
         <input formControlName="barcode" matInput />

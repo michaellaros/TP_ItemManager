@@ -141,7 +141,8 @@ export class EditListComponent implements OnChanges {
   OpenDialogModifyOption(option: Option) {
     const dialogRef = this.dialog.open(ModalOptionComponent, {
       data: option,
-      width: '60vw',
+      minWidth: '100%',
+      height: '100%',
     });
     dialogRef.afterClosed().subscribe(() => {
       this.refresh.emit(null);
@@ -150,7 +151,8 @@ export class EditListComponent implements OnChanges {
   OpenDialogModifyKiosk(kiosk: Kiosk) {
     const dialogRef = this.dialog.open(ModalKioskComponent, {
       data: kiosk,
-      width: '60vw',
+      minWidth: '100%',
+      height: '100%',
     });
     dialogRef.afterClosed().subscribe(() => {
       this.refresh.emit(null);

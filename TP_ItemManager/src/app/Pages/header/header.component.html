@@ -13,15 +13,18 @@
       <div>
         <h1 class="text-white m-2">{{ "Item Manager" | translate }}</h1>
       </div>
+
       <button
+        *ngFor="let route of status.routes"
         mat-raised-button
-        [color]="currentRoute == '/Device' ? '' : 'primary'"
+        [color]="currentRoute == route.route ? '' : 'primary'"
         class="m-2"
-        routerLink="/Device"
+        [routerLink]="route.route"
       >
-        {{ "Devices" | translate }}
+        {{ route.label | translate }}
       </button>
-      <button
+
+      <!-- <button
         mat-raised-button
         [color]="currentRoute == '/Store' ? '' : 'primary'"
         class="m-2"
@@ -69,7 +72,7 @@
         routerLink="/User"
       >
         {{ "Users" | translate }}
-      </button>
+      </button> -->
 
       <div class="d-flex language position-absolute end-0">
         <button mat-icon-button class="m-1" (click)="Logout()">

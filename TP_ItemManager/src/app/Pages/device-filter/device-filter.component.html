@@ -18,7 +18,7 @@
         <mat-label>{{ "Store" | translate }}</mat-label>
         <input formControlName="Store_id" matInput />
       </mat-form-field> -->
-      <mat-form-field class="col-3 m-1">
+      <mat-form-field class="col-3 m-1" *ngIf="status.Flg_enableStores">
         <mat-label>{{ "Store" | translate }}</mat-label>
         <input matInput formControlName="Store_id" [matAutocomplete]="auto" />
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
@@ -63,5 +63,5 @@
   *ngIf="this.list != null"
   [parentData]="this.list"
   [columnName]="'Device'"
-  (refresh)="this.GetDevices()"
+  (refresh)="GetDevices()"
 ></app-edit-list>

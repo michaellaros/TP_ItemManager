@@ -34,15 +34,17 @@ export class DeviceFilterComponent {
 
   ngOnInit() {
     this.GetDevices();
-    this.http.FilterStore({}).subscribe((data) => {
-      this.stores = this.MapToArray(data);
-      this.filteredStores = this.stores;
-    });
+    if(this.status.Flg_enableStores){
+      this.http.FilterStore({}).subscribe((data) => {
+        this.stores = this.MapToArray(data);
+        this.filteredStores = this.stores;
+      });
 
-    this.filterForm
-      .get('Store_id')!
-      .valueChanges.pipe(map((value) => this._filterStore(value || '')))
-      .subscribe((data) => (this.filteredStores = data));
+      this.filterForm
+        .get('Store_id')!
+        .valueChanges.pipe(map((value) => this._filterStore(value || '')))
+        .subscribe((data) => (this.filteredStores = data));
+    }
   }
 
   _filterStore(value: string): SearchedObject[] {

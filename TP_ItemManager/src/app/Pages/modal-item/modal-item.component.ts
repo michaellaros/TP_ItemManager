@@ -111,7 +111,9 @@ export class ModalItemComponent {
       this.itemForm.get('name')!.value!,
       this.itemForm.get('description')!.value!,
       this.itemForm.get('barcode')!.value!,
-      0,
+      this.itemvatform.get('price')!.value != null
+        ? Number.parseFloat(this.itemvatform.get('price')!.value!)
+        : 0,
       this.item.imagePath || '',
       this.itemForm.get('flg_addToCart')!.value!,
       this.itemForm.get('flg_verifyAdult')!.value!,

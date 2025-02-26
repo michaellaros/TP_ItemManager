@@ -112,7 +112,6 @@
       </mat-tab>
       <mat-tab [label]="'Options' | translate" *ngIf="status.Flg_enableOptions">
         <app-assigned-editor
-          class="overflow-hidden"
           [type]="'ItemOptions-Item'"
           [id]="item.id!"
           [AssignedObjects]="item.options"

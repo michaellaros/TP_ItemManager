@@ -5,6 +5,7 @@ import { HttpService } from 'src/app/Services/http.service';
 import { FormsModule } from '@angular/forms';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
+import { ImagePreview } from 'src/app/Models/ImagePreview';
 
 @Component({
   selector: 'app-image-picker',
@@ -16,7 +17,7 @@ export class ImagePickerComponent {
   public images?: string[];
   public filteredImages?: string[];
   public imgPath = 'http:\\\\localhost\\KioskImages\\';
-  public imgPreviewList: File[] = [];
+  public imgPreviewList: ImagePreview[] = [];
   public deleteMode: boolean = false;
   public filter: string = '';
   public folderName: string;
@@ -52,12 +53,14 @@ export class ImagePickerComponent {
   }
 
   UploadFile(files: any) {
-    console.log(files.target.files);
-    console.log(URL.createObjectURL(files.target.files[0]));
+    // console.log(files.target.files);
+    // console.log(URL.createObjectURL(files.target.files[0]));
+    // console.log(files.target.files[0]);
+    // console.log(files.target.files[0] instanceof File);
 
     if (
       this.images?.includes(files.target.files[0].name!) ||
-      this.imgPreviewList?.includes(files.target.files[0].name!)
+      this.imgPreviewList?.filter((i) => i.file!.name!).length > 0
     ) {
       if (
         !confirm(
@@ -68,15 +71,17 @@ export class ImagePickerComponent {
       }
     }
     let image = files.target.files[0];
-    this.imgPreviewList.push(image.name);
+    this.imgPreviewList.push({ file: image, url: URL.createObjectURL(image) });
     if (image)
       this.http.UploadImage(this.folderName, image).subscribe((data) => {
         this.images = data.filter(
           (image) =>
             this.imgPreviewList.findIndex(
-              (imgPreview) => image == imgPreview.name
+              (imgPreview) => image.split('\\')[1] == imgPreview.file!.name
             ) == -1
         );
+        data.forEach((image) => console.log(image));
+        this.imgPreviewList.forEach((image) => console.log(image));
         this.FilterImages();
         this._snackBar.open('Image successfully uploaded!', 'Confirm');
       });
@@ -97,16 +102,22 @@ export class ImagePickerComponent {
 
   DeleteImage(imageName: string) {
     if (confirm('The image will be permanently deleted!')) {
+      this.imgPreviewList = this.imgPreviewList.filter(
+        (img) => img.file!.name != imageName
+      );
+      imageName = imageName.startsWith(this.folderName)
+        ? imageName
+        : this.folderName + '\\' + imageName;
       this.http.DeleteImage(imageName).subscribe((data) => {
         this.images = data.filter(
           (image) =>
             this.imgPreviewList.findIndex(
-              (imgPreview) => image == imgPreview.name
+              (imgPreview) => image.split('\\')[1] == imgPreview.file!.name
             ) == -1
         );
 
         this.imgPreviewList = this.imgPreviewList.filter(
-          (img) => img.name != imageName
+          (img) => img.file!.name != imageName
         );
         this.FilterImages();
         this._snackBar.open('Image successfully deleted!', 'Confirm');

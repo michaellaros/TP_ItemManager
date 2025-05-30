@@ -1,7 +1,7 @@
 {
   "Flg_enableOptions": true,
-  "Flg_enableDetailedOptions": false,
-  "Flg_enableTranslations": false,
+  "Flg_enableDetailedOptions": true,
+  "Flg_enableTranslations": true,
   "Flg_enableStores": false,
-  "Flg_enableCategoryImages": false
+  "Flg_enableCategoryImages": true
 }

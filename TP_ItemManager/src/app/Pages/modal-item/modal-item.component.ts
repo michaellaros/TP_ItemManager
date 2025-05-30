@@ -11,7 +11,7 @@ import { Item } from 'src/app/Models/Item';
 import { HttpService } from 'src/app/Services/http.service';
 import { StatusService } from 'src/app/Services/status.service';
 import { ImagePickerComponent } from '../image-picker/image-picker.component';
-import { ItemVat } from 'src/app/Models/ItemVat';
+import { VYItem } from 'src/app/Models/VYItem';
 
 @Component({
   selector: 'app-modal-item',
@@ -20,7 +20,8 @@ import { ItemVat } from 'src/app/Models/ItemVat';
 })
 export class ModalItemComponent {
   item: Item;
-  itemVat!: ItemVat;
+  vyItem: VYItem | null = null;
+
   public flg_insert: boolean;
 
   itemForm = new FormGroup({
@@ -31,11 +32,10 @@ export class ModalItemComponent {
     flg_verifyAdult: new FormControl(false),
     flg_isMenu: new FormControl(false),
     available: new FormControl(true),
-  });
 
-  itemvatform = new FormGroup({
-    price: new FormControl({ value: '0', disabled: true }),
-    vat: new FormControl({ value: '0', disabled: true }),
+    price: new FormControl('0'),
+    vat: new FormControl('0'),
+    receiptDescription: new FormControl(''),
   });
 
   constructor(
@@ -61,11 +61,12 @@ export class ModalItemComponent {
         this.itemForm.get('barcode')?.value == null ||
         this.itemForm.get('barcode')?.value == ''
       ) {
-        this.itemvatform.patchValue({
+        this.itemForm.patchValue({
           price: '',
           vat: '',
+          receiptDescription: '',
         });
-      } else this.GetItemVat();
+      } else this.GetVYItem();
     });
   }
 
@@ -94,12 +95,23 @@ export class ModalItemComponent {
           this.http.UpdateItem(this.GetItemFromForm()).subscribe((data) => {
             this.item = data;
 
-            this.GetItemVat();
+            // this.GetVYItem();
             this.UpdateForm();
             this._snackBar.open('Item successfully updated!', 'Ok', {
               duration: this.status.snackbarDuration,
             });
           });
+        }
+        if (
+          this.vyItem == null ||
+          this.vyItem.price != this.itemForm.get('price')?.value ||
+          this.vyItem.receiptDescription !=
+            this.itemForm.get('receiptDescription')?.value ||
+          this.vyItem.vat != this.itemForm.get('vat')?.value
+        ) {
+          this.UpdateVynamicItem();
+        } else {
+          this.GetVYItem();
         }
       }
     }
@@ -111,8 +123,8 @@ export class ModalItemComponent {
       this.itemForm.get('name')!.value!,
       this.itemForm.get('description')!.value!,
       this.itemForm.get('barcode')!.value!,
-      this.itemvatform.get('price')!.value != null
-        ? Number.parseFloat(this.itemvatform.get('price')!.value!)
+      this.itemForm.get('price')!.value != null
+        ? Number.parseFloat(this.itemForm.get('price')!.value!)
         : 0,
       this.item.imagePath || '',
       this.itemForm.get('flg_addToCart')!.value!,
@@ -122,26 +134,61 @@ export class ModalItemComponent {
     );
   }
 
-  GetItemVat() {
+  GetVYItem() {
     this.http
-      .GetItemVat(this.itemForm.get('barcode')?.value!)
-      .subscribe((data) => {
+      .GetVYItem(this.itemForm.get('barcode')?.value!)
+      .subscribe((data: VYItem | null) => {
+        this.vyItem = data;
         if (data != null) {
-          this.itemvatform.patchValue({
-            price: data.price + '€',
-            vat: data.vat + '%',
+          this.itemForm.patchValue({
+            price: data.price,
+            vat: data.vat,
+            receiptDescription: data.receiptDescription,
           });
         } else {
-          this.itemvatform.patchValue({
+          this.itemForm.patchValue({
             price: '',
             vat: '',
+            receiptDescription: '',
           });
         }
       });
   }
+
+  UpdateVynamicItem() {
+    this.http
+      .UpdateVynamicItem({
+        barcode: this.itemForm.get('barcode')?.value!,
+        price: this.itemForm.get('price')?.value!,
+        receiptDescription: this.itemForm.get('receiptDescription')?.value!,
+        vat: this.itemForm.get('vat')?.value!,
+      })
+      .subscribe((data: VYItem | null) => {
+        this.vyItem = data;
+        if (data != null) {
+          this.itemForm.patchValue({
+            price: data.price,
+            vat: data.vat,
+            receiptDescription: data.receiptDescription,
+          });
+        } else {
+          this.itemForm.patchValue({
+            price: '',
+            vat: '',
+            receiptDescription: '',
+          });
+        }
+      });
+  }
+
   UpdateForm() {
     console.log(this.item);
-    if (this.item != null) {
+    if (this.flg_insert) {
+      this.itemForm.patchValue({
+        flg_addToCart: true,
+        available: true,
+      });
+    } else {
       this.itemForm.patchValue({
         name: this.item.name,
         description: this.item.description,
@@ -151,15 +198,10 @@ export class ModalItemComponent {
         flg_isMenu: this.item.flg_isMenu,
         available: this.item.available,
       });
+
       if (this.itemForm.get('barcode')!.value! != '') {
-        console.log(this.item);
-        this.GetItemVat();
+        this.GetVYItem();
       }
-    } else {
-      this.itemForm.patchValue({
-        flg_addToCart: true,
-        available: true,
-      });
     }
   }
   ChangeImage() {

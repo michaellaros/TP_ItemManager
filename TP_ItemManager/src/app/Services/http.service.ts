@@ -20,12 +20,12 @@ import { Language } from '../Models/language';
 import { SearchedObject } from '../Models/SearchedObject';
 import { UserModelRequest } from '../Models/UserModelRequest';
 import { Token } from '../Models/Token';
-import { ItemVat } from '../Models/ItemVat';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginPageComponent } from '../Pages/login-page/login-page.component';
 import { Device } from '../Models/Device';
 import { Store } from '../Models/Store';
 import { Menu } from '../Models/Menu';
+import { VYItem } from '../Models/VYItem';
 @Injectable({
   providedIn: 'root',
 })
@@ -377,10 +377,17 @@ export class HttpService {
     });
   }
 
-  GetItemVat(id: string) {
-    return this.http.post<ItemVat>(this.urlAPI + 'GetItemVat', null, {
-      params: new HttpParams().append('id', id),
+  GetVYItem(barcode: string) {
+    return this.http.get<VYItem>(this.urlAPI + 'api/Vynamic/GetVynamicItem?=', {
+      params: new HttpParams().append('barcode', barcode),
     });
+  }
+
+  UpdateVynamicItem(vyItem: VYItem) {
+    return this.http.post<VYItem>(
+      this.urlAPI + 'api/Vynamic/UpdateVynamicItem',
+      vyItem
+    );
   }
 
   GetConfig() {

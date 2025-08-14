@@ -5,7 +5,7 @@ import {
   transition,
   animate,
 } from '@angular/animations';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable, startWith, map } from 'rxjs';
@@ -57,60 +57,52 @@ export class AssignedEditorComponent {
     this.newAssignedObject = new AssignedObject();
   }
   ngOnInit() {
+    console.log('We idiiing ' + this.id);
     switch (this.type) {
       case 'CategoryItems-Category':
-        this.http.FilterItems({}).subscribe((data) => {
-          this.options = this.MapToArray(data);
-          this.filteredOptions = this.options;
-        });
+        this.http
+          .FilterItems({})
+          .subscribe((data) => this.setInitialOptions(data));
         break;
       case 'CategoryItems-Item':
-        this.http.FilterCategory({}).subscribe((data) => {
-          this.options = this.MapToArray(data);
-          this.filteredOptions = this.options;
-        });
+        this.http
+          .FilterCategory({})
+          .subscribe((data) => this.setInitialOptions(data));
         break;
       case 'OptionItems-Item':
-        this.http.FilterOption({}).subscribe((data) => {
-          this.options = this.MapToArray(data);
-          this.filteredOptions = this.options;
-        });
+        this.http
+          .FilterOption({})
+          .subscribe((data) => this.setInitialOptions(data));
         break;
       case 'OptionItems-Option':
-        this.http.FilterItems({}).subscribe((data) => {
-          this.options = this.MapToArray(data);
-          this.filteredOptions = this.options;
-        });
+        this.http
+          .FilterItems({})
+          .subscribe((data) => this.setInitialOptions(data));
         break;
       case 'ItemOptions-Item':
-        this.http.FilterOption({}).subscribe((data) => {
-          this.options = this.MapToArray(data);
-          this.filteredOptions = this.options;
-        });
+        this.http
+          .FilterOption({})
+          .subscribe((data) => this.setInitialOptions(data));
         break;
       case 'ItemOptions-Option':
-        this.http.FilterItems({}).subscribe((data) => {
-          this.options = this.MapToArray(data);
-          this.filteredOptions = this.options;
-        });
+        this.http
+          .FilterItems({})
+          .subscribe((data) => this.setInitialOptions(data));
         break;
       case 'MenuCategory-Menu':
-        this.http.FilterCategory({}).subscribe((data) => {
-          this.options = this.MapToArray(data);
-          this.filteredOptions = this.options;
-        });
+        this.http
+          .FilterCategory({})
+          .subscribe((data) => this.setInitialOptions(data));
         break;
       case 'MenuCategory-Category':
-        this.http.FilterMenu({}).subscribe((data) => {
-          this.options = this.MapToArray(data);
-          this.filteredOptions = this.options;
-        });
+        this.http
+          .FilterMenu({})
+          .subscribe((data) => this.setInitialOptions(data));
         break;
       case 'KioskCategory':
-        this.http.FilterCategory({}).subscribe((data) => {
-          this.options = this.MapToArray(data);
-          this.filteredOptions = this.options;
-        });
+        this.http
+          .FilterCategory({})
+          .subscribe((data) => this.setInitialOptions(data));
         break;
     }
 
@@ -119,6 +111,15 @@ export class AssignedEditorComponent {
       .valueChanges.pipe(map((value) => this._filter(value || '')))
       .subscribe((data) => (this.filteredOptions = data));
   }
+
+  ngOnChange() {
+    console.log('We idiiing 2 ' + this.id);
+  }
+
+  setInitialOptions = (data: any) => {
+    this.options = this.MapToArray(data);
+    this.filteredOptions = this._filter('');
+  };
 
   toggle(): void {
     if (!this.flg_insert) {

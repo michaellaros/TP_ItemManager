@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpService } from 'src/app/Services/http.service';
-import { UserModelRequest } from 'src/app/Models/UserModelRequest';
 import { StatusService } from 'src/app/Services/status.service';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { ModalUserComponent } from '../modal-user/modal-user.component';

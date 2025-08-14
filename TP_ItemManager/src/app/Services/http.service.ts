@@ -18,7 +18,6 @@ import { Timespan } from '../Models/Timespan';
 import { Kiosk } from '../Models/Kiosk';
 import { Language } from '../Models/language';
 import { SearchedObject } from '../Models/SearchedObject';
-import { UserModelRequest } from '../Models/UserModelRequest';
 import { Token } from '../Models/Token';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LoginPageComponent } from '../Pages/login-page/login-page.component';
@@ -26,6 +25,9 @@ import { Device } from '../Models/Device';
 import { Store } from '../Models/Store';
 import { Menu } from '../Models/Menu';
 import { VYItem } from '../Models/VYItem';
+import { User } from '../Models/User';
+import { UserFilterComponent } from '../Pages/user-filter/user-filter.component';
+import { Role } from '../Models/Role';
 @Injectable({
   providedIn: 'root',
 })
@@ -349,24 +351,22 @@ export class HttpService {
     return this.http.post<any>(this.urlAPI + 'GetUsers', filter);
     //
   }
-  CreateUser(name: string, password: string) {
-    return this.http.post<string>(this.urlAPI + 'CreateUser', {
-      name,
+  CreateUser(user: User, password: string) {
+    return this.http.post<User>(this.urlAPI + 'CreateUser', {
+      name: user.name,
+      role: user.role,
+      badge: user.badge,
       password,
     });
     //
   }
-  UpdateUser(user: UserModelRequest) {
-    return this.http.post<UserModelRequest>(this.urlAPI + 'UpdateUser', {
-      id: user.id?.toString(),
-      name: user.name,
-    });
+  UpdateUser(user: User) {
+    return this.http.post<User>(this.urlAPI + 'UpdateUser', user);
   }
 
   GetUser(id: string) {
-    return this.http.post<UserModelRequest>(this.urlAPI + 'GetUser', {
-      id: id,
-      name: '',
+    return this.http.get<User>(this.urlAPI + 'GetUser', {
+      params: new HttpParams().append('id', id),
     });
   }
   UpdatePassword(id: string, password: string, oldPassword: string) {

@@ -17,6 +17,8 @@ export class StatusService {
   public Flg_enableStores: Boolean = false;
   public Flg_enableCategoryImages: Boolean = false;
 
+  public Roles: { Role: string; RoleAuthority: number }[] = [];
+
   public routes = [
     { route: '/Device', label: 'Devices' },
     { route: '/Store', label: 'Stores' },

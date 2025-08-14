@@ -24,18 +24,18 @@
           <input formControlName="name" matInput />
         </mat-form-field>
       </div>
-      <div class="row" *ngIf="status.Flg_enableDetailedOptions">
+      <div class="row">
         <mat-form-field class="col-4">
           <mat-label>{{ "Default quantity" | translate }}</mat-label>
           <input type="number" formControlName="default_quantity" matInput />
         </mat-form-field>
 
-        <mat-form-field class="col-4">
+        <mat-form-field class="col-4" *ngIf="status.Flg_enableDetailedOptions">
           <mat-label>{{ "Min quantity" | translate }}</mat-label>
           <input type="number" formControlName="min_quantity" matInput />
         </mat-form-field>
 
-        <mat-form-field class="col-4">
+        <mat-form-field class="col-4" *ngIf="status.Flg_enableDetailedOptions">
           <mat-label>{{ "Max quantity" | translate }}</mat-label>
           <input type="number" formControlName="max_quantity" matInput />
         </mat-form-field>

@@ -1,7 +1,17 @@
 {
   "Flg_enableOptions": true,
-  "Flg_enableDetailedOptions": true,
-  "Flg_enableTranslations": true,
+  "Flg_enableDetailedOptions": false,
+  "Flg_enableTranslations": false,
   "Flg_enableStores": false,
-  "Flg_enableCategoryImages": true
+  "Flg_enableCategoryImages": false,
+  "Roles": [
+    {
+      "Role": "Manager",
+      "RoleAuthority": 999
+    },
+    {
+      "Role": "Cassiere",
+      "RoleAuthority": 500
+    }
+  ]
 }

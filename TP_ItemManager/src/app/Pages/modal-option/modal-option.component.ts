@@ -19,7 +19,7 @@ export class ModalOptionComponent {
     name: new FormControl('', [Validators.required]),
     flg_addToCart: new FormControl(true),
     default_quantity: new FormControl(0, [
-      Validators.max(99),
+      Validators.max(1),
       Validators.min(0),
       Validators.required,
     ]),

@@ -29,7 +29,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class TranslationsEditorComponent {
   public valueTranslation: string[] = ['Name', 'Description', 'Preview'];
-  public fieldTranslation: string[] = ['EL', 'IT', 'EN'];
+  public fieldTranslation: string[] = ['IT', 'EN'];
   @Input() public translations?: Translation[];
   public translation?: Translation;
   @Input() flg_isEditable!: boolean;

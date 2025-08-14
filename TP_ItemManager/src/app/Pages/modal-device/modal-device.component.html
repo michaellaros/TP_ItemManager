@@ -25,10 +25,10 @@
           <input formControlName="deviceIdentifier" matInput />
         </mat-form-field>
 
-        <mat-form-field class="col-4">
+        <!-- <mat-form-field class="col-4">
           <mat-label>{{ "Workstation ID" | translate }}</mat-label>
           <input formControlName="szWorkstationID" matInput />
-        </mat-form-field>
+        </mat-form-field> -->
         <mat-form-field class="col-4" *ngIf="status.Flg_enableStores">
           <mat-label>{{ "Store" | translate }}</mat-label>
           <input

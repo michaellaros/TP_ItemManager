@@ -55,6 +55,7 @@ export class ModalUserComponent {
       this.user = this.data || new User();
       this.flg_insert = this.data == null;
       this.userForm.get('vyUser')?.disable();
+      this.userForm.get('badge')?.disable();
     }
   }
   ngOnInit() {
@@ -179,5 +180,12 @@ export class ModalUserComponent {
         duration: this.status.snackbarDuration,
       });
     }
+  }
+
+  readCard() {
+    this.http.ReadBadge().subscribe((res: any) => {
+      console.log('Card Detected:', res);
+      this.userForm.get('badge')?.setValue(res.badge);
+    });
   }
 }

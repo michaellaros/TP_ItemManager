@@ -395,4 +395,8 @@ export class HttpService {
       this.assetsUrl + '/config.json'
     );
   }
+
+  ReadBadge() {
+    return this.http.get<any>(this.urlAPI + 'api/IO/ReadBadge');
+  }
 }

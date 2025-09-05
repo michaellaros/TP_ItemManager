@@ -30,19 +30,30 @@
           </mat-autocomplete>
         </mat-form-field>
         <mat-form-field class="col-4">
-          <mat-label>{{ "Badge" | translate }}</mat-label>
-          <input formControlName="badge" matInput />
-        </mat-form-field>
-        <mat-form-field class="col-4">
           <mat-label>{{ "Vynamic user" | translate }}</mat-label>
           <input formControlName="vyUser" matInput />
         </mat-form-field>
-        <mat-form-field class="col-4" *ngIf="flg_insert">
+        <mat-form-field class="col-4">
+          <mat-label>{{ "Badge" | translate }}</mat-label>
+          <input formControlName="badge" matInput />
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          type="button"
+          class="col-2"
+          (click)="readCard()"
+        >
+          {{ "Read badge" | translate }}
+        </button>
+      </div>
+      <div class="row" *ngIf="flg_insert">
+        <mat-form-field class="col-4">
           <mat-label>{{ "Password" | translate }}</mat-label>
           <input type="password" [formControl]="password" matInput />
         </mat-form-field>
 
-        <mat-form-field class="col-4" *ngIf="flg_insert">
+        <mat-form-field class="col-4">
           <mat-label>{{ "Confirm Password" | translate }}</mat-label>
           <input type="password" [formControl]="confirmPassword" matInput />
         </mat-form-field>

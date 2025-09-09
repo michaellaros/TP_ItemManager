@@ -33,9 +33,9 @@ export class ModalItemComponent {
     flg_isMenu: new FormControl(false),
     available: new FormControl(true),
 
-    price: new FormControl('0'),
-    vat: new FormControl('0'),
-    receiptDescription: new FormControl(''),
+    price: new FormControl('0', [Validators.required]),
+    vat: new FormControl('0', [Validators.required]),
+    receiptDescription: new FormControl('', [Validators.required]),
   });
 
   constructor(
@@ -78,41 +78,41 @@ export class ModalItemComponent {
           duration: this.status.snackbarDuration,
         });
         return;
+      }
+
+      if (this.flg_insert) {
+        console.log(this.GetItemFromForm());
+        this.http.InsertItem(this.GetItemFromForm()).subscribe((data) => {
+          this.item = data;
+
+          this.UpdateForm();
+          this.flg_insert = false;
+          this._snackBar.open('Item successfully created!', 'Ok', {
+            duration: this.status.snackbarDuration,
+          });
+        });
       } else {
-        if (this.flg_insert) {
-          console.log(this.GetItemFromForm());
-          this.http.InsertItem(this.GetItemFromForm()).subscribe((data) => {
-            this.item = data;
+        console.log(this.GetItemFromForm());
+        this.http.UpdateItem(this.GetItemFromForm()).subscribe((data) => {
+          this.item = data;
 
-            this.UpdateForm();
-            this.flg_insert = false;
-            this._snackBar.open('Item successfully created!', 'Ok', {
-              duration: this.status.snackbarDuration,
-            });
+          // this.GetVYItem();
+          this.UpdateForm();
+          this._snackBar.open('Item successfully updated!', 'Ok', {
+            duration: this.status.snackbarDuration,
           });
-        } else {
-          console.log(this.GetItemFromForm());
-          this.http.UpdateItem(this.GetItemFromForm()).subscribe((data) => {
-            this.item = data;
-
-            // this.GetVYItem();
-            this.UpdateForm();
-            this._snackBar.open('Item successfully updated!', 'Ok', {
-              duration: this.status.snackbarDuration,
-            });
-          });
-        }
-        if (
-          this.vyItem == null ||
-          this.vyItem.price != this.itemForm.get('price')?.value ||
-          this.vyItem.receiptDescription !=
-            this.itemForm.get('receiptDescription')?.value ||
-          this.vyItem.vat != this.itemForm.get('vat')?.value
-        ) {
-          this.UpdateVynamicItem();
-        } else {
-          this.GetVYItem();
-        }
+        });
+      }
+      if (
+        this.vyItem == null ||
+        this.vyItem.price != this.itemForm.get('price')?.value ||
+        this.vyItem.receiptDescription !=
+          this.itemForm.get('receiptDescription')?.value ||
+        this.vyItem.vat != this.itemForm.get('vat')?.value
+      ) {
+        this.UpdateVynamicItem();
+      } else {
+        this.GetVYItem();
       }
     }
   }

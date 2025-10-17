@@ -13,5 +13,19 @@
       "Role": "Cassiere",
       "RoleAuthority": 500
     }
+  ],
+  "Reports": [
+    {
+      "name": "SaleTransactionItem",
+      "display": "Sale Transaction Item"
+    },
+    {
+      "name": "SaleTransactionTotal",
+      "display": "Sale Transaction Total"
+    },
+    {
+      "name": "SaleTransactionPayment",
+      "display": "Sale Transaction Payment"
+    }
   ]
 }

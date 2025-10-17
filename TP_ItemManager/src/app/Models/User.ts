@@ -5,6 +5,7 @@ export class User {
     public role?: number,
     public badge?: string,
     public vyUser?: string,
+    public lastPasswordUpdate?: Date,
     public password?: string
   ) {}
 }

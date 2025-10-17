@@ -1,0 +1,40 @@
+<div class="container mt-3">
+  <div class="row">
+    <h1>{{ "Reports" | translate }}</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="row g-3">
+    <div class="col-md-4" *ngFor="let report of status.Reports">
+      <mat-card class="h-100 shadow-sm">
+        <mat-card-title class="pt-3 ps-3">{{ report.display }}</mat-card-title>
+        <mat-card-content class="d-flex flex-column justify-content-center">
+          <div class="pt-4">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Select Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                [(ngModel)]="report.date"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+        <mat-card-actions class="pb-3 ps-3">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="downloadReport(report.name!, report.date)"
+          >
+            Download CSV
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

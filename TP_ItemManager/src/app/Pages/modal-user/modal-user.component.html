@@ -34,6 +34,10 @@
           <input formControlName="vyUser" matInput />
         </mat-form-field>
         <mat-form-field class="col-4">
+          <mat-label>{{ "Last password update" | translate }}</mat-label>
+          <input formControlName="lastPasswordUpdate" matInput />
+        </mat-form-field>
+        <mat-form-field class="col-4">
           <mat-label>{{ "Badge" | translate }}</mat-label>
           <input formControlName="badge" matInput />
         </mat-form-field>
@@ -43,6 +47,7 @@
           type="button"
           class="col-2"
           (click)="readCard()"
+          [disabled]="isReadingBadge"
         >
           {{ "Read badge" | translate }}
         </button>

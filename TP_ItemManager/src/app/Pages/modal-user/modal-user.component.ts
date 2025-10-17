@@ -13,16 +13,19 @@ import { NavigationExtras, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { SearchedObject } from 'src/app/Models/SearchedObject';
 import { Role } from 'src/app/Models/Role';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-modal-user',
   templateUrl: './modal-user.component.html',
   styleUrls: ['./modal-user.component.scss'],
+  providers: [DatePipe],
 })
 export class ModalUserComponent {
   public flg_insert: boolean;
   user?: User;
   isResetPassword: boolean = false;
+  isReadingBadge: boolean = false;
 
   userForm = new FormGroup({
     id: new FormControl(),
@@ -30,6 +33,7 @@ export class ModalUserComponent {
     role: new FormControl('', [Validators.required]),
     badge: new FormControl(''),
     vyUser: new FormControl(''),
+    lastPasswordUpdate: new FormControl(''),
     password: new FormControl(''),
   });
 
@@ -49,6 +53,7 @@ export class ModalUserComponent {
     @Inject(MAT_DIALOG_DATA) private data: any,
     private http: HttpService,
     public status: StatusService,
+    private datePipe: DatePipe,
     private _snackBar: MatSnackBar
   ) {
     {
@@ -56,6 +61,7 @@ export class ModalUserComponent {
       this.flg_insert = this.data == null;
       this.userForm.get('vyUser')?.disable();
       this.userForm.get('badge')?.disable();
+      this.userForm.get('lastPasswordUpdate')?.disable();
     }
   }
   ngOnInit() {
@@ -72,12 +78,18 @@ export class ModalUserComponent {
       let role = this.status.Roles.find(
         (x) => x.RoleAuthority == this.user?.role
       );
+
       console.log({
         id: this.user?.id,
         name: this.user?.name,
         role: role?.Role,
         badge: this.user.badge,
         vyUser: this.user.vyUser,
+        lastPasswordUpdate:
+          this.datePipe.transform(
+            this.user?.lastPasswordUpdate,
+            'dd/MM/yyyy HH:mm'
+          ) ?? '',
       });
       this.userForm.patchValue({
         id: this.user?.id,
@@ -85,6 +97,11 @@ export class ModalUserComponent {
         role: role?.Role,
         badge: this.user.badge,
         vyUser: this.user.vyUser,
+        lastPasswordUpdate:
+          this.datePipe.transform(
+            this.user?.lastPasswordUpdate,
+            'dd/MM/yyyy HH:mm'
+          ) ?? '',
       });
     } else {
     }
@@ -183,9 +200,11 @@ export class ModalUserComponent {
   }
 
   readCard() {
+    this.isReadingBadge = true;
     this.http.ReadBadge().subscribe((res: any) => {
       console.log('Card Detected:', res);
       this.userForm.get('badge')?.setValue(res.badge);
+      this.isReadingBadge = false;
     });
   }
 }

@@ -12,6 +12,7 @@ import { ModalItemComponent } from './Pages/modal-item/modal-item.component';
 import { DeviceFilterComponent } from './Pages/device-filter/device-filter.component';
 import { MenuFilterComponent } from './Pages/menu-filter/menu-filter.component';
 import { StoreFilterComponent } from './Pages/store-filter/store-filter.component';
+import { ReportFilterComponent } from './Pages/report-filter/report-filter.component';
 const routes: Routes = [
   {
     path: 'Category',
@@ -34,6 +35,12 @@ const routes: Routes = [
   {
     path: 'Option',
     component: OptionFilterComponent,
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'Report',
+    component: ReportFilterComponent,
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
   },

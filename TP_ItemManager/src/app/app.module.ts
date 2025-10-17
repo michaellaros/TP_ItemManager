@@ -49,6 +49,7 @@ import { ModalDeviceComponent } from './Pages/modal-device/modal-device.componen
 import { ModalStoreComponent } from './Pages/modal-store/modal-store.component';
 import { ModalMenuComponent } from './Pages/modal-menu/modal-menu.component';
 import { StoreFilterComponent } from './Pages/store-filter/store-filter.component';
+import { ReportFilterComponent } from './Pages/report-filter/report-filter.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -81,6 +82,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalStoreComponent,
     ModalMenuComponent,
     StoreFilterComponent,
+    ReportFilterComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,10 @@
+{
+  "assetsURL": "http://localhost:4200/assets/",
+  "flg_enableMultiCurrency": true,
+  "defaultCurrency": {
+    "code": "EUR",
+    "symbol": "€",
+    "label": "Euro",
+    "conversionRate": 1
+  }
+}

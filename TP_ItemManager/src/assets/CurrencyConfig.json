@@ -1,0 +1,21 @@
+{
+  "currenciesEnabled": [
+    "EUR",
+	"BLG"    
+  ],
+  "currencies": [
+       {
+      "code": "EUR",
+      "symbol": "€",
+      "label": "Euro",
+      "conversionRate": 1
+    }, 
+	{
+      "code": "BLG",
+      "symbol": "лв",
+      "label": "Lev",
+      "conversionRate": 1.95583
+    }
+
+  ]
+}

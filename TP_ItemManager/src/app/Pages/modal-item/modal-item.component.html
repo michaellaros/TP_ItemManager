@@ -44,7 +44,7 @@
 
           <mat-form-field>
             <mat-label>{{ "Barcode" | translate }}</mat-label>
-            <input formControlName="barcode" matInput  />
+            <input formControlName="barcode" matInput />
           </mat-form-field>
 
           <!-- <mat-form-field>
@@ -75,27 +75,44 @@
           </mat-checkbox>
         </div>
       </div>
-
-
     </form>
 
-    <form [formGroup]="itemvatform" class="formGroup2" >
-
-    <div class="col-4 ">
-      <mat-form-field>
-      <mat-label>{{ "Price" | translate }}</mat-label>
-      <input  formControlName="price" matInput />
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>{{ "Vat" | translate }}</mat-label>
-      <input  formControlName="vat" matInput  />
-    </mat-form-field>
-  </div>
-  </form>
-  <button mat-raised-button color="primary"
-  [disabled]="itemForm.invalid || this.itemvatform.get('price')!.value! == ''" (click)="SubmitForm()">
-    {{ flg_insert ? "Create" : ("Save" | translate) }}
-  </button>
+    <form [formGroup]="itemvatform" class="formGroup2">
+      <div class="col-4">
+        <div formArrayName="prices" class="converted-prices">
+          <div
+            *ngFor="let ctrl of prices.controls; let i = index"
+            [formGroupName]="i"
+          >
+            <mat-form-field>
+              <mat-label
+                >{{
+                  status.currencies[i].label || status.currencies[i].code
+                }}
+                ({{ status.currencies[i].symbol }})</mat-label
+              >
+              <input matInput formControlName="value" type="number" />
+            </mat-form-field>
+          </div>
+        </div>
+        <mat-form-field>
+          <mat-label>{{ "Vat" | translate }}</mat-label>
+          <input formControlName="vat" matInput />
+        </mat-form-field>
+      </div>
+    </form>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="
+        itemForm.invalid ||
+        (this.itemvatform.get('price')!.value! == '' &&
+          itemForm.get('flg_addToCart')!.value)
+      "
+      (click)="SubmitForm()"
+    >
+      {{ flg_insert ? "Create" : ("Save" | translate) }}
+    </button>
   </div>
   <app-translations-editor
     [id]="item.id!"

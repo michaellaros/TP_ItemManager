@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
@@ -25,19 +25,19 @@ export class ModalItemComponent {
 
   itemForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
-    barcode: new FormControl('', [Validators.required]),
+    description: new FormControl(''),
+    barcode: new FormControl(''),
     flg_addToCart: new FormControl(true),
     flg_verifyAdult: new FormControl(false),
     flg_isMenu: new FormControl(false),
     available: new FormControl(true),
   });
 
-  itemvatform= new FormGroup({
-    price: new FormControl({value:'0',disabled:true}),
-    vat: new FormControl({value:'0',disabled:true})
-  })
-
+  itemvatform = new FormGroup({
+    price: new FormControl({ value: '', disabled: true }),
+    vat: new FormControl({ value: '', disabled: true }),
+    prices: new FormArray([]), // dynamic per-currency
+  });
 
   constructor(
     @Inject('IMAGES_URL') public imageUrl: string,
@@ -56,28 +56,33 @@ export class ModalItemComponent {
 
   ngOnInit() {
     this.UpdateForm();
-    this.itemForm.get("barcode")?.valueChanges.subscribe((data)=>{
-      if(this.itemForm.get("barcode")?.value == undefined || this.itemForm.get("barcode")?.value == null || this.itemForm.get("barcode")?.value == '')
-      {this.itemvatform.patchValue({
-        price:'',
-        vat:''
-      });}
-       else this.GetItemVat();
-    })
-  }
 
+    this.initConvertedPrices();
+
+    // automatically update when base price changes
+    this.itemForm.get('barcode')?.valueChanges.subscribe((data) => {
+      if (
+        this.itemForm.get('barcode')?.value == undefined ||
+        this.itemForm.get('barcode')?.value == null ||
+        this.itemForm.get('barcode')?.value == ''
+      ) {
+        this.itemvatform.patchValue({
+          price: '',
+          vat: '',
+        });
+      } else this.GetItemVat();
+    });
+  }
 
   public SubmitForm() {
     console.log('submit');
     if (this.itemForm.valid) {
-    if(this.item.imagePath == null){
-      this._snackBar.open('Select item image!', 'Ok',{
-        duration:this.status.snackbarDuration
-      });
-      return;
-    }
-    else{
-
+      if (this.item.imagePath == null) {
+        this._snackBar.open('Select item image!', 'Ok', {
+          duration: this.status.snackbarDuration,
+        });
+        return;
+      } else {
         if (this.flg_insert) {
           console.log(this.GetItemFromForm());
           this.http.InsertItem(this.GetItemFromForm()).subscribe((data) => {
@@ -85,8 +90,8 @@ export class ModalItemComponent {
 
             this.UpdateForm();
             this.flg_insert = false;
-            this._snackBar.open('Item successfully created!', 'Ok',{
-              duration:this.status.snackbarDuration
+            this._snackBar.open('Item successfully created!', 'Ok', {
+              duration: this.status.snackbarDuration,
             });
           });
         } else {
@@ -96,14 +101,13 @@ export class ModalItemComponent {
 
             this.GetItemVat();
             this.UpdateForm();
-            this._snackBar.open('Item successfully updated!', 'Ok',{
-              duration:this.status.snackbarDuration
+            this._snackBar.open('Item successfully updated!', 'Ok', {
+              duration: this.status.snackbarDuration,
             });
           });
         }
       }
     }
-
   }
 
   GetItemFromForm(): Item {
@@ -121,24 +125,27 @@ export class ModalItemComponent {
     );
   }
 
-  GetItemVat(){
-    this.http.GetItemVat(this.itemForm.get("barcode")?.value!).subscribe((data)=>{
-      if(data != null){this.itemvatform.patchValue({
-        price:data.price + '€',
-        vat:data.vat + '%'
+  GetItemVat() {
+    this.http
+      .GetItemVat(this.itemForm.get('barcode')?.value!)
+      .subscribe((data) => {
+        if (data != null) {
+          this.itemvatform.patchValue({
+            price: data.price + '',
+            vat: data.vat + '%',
+          });
+        } else {
+          this.itemvatform.patchValue({
+            price: '',
+            vat: '',
+          });
+        }
+        this.updateConvertedPrices(Number(data?.price || 0));
       });
-    }
-      else {this.itemvatform.patchValue({
-        price:'',
-        vat:''
-      });
-    }
-    })
   }
   UpdateForm() {
     console.log(this.item);
     if (this.item != null) {
-
       this.itemForm.patchValue({
         name: this.item.name,
         description: this.item.description,
@@ -148,10 +155,9 @@ export class ModalItemComponent {
         flg_isMenu: this.item.flg_isMenu,
         available: this.item.available,
       });
-      if(this.itemForm.get('barcode')!.value! !=''){
+      if (this.itemForm.get('barcode')!.value! != '') {
         console.log(this.item);
-      this.GetItemVat();
-
+        this.GetItemVat();
       }
     }
   }
@@ -162,5 +168,40 @@ export class ModalItemComponent {
     dialogRef.afterClosed().subscribe((data) => {
       if (data != null) this.item!.imagePath = data;
     });
+  }
+
+  get prices(): FormArray {
+    return this.itemvatform.get('prices') as FormArray;
+  }
+
+  private initConvertedPrices(): void {
+    this.status.currencies.forEach((currency) => {
+      this.prices.push(
+        new FormGroup({
+          code: new FormControl(currency.code),
+          symbol: new FormControl(currency.symbol),
+          value: new FormControl({
+            value: this.getConvertedPrice(1, currency.conversionRate!),
+            disabled: true,
+          }),
+        })
+      );
+    });
+  }
+
+  private updateConvertedPrices(basePrice: number): void {
+    this.status.currencies.forEach((currency, i) => {
+      const converted = this.getConvertedPrice(
+        basePrice,
+        currency.conversionRate!
+      );
+      this.prices.at(i).get('value')?.setValue(converted, { emitEvent: false });
+    });
+  }
+
+  getConvertedPrice(value: number, rate: number): number {
+    if (!rate || isNaN(value)) return 0;
+    const converted = value * rate;
+    return Math.round((converted + Number.EPSILON) * 100) / 100;
   }
 }

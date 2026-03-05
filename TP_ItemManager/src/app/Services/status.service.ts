@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Language } from '../Models/language';
+import { Report } from '../Models/Report';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,7 @@ export class StatusService {
   public Flg_enableCategoryImages: Boolean = false;
 
   public Roles: { Role: string; RoleAuthority: number }[] = [];
+  public Reports: Report[] = [];
 
   public routes = [
     { route: '/Device', label: 'Devices' },
@@ -27,6 +29,7 @@ export class StatusService {
     { route: '/Item', label: 'Items' },
     { route: '/Option', label: 'Options' },
     { route: '/User', label: 'Users' },
+    { route: '/Report', label: 'Reports' },
   ];
 
   error: Boolean = false;
@@ -40,6 +43,7 @@ export class StatusService {
       { route: '/Item', label: 'Items' },
       { route: '/Option', label: 'Options' },
       { route: '/User', label: 'Users' },
+      { route: '/Report', label: 'Reports' },
     ].filter((route) => {
       if (route.route === '/Store' && !this.Flg_enableStores) {
         return false;

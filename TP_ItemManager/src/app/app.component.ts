@@ -34,6 +34,7 @@ export class AppComponent {
       this.status.Flg_enableStores = data['Flg_enableStores'];
       this.status.Flg_enableCategoryImages = data['Flg_enableCategoryImages'];
       this.status.Roles = data['Roles'];
+      this.status.Reports = data['Reports'];
       this.status.updateRoutes();
     });
   }

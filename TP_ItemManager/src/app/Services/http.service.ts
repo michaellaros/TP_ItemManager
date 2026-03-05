@@ -399,4 +399,13 @@ export class HttpService {
   ReadBadge() {
     return this.http.get<any>(this.urlAPI + 'api/IO/ReadBadge');
   }
+  GenerateCSVReport(ReportType: string, Date: string) {
+    return this.http.post(
+      this.urlAPI + 'api/Report/GenerateCSVReport',
+      { ReportType, Date },
+      {
+        responseType: 'blob',
+      }
+    );
+  }
 }

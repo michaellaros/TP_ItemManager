@@ -10,7 +10,11 @@
         <mat-card-title class="pt-3 ps-3">{{ report.display }}</mat-card-title>
         <mat-card-content class="d-flex flex-column justify-content-center">
           <div class="pt-4">
-            <mat-form-field appearance="outline" class="w-100">
+            <mat-form-field
+              appearance="outline"
+              class="w-100"
+              *ngIf="!report.isMonthOnly"
+            >
               <mat-label>Select Date</mat-label>
               <input
                 matInput
@@ -23,13 +27,17 @@
               ></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
+            <app-report-month-picker
+              [report]="report"
+              *ngIf="report.isMonthOnly"
+            />
           </div>
         </mat-card-content>
         <mat-card-actions class="pb-3 ps-3">
           <button
             mat-raised-button
             color="primary"
-            (click)="downloadReport(report.name!, report.date)"
+            (click)="downloadReport(report)"
           >
             Download CSV
           </button>

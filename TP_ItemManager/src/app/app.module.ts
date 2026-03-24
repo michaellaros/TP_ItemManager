@@ -50,6 +50,7 @@ import { ModalStoreComponent } from './Pages/modal-store/modal-store.component';
 import { ModalMenuComponent } from './Pages/modal-menu/modal-menu.component';
 import { StoreFilterComponent } from './Pages/store-filter/store-filter.component';
 import { ReportFilterComponent } from './Pages/report-filter/report-filter.component';
+import { ReportMonthPickerComponent } from './Pages/report-month-picker/report-month-picker.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -83,6 +84,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalMenuComponent,
     StoreFilterComponent,
     ReportFilterComponent,
+    ReportMonthPickerComponent,
   ],
   imports: [
     BrowserModule,

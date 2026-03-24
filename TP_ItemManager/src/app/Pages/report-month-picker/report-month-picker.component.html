@@ -1,0 +1,15 @@
+<mat-form-field appearance="outline" class="w-100">
+  <mat-label>Select Date</mat-label>
+  <input matInput [matDatepicker]="picker" [(ngModel)]="report.date" />
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <!-- <mat-datepicker
+                *ngIf="!report.isMonthOnly"
+                #picker
+              ></mat-datepicker> -->
+  <mat-datepicker
+    #picker
+    [startView]="report.isMonthOnly ? 'year' : 'month'"
+    (monthSelected)="setMonthAndYear($event, picker, report)"
+  >
+  </mat-datepicker>
+</mat-form-field>

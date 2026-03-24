@@ -17,15 +17,27 @@
   "Reports": [
     {
       "name": "SaleTransactionItem",
-      "display": "Sale Transaction Item"
+      "display": "Sale Transaction Item",
+      "isMonthOnly": false,
+      "allowTodayReport": true
     },
     {
       "name": "SaleTransactionTotal",
-      "display": "Sale Transaction Total"
+      "display": "Sale Transaction Total",
+      "isMonthOnly": false,
+      "allowTodayReport": false
     },
     {
       "name": "SaleTransactionPayment",
-      "display": "Sale Transaction Payment"
+      "display": "Sale Transaction Payment",
+      "isMonthOnly": false,
+      "allowTodayReport": true
+    },
+    {
+      "name": "SaleTransactionTotalMonth",
+      "display": "Sale Transaction Total Montly",
+      "isMonthOnly": true,
+      "allowTodayReport": false
     }
   ]
 }

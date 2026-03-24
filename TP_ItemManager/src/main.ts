@@ -5,7 +5,7 @@ import { environment } from './app/enviroments/environment';
 
 export const getBaseUrl = () => {
   if (isDevMode()) {
-    return 'http://localhost:5172'; //'http://172.16.3.72/VYItemManagerAPI';
+    return 'http://172.16.3.60/VYItemManagerAPI'; //'http://localhost:5172'; //'http://172.16.3.72/VYItemManagerAPI';
   } else {
     const url = document.getElementsByTagName('base')[0].href;
     const arr = url.split('/');
@@ -15,7 +15,7 @@ export const getBaseUrl = () => {
 
 export const getImagesUrl = () => {
   if (isDevMode()) {
-    return 'http://172.16.3.72/VYWebAssets/Images/';
+    return 'http://172.16.3.60/VYWebAssets/Images/';
   } else {
     const url = document.getElementsByTagName('base')[0].href;
     const arr = url.split('/');

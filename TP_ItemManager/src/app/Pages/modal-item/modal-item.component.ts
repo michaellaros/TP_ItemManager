@@ -9,7 +9,7 @@ import {
   signal,
   Inject,
 } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
@@ -50,8 +50,9 @@ export class ModalItemComponent {
   });
 
   itemvatform = new FormGroup({
-    price: new FormControl({ value: '0', disabled: true }),
-    vat: new FormControl({ value: '0', disabled: true }),
+    price: new FormControl({ value: '', disabled: true }),
+    vat: new FormControl({ value: '', disabled: true }),
+    prices: new FormArray([]), // dynamic per-currency
   });
 
   constructor(
@@ -72,27 +73,24 @@ export class ModalItemComponent {
 
   ngOnInit() {
     this.UpdateForm();
+
+    this.initConvertedPrices();
+
+    // automatically update when base price changes
     this.itemForm.get('barcode')?.valueChanges.subscribe((data) => {
-      this.GetItemVat(data || '');
+      if (
+        this.itemForm.get('barcode')?.value == undefined ||
+        this.itemForm.get('barcode')?.value == null ||
+        this.itemForm.get('barcode')?.value == ''
+      ) {
+        this.itemvatform.patchValue({
+          price: '',
+          vat: '',
+        });
+      } else this.GetItemVat();
     });
-
-    if (!this.storage.CheckPermission(this.storage.CountryManagerPermission)) {
-      this.itemForm.get('name')?.disable();
-      this.itemForm.get('description')?.disable();
-      this.itemForm.get('barcode')?.disable();
-      this.itemForm.get('flg_addToCart')?.disable();
-      this.itemForm.get('flg_verifyAdult')?.disable();
-      this.itemForm.get('flg_isMenu')?.disable();
-    }
   }
 
-  public IsDataChanged(): boolean {
-    if (this.item != this.GetItemFromForm()) {
-      return true;
-    } else {
-      return false;
-    }
-  }
   public SubmitForm() {
     if (this.itemForm.valid) {
       if (this.item.imagePath == null) {
@@ -146,23 +144,24 @@ export class ModalItemComponent {
     );
   }
 
-  GetItemVat(barcode: string) {
-    if (barcode == undefined || barcode == null || barcode == '') {
-      this.itemvatform.patchValue({
-        price: '',
-        vat: '',
+  GetItemVat() {
+    this.http
+      .GetItemVat(this.itemForm.get('barcode')?.value!)
+      .subscribe((data) => {
+        if (data != null) {
+          this.itemvatform.patchValue({
+            price: data.price + '',
+            vat: data.vat + '%',
+          });
+        } else {
+          this.itemvatform.patchValue({
+            price: '',
+            vat: '',
+          });
+        }
+        this.updateConvertedPrices(Number(data?.price || 0));
       });
-      return;
-    }
-
-    this.http.GetItemVat(barcode).subscribe((data) => {
-      this.itemvatform.patchValue({
-        price: data != null ? data.price + '€' : '',
-        vat: data != null ? data.vat + '%' : '',
-      });
-    });
   }
-
   UpdateForm() {
     if (this.item != null) {
       this.itemForm.patchValue({
@@ -174,8 +173,10 @@ export class ModalItemComponent {
         flg_isMenu: this.item.flg_isMenu,
         available: this.item.available,
       });
-
-      this.GetItemVat(this.item.barcode || '');
+      if (this.itemForm.get('barcode')!.value! != '') {
+        console.log(this.item);
+        this.GetItemVat();
+      }
     }
   }
 
@@ -186,5 +187,40 @@ export class ModalItemComponent {
     dialogRef.afterClosed().subscribe((data) => {
       if (data != null) this.item!.imagePath = data;
     });
+  }
+
+  get prices(): FormArray {
+    return this.itemvatform.get('prices') as FormArray;
+  }
+
+  private initConvertedPrices(): void {
+    this.status.currencies.forEach((currency) => {
+      this.prices.push(
+        new FormGroup({
+          code: new FormControl(currency.code),
+          symbol: new FormControl(currency.symbol),
+          value: new FormControl({
+            value: this.getConvertedPrice(1, currency.conversionRate!),
+            disabled: true,
+          }),
+        })
+      );
+    });
+  }
+
+  private updateConvertedPrices(basePrice: number): void {
+    this.status.currencies.forEach((currency, i) => {
+      const converted = this.getConvertedPrice(
+        basePrice,
+        currency.conversionRate!
+      );
+      this.prices.at(i).get('value')?.setValue(converted, { emitEvent: false });
+    });
+  }
+
+  getConvertedPrice(value: number, rate: number): number {
+    if (!rate || isNaN(value)) return 0;
+    const converted = value * rate;
+    return Math.round((converted + Number.EPSILON) * 100) / 100;
   }
 }

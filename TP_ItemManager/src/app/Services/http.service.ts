@@ -37,6 +37,7 @@ import { FilterObjectModel } from '../Models/FilterObjectModel';
 import { ItemgroupFilterComponent } from '../Pages/itemgroup-filter/itemgroup-filter.component';
 import { ResponseStoreUpdate } from '../Models/ResponseStoreUpdate';
 import { StoreModel } from '../Models/StoreModel';
+import { Currency } from '../Models/Currency';
 @Injectable({
   providedIn: 'root',
 })
@@ -499,5 +500,11 @@ export class HttpService {
   }
   UpdateCountry(country: Country) {
     return this.http.post<Country>(this.urlAPI + 'UpdateCountry', country);
-  }
+    }
+    GetCurrencies(imageServerURL: string) {
+        return this.http.get<{
+            currenciesEnabled: string[];
+            currencies: Currency[];
+        }>(imageServerURL + 'CurrencyConfig.json');
+    }
 }

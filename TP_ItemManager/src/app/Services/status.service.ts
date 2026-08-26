@@ -1,5 +1,6 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Language } from '../Models/language';
+import { Currency } from '../Models/Currency';
 import { ModalAvailabilityComponent } from '../Pages/modal-availability/modal-availability.component';
 
 import {
@@ -24,7 +25,8 @@ export class StatusService {
   public listAvailable!: CountryAvailability[];
   @Output() public refresh = new EventEmitter();
 
-  error: Boolean = false;
+    error: Boolean = false;
+    public currencies!: Currency[];
   constructor(private dialog: MatDialog, private http: HttpService) {}
 
   OpenDialogModifyItem(id: string, type: string) {
@@ -38,6 +40,7 @@ export class StatusService {
     });
   }
 
+ 
   DeleteObject(id: string, type: string) {
     if (confirm('The element will be deleted permanently!')) {
       this.http.DeleteObject(type, id).subscribe(() => this.refresh.emit(null));
